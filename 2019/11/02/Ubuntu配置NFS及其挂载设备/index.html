@@ -81,19 +81,19 @@
 
 
 
-<meta name="description" content="1.    在Ubuntu系统中安装NFS执行命令： 1sudo apt-get install nfs-kernel-server  同时会有两个软件包nfs-common和portmap被安装上，如果没有安装成功多安装几次。  2.    在Ubuntu系统中的&#x2F;mnt下建立共享项目nfs_shared12# mkdir nfs_shared # chmod 777 -R nfs_shared">
+<meta name="description" content="在Ubuntu系统中安装NFS执行命令： 1sudo apt-get install nfs-kernel-server  同时会有两个软件包nfs-common和portmap被安装上，如果没有安装成功多安装几次。  在Ubuntu系统中的&#x2F;mnt下建立共享项目nfs_shared12# mkdir nfs_shared # chmod 777 -R nfs_shared&#x2F; 保证使用者都能够读、">
 <meta name="keywords" content="nfs,ubuntu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu配置NFS及其挂载设备">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;02&#x2F;Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87&#x2F;index.html">
 <meta property="og:site_name" content="Faihung&#39;s blog">
-<meta property="og:description" content="1.    在Ubuntu系统中安装NFS执行命令： 1sudo apt-get install nfs-kernel-server  同时会有两个软件包nfs-common和portmap被安装上，如果没有安装成功多安装几次。  2.    在Ubuntu系统中的&#x2F;mnt下建立共享项目nfs_shared12# mkdir nfs_shared # chmod 777 -R nfs_shared">
+<meta property="og:description" content="在Ubuntu系统中安装NFS执行命令： 1sudo apt-get install nfs-kernel-server  同时会有两个软件包nfs-common和portmap被安装上，如果没有安装成功多安装几次。  在Ubuntu系统中的&#x2F;mnt下建立共享项目nfs_shared12# mkdir nfs_shared # chmod 777 -R nfs_shared&#x2F; 保证使用者都能够读、">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;02&#x2F;Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87&#x2F;1.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;02&#x2F;Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87&#x2F;2.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;02&#x2F;Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87&#x2F;3.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;02&#x2F;Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87&#x2F;4.png">
-<meta property="og:updated_time" content="2019-11-02T11:59:23.363Z">
+<meta property="og:updated_time" content="2019-11-02T12:08:56.285Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;02&#x2F;Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87&#x2F;1.png">
 
@@ -357,26 +357,26 @@
       
 
       
-        <h5 id="1-在Ubuntu系统中安装NFS"><a href="#1-在Ubuntu系统中安装NFS" class="headerlink" title="1.    在Ubuntu系统中安装NFS"></a>1.    在Ubuntu系统中安装NFS</h5><p>执行命令：</p>
+        <h5 id="在Ubuntu系统中安装NFS"><a href="#在Ubuntu系统中安装NFS" class="headerlink" title="在Ubuntu系统中安装NFS"></a>在Ubuntu系统中安装NFS</h5><p>执行命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nfs-kernel-server</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>同时会有两个软件包nfs-common和portmap被安装上，如果没有安装成功多安装几次。</p>
 </blockquote>
-<h5 id="2-在Ubuntu系统中的-mnt下建立共享项目nfs-shared"><a href="#2-在Ubuntu系统中的-mnt下建立共享项目nfs-shared" class="headerlink" title="2.    在Ubuntu系统中的/mnt下建立共享项目nfs_shared"></a>2.    在Ubuntu系统中的/mnt下建立共享项目nfs_shared</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># mkdir nfs_shared </span><br><span class="line"># chmod 777 -R nfs_shared/</span><br></pre></td></tr></table></figure>
+<h5 id="在Ubuntu系统中的-mnt下建立共享项目nfs-shared"><a href="#在Ubuntu系统中的-mnt下建立共享项目nfs-shared" class="headerlink" title="在Ubuntu系统中的/mnt下建立共享项目nfs_shared"></a>在Ubuntu系统中的/mnt下建立共享项目nfs_shared</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># mkdir nfs_shared </span><br><span class="line"># chmod 777 -R nfs_shared/</span><br></pre></td></tr></table></figure>
 <p>保证使用者都能够读、写、执行。如图</p>
 <p><img src="/2019/11/02/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/1.png" alt="1"></p>
-<h5 id="3-在Ubuntu系统中修改NFS配置文件"><a href="#3-在Ubuntu系统中修改NFS配置文件" class="headerlink" title="3.    在Ubuntu系统中修改NFS配置文件"></a>3.    在Ubuntu系统中修改NFS配置文件</h5><p>执行命令：</p>
+<h5 id="在Ubuntu系统中修改NFS配置文件"><a href="#在Ubuntu系统中修改NFS配置文件" class="headerlink" title="在Ubuntu系统中修改NFS配置文件"></a>在Ubuntu系统中修改NFS配置文件</h5><p>执行命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/exports</span><br></pre></td></tr></table></figure>
 <p>在exports最后一行添加：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/mnt/nfs_shared 192.168.0.*(rw,sync,no_root_squash,no_subtree_check)</span><br><span class="line">其中，</span><br><span class="line">/mnt/nfs_shared  ---要共享的目录</span><br><span class="line">192.168.0.*---允许访问的网段，也可以是ip地址、主机名（能够被服务器解析）、</span><br><span class="line">     *（所有人都能访问）</span><br><span class="line">(rw,sync,no_root_squash,no_subtree_check)---</span><br><span class="line">rw:读/写权限</span><br><span class="line">sync:数据同步写入内存和硬盘</span><br><span class="line">no_root_squash:服务器允许远程系统以root特权存取该目录</span><br><span class="line">no_subtree_check:关闭子树检查</span><br></pre></td></tr></table></figure>
 <p><img src="/2019/11/02/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/2.png" alt="2"></p>
-<h5 id="4-在Ubuntu系统中启动服务"><a href="#4-在Ubuntu系统中启动服务" class="headerlink" title="4.    在Ubuntu系统中启动服务"></a>4.    在Ubuntu系统中启动服务</h5><p>依次执行下列命令：</p>
+<h5 id="在Ubuntu系统中启动服务"><a href="#在Ubuntu系统中启动服务" class="headerlink" title="在Ubuntu系统中启动服务"></a>在Ubuntu系统中启动服务</h5><p>依次执行下列命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo service rpcbind restart</span><br><span class="line">sudo service rpcbind restart</span><br></pre></td></tr></table></figure>
 <p><img src="/2019/11/02/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/3.png" alt="3"></p>
-<h5 id="5-测试验证"><a href="#5-测试验证" class="headerlink" title="5.    测试验证"></a>5.    测试验证</h5><h6 id="5-1-测试Ubuntu-nfs"><a href="#5-1-测试Ubuntu-nfs" class="headerlink" title="5.1    测试Ubuntu nfs"></a>5.1    测试Ubuntu nfs</h6><p>执行命令：</p>
+<h5 id="测试验证"><a href="#测试验证" class="headerlink" title="测试验证"></a>测试验证</h5><h6 id="测试Ubuntu-nfs"><a href="#测试Ubuntu-nfs" class="headerlink" title="测试Ubuntu nfs"></a>测试Ubuntu nfs</h6><p>执行命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$showmount -e</span><br></pre></td></tr></table></figure>
 <p><img src="/2019/11/02/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/4.png" alt="4"></p>
-<h6 id="5-2-设备挂载"><a href="#5-2-设备挂载" class="headerlink" title="5.2 设备挂载"></a>5.2 设备挂载</h6><p>在《Hi3519AV100 SDK 安装及升级使用说明.pdf》中4.2 使用 NFS 文件系统进行开发可以看到：</p>
+<h6 id="设备挂载"><a href="#设备挂载" class="headerlink" title="设备挂载"></a>设备挂载</h6><p>在《Hi3519AV100 SDK 安装及升级使用说明.pdf》中4.2 使用 NFS 文件系统进行开发可以看到：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -t nfs -o nolock -o tcp -o rsize=32768,wsize=32768 xx.xx.xx.xx:/your-nfs-path /mnt</span><br></pre></td></tr></table></figure>
 
 <p>改为：（在设备中挂载）</p>
@@ -414,7 +414,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/02/hello-world/" rel="next" title="Hello World">
+              <a href="/2019/11/02/%E7%AE%80%E5%8D%95%E7%9A%84rtsp%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/" rel="next" title="Hello World">
                 <i class="fa fa-chevron-left"></i> Hello World
               </a>
             
@@ -423,6 +423,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/02/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -621,7 +625,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-在Ubuntu系统中安装NFS"><span class="nav-number">1.</span> <span class="nav-text">1.    在Ubuntu系统中安装NFS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-在Ubuntu系统中的-mnt下建立共享项目nfs-shared"><span class="nav-number">2.</span> <span class="nav-text">2.    在Ubuntu系统中的/mnt下建立共享项目nfs_shared</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-在Ubuntu系统中修改NFS配置文件"><span class="nav-number">3.</span> <span class="nav-text">3.    在Ubuntu系统中修改NFS配置文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-在Ubuntu系统中启动服务"><span class="nav-number">4.</span> <span class="nav-text">4.    在Ubuntu系统中启动服务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-测试验证"><span class="nav-number">5.</span> <span class="nav-text">5.    测试验证</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#5-1-测试Ubuntu-nfs"><span class="nav-number">5.1.</span> <span class="nav-text">5.1    测试Ubuntu nfs</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5-2-设备挂载"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 设备挂载</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#在Ubuntu系统中安装NFS"><span class="nav-number">1.</span> <span class="nav-text">在Ubuntu系统中安装NFS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在Ubuntu系统中的-mnt下建立共享项目nfs-shared"><span class="nav-number">2.</span> <span class="nav-text">在Ubuntu系统中的/mnt下建立共享项目nfs_shared</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在Ubuntu系统中修改NFS配置文件"><span class="nav-number">3.</span> <span class="nav-text">在Ubuntu系统中修改NFS配置文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在Ubuntu系统中启动服务"><span class="nav-number">4.</span> <span class="nav-text">在Ubuntu系统中启动服务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#测试验证"><span class="nav-number">5.</span> <span class="nav-text">测试验证</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#测试Ubuntu-nfs"><span class="nav-number">5.1.</span> <span class="nav-text">测试Ubuntu nfs</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#设备挂载"><span class="nav-number">5.2.</span> <span class="nav-text">设备挂载</span></a></li></ol></li></ol></div>
             
 
           </div>
