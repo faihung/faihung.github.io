@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>Ubuntu配置NFS及其挂载设备</title>
-    <url>/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87.html</url>
+    <url>/2019/11/02/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/</url>
     <content><![CDATA[<h5 id="在Ubuntu系统中安装NFS"><a href="#在Ubuntu系统中安装NFS" class="headerlink" title="在Ubuntu系统中安装NFS"></a>在Ubuntu系统中安装NFS</h5><p>执行命令：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get install nfs-kernel-server</span><br></pre></td></tr></table></figure>
 <blockquote>
@@ -10,18 +10,18 @@
 </blockquote>
 <h5 id="在Ubuntu系统中的-mnt下建立共享项目nfs-shared"><a href="#在Ubuntu系统中的-mnt下建立共享项目nfs-shared" class="headerlink" title="在Ubuntu系统中的/mnt下建立共享项目nfs_shared"></a>在Ubuntu系统中的/mnt下建立共享项目nfs_shared</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># mkdir nfs_shared </span><br><span class="line"># chmod 777 -R nfs_shared/</span><br></pre></td></tr></table></figure>
 <p>保证使用者都能够读、写、执行。如图</p>
-<p><img src="/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87.htm/1.png" alt="1"></p>
+<p><img src="/2019/11/02/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/1.png" alt="1"></p>
 <h5 id="在Ubuntu系统中修改NFS配置文件"><a href="#在Ubuntu系统中修改NFS配置文件" class="headerlink" title="在Ubuntu系统中修改NFS配置文件"></a>在Ubuntu系统中修改NFS配置文件</h5><p>执行命令：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo vi /etc/exports</span><br></pre></td></tr></table></figure>
 <p>在exports最后一行添加：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/mnt/nfs_shared 192.168.0.*(rw,sync,no_root_squash,no_subtree_check)</span><br><span class="line">其中，</span><br><span class="line">/mnt/nfs_shared  ---要共享的目录</span><br><span class="line">192.168.0.*---允许访问的网段，也可以是ip地址、主机名（能够被服务器解析）、</span><br><span class="line">     *（所有人都能访问）</span><br><span class="line">(rw,sync,no_root_squash,no_subtree_check)---</span><br><span class="line">rw:读/写权限</span><br><span class="line">sync:数据同步写入内存和硬盘</span><br><span class="line">no_root_squash:服务器允许远程系统以root特权存取该目录</span><br><span class="line">no_subtree_check:关闭子树检查</span><br></pre></td></tr></table></figure>
-<p><img src="/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87.htm/2.png" alt="2"></p>
+<p><img src="/2019/11/02/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/2.png" alt="2"></p>
 <h5 id="在Ubuntu系统中启动服务"><a href="#在Ubuntu系统中启动服务" class="headerlink" title="在Ubuntu系统中启动服务"></a>在Ubuntu系统中启动服务</h5><p>依次执行下列命令：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo service rpcbind restart</span><br><span class="line">sudo service rpcbind restart</span><br></pre></td></tr></table></figure>
-<p><img src="/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87.htm/3.png" alt="3"></p>
+<p><img src="/2019/11/02/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/3.png" alt="3"></p>
 <h5 id="测试验证"><a href="#测试验证" class="headerlink" title="测试验证"></a>测试验证</h5><h6 id="测试Ubuntu-nfs"><a href="#测试Ubuntu-nfs" class="headerlink" title="测试Ubuntu nfs"></a>测试Ubuntu nfs</h6><p>执行命令：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$showmount -e</span><br></pre></td></tr></table></figure>
-<p><img src="/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87.htm/4.png" alt="4"></p>
+<p><img src="/2019/11/02/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/4.png" alt="4"></p>
 <h6 id="设备挂载"><a href="#设备挂载" class="headerlink" title="设备挂载"></a>设备挂载</h6><p>在《Hi3519AV100 SDK 安装及升级使用说明.pdf》中4.2 使用 NFS 文件系统进行开发可以看到：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mount -t nfs -o nolock -o tcp -o rsize=32768,wsize=32768 xx.xx.xx.xx:/your-nfs-path /mnt</span><br></pre></td></tr></table></figure>
 
@@ -39,7 +39,7 @@
   </entry>
   <entry>
     <title>Hello World</title>
-    <url>/hello-world.html</url>
+    <url>/2019/11/02/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
@@ -65,7 +65,7 @@
   </entry>
   <entry>
     <title>Hello World</title>
-    <url>/%E7%AE%80%E5%8D%95%E7%9A%84rtsp%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B.html</url>
+    <url>/2019/11/02/%E7%AE%80%E5%8D%95%E7%9A%84rtsp%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/</url>
     <content><![CDATA[<blockquote>
 <p>这里C表示rtsp客户端,S表示rtsp服务端。 </p>
 </blockquote>
