@@ -5,9 +5,9 @@
   <subtitle>作者：faihung</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://faihung.github.io/"/>
+  <link href="http://faihung.github.io/"/>
   <updated>2019-11-02T12:08:56.285Z</updated>
-  <id>https://faihung.github.io/</id>
+  <id>http://faihung.github.io/</id>
   
   <author>
     <name>faihung</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Ubuntu配置NFS及其挂载设备</title>
-    <link href="https://faihung.github.io/2019/11/02/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/"/>
-    <id>https://faihung.github.io/2019/11/02/Ubuntu配置NFS及其挂载设备/</id>
+    <link href="http://faihung.github.io/2019/11/02/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/"/>
+    <id>http://faihung.github.io/2019/11/02/Ubuntu配置NFS及其挂载设备/</id>
     <published>2019-11-01T16:00:00.000Z</published>
     <updated>2019-11-02T12:08:56.285Z</updated>
     
@@ -36,19 +36,19 @@
     </summary>
     
     
-      <category term="工具" scheme="https://faihung.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
+      <category term="工具" scheme="http://faihung.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-      <category term="nfs" scheme="https://faihung.github.io/tags/nfs/"/>
+      <category term="nfs" scheme="http://faihung.github.io/tags/nfs/"/>
     
-      <category term="ubuntu" scheme="https://faihung.github.io/tags/ubuntu/"/>
+      <category term="ubuntu" scheme="http://faihung.github.io/tags/ubuntu/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="https://faihung.github.io/2019/11/02/hello-world/"/>
-    <id>https://faihung.github.io/2019/11/02/hello-world/</id>
+    <link href="http://faihung.github.io/2019/11/02/hello-world/"/>
+    <id>http://faihung.github.io/2019/11/02/hello-world/</id>
     <published>2019-11-01T16:00:00.000Z</published>
     <updated>2019-11-02T03:48:01.840Z</updated>
     
@@ -64,21 +64,21 @@
     </summary>
     
     
-      <category term="搭建博客" scheme="https://faihung.github.io/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
+      <category term="搭建博客" scheme="http://faihung.github.io/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
     
     
-      <category term="npm" scheme="https://faihung.github.io/tags/npm/"/>
+      <category term="npm" scheme="http://faihung.github.io/tags/npm/"/>
     
-      <category term="hexo" scheme="https://faihung.github.io/tags/hexo/"/>
+      <category term="hexo" scheme="http://faihung.github.io/tags/hexo/"/>
     
-      <category term="github" scheme="https://faihung.github.io/tags/github/"/>
+      <category term="github" scheme="http://faihung.github.io/tags/github/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="https://faihung.github.io/2019/11/02/%E7%AE%80%E5%8D%95%E7%9A%84rtsp%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/"/>
-    <id>https://faihung.github.io/2019/11/02/简单的rtsp交互过程/</id>
+    <link href="http://faihung.github.io/2019/11/02/%E7%AE%80%E5%8D%95%E7%9A%84rtsp%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/"/>
+    <id>http://faihung.github.io/2019/11/02/简单的rtsp交互过程/</id>
     <published>2019-11-01T16:00:00.000Z</published>
     <updated>2019-11-02T11:06:44.334Z</updated>
     
@@ -97,7 +97,7 @@
     </summary>
     
     
-      <category term="流媒体" scheme="https://faihung.github.io/categories/%E6%B5%81%E5%AA%92%E4%BD%93/"/>
+      <category term="流媒体" scheme="http://faihung.github.io/categories/%E6%B5%81%E5%AA%92%E4%BD%93/"/>
     
     
   </entry>
