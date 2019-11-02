@@ -47,33 +47,6 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://yoursite.com/2019/11/02/%E7%AE%80%E5%8D%95%E7%9A%84rtsp%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/"/>
-    <id>http://yoursite.com/2019/11/02/简单的rtsp交互过程/</id>
-    <published>2019-11-01T16:00:00.000Z</published>
-    <updated>2019-11-02T11:06:44.334Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>这里C表示rtsp客户端,S表示rtsp服务端。 </p></blockquote><h6 id="C-gt-发送流媒体数据前的准备"><a href="#C-gt-发送流媒体数据前的准备" class="headerlink" title="C-&gt;:发送流媒体数据前的准备"></a>C-&gt;:发送流媒体数据前的准备</h6><ul><li>C-&gt;S:OPTION request  //询问S有哪些方法可用 </li><li>S-&gt;C:OPTION response //S回应信息中包括提供的所有可用方法 </li></ul><ul><li>C-&gt;S:DESCRIBE request //要求得到S提供的媒体初始化描述信息 </li><li>S-&gt;C:DESCRIBE response //S回应媒体初始化描述信息，主要是sdp </li></ul><ul><li>C-&gt;S:SETUP request //设置会话的属性，以及传输模式，提醒S建立会话 </li><li>S-&gt;C:SETUP response //S建立会话，返回会话标识符，以及会话相关信息 </li></ul><ul><li>C-&gt;S:PLAY request //C请求播放 </li><li>S-&gt;C:PLAY response //S回应该请求的信息 </li></ul><h6 id="S-gt-C-发送流媒体数据"><a href="#S-gt-C-发送流媒体数据" class="headerlink" title="S-&gt;C:发送流媒体数据"></a>S-&gt;C:发送流媒体数据</h6><ul><li>C-&gt;S:TEARDOWN request //C请求关闭会话 </li><li>S-&gt;C:TEARDOWN response //S回应该请求</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;
-&lt;p&gt;这里C表示rtsp客户端,S表示rtsp服务端。 &lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h6 id=&quot;C-gt-发送流媒体数据前的准备&quot;&gt;&lt;a href=&quot;#C-gt-发送流媒体数据前的准备&quot; class=&quot;headerlink&quot; title=&quot;
-      
-    
-    </summary>
-    
-    
-      <category term="流媒体" scheme="http://yoursite.com/categories/%E6%B5%81%E5%AA%92%E4%BD%93/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
     <link href="http://yoursite.com/2019/11/02/hello-world/"/>
     <id>http://yoursite.com/2019/11/02/hello-world/</id>
     <published>2019-11-01T16:00:00.000Z</published>
@@ -99,6 +72,33 @@
       <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
     
       <category term="github" scheme="http://yoursite.com/tags/github/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2019/11/02/%E7%AE%80%E5%8D%95%E7%9A%84rtsp%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/"/>
+    <id>http://yoursite.com/2019/11/02/简单的rtsp交互过程/</id>
+    <published>2019-11-01T16:00:00.000Z</published>
+    <updated>2019-11-02T11:06:44.334Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>这里C表示rtsp客户端,S表示rtsp服务端。 </p></blockquote><h6 id="C-gt-发送流媒体数据前的准备"><a href="#C-gt-发送流媒体数据前的准备" class="headerlink" title="C-&gt;:发送流媒体数据前的准备"></a>C-&gt;:发送流媒体数据前的准备</h6><ul><li>C-&gt;S:OPTION request  //询问S有哪些方法可用 </li><li>S-&gt;C:OPTION response //S回应信息中包括提供的所有可用方法 </li></ul><ul><li>C-&gt;S:DESCRIBE request //要求得到S提供的媒体初始化描述信息 </li><li>S-&gt;C:DESCRIBE response //S回应媒体初始化描述信息，主要是sdp </li></ul><ul><li>C-&gt;S:SETUP request //设置会话的属性，以及传输模式，提醒S建立会话 </li><li>S-&gt;C:SETUP response //S建立会话，返回会话标识符，以及会话相关信息 </li></ul><ul><li>C-&gt;S:PLAY request //C请求播放 </li><li>S-&gt;C:PLAY response //S回应该请求的信息 </li></ul><h6 id="S-gt-C-发送流媒体数据"><a href="#S-gt-C-发送流媒体数据" class="headerlink" title="S-&gt;C:发送流媒体数据"></a>S-&gt;C:发送流媒体数据</h6><ul><li>C-&gt;S:TEARDOWN request //C请求关闭会话 </li><li>S-&gt;C:TEARDOWN response //S回应该请求</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;这里C表示rtsp客户端,S表示rtsp服务端。 &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h6 id=&quot;C-gt-发送流媒体数据前的准备&quot;&gt;&lt;a href=&quot;#C-gt-发送流媒体数据前的准备&quot; class=&quot;headerlink&quot; title=&quot;
+      
+    
+    </summary>
+    
+    
+      <category term="流媒体" scheme="http://yoursite.com/categories/%E6%B5%81%E5%AA%92%E4%BD%93/"/>
+    
     
   </entry>
   
