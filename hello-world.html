@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="npm,hexo,github," />
 
 
 
@@ -81,15 +81,15 @@
 
 
 
-<meta name="description" content="这里C表示rtsp客户端,S表示rtsp服务端。   C-&amp;gt;:发送流媒体数据前的准备 C-&amp;gt;S:OPTION request  &#x2F;&#x2F;询问S有哪些方法可用  S-&amp;gt;C:OPTION response &#x2F;&#x2F;S回应信息中包括提供的所有可用方法    C-&amp;gt;S:DESCRIBE request &#x2F;&#x2F;要求得到S提供的媒体初始化描述信息  S-&amp;gt;C:DESCRIBE respo">
-<meta name="keywords" content="个人博客">
+<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="keywords" content="npm,hexo,github">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hello World">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;02&#x2F;%E7%AE%80%E5%8D%95%E7%9A%84rtsp%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B&#x2F;index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;faihung.github.io&#x2F;hello-world.html">
 <meta property="og:site_name" content="Faihung&#39;s blog">
-<meta property="og:description" content="这里C表示rtsp客户端,S表示rtsp服务端。   C-&amp;gt;:发送流媒体数据前的准备 C-&amp;gt;S:OPTION request  &#x2F;&#x2F;询问S有哪些方法可用  S-&amp;gt;C:OPTION response &#x2F;&#x2F;S回应信息中包括提供的所有可用方法    C-&amp;gt;S:DESCRIBE request &#x2F;&#x2F;要求得到S提供的媒体初始化描述信息  S-&amp;gt;C:DESCRIBE respo">
+<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-02T11:06:44.334Z">
+<meta property="og:updated_time" content="2019-11-02T03:48:01.840Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/11/02/简单的rtsp交互过程/"/>
+  <link rel="canonical" href="https://faihung.github.io/hello-world.html"/>
 
 
 
@@ -234,7 +234,7 @@
       
         <li class="menu-item menu-item-search">
           
-            <a href="javascript:;" class="popup-trigger">
+            <a href="javascript:;" target="_blank" rel="noopener" class="popup-trigger">
           
             
               <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
@@ -297,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/02/%E7%AE%80%E5%8D%95%E7%9A%84rtsp%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/">
+    <link itemprop="mainEntityOfPage" href="https://faihung.github.io/hello-world.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="faihung">
@@ -349,8 +349,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B5%81%E5%AA%92%E4%BD%93/" itemprop="url" rel="index">
-                    <span itemprop="name">流媒体</span>
+                  <a href="/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index">
+                    <span itemprop="name">搭建博客</span>
                   </a>
                 </span>
 
@@ -391,29 +391,19 @@
       
 
       
-        <blockquote>
-<p>这里C表示rtsp客户端,S表示rtsp服务端。 </p>
-</blockquote>
-<h6 id="C-gt-发送流媒体数据前的准备"><a href="#C-gt-发送流媒体数据前的准备" class="headerlink" title="C-&gt;:发送流媒体数据前的准备"></a>C-&gt;:发送流媒体数据前的准备</h6><ul>
-<li>C-&gt;S:OPTION request  //询问S有哪些方法可用 </li>
-<li>S-&gt;C:OPTION response //S回应信息中包括提供的所有可用方法 </li>
-</ul>
-<ul>
-<li>C-&gt;S:DESCRIBE request //要求得到S提供的媒体初始化描述信息 </li>
-<li>S-&gt;C:DESCRIBE response //S回应媒体初始化描述信息，主要是sdp </li>
-</ul>
-<ul>
-<li>C-&gt;S:SETUP request //设置会话的属性，以及传输模式，提醒S建立会话 </li>
-<li>S-&gt;C:SETUP response //S建立会话，返回会话标识符，以及会话相关信息 </li>
-</ul>
-<ul>
-<li>C-&gt;S:PLAY request //C请求播放 </li>
-<li>S-&gt;C:PLAY response //S回应该请求的信息 </li>
-</ul>
-<h6 id="S-gt-C-发送流媒体数据"><a href="#S-gt-C-发送流媒体数据" class="headerlink" title="S-&gt;C:发送流媒体数据"></a>S-&gt;C:发送流媒体数据</h6><ul>
-<li>C-&gt;S:TEARDOWN request //C请求关闭会话 </li>
-<li>S-&gt;C:TEARDOWN response //S回应该请求</li>
-</ul>
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
       
     </div>
@@ -429,6 +419,16 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/npm/" rel="tag"># npm</a>
+          
+            <a href="/tags/hexo/" rel="tag"># hexo</a>
+          
+            <a href="/tags/github/" rel="tag"># github</a>
+          
+        </div>
+      
 
       
       
@@ -438,7 +438,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/02/hello-world/" rel="next" title="Hello World">
+              <a href="/%E7%AE%80%E5%8D%95%E7%9A%84rtsp%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B.html" rel="next" title="Hello World">
                 <i class="fa fa-chevron-left"></i> Hello World
               </a>
             
@@ -448,7 +448,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/11/02/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/" rel="prev" title="Ubuntu配置NFS及其挂载设备">
+              <a href="/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87.html" rel="prev" title="Ubuntu配置NFS及其挂载设备">
                 Ubuntu配置NFS及其挂载设备 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -521,7 +521,7 @@
                 alt="faihung" />
             
               <p class="site-author-name" itemprop="name">faihung</p>
-              <p class="site-description motion-element" itemprop="description">学习总结与知识积累</p>
+              <p class="site-description motion-element" itemprop="description">系统、归纳、总结</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -649,7 +649,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#C-gt-发送流媒体数据前的准备"><span class="nav-text">C-&gt;:发送流媒体数据前的准备</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#S-gt-C-发送流媒体数据"><span class="nav-text">S-&gt;C:发送流媒体数据</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
             
 
           </div>
