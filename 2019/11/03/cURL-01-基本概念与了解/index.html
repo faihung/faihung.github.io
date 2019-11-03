@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http:&#x2F;&#x2F;faihung.github.io&#x2F;2019&#x2F;11&#x2F;03&#x2F;cURL-01-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BA%86%E8%A7%A3&#x2F;1.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;faihung.github.io&#x2F;2019&#x2F;11&#x2F;03&#x2F;cURL-01-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BA%86%E8%A7%A3&#x2F;2.gif">
-<meta property="og:updated_time" content="2019-11-03T04:28:42.385Z">
+<meta property="og:updated_time" content="2019-11-03T14:58:32.291Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;faihung.github.io&#x2F;2019&#x2F;11&#x2F;03&#x2F;cURL-01-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BA%86%E8%A7%A3&#x2F;1.png">
 
@@ -407,7 +407,7 @@
 <p>2.WebService 数据接口资源（比如动态获取接口数据，比如天气、号码归属地等）</p>
 <p>3.FTP 服务器里的文件资源（下载 FTP 服务器里面的文件）</p>
 <p>4.其他资源（所有网络上的资源都可以使用 cURL 访问和下载到）</p>
-<h5 id="三、延伸"><a href="#三、延伸" class="headerlink" title="三、延伸"></a>三、延伸</h5><p>开发 HTTP 和 FTP 之类依赖于应用层协议的应用程序并不复杂，但也不简单。进一步讲，这不是应用程序的重点，因为大部分情况下，协议之上的内容才是真正重要的内容。因此，libcurl 引起了许多人的兴趣，因为它的重点是应用程序而不是开发的各个方面。注意，很少有应用程序开发自己的 TCP/IP 堆栈，所以老话重提：尽可能重用以最小化开发安排并提高应用程序的可靠性。</p>
+<h5 id="三、延伸-为什么要用cURL"><a href="#三、延伸-为什么要用cURL" class="headerlink" title="三、延伸(为什么要用cURL)"></a>三、延伸(为什么要用cURL)</h5><p>开发 HTTP 和 FTP 之类依赖于应用层协议的应用程序并不复杂，但也不简单。进一步讲，这不是应用程序的重点，因为大部分情况下，协议之上的内容才是真正重要的内容。因此，libcurl 引起了许多人的兴趣，因为它的重点是应用程序而不是开发的各个方面。注意，很少有应用程序开发自己的 TCP/IP 堆栈，所以老话重提：尽可能重用以最小化开发安排并提高应用程序的可靠性。</p>
 <h6 id="关于Web-协议"><a href="#关于Web-协议" class="headerlink" title="关于Web 协议"></a>关于Web 协议</h6><p>如今构建应用程序已与过去大不相同。现在的应用程序需要能够通过网络或 Internet 进行通讯（提供人类可用的网络 API 或接口），还要能支持用户脚本化以提高灵活性。现代应用程序通常使用 HTTP 公开 Web 接口，并通过 Simple Mail Transport Protocol (SMTP) 提供警告通知。这些协议允许您将 Web 浏览器指向设备以获得配置或状态信息，并从设备或常用的电子邮件客户端接收标准电子邮件（分别通过 HTTP 和 SMTP）。</p>
 <p>这些 Web 服务通常构建在网络堆栈的套接字层上（见图 1）。套接字层实现一个最先出现在 Berkeley Software Distribution (BSD) 操作系统上的 API，并提取底层传输和网络层协议的详细信息。</p>
 <p>图 1. 网络堆栈和 libcurl</p>
@@ -536,7 +536,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -654,7 +654,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、基本概念"><span class="nav-text">一、基本概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、使用场景"><span class="nav-text">二、使用场景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三、延伸"><span class="nav-text">三、延伸</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#关于Web-协议"><span class="nav-text">关于Web 协议</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、基本概念"><span class="nav-text">一、基本概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、使用场景"><span class="nav-text">二、使用场景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三、延伸-为什么要用cURL"><span class="nav-text">三、延伸(为什么要用cURL)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#关于Web-协议"><span class="nav-text">关于Web 协议</span></a></li></ol></li></ol></div>
             
 
           </div>
