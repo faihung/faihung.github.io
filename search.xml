@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>cURL-01_基本概念与了解</title>
+    <url>/2019/11/03/cURL-01-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BA%86%E8%A7%A3/</url>
+    <content><![CDATA[<h5 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h5><p>cURL（Client URL Library Functions）is a command line tool for transfering data with URL syntax（使用 URL 语法传输数据的命令行工具），即客户端向服务器请求资源的工具。</p>
+<p><img src="/2019/11/03/cURL-01-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BA%86%E8%A7%A3/1.png" alt="1"></p>
+<a id="more"></a>
+
+<p>关于cURL,<a href="https://curl.haxx.se/" target="_blank" rel="noopener">这里</a>有更详细的介绍。</p>
+<h5 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h5><p>1.网页资源（例如编写网页爬虫）</p>
+<p>2.WebService 数据接口资源（比如动态获取接口数据，比如天气、号码归属地等）</p>
+<p>3.FTP 服务器里的文件资源（下载 FTP 服务器里面的文件）</p>
+<p>4.其他资源（所有网络上的资源都可以使用 cURL 访问和下载到）</p>
+<h5 id="cURL库支持多种语言"><a href="#cURL库支持多种语言" class="headerlink" title="cURL库支持多种语言"></a>cURL库支持多种语言</h5><p>curl库是C语言封装的一个强大的库，使用curl比封装socket更加方便。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>虚拟机VMware与Windows主机共享文件介绍</title>
     <url>/2019/11/03/%E8%99%9A%E6%8B%9F%E6%9C%BAVMware%E4%B8%8EWindows%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D/</url>
     <content><![CDATA[<h5 id="一、设置共享文件夹功能"><a href="#一、设置共享文件夹功能" class="headerlink" title="一、设置共享文件夹功能"></a>一、设置共享文件夹功能</h5><p>虚拟机VMware提供了在宿主机与虚拟机系统之间交换文件的共享文件夹（Shared Folder）功能。不管虚拟机操作系统是Linux还是Windows都可用。你可以通过设置（ Settings）&gt;共享文件夹（Shared Folder）来设置。但是此功能选项必须要安装虚拟机工具（VMware Tools），否则如下所示，否则该功能选项不可用。</p>

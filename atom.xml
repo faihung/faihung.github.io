@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://faihung.github.io/"/>
-  <updated>2019-11-03T03:12:10.814Z</updated>
+  <updated>2019-11-03T04:00:39.027Z</updated>
   <id>http://faihung.github.io/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>cURL-01_基本概念与了解</title>
+    <link href="http://faihung.github.io/2019/11/03/cURL-01-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BA%86%E8%A7%A3/"/>
+    <id>http://faihung.github.io/2019/11/03/cURL-01-基本概念与了解/</id>
+    <published>2019-11-03T03:59:28.000Z</published>
+    <updated>2019-11-03T04:00:39.027Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h5><p>cURL（Client URL Library Functions）is a command line tool for transfering data with URL syntax（使用 URL 语法传输数据的命令行工具），即客户端向服务器请求资源的工具。</p><p><img src="/2019/11/03/cURL-01-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BA%86%E8%A7%A3/1.png" alt="1"></p><a id="more"></a><p>关于cURL,<a href="https://curl.haxx.se/" target="_blank" rel="noopener">这里</a>有更详细的介绍。</p><h5 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h5><p>1.网页资源（例如编写网页爬虫）</p><p>2.WebService 数据接口资源（比如动态获取接口数据，比如天气、号码归属地等）</p><p>3.FTP 服务器里的文件资源（下载 FTP 服务器里面的文件）</p><p>4.其他资源（所有网络上的资源都可以使用 cURL 访问和下载到）</p><h5 id="cURL库支持多种语言"><a href="#cURL库支持多种语言" class="headerlink" title="cURL库支持多种语言"></a>cURL库支持多种语言</h5><p>curl库是C语言封装的一个强大的库，使用curl比封装socket更加方便。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h5 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h5&gt;&lt;p&gt;cURL（Client URL Library Functions）is a command line tool for transfering data with URL syntax（使用 URL 语法传输数据的命令行工具），即客户端向服务器请求资源的工具。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/2019/11/03/cURL-01-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BA%86%E8%A7%A3/1.png&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>虚拟机VMware与Windows主机共享文件介绍</title>
