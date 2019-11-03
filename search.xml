@@ -49,7 +49,7 @@
 <blockquote>
 <p>同时会有两个软件包nfs-common和portmap被安装上，如果没有安装成功多安装几次。</p>
 </blockquote>
-<!--阅读全文-->
+<a id="more"></a>
 
 <h5 id="在Ubuntu系统中的-mnt下建立共享项目nfs-shared"><a href="#在Ubuntu系统中的-mnt下建立共享项目nfs-shared" class="headerlink" title="在Ubuntu系统中的/mnt下建立共享项目nfs_shared"></a>在Ubuntu系统中的/mnt下建立共享项目nfs_shared</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># mkdir nfs_shared </span><br><span class="line"># chmod 777 -R nfs_shared/</span><br></pre></td></tr></table></figure>
 <p>保证使用者都能够读、写、执行。如图</p>

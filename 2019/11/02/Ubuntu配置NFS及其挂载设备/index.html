@@ -81,19 +81,19 @@
 
 
 
-<meta name="description" content="在Ubuntu系统中安装NFS执行命令： 1sudo apt-get install nfs-kernel-server  同时会有两个软件包nfs-common和portmap被安装上，如果没有安装成功多安装几次。    在Ubuntu系统中的&#x2F;mnt下建立共享项目nfs_shared12# mkdir nfs_shared # chmod 777 -R nfs_shared&#x2F; 保证使用者都能够">
+<meta name="description" content="在Ubuntu系统中安装NFS执行命令： 1sudo apt-get install nfs-kernel-server  同时会有两个软件包nfs-common和portmap被安装上，如果没有安装成功多安装几次。">
 <meta name="keywords" content="nfs,ubuntu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu配置NFS及其挂载设备">
 <meta property="og:url" content="http:&#x2F;&#x2F;faihung.github.io&#x2F;2019&#x2F;11&#x2F;02&#x2F;Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87&#x2F;index.html">
 <meta property="og:site_name" content="Faihung&#39;s blog">
-<meta property="og:description" content="在Ubuntu系统中安装NFS执行命令： 1sudo apt-get install nfs-kernel-server  同时会有两个软件包nfs-common和portmap被安装上，如果没有安装成功多安装几次。    在Ubuntu系统中的&#x2F;mnt下建立共享项目nfs_shared12# mkdir nfs_shared # chmod 777 -R nfs_shared&#x2F; 保证使用者都能够">
+<meta property="og:description" content="在Ubuntu系统中安装NFS执行命令： 1sudo apt-get install nfs-kernel-server  同时会有两个软件包nfs-common和portmap被安装上，如果没有安装成功多安装几次。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http:&#x2F;&#x2F;faihung.github.io&#x2F;2019&#x2F;11&#x2F;02&#x2F;Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87&#x2F;1.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;faihung.github.io&#x2F;2019&#x2F;11&#x2F;02&#x2F;Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87&#x2F;2.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;faihung.github.io&#x2F;2019&#x2F;11&#x2F;02&#x2F;Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87&#x2F;3.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;faihung.github.io&#x2F;2019&#x2F;11&#x2F;02&#x2F;Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87&#x2F;4.png">
-<meta property="og:updated_time" content="2019-11-03T02:15:19.815Z">
+<meta property="og:updated_time" content="2019-11-03T02:31:52.620Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;faihung.github.io&#x2F;2019&#x2F;11&#x2F;02&#x2F;Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87&#x2F;1.png">
 
@@ -401,7 +401,7 @@
 <blockquote>
 <p>同时会有两个软件包nfs-common和portmap被安装上，如果没有安装成功多安装几次。</p>
 </blockquote>
-<!--阅读全文-->
+<a id="more"></a>
 
 <h5 id="在Ubuntu系统中的-mnt下建立共享项目nfs-shared"><a href="#在Ubuntu系统中的-mnt下建立共享项目nfs-shared" class="headerlink" title="在Ubuntu系统中的/mnt下建立共享项目nfs_shared"></a>在Ubuntu系统中的/mnt下建立共享项目nfs_shared</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># mkdir nfs_shared </span><br><span class="line"># chmod 777 -R nfs_shared/</span><br></pre></td></tr></table></figure>
 <p>保证使用者都能够读、写、执行。如图</p>
