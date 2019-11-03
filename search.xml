@@ -14,6 +14,12 @@
 <p>4.其他资源（所有网络上的资源都可以使用 cURL 访问和下载到）</p>
 <h5 id="cURL库支持多种语言"><a href="#cURL库支持多种语言" class="headerlink" title="cURL库支持多种语言"></a>cURL库支持多种语言</h5><p>curl库是C语言封装的一个强大的库，使用curl比封装socket更加方便。</p>
 ]]></content>
+      <categories>
+        <category>cURL</category>
+      </categories>
+      <tags>
+        <tag>cURL</tag>
+      </tags>
   </entry>
   <entry>
     <title>虚拟机VMware与Windows主机共享文件介绍</title>
