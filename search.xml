@@ -3,16 +3,25 @@
   <entry>
     <title>cURL-01_基本概念与了解</title>
     <url>/2019/11/03/cURL-01-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BA%86%E8%A7%A3/</url>
-    <content><![CDATA[<h5 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h5><p>cURL（Client URL Library Functions）is a command line tool for transfering data with URL syntax（使用 URL 语法传输数据的命令行工具），即客户端向服务器请求资源的工具。</p>
+    <content><![CDATA[<h5 id="一、基本概念"><a href="#一、基本概念" class="headerlink" title="一、基本概念"></a>一、基本概念</h5><p>cURL（Client URL Library Functions）is a command line tool for transfering data with URL syntax（使用 URL 语法传输数据的命令行工具），即客户端向服务器请求资源的工具。</p>
 <p><img src="/2019/11/03/cURL-01-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BA%86%E8%A7%A3/1.png" alt="1"></p>
 <a id="more"></a>
 
+<p>curl库是C语言封装的一个强大的库，使用curl比封装socket更加方便。</p>
+<p>cURL 最初的设计初衷是使用不同的协议（比如 FTP、HTTP、SCP 等）在端点之间移动文件。它最初是一个命令行实用工具，但现在也是一个绑定了 30 多种语言的库。因此，现在不仅可以通过 shell 使用 cURL，您还可以构建合并了这个重要功能的应用程序。libcurl 库也是可以移植的，支持 Linux®、IBM®AIX®操作系统、BSD、Solaris 以及许多其他 UNIX®变体。</p>
+<p>cURL是一个命令行工具和库，实现了各种客户端协议。它支持 12 种以上的协议，包括 FTP、HTTP、Telnet 以及其他安全变体。许多平台上都能找到 cURL，包括 Linux、AIX、BSD 和 Solaris，它支持 30 多种语言。</p>
+<p>PycURL是 libcurl API 之上的一个薄层，PycURL 速度非常快。使用 PycURL，您可以使用 libcurl 库开发 Python 应用程序。</p>
 <p>关于cURL,<a href="https://curl.haxx.se/" target="_blank" rel="noopener">这里</a>有更详细的介绍。</p>
-<h5 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h5><p>1.网页资源（例如编写网页爬虫）</p>
+<h5 id="二、使用场景"><a href="#二、使用场景" class="headerlink" title="二、使用场景"></a>二、使用场景</h5><p>1.网页资源（例如编写网页爬虫）</p>
 <p>2.WebService 数据接口资源（比如动态获取接口数据，比如天气、号码归属地等）</p>
 <p>3.FTP 服务器里的文件资源（下载 FTP 服务器里面的文件）</p>
 <p>4.其他资源（所有网络上的资源都可以使用 cURL 访问和下载到）</p>
-<h5 id="cURL库支持多种语言"><a href="#cURL库支持多种语言" class="headerlink" title="cURL库支持多种语言"></a>cURL库支持多种语言</h5><p>curl库是C语言封装的一个强大的库，使用curl比封装socket更加方便。</p>
+<h5 id="三、延伸"><a href="#三、延伸" class="headerlink" title="三、延伸"></a>三、延伸</h5><p>开发 HTTP 和 FTP 之类依赖于应用层协议的应用程序并不复杂，但也不简单。进一步讲，这不是应用程序的重点，因为大部分情况下，协议之上的内容才是真正重要的内容。因此，libcurl 引起了许多人的兴趣，因为它的重点是应用程序而不是开发的各个方面。注意，很少有应用程序开发自己的 TCP/IP 堆栈，所以老话重提：尽可能重用以最小化开发安排并提高应用程序的可靠性。</p>
+<h6 id="关于Web-协议"><a href="#关于Web-协议" class="headerlink" title="关于Web 协议"></a>关于Web 协议</h6><p>如今构建应用程序已与过去大不相同。现在的应用程序需要能够通过网络或 Internet 进行通讯（提供人类可用的网络 API 或接口），还要能支持用户脚本化以提高灵活性。现代应用程序通常使用 HTTP 公开 Web 接口，并通过 Simple Mail Transport Protocol (SMTP) 提供警告通知。这些协议允许您将 Web 浏览器指向设备以获得配置或状态信息，并从设备或常用的电子邮件客户端接收标准电子邮件（分别通过 HTTP 和 SMTP）。</p>
+<p>这些 Web 服务通常构建在网络堆栈的套接字层上（见图 1）。套接字层实现一个最先出现在 Berkeley Software Distribution (BSD) 操作系统上的 API，并提取底层传输和网络层协议的详细信息。</p>
+<p>图 1. 网络堆栈和 libcurl</p>
+<p><img src="/2019/11/03/cURL-01-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BA%86%E8%A7%A3/2.gif" alt="2"></p>
+<p>Web 服务发生在客户端和服务器之间的协议对话中。在 HTTP 上下文中，服务器是终端设备，客户端是位于端点上的浏览器。对于 SMTP，服务器是邮件网关或端点用户，客户端是终端设备。在某些情况下，协议对话发生在两个步骤（请求和响应）中，但另一些情况下，需要协商和通讯的通信量更多。这种协商可能增加了大量复杂性，这可以通过 API 进行抽象，比如 libcurl。</p>
 ]]></content>
       <categories>
         <category>cURL</category>
