@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="系统时间," />
 
 
 
@@ -81,15 +81,18 @@
 
 
 
-<meta name="description" content="系统、归纳、总结">
-<meta name="keywords" content="个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Faihung&#39;s blog">
-<meta property="og:url" content="http:&#x2F;&#x2F;faihung.github.io&#x2F;categories&#x2F;%E5%B7%A5%E5%85%B7&#x2F;index.html">
+<meta name="description" content="一、描述：通过settimeofday()函数来设置系统时间，这个函数设置的精度可以精确到微秒。 12345678910111213#include &amp;lt;time.h&amp;gt;int settimeofday(const struct timeval *tv , const struct timezone *tz);struct timeval &amp;#123;    time_t      tv_">
+<meta name="keywords" content="系统时间">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux 通过系统函数设置系统时间">
+<meta property="og:url" content="http:&#x2F;&#x2F;faihung.github.io&#x2F;2019&#x2F;11&#x2F;03&#x2F;linux-%E9%80%9A%E8%BF%87%E7%B3%BB%E7%BB%9F%E5%87%BD%E6%95%B0%E8%AE%BE%E7%BD%AE%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4&#x2F;index.html">
 <meta property="og:site_name" content="Faihung&#39;s blog">
-<meta property="og:description" content="系统、归纳、总结">
+<meta property="og:description" content="一、描述：通过settimeofday()函数来设置系统时间，这个函数设置的精度可以精确到微秒。 12345678910111213#include &amp;lt;time.h&amp;gt;int settimeofday(const struct timeval *tv , const struct timezone *tz);struct timeval &amp;#123;    time_t      tv_">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http:&#x2F;&#x2F;faihung.github.io&#x2F;2019&#x2F;11&#x2F;03&#x2F;linux-%E9%80%9A%E8%BF%87%E7%B3%BB%E7%BB%9F%E5%87%BD%E6%95%B0%E8%AE%BE%E7%BD%AE%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4&#x2F;1.jpg">
+<meta property="og:updated_time" content="2019-11-03T09:09:54.432Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;faihung.github.io&#x2F;2019&#x2F;11&#x2F;03&#x2F;linux-%E9%80%9A%E8%BF%87%E7%B3%BB%E7%BB%9F%E5%87%BD%E6%95%B0%E8%AE%BE%E7%BD%AE%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4&#x2F;1.jpg">
 
 
 
@@ -119,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://faihung.github.io/categories/工具/"/>
+  <link rel="canonical" href="http://faihung.github.io/2019/11/03/linux-通过系统函数设置系统时间/"/>
 
 
 
 
 
-  <title>分类: 工具 | Faihung's blog</title>
+  <title>linux 通过系统函数设置系统时间 | Faihung's blog</title>
   
 
 
@@ -144,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -282,111 +285,187 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>工具<small>分类</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://faihung.github.io/2019/11/03/linux-%E9%80%9A%E8%BF%87%E7%B3%BB%E7%BB%9F%E5%87%BD%E6%95%B0%E8%AE%BE%E7%BD%AE%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="faihung">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Faihung's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/11/03/%E8%99%9A%E6%8B%9F%E6%9C%BAVMware%E4%B8%8EWindows%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D/" itemprop="url">
-              
-                <span itemprop="name">虚拟机VMware与Windows主机共享文件介绍</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">linux 通过系统函数设置系统时间</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-11-03T11:07:48+08:00"
-              content="2019-11-03" >
-          11-03
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-03T17:06:09+08:00">
+                2019-11-03
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%B3%BB%E7%BB%9F%E5%87%BD%E6%95%B0-%E5%BA%93%E5%87%BD%E6%95%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">系统函数&库函数</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"> 阅读次数:</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/11/03/Source-Insight-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E6%95%B4%E7%90%86/" itemprop="url">
-              
-                <span itemprop="name">Source Insight 使用技巧整理</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-11-03T00:17:01+08:00"
-              content="2019-11-03" >
-          11-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
+        <h5 id="一、描述："><a href="#一、描述：" class="headerlink" title="一、描述："></a>一、描述：</h5><p>通过settimeofday()函数来设置系统时间，这个函数设置的精度可以精确到微秒。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;time.h&gt;</span><br><span class="line"></span><br><span class="line">int settimeofday(const struct timeval *tv , const struct timezone *tz);</span><br><span class="line"></span><br><span class="line">struct timeval &#123;</span><br><span class="line">    time_t      tv_sec;     /* seconds */</span><br><span class="line">    suseconds_t tv_usec;    /* microseconds */</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct timezone &#123;</span><br><span class="line">    int tz_minuteswest;     /* minutes west of Greenwich */</span><br><span class="line">    int tz_dsttime;         /* type of DST correction */</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>tz参数为时区，时区结构中tz_dsttime在linux中不支持，应该置为0，通常将参数tz设置为NULL，表示使用当前系统的时区。该函数是glib中的，但在mingw中没有实现。</p>
+</blockquote>
+<a id="more"></a>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<h5 id="二、代码演示："><a href="#二、代码演示：" class="headerlink" title="二、代码演示："></a>二、代码演示：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include&lt;sys/time.h&gt;</span><br><span class="line">#include&lt;unistd.h&gt;</span><br><span class="line">#include &lt;time.h&gt;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">int SetSystemTime(char *dt)</span><br><span class="line">&#123;</span><br><span class="line">    struct tm rtc_time;</span><br><span class="line">    struct tm _tm;</span><br><span class="line">    struct timeval tv;</span><br><span class="line">    time_t timep;</span><br><span class="line">    sscanf(dt, &quot;%d-%d-%d %d:%d:%d&quot;, &amp;rtc_time.tm_year,</span><br><span class="line">		&amp;rtc_time.tm_mon, &amp;rtc_time.tm_mday,&amp;rtc_time.tm_hour,</span><br><span class="line">        &amp;rtc_time.tm_min, &amp;rtc_time.tm_sec);</span><br><span class="line">    _tm.tm_sec = rtc_time.tm_sec;</span><br><span class="line">    _tm.tm_min = rtc_time.tm_min;</span><br><span class="line">    _tm.tm_hour = rtc_time.tm_hour;</span><br><span class="line">    _tm.tm_mday = rtc_time.tm_mday;</span><br><span class="line">    _tm.tm_mon = rtc_time.tm_mon - 1;</span><br><span class="line">    _tm.tm_year = rtc_time.tm_year - 1900;</span><br><span class="line"> </span><br><span class="line">    timep = mktime(&amp;_tm);</span><br><span class="line">    tv.tv_sec = timep;</span><br><span class="line">    tv.tv_usec = 0;</span><br><span class="line">    // if(settimeofday (&amp;tv, (struct timezone *) 0) &lt; 0)</span><br><span class="line">	if(settimeofday (&amp;tv, NULL) &lt; 0)	</span><br><span class="line">    &#123;</span><br><span class="line">		printf(&quot;Set system datatime error!\n&quot;);</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">	printf(&quot;现在的时间是:&quot;);</span><br><span class="line">	fflush(stdout);</span><br><span class="line">	system(&quot;date&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">  SetSystemTime(&quot;2019-11-03 16:30:30&quot;);//2019-11-01 21:19:05  </span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/11/02/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/" itemprop="url">
-              
-                <span itemprop="name">Ubuntu配置NFS及其挂载设备</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-11-02T00:00:00+08:00"
-              content="2019-11-02" >
-          11-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+<h5 id="三、效果如下："><a href="#三、效果如下：" class="headerlink" title="三、效果如下："></a>三、效果如下：</h5><p><img src="/2019/11/03/linux-%E9%80%9A%E8%BF%87%E7%B3%BB%E7%BB%9F%E5%87%BD%E6%95%B0%E8%AE%BE%E7%BD%AE%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/1.jpg" alt="1"><br>注意：</p>
+<ol>
+<li>调用settimeofday函数时必须要在root权限下执行。</li>
+<li>设置时间之前最好把虚拟机网络断开。</li>
+</ol>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/" rel="tag"># 系统时间</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/03/cURL-01-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BA%86%E8%A7%A3/" rel="next" title="cURL-01_基本概念与了解">
+                <i class="fa fa-chevron-left"></i> cURL-01_基本概念与了解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -394,6 +473,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -414,8 +497,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -542,6 +634,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、描述："><span class="nav-text">一、描述：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、代码演示："><span class="nav-text">二、代码演示：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三、效果如下："><span class="nav-text">三、效果如下：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -702,6 +810,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
