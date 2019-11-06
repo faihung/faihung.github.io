@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;11&#x2F;03&#x2F;Source-Insight-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E6%95%B4%E7%90%86&#x2F;1.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;11&#x2F;03&#x2F;Source-Insight-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E6%95%B4%E7%90%86&#x2F;2.png">
-<meta property="og:updated_time" content="2019-11-03T02:50:35.710Z">
+<meta property="og:updated_time" content="2019-11-06T14:53:34.273Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;11&#x2F;03&#x2F;Source-Insight-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E6%95%B4%E7%90%86&#x2F;1.png">
 
@@ -345,8 +345,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-03T10:50:35+08:00">
-                2019-11-03
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-06T22:53:34+08:00">
+                2019-11-06
               </time>
             
           </span>
@@ -437,6 +437,14 @@
 <p>添加“#ifdef 0”和“#endif”的宏代码，定义快捷键为Ctrl+/+Shift：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">macro AddMacroComment()  </span><br><span class="line">&#123;  </span><br><span class="line">    hwnd=GetCurrentWnd()  </span><br><span class="line">    sel=GetWndSel(hwnd)  </span><br><span class="line">    lnFirst=GetWndSelLnFirst(hwnd)  </span><br><span class="line">    lnLast=GetWndSelLnLast(hwnd)  </span><br><span class="line">    hbuf=GetCurrentBuf()  </span><br><span class="line">   </span><br><span class="line">    if(LnFirst == 0) &#123;  </span><br><span class="line">            szIfStart = &quot;&quot;  </span><br><span class="line">    &#125;else&#123;  </span><br><span class="line">            szIfStart = GetBufLine(hbuf, LnFirst-1)  </span><br><span class="line">    &#125;  </span><br><span class="line">    szIfEnd = GetBufLine(hbuf, lnLast+1)  </span><br><span class="line">    if(szIfStart == &quot;#if 0&quot; &amp;&amp; szIfEnd == &quot;#endif&quot;) &#123;  </span><br><span class="line">            DelBufLine(hbuf, lnLast+1)  </span><br><span class="line">            DelBufLine(hbuf, lnFirst-1)  </span><br><span class="line">            sel.lnFirst = sel.lnFirst – 1  </span><br><span class="line">            sel.lnLast = sel.lnLast – 1  </span><br><span class="line">    &#125;else&#123;  </span><br><span class="line">            InsBufLine(hbuf, lnFirst, &quot;#if 0&quot;)  </span><br><span class="line">            InsBufLine(hbuf, lnLast+2, &quot;#endif&quot;)  </span><br><span class="line">            sel.lnFirst = sel.lnFirst + 1  </span><br><span class="line">            sel.lnLast = sel.lnLast + 1  </span><br><span class="line">    &#125;  </span><br><span class="line">   </span><br><span class="line">    SetWndSel( hwnd, sel )  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>操作和上面类似</p>
+<h4 id="添加快捷键，快速打开当前文件所在文件夹"><a href="#添加快捷键，快速打开当前文件所在文件夹" class="headerlink" title="添加快捷键，快速打开当前文件所在文件夹"></a>添加快捷键，快速打开当前文件所在文件夹</h4><ol>
+<li><p>选择【Tools】-&gt;【custom commands】，在add -&gt;【Command】输入名字：Explorer Project</p>
+</li>
+<li><p>在【Run：】中输入： ShellExecute open explorer /e,/select,%f 或 ShellExecute open explorer /select,%f 或  explorer %d 或 explorer /select,%f<br>注意中间的逗号:ShellExecute open explorer /select,%f</p>
+</li>
+<li><p>在点击【Keys…】，点击【Assign New Key…】，设置快捷键 Ctrl+Alt+O</p>
+</li>
+</ol>
 
       
     </div>
@@ -672,7 +680,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#通用设置"><span class="nav-text">通用设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#显示中文乱码"><span class="nav-text">显示中文乱码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加注释快捷键"><span class="nav-text">添加注释快捷键</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#操作步骤："><span class="nav-text">操作步骤：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#单行、多行注释："><span class="nav-text">单行、多行注释：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#通用设置"><span class="nav-text">通用设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#显示中文乱码"><span class="nav-text">显示中文乱码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加注释快捷键"><span class="nav-text">添加注释快捷键</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#操作步骤："><span class="nav-text">操作步骤：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#单行、多行注释："><span class="nav-text">单行、多行注释：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加快捷键，快速打开当前文件所在文件夹"><span class="nav-text">添加快捷键，快速打开当前文件所在文件夹</span></a></li></ol></div>
             
 
           </div>

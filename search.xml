@@ -312,6 +312,14 @@
 <p>添加“#ifdef 0”和“#endif”的宏代码，定义快捷键为Ctrl+/+Shift：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">macro AddMacroComment()  </span><br><span class="line">&#123;  </span><br><span class="line">    hwnd=GetCurrentWnd()  </span><br><span class="line">    sel=GetWndSel(hwnd)  </span><br><span class="line">    lnFirst=GetWndSelLnFirst(hwnd)  </span><br><span class="line">    lnLast=GetWndSelLnLast(hwnd)  </span><br><span class="line">    hbuf=GetCurrentBuf()  </span><br><span class="line">   </span><br><span class="line">    if(LnFirst == 0) &#123;  </span><br><span class="line">            szIfStart = &quot;&quot;  </span><br><span class="line">    &#125;else&#123;  </span><br><span class="line">            szIfStart = GetBufLine(hbuf, LnFirst-1)  </span><br><span class="line">    &#125;  </span><br><span class="line">    szIfEnd = GetBufLine(hbuf, lnLast+1)  </span><br><span class="line">    if(szIfStart == &quot;#if 0&quot; &amp;&amp; szIfEnd == &quot;#endif&quot;) &#123;  </span><br><span class="line">            DelBufLine(hbuf, lnLast+1)  </span><br><span class="line">            DelBufLine(hbuf, lnFirst-1)  </span><br><span class="line">            sel.lnFirst = sel.lnFirst – 1  </span><br><span class="line">            sel.lnLast = sel.lnLast – 1  </span><br><span class="line">    &#125;else&#123;  </span><br><span class="line">            InsBufLine(hbuf, lnFirst, &quot;#if 0&quot;)  </span><br><span class="line">            InsBufLine(hbuf, lnLast+2, &quot;#endif&quot;)  </span><br><span class="line">            sel.lnFirst = sel.lnFirst + 1  </span><br><span class="line">            sel.lnLast = sel.lnLast + 1  </span><br><span class="line">    &#125;  </span><br><span class="line">   </span><br><span class="line">    SetWndSel( hwnd, sel )  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>操作和上面类似</p>
+<h4 id="添加快捷键，快速打开当前文件所在文件夹"><a href="#添加快捷键，快速打开当前文件所在文件夹" class="headerlink" title="添加快捷键，快速打开当前文件所在文件夹"></a>添加快捷键，快速打开当前文件所在文件夹</h4><ol>
+<li><p>选择【Tools】-&gt;【custom commands】，在add -&gt;【Command】输入名字：Explorer Project</p>
+</li>
+<li><p>在【Run：】中输入： ShellExecute open explorer /e,/select,%f 或 ShellExecute open explorer /select,%f 或  explorer %d 或 explorer /select,%f<br>注意中间的逗号:ShellExecute open explorer /select,%f</p>
+</li>
+<li><p>在点击【Keys…】，点击【Assign New Key…】，设置快捷键 Ctrl+Alt+O</p>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>工具</category>
