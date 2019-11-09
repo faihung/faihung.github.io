@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Camera-摄像头工作原理（转载）</title>
+    <url>/2019/11/09/Camera-%E6%91%84%E5%83%8F%E5%A4%B4%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/</url>
+    <content><![CDATA[<blockquote>
+<p>回想这工作的这几年，尝尽社会的辛酸艰难，从一开始什么都没有到30万，从30万到200万，从200万到1300万，不是炫耀，我只是想通过我自己的经历告诉我的朋友们「手机像素越高，拍的照片越清晰」</p>
+</blockquote>
+<a id="more"></a>
+
+<h5 id="摄像头结构"><a href="#摄像头结构" class="headerlink" title="摄像头结构"></a>摄像头结构</h5><p><img src="/2019/11/09/Camera-%E6%91%84%E5%83%8F%E5%A4%B4%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/1.png" alt="1"></p>
+<p><img src="/2019/11/09/Camera-%E6%91%84%E5%83%8F%E5%A4%B4%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/2.png" alt="2"></p>
+<p>我初中的时候，有一次我考了年级第7名，学校奖励了 200块钱，我当时非常开心，第一时间就想去买一个照相机，我想把自己那时看到的画面都记录下来，可惜的是，我看上那个最便宜的也要两百多，然后我妈跟我说先把钱存她那里，等过阵子有钱了再给我买，然后，你可能想知道然后怎么了，然后就没有然后了，我最开始的照相机就是大学的时候，我哥给我买的那个大块头手机，铃声一响起来，一头熟睡的母猪都能被吵醒。</p>
+<p>最开始的照相机是那种手动对焦的，就是转动马达让感光芯片能接收到最好的信号，俗称对焦。</p>
+<p><img src="/2019/11/09/Camera-%E6%91%84%E5%83%8F%E5%A4%B4%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/3.png" alt="3"></p>
+<h5 id="最原始的Camera成像原理"><a href="#最原始的Camera成像原理" class="headerlink" title="最原始的Camera成像原理"></a>最原始的Camera成像原理</h5><p>说起成像原理，我们不得不说小孔成像，就是有了小孔成像，我们才有了相机这么神奇的东西。</p>
+<p>小孔成像是是比较古老的方式了，随着现在技术的发展，已经使用了新的方式替代小孔成像，因为小孔成像的孔很小，也造成了拍摄存在很多局限性。</p>
+<p><img src="/2019/11/09/Camera-%E6%91%84%E5%83%8F%E5%A4%B4%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/4.png" alt="4"></p>
+<h5 id="现代Camera-工作原理"><a href="#现代Camera-工作原理" class="headerlink" title="现代Camera 工作原理"></a>现代Camera 工作原理</h5><p>camera工作原理是外部光线穿过 lens 后， 经过 color filter 滤波后照射到 Sensor 面上， Sensor 将从 lens 上传导过来的光线转换为电信号，再通过内部的 AD 转换为数字信号。如果 Sensor 没有集 成 DSP，则通过 DVP 的方式传输到baseband，此时的数据格式是 RAW DATA。如果集成 了 DSP， RAW DATA 数据经过 AWB、 则 color matrix、 lens shading、 gamma、 sharpness、 AE 和 de-noise 处理（手机一般在cpu isp端做），后输出 YUV 或者 RGB 格式的数据。最后会由 CPU 送到 framebuffer 中进行显示，这样我们就看到 camera 拍摄到的景象了。</p>
+<p><img src="/2019/11/09/Camera-%E6%91%84%E5%83%8F%E5%A4%B4%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/5.png" alt="5"></p>
+<p>我们先用眼睛通过目镜确定当前拍摄的这个人是不是一个靓仔，然后呢，让这个靓仔做一个比较帅点的姿势，然后按下快门就，挡光板抬起，把光线照到感光器上，感光器是一个模拟图片，通过ADC转换数字信号，存储到存储芯片上。</p>
+<p><img src="/2019/11/09/Camera-%E6%91%84%E5%83%8F%E5%A4%B4%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/6.png" alt="6"></p>
+<h5 id="Camera硬件原理图"><a href="#Camera硬件原理图" class="headerlink" title="Camera硬件原理图"></a>Camera硬件原理图</h5><p>硬件原理图分析</p>
+<p><img src="/2019/11/09/Camera-%E6%91%84%E5%83%8F%E5%A4%B4%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/7.png" alt="7"></p>
+<p><strong>POWER:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">VDD_CAMA28   ----2.8v   camera的模拟电压</span><br><span class="line">VDD_CAMD28   ----1.5v   camera的工作电压</span><br><span class="line">VDD_CAMIO28  ----2.8v   camera的GPIO口数字电压</span><br></pre></td></tr></table></figure>
+
+<p><strong>OUTPUT:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CAM_DATA: camera的数据管脚。此数据脚可以输出的格式有YUV、RGB、JPEG</span><br><span class="line"></span><br><span class="line">CAM_VSYNC: camera的帧同步信号管脚。一个VYSNC信号结束表示一帧（即一个画面）的数据已经输出完毕</span><br><span class="line"></span><br><span class="line">CAM_HSYNC: camera行同步信号管脚。一个HSYNC信号结束表示一行的数据已经输出完毕</span><br><span class="line"></span><br><span class="line">CAM_PCLK: 像素同步信号管脚。一个PCLK信号结束表示一个数据已经输出完毕</span><br></pre></td></tr></table></figure>
+
+<p><strong>INPUT:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CAM_PWDN:  camera的使能管脚，当camera处于PWDN模式时，一切对camera的操作都是无效的，因此，在RST之前，一定要将PWDN管脚置为normal模式</span><br><span class="line"></span><br><span class="line">CAM_RST:  camera的复位管脚。此方式为硬复位模式，一般管脚置为低，camera处于硬复位状态，camera的各个IO口恢复到出厂默认状态。只有在XCLK开启后，将RESET置为低，硬复位才有效，否则复位无效。</span><br><span class="line"></span><br><span class="line">CAM_MCLK:  camera工作时钟管脚。此管脚为主控提供camera的工作时钟</span><br><span class="line"></span><br><span class="line">CAM_I2C:  camera与主控的通信管脚 Camera主要的通信接口是i2c，数据传输是mipi</span><br></pre></td></tr></table></figure>
+<p><strong>我们在软件调试时，camera大致流程：</strong></p>
+<p>第一步，给sensor进行上电和输出时钟信号；</p>
+<p>第二步，然后通过i2c进行通信，通过发送地址，cpu查找camera；</p>
+<p>第三步，在打开camera时，通过i2c下发，对sensor寄存器进行适配和准备工作；</p>
+<p>第四步，camera数据输出，通过mipi给到cpu端进行采集；</p>
+<h5 id="Sensor类型"><a href="#Sensor类型" class="headerlink" title="Sensor类型"></a>Sensor类型</h5><h6 id="1-常见的摄像头传感器类型主要有两种"><a href="#1-常见的摄像头传感器类型主要有两种" class="headerlink" title="1. 常见的摄像头传感器类型主要有两种"></a>1. 常见的摄像头传感器类型主要有两种</h6><p><strong>CCD（Chagre Couled Device）</strong>，即电荷耦合器，目前被广泛应用于大部分数码相机上，这是一种特殊的半导体材料，它由大量独立的光敏元件组成，这些光敏元件通常按矩阵排列。光线透过镜头照射到CCD上，并转换成电荷，每个元件上的电荷量取决于其受到的光照强度。当摄影者按动快门时，CCD可将各个元件的信息传送到模/数转换器上，然后将模拟电信号转变为数字信号，数字信号再以一定的格式压缩后存入缓存内，这样就完成了数码相片的整个拍摄。</p>
+<p><strong>CMOS（Complementary Metal-Oxide-Semiconductor）</strong>，即互补金属氧化物半导体，它在微处理器和闪存等半导体技术上占有重要的地位，也是一种可用来感受光线变化的半导体，其组成元素主要是硅和锗，通过CMOS上带负电和带正电的晶体管来实现基本功能。这两个互补效应所产生的电流即可被处理芯片记录和解读成影像。由于CMOS结构相对简单，与现有的大规模集成电路生产工艺相同，从而生产成本可以降低，理论上讲，CMOS的信号是以点为单位的电荷信号，CCD是以行为单位的电流信号，相比较而言，前者更为敏感、速度更快、更为省电。目前CMOS技术发展还不成熟，这种高质量的CMOS还只应用于一些专业的数码相机上，而在一些低档数码相机上常使用廉价低档的CMOS，成像质量一般比较差。所以目前要购买消费级数码相机的话，建议用户最好选择以CCD为影像传感器的产品</p>
+<h6 id="2-图像采集数据的模式有两种"><a href="#2-图像采集数据的模式有两种" class="headerlink" title="2. 图像采集数据的模式有两种"></a>2. 图像采集数据的模式有两种</h6><p>Color Filter Array—CFA 图像传感器都采用一定的模式来采集图像数据，常用的有 BGR 模式和 CFA 模式。</p>
+<p><strong>BGR 模式：</strong><br>BGR 模式是一种可直接进行显示和压缩等处理的图像数据模式，它由 R( 红)、G( 绿) 、B( 蓝) 三原色值来共同确定 1 个像素点，例如富士数码相机采用的 SUPER CCD 图像传感器就采用这种模式，其优点是图像传感器产生的图像数据无需插值就可直接进行显示等后续处理，图像效果最好，但是成本高，常用于专业相机中。</p>
+<p><strong>CFA 模式：</strong><br>为了减少成本，缩小体积，市场上的数码相机大多采用 CFA 模式，即在像素阵列的表面覆盖一层彩色滤波阵列（Color Filter Array，CFA），彩色滤波阵列有多种，现在应用最广泛的是 Bayer 格式滤波阵列，满足 GRBG 规律，绿色像素数是红色或蓝色像素数的两倍，这是因为人眼对可见光光谱敏感度的峰值位于中波段，这正好对应着绿色光谱成分。在该模式下图像数据只用R, G, B三个值中的一个值来表示一个像素点，而缺失另外两个颜色值，这时得到的是一副马赛克图片，为了得到全彩色的图像，需要使用其周围像素点的色彩信息来估计缺失的另外两种颜色，这种处理叫做色彩插值。</p>
+]]></content>
+      <categories>
+        <category>Camera</category>
+      </categories>
+      <tags>
+        <tag>摄像头</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>cURL-04_基于libcurl库的开发</title>
     <url>/2019/11/06/cURL-04-%E5%9F%BA%E4%BA%8Elibcurl%E5%BA%93%E7%9A%84%E5%BC%80%E5%8F%91/</url>
     <content><![CDATA[<blockquote>
@@ -43,33 +91,6 @@
 <h6 id="3-void-curl-easy-reset-CURL-handle"><a href="#3-void-curl-easy-reset-CURL-handle" class="headerlink" title="3. void curl_easy_reset(CURL *handle )"></a>3. void curl_easy_reset(CURL *handle )</h6><p>重新初始化CURL句柄的选项设置。</p>
 <h6 id="4-CURLcode-curl-easy-getinfo-CURL-curl-CURLINFO-info-…"><a href="#4-CURLcode-curl-easy-getinfo-CURL-curl-CURLINFO-info-…" class="headerlink" title="4. CURLcode curl_easy_getinfo(CURL *curl, CURLINFO info, … )"></a>4. CURLcode curl_easy_getinfo(CURL *curl, CURLINFO info, … )</h6><p>查询CRUL会话的内部信息，具体说明请参考curl自带文档。</p>
 <h6 id="5-void-curl-easy-cleanup-CURL-handle"><a href="#5-void-curl-easy-cleanup-CURL-handle" class="headerlink" title="5. void curl_easy_cleanup(CURL * handle )"></a>5. void curl_easy_cleanup(CURL * handle )</h6><p>该函数与curl_easy_init函数成对出现，handle即为调用curl_easy_init返回的句柄。该函数在CURL会话结束退出时调用，之后handle无效。</p>
-]]></content>
-      <categories>
-        <category>cURL</category>
-      </categories>
-      <tags>
-        <tag>cURL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>cURL-03-cURL的几种语言支持</title>
-    <url>/2019/11/03/cURL-03-cURL%E7%9A%84%E5%87%A0%E7%A7%8D%E8%AF%AD%E8%A8%80%E6%94%AF%E6%8C%81/</url>
-    <content><![CDATA[<h5 id="一、基于-C-的-HTTP-客户端"><a href="#一、基于-C-的-HTTP-客户端" class="headerlink" title="一、基于 C 的 HTTP 客户端"></a>一、基于 C 的 HTTP 客户端</h5><p>C API 在 libcurl 功能上提供了两个 API。easy 接口是一个简单的同步 API（意味着当您使用请求调用 libcurl 时，将能够满足您的请求，直到完成或发生错误）。多接口可以进一步控制 libcurl，您的应用程序可以执行多个同步传输，并控制 libcurl 何时何地移动数据。</p>
-<p>该示例使用 easy 接口。该 API 还能控制数据移动过程（使用回调），但正如其名称所示，使用起来非常简单。下面请看HTTP 的 C 语言示例,使用 libcurl easy 接口的 C HTTP 客户端。</p>
-<a id="more"></a>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt; </span><br><span class="line">#include &lt;string.h&gt; </span><br><span class="line">#include &lt;curl/curl.h&gt; </span><br><span class="line"> </span><br><span class="line">#define MAX_BUF     65536 </span><br><span class="line"> </span><br><span class="line">char wr_buf[MAX_BUF+1]; </span><br><span class="line">int  wr_index; </span><br><span class="line"> </span><br><span class="line">/* </span><br><span class="line">* Write data callback function (called within the context of </span><br><span class="line">* curl_easy_perform. </span><br><span class="line">*/ </span><br><span class="line">size_t write_data( void *buffer, size_t size, size_t nmemb, void *userp ) </span><br><span class="line">&#123; </span><br><span class="line"> int segsize = size * nmemb; </span><br><span class="line"> </span><br><span class="line"> /* Check to see if this data exceeds the size of our buffer. If so, </span><br><span class="line">  * set the user-defined context value and return 0 to indicate a </span><br><span class="line">  * problem to curl. </span><br><span class="line">  */ </span><br><span class="line"> if ( wr_index + segsize &gt; MAX_BUF ) &#123; </span><br><span class="line">   *(int *)userp = 1; </span><br><span class="line">   return 0; </span><br><span class="line"> &#125; </span><br><span class="line"> </span><br><span class="line"> /* Copy the data from the curl buffer into our buffer */ </span><br><span class="line"> memcpy( (void *)&amp;wr_buf[wr_index], buffer, (size_t)segsize ); </span><br><span class="line"> </span><br><span class="line"> /* Update the write index */ </span><br><span class="line"> wr_index += segsize; </span><br><span class="line"> </span><br><span class="line"> /* Null terminate the buffer */ </span><br><span class="line"> wr_buf[wr_index] = 0; </span><br><span class="line"> </span><br><span class="line"> /* Return the number of bytes received, indicating to curl that all is okay */ </span><br><span class="line"> return segsize; </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">/* </span><br><span class="line">* Simple curl application to read the index.html file from a Web site. </span><br><span class="line">*/ </span><br><span class="line">int main( void ) </span><br><span class="line">&#123; </span><br><span class="line"> CURL *curl; </span><br><span class="line"> CURLcode ret; </span><br><span class="line"> int  wr_error; </span><br><span class="line"> </span><br><span class="line"> wr_error = 0; </span><br><span class="line"> wr_index = 0; </span><br><span class="line"> </span><br><span class="line"> /* First step, init curl */ </span><br><span class="line"> curl = curl_easy_init(); </span><br><span class="line"> if (!curl) &#123; </span><br><span class="line">   printf(&quot;couldn&apos;t init curl\n&quot;); </span><br><span class="line">   return 0; </span><br><span class="line"> &#125; </span><br><span class="line"> </span><br><span class="line"> /* Tell curl the URL of the file we&apos;re going to retrieve */ </span><br><span class="line"> curl_easy_setopt( curl, CURLOPT_URL, &quot;www.exampledomain.com&quot; ); </span><br><span class="line"> </span><br><span class="line"> /* Tell curl that we&apos;ll receive data to the function write_data, and </span><br><span class="line">  * also provide it with a context pointer for our error return. </span><br><span class="line">  */ </span><br><span class="line"> curl_easy_setopt( curl, CURLOPT_WRITEDATA, (void *)&amp;wr_error ); </span><br><span class="line"> curl_easy_setopt( curl, CURLOPT_WRITEFUNCTION, write_data ); </span><br><span class="line"> </span><br><span class="line"> /* Allow curl to perform the action */ </span><br><span class="line"> ret = curl_easy_perform( curl ); </span><br><span class="line"> </span><br><span class="line"> printf( &quot;ret = %d (write_error = %d)\n&quot;, ret, wr_error ); </span><br><span class="line"> </span><br><span class="line"> /* Emit the page if curl indicates that no errors occurred */ </span><br><span class="line"> if ( ret == 0 ) printf( &quot;%s\n&quot;, wr_buf ); </span><br><span class="line"> </span><br><span class="line"> curl_easy_cleanup( curl ); </span><br><span class="line"> </span><br><span class="line"> return 0; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最上方是必需的 include文件，包括 cURL 根文件。接下来，定义了两个用于传输的变量。第一个变量是 wr_buf，表示将在其中写入传入数据的缓冲区。wr_index表示缓冲区的当前写入索引。</p>
-<p>转到 main函数，该函数使用 easy API 进行设置。所有 cURL 调用都通过维护特定请求状态的句柄进行操作。这称为 CURL指针引用。本例还创建一个特殊的返回码，称为 CURLcode。在使用任何 libcurl 函数之前，您需要调用 curl_easy_init获取 CURL句柄。接下来，注意 curl_easy_setopt调用的数量。它们为特定的操作配置句柄。对于这些调用，您提供句柄、命令和选项。首先，本例使用 CURLOPT_URL指定要获取的 URL。然后，它使用 CURL_WRITEDATA提供一个上下文变量（在本例中，它是内部的 write 错误变量）。最后，它使用 CURLOPT_WRITEFUNCTION指定数据可用时应该调用的函数。在启动 API 之后，API 将使用它读取的数据多次调用该函数。</p>
-<p>要开始传输，调用 curl_easy_perform。它的工作是根据之前的配置执行传输。调用该函数时，在完成传输或发生错误之前该函数不会返回。main的最后一步是提交返回状态，提交页面读取，最后使用 curl_easy_cleanup清除（当使用句柄执行完操作后）。</p>
-<p>现在看看 write_data函数。该函数是针对特定操作收到数据时调用的回调。注意，当您从网站读取数据时，将写入该数据（write_data）。将向回调提供一个缓冲区（包含可用数据）、成员数量和大小（缓冲中可用数据总量）、上下文指针。第一个任务是确保缓冲区（wr_buf）的空间足以写入数据。如果不够，它将设置上下文指针并返回 0，表示出现问题。否则，它将 cURL 缓冲区的数据复制到您的缓冲区，并增加索引，指向要写入的下一个位置。本例还终止字符串，稍后可以对其使用 printf。最后，它返回 libcurl 操作的字节数量。这将告诉 libcurl 数据被提取，它也可以丢弃该数据。这就是从网站将文件读取到内存的相对简单的方法。</p>
-<h5 id="二、基于-Python-的-HTTP-客户端"><a href="#二、基于-Python-的-HTTP-客户端" class="headerlink" title="二、基于 Python 的 HTTP 客户端"></a>二、基于 Python 的 HTTP 客户端</h5><p>Python 是一种非常有用的面向对象的脚本语言，在原型化和构建生产软件方面非常突出。示例假设您较熟悉 Python，但使用不多，因此不要期望过高。</p>
-<p>这个简单的 Python HTTP 客户端使用 pycurl，如下：</p>
-<p>使用 libcurl 的 pycurl接口的 Python HTTP 客户端</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import sys </span><br><span class="line">import pycurl </span><br><span class="line"> </span><br><span class="line">wr_buf = &apos;&apos;</span><br><span class="line"> </span><br><span class="line">def write_data( buf ): </span><br><span class="line">    global wr_buf </span><br><span class="line">    wr_buf += buf </span><br><span class="line"> </span><br><span class="line">def main(): </span><br><span class="line">    c = pycurl.Curl() </span><br><span class="line">    c.setopt( pycurl.URL, &apos;http://www.exampledomain.com&apos; ) </span><br><span class="line">    c.setopt( pycurl.WRITEFUNCTION, write_data ) </span><br><span class="line"> </span><br><span class="line">    c.perform() </span><br><span class="line"> </span><br><span class="line">    c.close() </span><br><span class="line"> </span><br><span class="line">main() </span><br><span class="line">sys.stdout.write(wr_buf)</span><br></pre></td></tr></table></figure>
-
-<p>这比 C 语言版本简单的多。它首先导入必需的模块（用于标准系统的 sys和 pycurl模块）。接下来，它定义 write 缓冲区（wr_buf）。像 C 程序中一样，声明一个 write_data函数。注意，该函数只有一个参数：从 HTTP 服务器中读取的数据缓冲区。我将该缓冲区连接到全局 write 缓冲区。main函数首先创建一个 Curl句柄，然后使用 setopt方法为传输定义 URL和 WRITEFUNCTION。它调用 perform方法启动传输并关闭句柄。最后，它调用 main函数，并将 write 缓冲区提交到 stdout。注意，在这种情况下，不需要错误上下文指针，因为使用了 Python 字符串连接，这就是说您不会使用大小固定的字符串。</p>
 ]]></content>
       <categories>
         <category>cURL</category>
@@ -147,6 +168,33 @@
 
 
 <h5 id="13-cURL还有很多命令行操作，这里就不作陈诉了。"><a href="#13-cURL还有很多命令行操作，这里就不作陈诉了。" class="headerlink" title="13. cURL还有很多命令行操作，这里就不作陈诉了。"></a>13. cURL还有很多命令行操作，这里就不作陈诉了。</h5>]]></content>
+      <categories>
+        <category>cURL</category>
+      </categories>
+      <tags>
+        <tag>cURL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cURL-03-cURL的几种语言支持</title>
+    <url>/2019/11/03/cURL-03-cURL%E7%9A%84%E5%87%A0%E7%A7%8D%E8%AF%AD%E8%A8%80%E6%94%AF%E6%8C%81/</url>
+    <content><![CDATA[<h5 id="一、基于-C-的-HTTP-客户端"><a href="#一、基于-C-的-HTTP-客户端" class="headerlink" title="一、基于 C 的 HTTP 客户端"></a>一、基于 C 的 HTTP 客户端</h5><p>C API 在 libcurl 功能上提供了两个 API。easy 接口是一个简单的同步 API（意味着当您使用请求调用 libcurl 时，将能够满足您的请求，直到完成或发生错误）。多接口可以进一步控制 libcurl，您的应用程序可以执行多个同步传输，并控制 libcurl 何时何地移动数据。</p>
+<p>该示例使用 easy 接口。该 API 还能控制数据移动过程（使用回调），但正如其名称所示，使用起来非常简单。下面请看HTTP 的 C 语言示例,使用 libcurl easy 接口的 C HTTP 客户端。</p>
+<a id="more"></a>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt; </span><br><span class="line">#include &lt;string.h&gt; </span><br><span class="line">#include &lt;curl/curl.h&gt; </span><br><span class="line"> </span><br><span class="line">#define MAX_BUF     65536 </span><br><span class="line"> </span><br><span class="line">char wr_buf[MAX_BUF+1]; </span><br><span class="line">int  wr_index; </span><br><span class="line"> </span><br><span class="line">/* </span><br><span class="line">* Write data callback function (called within the context of </span><br><span class="line">* curl_easy_perform. </span><br><span class="line">*/ </span><br><span class="line">size_t write_data( void *buffer, size_t size, size_t nmemb, void *userp ) </span><br><span class="line">&#123; </span><br><span class="line"> int segsize = size * nmemb; </span><br><span class="line"> </span><br><span class="line"> /* Check to see if this data exceeds the size of our buffer. If so, </span><br><span class="line">  * set the user-defined context value and return 0 to indicate a </span><br><span class="line">  * problem to curl. </span><br><span class="line">  */ </span><br><span class="line"> if ( wr_index + segsize &gt; MAX_BUF ) &#123; </span><br><span class="line">   *(int *)userp = 1; </span><br><span class="line">   return 0; </span><br><span class="line"> &#125; </span><br><span class="line"> </span><br><span class="line"> /* Copy the data from the curl buffer into our buffer */ </span><br><span class="line"> memcpy( (void *)&amp;wr_buf[wr_index], buffer, (size_t)segsize ); </span><br><span class="line"> </span><br><span class="line"> /* Update the write index */ </span><br><span class="line"> wr_index += segsize; </span><br><span class="line"> </span><br><span class="line"> /* Null terminate the buffer */ </span><br><span class="line"> wr_buf[wr_index] = 0; </span><br><span class="line"> </span><br><span class="line"> /* Return the number of bytes received, indicating to curl that all is okay */ </span><br><span class="line"> return segsize; </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">/* </span><br><span class="line">* Simple curl application to read the index.html file from a Web site. </span><br><span class="line">*/ </span><br><span class="line">int main( void ) </span><br><span class="line">&#123; </span><br><span class="line"> CURL *curl; </span><br><span class="line"> CURLcode ret; </span><br><span class="line"> int  wr_error; </span><br><span class="line"> </span><br><span class="line"> wr_error = 0; </span><br><span class="line"> wr_index = 0; </span><br><span class="line"> </span><br><span class="line"> /* First step, init curl */ </span><br><span class="line"> curl = curl_easy_init(); </span><br><span class="line"> if (!curl) &#123; </span><br><span class="line">   printf(&quot;couldn&apos;t init curl\n&quot;); </span><br><span class="line">   return 0; </span><br><span class="line"> &#125; </span><br><span class="line"> </span><br><span class="line"> /* Tell curl the URL of the file we&apos;re going to retrieve */ </span><br><span class="line"> curl_easy_setopt( curl, CURLOPT_URL, &quot;www.exampledomain.com&quot; ); </span><br><span class="line"> </span><br><span class="line"> /* Tell curl that we&apos;ll receive data to the function write_data, and </span><br><span class="line">  * also provide it with a context pointer for our error return. </span><br><span class="line">  */ </span><br><span class="line"> curl_easy_setopt( curl, CURLOPT_WRITEDATA, (void *)&amp;wr_error ); </span><br><span class="line"> curl_easy_setopt( curl, CURLOPT_WRITEFUNCTION, write_data ); </span><br><span class="line"> </span><br><span class="line"> /* Allow curl to perform the action */ </span><br><span class="line"> ret = curl_easy_perform( curl ); </span><br><span class="line"> </span><br><span class="line"> printf( &quot;ret = %d (write_error = %d)\n&quot;, ret, wr_error ); </span><br><span class="line"> </span><br><span class="line"> /* Emit the page if curl indicates that no errors occurred */ </span><br><span class="line"> if ( ret == 0 ) printf( &quot;%s\n&quot;, wr_buf ); </span><br><span class="line"> </span><br><span class="line"> curl_easy_cleanup( curl ); </span><br><span class="line"> </span><br><span class="line"> return 0; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最上方是必需的 include文件，包括 cURL 根文件。接下来，定义了两个用于传输的变量。第一个变量是 wr_buf，表示将在其中写入传入数据的缓冲区。wr_index表示缓冲区的当前写入索引。</p>
+<p>转到 main函数，该函数使用 easy API 进行设置。所有 cURL 调用都通过维护特定请求状态的句柄进行操作。这称为 CURL指针引用。本例还创建一个特殊的返回码，称为 CURLcode。在使用任何 libcurl 函数之前，您需要调用 curl_easy_init获取 CURL句柄。接下来，注意 curl_easy_setopt调用的数量。它们为特定的操作配置句柄。对于这些调用，您提供句柄、命令和选项。首先，本例使用 CURLOPT_URL指定要获取的 URL。然后，它使用 CURL_WRITEDATA提供一个上下文变量（在本例中，它是内部的 write 错误变量）。最后，它使用 CURLOPT_WRITEFUNCTION指定数据可用时应该调用的函数。在启动 API 之后，API 将使用它读取的数据多次调用该函数。</p>
+<p>要开始传输，调用 curl_easy_perform。它的工作是根据之前的配置执行传输。调用该函数时，在完成传输或发生错误之前该函数不会返回。main的最后一步是提交返回状态，提交页面读取，最后使用 curl_easy_cleanup清除（当使用句柄执行完操作后）。</p>
+<p>现在看看 write_data函数。该函数是针对特定操作收到数据时调用的回调。注意，当您从网站读取数据时，将写入该数据（write_data）。将向回调提供一个缓冲区（包含可用数据）、成员数量和大小（缓冲中可用数据总量）、上下文指针。第一个任务是确保缓冲区（wr_buf）的空间足以写入数据。如果不够，它将设置上下文指针并返回 0，表示出现问题。否则，它将 cURL 缓冲区的数据复制到您的缓冲区，并增加索引，指向要写入的下一个位置。本例还终止字符串，稍后可以对其使用 printf。最后，它返回 libcurl 操作的字节数量。这将告诉 libcurl 数据被提取，它也可以丢弃该数据。这就是从网站将文件读取到内存的相对简单的方法。</p>
+<h5 id="二、基于-Python-的-HTTP-客户端"><a href="#二、基于-Python-的-HTTP-客户端" class="headerlink" title="二、基于 Python 的 HTTP 客户端"></a>二、基于 Python 的 HTTP 客户端</h5><p>Python 是一种非常有用的面向对象的脚本语言，在原型化和构建生产软件方面非常突出。示例假设您较熟悉 Python，但使用不多，因此不要期望过高。</p>
+<p>这个简单的 Python HTTP 客户端使用 pycurl，如下：</p>
+<p>使用 libcurl 的 pycurl接口的 Python HTTP 客户端</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import sys </span><br><span class="line">import pycurl </span><br><span class="line"> </span><br><span class="line">wr_buf = &apos;&apos;</span><br><span class="line"> </span><br><span class="line">def write_data( buf ): </span><br><span class="line">    global wr_buf </span><br><span class="line">    wr_buf += buf </span><br><span class="line"> </span><br><span class="line">def main(): </span><br><span class="line">    c = pycurl.Curl() </span><br><span class="line">    c.setopt( pycurl.URL, &apos;http://www.exampledomain.com&apos; ) </span><br><span class="line">    c.setopt( pycurl.WRITEFUNCTION, write_data ) </span><br><span class="line"> </span><br><span class="line">    c.perform() </span><br><span class="line"> </span><br><span class="line">    c.close() </span><br><span class="line"> </span><br><span class="line">main() </span><br><span class="line">sys.stdout.write(wr_buf)</span><br></pre></td></tr></table></figure>
+
+<p>这比 C 语言版本简单的多。它首先导入必需的模块（用于标准系统的 sys和 pycurl模块）。接下来，它定义 write 缓冲区（wr_buf）。像 C 程序中一样，声明一个 write_data函数。注意，该函数只有一个参数：从 HTTP 服务器中读取的数据缓冲区。我将该缓冲区连接到全局 write 缓冲区。main函数首先创建一个 Curl句柄，然后使用 setopt方法为传输定义 URL和 WRITEFUNCTION。它调用 perform方法启动传输并关闭句柄。最后，它调用 main函数，并将 write 缓冲区提交到 stdout。注意，在这种情况下，不需要错误上下文指针，因为使用了 Python 字符串连接，这就是说您不会使用大小固定的字符串。</p>
+]]></content>
       <categories>
         <category>cURL</category>
       </categories>
