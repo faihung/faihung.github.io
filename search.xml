@@ -39,8 +39,8 @@
         <category>C</category>
       </categories>
       <tags>
-        <tag>整数转字符串，字符串转整数，sprintf</tag>
         <tag>sscanf</tag>
+        <tag>整数转字符串，字符串转整数，sprintf</tag>
       </tags>
   </entry>
   <entry>
@@ -103,7 +103,8 @@
         <category>C</category>
       </categories>
       <tags>
-        <tag>16进制转10进制，10进制转16进制，</tag>
+        <tag>16进制转10进制，10进制转16进制，sprintf</tag>
+        <tag>sscanf</tag>
       </tags>
   </entry>
   <entry>
