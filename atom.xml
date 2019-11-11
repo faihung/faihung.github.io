@@ -35,9 +35,9 @@
       <category term="C" scheme="http://www.faihung.net/categories/C/"/>
     
     
-      <category term="sscanf" scheme="http://www.faihung.net/tags/sscanf/"/>
-    
       <category term="整数转字符串，字符串转整数，sprintf" scheme="http://www.faihung.net/tags/%E6%95%B4%E6%95%B0%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B4%E6%95%B0%EF%BC%8Csprintf/"/>
+    
+      <category term="sscanf" scheme="http://www.faihung.net/tags/sscanf/"/>
     
   </entry>
   
@@ -63,9 +63,9 @@
       <category term="C" scheme="http://www.faihung.net/categories/C/"/>
     
     
-      <category term="16进制转10进制，10进制转16进制，sprintf" scheme="http://www.faihung.net/tags/16%E8%BF%9B%E5%88%B6%E8%BD%AC10%E8%BF%9B%E5%88%B6%EF%BC%8C10%E8%BF%9B%E5%88%B6%E8%BD%AC16%E8%BF%9B%E5%88%B6%EF%BC%8Csprintf/"/>
-    
       <category term="sscanf" scheme="http://www.faihung.net/tags/sscanf/"/>
+    
+      <category term="16进制转10进制，10进制转16进制，sprintf" scheme="http://www.faihung.net/tags/16%E8%BF%9B%E5%88%B6%E8%BD%AC10%E8%BF%9B%E5%88%B6%EF%BC%8C10%E8%BF%9B%E5%88%B6%E8%BD%AC16%E8%BF%9B%E5%88%B6%EF%BC%8Csprintf/"/>
     
   </entry>
   
