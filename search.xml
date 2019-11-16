@@ -110,9 +110,9 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sprintf</tag>
         <tag>字符串拼接</tag>
         <tag>strcat</tag>
+        <tag>sprintf</tag>
       </tags>
   </entry>
   <entry>
@@ -220,9 +220,9 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
+        <tag>sprintf</tag>
         <tag>16进制转10进制</tag>
         <tag>10进制转16进制</tag>
-        <tag>sprintf</tag>
         <tag>sscanf</tag>
       </tags>
   </entry>
@@ -605,6 +605,37 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
       </tags>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/2019/11/02/%E7%AE%80%E5%8D%95%E7%9A%84rtsp%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/</url>
+    <content><![CDATA[<blockquote>
+<p>这里C表示rtsp客户端,S表示rtsp服务端。 </p>
+</blockquote>
+<h6 id="C-gt-发送流媒体数据前的准备"><a href="#C-gt-发送流媒体数据前的准备" class="headerlink" title="C-&gt;:发送流媒体数据前的准备"></a>C-&gt;:发送流媒体数据前的准备</h6><ul>
+<li>C-&gt;S:OPTION request  //询问S有哪些方法可用 </li>
+<li>S-&gt;C:OPTION response //S回应信息中包括提供的所有可用方法 </li>
+</ul>
+<ul>
+<li>C-&gt;S:DESCRIBE request //要求得到S提供的媒体初始化描述信息 </li>
+<li>S-&gt;C:DESCRIBE response //S回应媒体初始化描述信息，主要是sdp </li>
+</ul>
+<ul>
+<li>C-&gt;S:SETUP request //设置会话的属性，以及传输模式，提醒S建立会话 </li>
+<li>S-&gt;C:SETUP response //S建立会话，返回会话标识符，以及会话相关信息 </li>
+</ul>
+<ul>
+<li>C-&gt;S:PLAY request //C请求播放 </li>
+<li>S-&gt;C:PLAY response //S回应该请求的信息 </li>
+</ul>
+<h6 id="S-gt-C-发送流媒体数据"><a href="#S-gt-C-发送流媒体数据" class="headerlink" title="S-&gt;C:发送流媒体数据"></a>S-&gt;C:发送流媒体数据</h6><ul>
+<li>C-&gt;S:TEARDOWN request //C请求关闭会话 </li>
+<li>S-&gt;C:TEARDOWN response //S回应该请求</li>
+</ul>
+]]></content>
+      <categories>
+        <category>流媒体</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Ubuntu配置NFS及其挂载设备</title>
     <url>/2019/11/02/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/</url>
     <content><![CDATA[<h5 id="在Ubuntu系统中安装NFS"><a href="#在Ubuntu系统中安装NFS" class="headerlink" title="在Ubuntu系统中安装NFS"></a>在Ubuntu系统中安装NFS</h5><p>执行命令：</p>
@@ -639,39 +670,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>工具</category>
       </categories>
       <tags>
-        <tag>nfs</tag>
         <tag>ubuntu</tag>
+        <tag>nfs</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2019/11/02/%E7%AE%80%E5%8D%95%E7%9A%84rtsp%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/</url>
-    <content><![CDATA[<blockquote>
-<p>这里C表示rtsp客户端,S表示rtsp服务端。 </p>
-</blockquote>
-<h6 id="C-gt-发送流媒体数据前的准备"><a href="#C-gt-发送流媒体数据前的准备" class="headerlink" title="C-&gt;:发送流媒体数据前的准备"></a>C-&gt;:发送流媒体数据前的准备</h6><ul>
-<li>C-&gt;S:OPTION request  //询问S有哪些方法可用 </li>
-<li>S-&gt;C:OPTION response //S回应信息中包括提供的所有可用方法 </li>
-</ul>
-<ul>
-<li>C-&gt;S:DESCRIBE request //要求得到S提供的媒体初始化描述信息 </li>
-<li>S-&gt;C:DESCRIBE response //S回应媒体初始化描述信息，主要是sdp </li>
-</ul>
-<ul>
-<li>C-&gt;S:SETUP request //设置会话的属性，以及传输模式，提醒S建立会话 </li>
-<li>S-&gt;C:SETUP response //S建立会话，返回会话标识符，以及会话相关信息 </li>
-</ul>
-<ul>
-<li>C-&gt;S:PLAY request //C请求播放 </li>
-<li>S-&gt;C:PLAY response //S回应该请求的信息 </li>
-</ul>
-<h6 id="S-gt-C-发送流媒体数据"><a href="#S-gt-C-发送流媒体数据" class="headerlink" title="S-&gt;C:发送流媒体数据"></a>S-&gt;C:发送流媒体数据</h6><ul>
-<li>C-&gt;S:TEARDOWN request //C请求关闭会话 </li>
-<li>S-&gt;C:TEARDOWN response //S回应该请求</li>
-</ul>
-]]></content>
-      <categories>
-        <category>流媒体</category>
-      </categories>
   </entry>
 </search>
