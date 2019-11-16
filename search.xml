@@ -35,32 +35,32 @@
   </entry>
   <entry>
     <title>C语言-数组强制转换成结构体类型存储(1)</title>
-    <url>/2019/11/16/C%E8%AF%AD%E8%A8%80-%E6%95%B0%E7%BB%84%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%88%90%E7%BB%93%E6%9E%84%E4%BD%93%E7%B1%BB%E5%9E%8B%E5%AD%98%E5%82%A8/</url>
+    <url>/2019/11/16/C%E8%AF%AD%E8%A8%80-%E6%95%B0%E7%BB%84%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%88%90%E7%BB%93%E6%9E%84%E4%BD%93%E7%B1%BB%E5%9E%8B%E5%AD%98%E5%82%A8-1/</url>
     <content><![CDATA[<h5 id="1-数组强制转换成结构类型-数组类型和结构体成员类型一致"><a href="#1-数组强制转换成结构类型-数组类型和结构体成员类型一致" class="headerlink" title="1. 数组强制转换成结构类型,数组类型和结构体成员类型一致"></a>1. 数组强制转换成结构类型,数组类型和结构体成员类型一致</h5><p>代码示例：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;      /*标准输入输出定义*/</span><br><span class="line">#include &lt;stdlib.h&gt;     /*标准函数库定义*/</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;fcntl.h&gt;      /*文件控制定义*/</span><br><span class="line">#include &lt;termios.h&gt;    /*PPSIX 终端控制定义*/</span><br><span class="line">#include &lt;unistd.h&gt;     /*Unix 标准函数定义*/</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;sys/stat.h&gt;</span><br><span class="line">/*</span><br><span class="line">字节对齐问题，一个数组强制转换成结构体类型</span><br><span class="line">*/</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"></span><br><span class="line">int ch[] = &#123;0x12, 0x34, 0x56, 0x78&#125;;</span><br><span class="line">typedef struct arr_s</span><br><span class="line">&#123;</span><br><span class="line">	int i;</span><br><span class="line">	int j;</span><br><span class="line">&#125;arr_t;</span><br><span class="line"></span><br><span class="line">void main()</span><br><span class="line">&#123;</span><br><span class="line">	arr_t* p = (arr_t*)ch;</span><br><span class="line">	printf(&quot;数组强制转换成结构类型,数组类型和结构体成员类型一致:0x%X, 0x%X\n&quot;,p-&gt;i,p-&gt;j);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>数组是int类型，结构体成员也是int类型。</p>
 <p>演示效果：</p>
-<p><img src="/2019/11/16/C%E8%AF%AD%E8%A8%80-%E6%95%B0%E7%BB%84%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%88%90%E7%BB%93%E6%9E%84%E4%BD%93%E7%B1%BB%E5%9E%8B%E5%AD%98%E5%82%A8/1.jpg" alt="1"></p>
+<p><img src="/2019/11/16/C%E8%AF%AD%E8%A8%80-%E6%95%B0%E7%BB%84%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%88%90%E7%BB%93%E6%9E%84%E4%BD%93%E7%B1%BB%E5%9E%8B%E5%AD%98%E5%82%A8-1/1.jpg" alt="1"></p>
 <h5 id="2-数组强制转换成结构类型-数组类型和结构体成员类型不一致"><a href="#2-数组强制转换成结构类型-数组类型和结构体成员类型不一致" class="headerlink" title="2.  数组强制转换成结构类型,数组类型和结构体成员类型不一致"></a>2.  数组强制转换成结构类型,数组类型和结构体成员类型不一致</h5><p>示例代码：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;      /*标准输入输出定义*/</span><br><span class="line">#include &lt;stdlib.h&gt;     /*标准函数库定义*/</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;fcntl.h&gt;      /*文件控制定义*/</span><br><span class="line">#include &lt;termios.h&gt;    /*PPSIX 终端控制定义*/</span><br><span class="line">#include &lt;unistd.h&gt;     /*Unix 标准函数定义*/</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;sys/stat.h&gt;</span><br><span class="line"></span><br><span class="line">char ch[] = &#123;0x12, 0x34, 0x56, 0x78&#125;;</span><br><span class="line">typedef struct arr_s</span><br><span class="line">&#123;</span><br><span class="line">	char i;</span><br><span class="line">	short j;</span><br><span class="line">	char l;</span><br><span class="line"></span><br><span class="line">&#125;arr_t;</span><br><span class="line"></span><br><span class="line">void main()</span><br><span class="line">&#123;</span><br><span class="line">	arr_t* p = (arr_t*)ch;</span><br><span class="line">	printf(&quot;数组大小:%d\n&quot;,sizeof(ch));</span><br><span class="line">	printf(&quot;结构体成员大小:%d\n&quot;,sizeof(arr_t));</span><br><span class="line">	printf(&quot;数组强制转换成结构类型,数组类型和结构体成员类型不一致:%X, %X, %X\n&quot;,p-&gt;i,p-&gt;j,p-&gt;l);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 <p>效果演示：</p>
-<p><img src="/2019/11/16/C%E8%AF%AD%E8%A8%80-%E6%95%B0%E7%BB%84%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%88%90%E7%BB%93%E6%9E%84%E4%BD%93%E7%B1%BB%E5%9E%8B%E5%AD%98%E5%82%A8/2.jpg" alt="2"></p>
+<p><img src="/2019/11/16/C%E8%AF%AD%E8%A8%80-%E6%95%B0%E7%BB%84%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%88%90%E7%BB%93%E6%9E%84%E4%BD%93%E7%B1%BB%E5%9E%8B%E5%AD%98%E5%82%A8-1/2.jpg" alt="2"></p>
 <p>数组为char型，结构体成员为依次char型，short型，char型。其中数组有四个字节，结构体成员因为对齐的原因有6个字节。</p>
 <p>可以看到，i的类型因为j的类型的原因，补充了一个字节，所以当数组强制转换成结构体类型之后，0x34会漏掉。 0x56 0x78 因为小端的原因，排序成0x7856</p>
 <p>但是如果稍微将j和l位置替换一下，结果又不一样，请看示例代码：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;      /*标准输入输出定义*/</span><br><span class="line">#include &lt;stdlib.h&gt;     /*标准函数库定义*/</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;fcntl.h&gt;      /*文件控制定义*/</span><br><span class="line">#include &lt;termios.h&gt;    /*PPSIX 终端控制定义*/</span><br><span class="line">#include &lt;unistd.h&gt;     /*Unix 标准函数定义*/</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;sys/stat.h&gt;</span><br><span class="line"></span><br><span class="line">char ch[] = &#123;0x12, 0x34, 0x56, 0x78&#125;;</span><br><span class="line">typedef struct arr_s</span><br><span class="line">&#123;</span><br><span class="line">	char i;</span><br><span class="line">	char l;</span><br><span class="line">	short j;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">&#125;arr_t;</span><br><span class="line"></span><br><span class="line">void main()</span><br><span class="line">&#123;</span><br><span class="line">	arr_t* p = (arr_t*)ch;</span><br><span class="line">	printf(&quot;数组大小:%d\n&quot;,sizeof(ch));</span><br><span class="line">	printf(&quot;结构体成员大小:%d\n&quot;,sizeof(arr_t));</span><br><span class="line">	printf(&quot;数组强制转换成结构类型,数组类型和结构体成员类型不一致:%X, %X, %X\n&quot;,p-&gt;i,p-&gt;j,p-&gt;l);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>效果演示：</p>
-<p><img src="/2019/11/16/C%E8%AF%AD%E8%A8%80-%E6%95%B0%E7%BB%84%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%88%90%E7%BB%93%E6%9E%84%E4%BD%93%E7%B1%BB%E5%9E%8B%E5%AD%98%E5%82%A8/3.jpg" alt="3"></p>
+<p><img src="/2019/11/16/C%E8%AF%AD%E8%A8%80-%E6%95%B0%E7%BB%84%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%88%90%E7%BB%93%E6%9E%84%E4%BD%93%E7%B1%BB%E5%9E%8B%E5%AD%98%E5%82%A8-1/3.jpg" alt="3"></p>
 <p>看到没有，此时数组的大小和结构体大小一致。那么此时打印出来的数据也是一样的。</p>
 <p>其实还可以这样，加一个</p>
 <pre><code>#pragma   pack(1)</code></pre><p>示例代码：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;      /*标准输入输出定义*/</span><br><span class="line">#include &lt;stdlib.h&gt;     /*标准函数库定义*/</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;fcntl.h&gt;      /*文件控制定义*/</span><br><span class="line">#include &lt;termios.h&gt;    /*PPSIX 终端控制定义*/</span><br><span class="line">#include &lt;unistd.h&gt;     /*Unix 标准函数定义*/</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;sys/stat.h&gt;</span><br><span class="line"></span><br><span class="line">char ch[] = &#123;0x12, 0x34, 0x56, 0x78&#125;;</span><br><span class="line">#pragma   pack(1) //强制连续存放,对齐边界为 1</span><br><span class="line">typedef struct arr_s</span><br><span class="line">&#123;</span><br><span class="line">	char i;</span><br><span class="line">	short j;</span><br><span class="line">	char l;</span><br><span class="line">&#125;arr_t;</span><br><span class="line"></span><br><span class="line">void main()</span><br><span class="line">&#123;</span><br><span class="line">	arr_t* p = (arr_t*)ch;</span><br><span class="line">	printf(&quot;数组大小:%d\n&quot;,sizeof(ch));</span><br><span class="line">	printf(&quot;结构体成员大小:%d\n&quot;,sizeof(arr_t));</span><br><span class="line">	printf(&quot;数组强制转换成结构类型,数组类型和结构体成员类型不一致:%X, %X, %X\n&quot;,p-&gt;i,p-&gt;j,p-&gt;l);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>效果演示：</p>
-<p><img src="/2019/11/16/C%E8%AF%AD%E8%A8%80-%E6%95%B0%E7%BB%84%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%88%90%E7%BB%93%E6%9E%84%E4%BD%93%E7%B1%BB%E5%9E%8B%E5%AD%98%E5%82%A8/4.jpg" alt="4"></p>
+<p><img src="/2019/11/16/C%E8%AF%AD%E8%A8%80-%E6%95%B0%E7%BB%84%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%88%90%E7%BB%93%E6%9E%84%E4%BD%93%E7%B1%BB%E5%9E%8B%E5%AD%98%E5%82%A8-1/4.jpg" alt="4"></p>
 <p>由此可以看到，其实结构体的存储和数组的存储其实本质上是一样的，不同的是数组只能有一种数据类型，结构体可以有多种数据类型，他们之间强制转换时，要考虑到字节对齐、大小端问题。</p>
 ]]></content>
       <categories>
@@ -110,9 +110,9 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
+        <tag>sprintf</tag>
         <tag>字符串拼接</tag>
         <tag>strcat</tag>
-        <tag>sprintf</tag>
       </tags>
   </entry>
   <entry>
@@ -220,9 +220,9 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sprintf</tag>
         <tag>16进制转10进制</tag>
         <tag>10进制转16进制</tag>
+        <tag>sprintf</tag>
         <tag>sscanf</tag>
       </tags>
   </entry>
