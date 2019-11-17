@@ -1,12 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>视音频-视音频信号种类和物理接口</title>
+    <url>/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%9F%B3%E9%A2%91%E4%BF%A1%E5%8F%B7%E7%A7%8D%E7%B1%BB%E5%92%8C%E7%89%A9%E7%90%86%E6%8E%A5%E5%8F%A3/</url>
+    <content><![CDATA[<h5 id="模拟视频信号的格式"><a href="#模拟视频信号的格式" class="headerlink" title="模拟视频信号的格式"></a>模拟视频信号的格式</h5><h6 id="复合信号Composite-Video"><a href="#复合信号Composite-Video" class="headerlink" title="复合信号Composite Video"></a>复合信号Composite Video</h6><p>在一路信号中,使用不同的频率把亮度、色度、同步等所有视频信号结合在一起。只使用一个连接线传输即可。标准的PAL和NTSC信号就是复合信号。信号使用BNC或者“莲花”端子连接。</p>
+<a id="more"></a>
+
+<h6 id="分量信号Component-Video"><a href="#分量信号Component-Video" class="headerlink" title="分量信号Component Video"></a>分量信号Component Video</h6><p>使用3路信号分别传输模拟的经过Gamma校正的RGB信号,或者更常见地, YPbPr信号,就是模拟YuV信号经过某种线形变换之后的形式,通常线缆上或者接口上会标注Y,Pb,Pr或者Y、U、V或者Y,R-YB-Y等。信号使用BNC或者“莲花”端子连接。</p>
+<h6 id="S-Video或YC"><a href="#S-Video或YC" class="headerlink" title="S-Video或YC"></a>S-Video或YC</h6><p>用两路信号分别传送亮度信号Y和将U、V正交调制而成的色度信号C。信号使用专门的4针mini-DIN端了连接。</p>
+<h5 id="数字视频信号的格式"><a href="#数字视频信号的格式" class="headerlink" title="数字视频信号的格式"></a>数字视频信号的格式</h5><h6 id="SDI"><a href="#SDI" class="headerlink" title="SDI"></a>SDI</h6><p>Serial Digital Interface串行数字接口。SMPTE定义的专业视频数据传输接口,速率为143Mb/s或者360Mb/s通常用来传输非压缩视频数据。HD SDI标准由SMPTE 292M定义,速率为1.485 Gbitls. SMPTE 372M定义了Dual Link SDI,速率为2.970 Gbit/s,最近又定义了3G-SDI,同样速率,都是为HD电视之上的数字影院使用。SDI信号一般使用同轴电缆和BNC端子连接,传输距离设计为演播室内部使用(300米以内)。</p>
+<p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%9F%B3%E9%A2%91%E4%BF%A1%E5%8F%B7%E7%A7%8D%E7%B1%BB%E5%92%8C%E7%89%A9%E7%90%86%E6%8E%A5%E5%8F%A3/B0312B3E16CD40E4B24AB23337C465F5" alt="1"></p>
+<h6 id="SDTI"><a href="#SDTI" class="headerlink" title="SDTI"></a>SDTI</h6><p>Serial Data Transmission Interface串行数据传输接口。SMPTE定义的SDI的变体,用来传输任意格式的数据,而非限于非压缩视频数据。主要是压缩到视频流数据(DV, DVCPRO, BetaSX, MPEG2),由于是在SDI实时传输非压缩数据的定义的逻辑和物理结构的基础之上传输压缩数据,所以可以做到超实时(2x, 4x等)。270Mb/s速率的SDTI由SMPTE 305M定义,而1.5Gb/s的HD SDTI由SMPTE 348M定义。</p>
+<h5 id="模拟音频信号"><a href="#模拟音频信号" class="headerlink" title="模拟音频信号"></a>模拟音频信号</h5><h6 id="非平衡音频连接及其弱点"><a href="#非平衡音频连接及其弱点" class="headerlink" title="非平衡音频连接及其弱点"></a>非平衡音频连接及其弱点</h6><p>音频电缆中有2根铜线,一条信号线、一条地线,即普通的一条RCA线和莲花插头。家用音响多为非平衡输入输出。非平衡连接的弱点在于噪声控制比较差,如下图噪声透过电缆保护层加入到信号中无法去除。</p>
+<p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%9F%B3%E9%A2%91%E4%BF%A1%E5%8F%B7%E7%A7%8D%E7%B1%BB%E5%92%8C%E7%89%A9%E7%90%86%E6%8E%A5%E5%8F%A3/33E8A50D20A94DACAF1ABFD574D9746C" alt="2"></p>
+<h6 id="平衡音频"><a href="#平衡音频" class="headerlink" title="平衡音频"></a>平衡音频</h6><p>平衡音频电缆中采用3根导线, 2条传输信号, 1条是地线。源设备通过这2条信号线传输相位完全相反的信号,两条导线制作成具有相当一致的阻抗特性和缠绕方式,所以各自拾取的噪声信号也相同,接收设各收到信号后,将第2路反相回来,这样其中的噪声就变成与第1路中的噪声反相了, 2路信号相加,即除去了噪声。专业音频设备多使用平衡线路。</p>
+<p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%9F%B3%E9%A2%91%E4%BF%A1%E5%8F%B7%E7%A7%8D%E7%B1%BB%E5%92%8C%E7%89%A9%E7%90%86%E6%8E%A5%E5%8F%A3/CFDF4007DFB94C3384401E395892A2F7" alt="3"></p>
+<p>平衡音频使用3针XLR接头(卡农)或1/4”TRS接头。</p>
+<p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%9F%B3%E9%A2%91%E4%BF%A1%E5%8F%B7%E7%A7%8D%E7%B1%BB%E5%92%8C%E7%89%A9%E7%90%86%E6%8E%A5%E5%8F%A3/4A762BD103114D6E8B9FBB735F1418F0" alt="4"></p>
+<h5 id="数字音频信号的格式"><a href="#数字音频信号的格式" class="headerlink" title="数字音频信号的格式"></a>数字音频信号的格式</h5><h6 id="SDI嵌入式音频信号"><a href="#SDI嵌入式音频信号" class="headerlink" title="SDI嵌入式音频信号"></a>SDI嵌入式音频信号</h6><p>在SDI信号中,都提供16路单声道音频信号的传输,格式均为24bit,48KHz的PCM音频。音频数据记录在水平消隐期对应的信号数据中。</p>
+<h6 id="AES-EBU音频信号"><a href="#AES-EBU音频信号" class="headerlink" title="AES/EBU音频信号"></a>AES/EBU音频信号</h6><p>AES/EBU的全称是Audio Engineering Society/European Broadcast Union (音频工程师协会/欧洲广播联盟),现已成为专业数字音频较为流行的标准。大量民用产品和专业音频数字设备如CD机、DAT, MD机、数字调音台、数字音频工作站等都支持AES/EBU。</p>
+<p>AES/EBU是一种通过基于单根绞合线对来传输数字音频数据的串行位传输协议。它无须均衡即可在长达100m的距离上传输数据,如果均衡,可以传输更远距离。它提供两个信道的音频数据(最高24比特量化),信道是自动计时和自同步的。它也提供了传输控制的方法和状态信息的表示(channel status bi)和一些误码的检测能力。它的时钟信息是由传输端控制,来自AES/EBU的位流。它的三个标准采样率是32kHz44.1kHz、48kHz,当然许多接口能够工作在其它不同的采样率上。</p>
+<p>AES/EBU提供“专业”和“消费”两种模式。它们两者最大的不同在于信道状态位格式的提供上。专业模式的状态位格式里包括数字信道的源和目的地址、日期时间码、采样点数、字节长度和其它信息。消费模式包括的东西就比较少,但包含了拷贝保护信息。另外, AES/EBU标准提供“用户数据”,在它的位流里包含用户说明(例如厂商说明等)。</p>
+<p>AES/EBU的普通物理连接媒质有: </p>
+<p>(1)平衡或差分连接,使用XLR (卡依)连接器的三芯话筒屏蔽电缆参数为阻抗11032,电平范围0.2V~5Vpp,抖动为土20ns。</p>
+<p>(2)单端非平衡连接,使用RCA插头的音频同轴电缆。</p>
+<p>(3)光学连接,使用光纤连接器。</p>
+<h5 id="同步Genlock"><a href="#同步Genlock" class="headerlink" title="同步Genlock"></a>同步Genlock</h5><p>Genlock (Generator Lock)同步锁相也是一种帧同步技术,通常用于视频后期处理、非线性编辑(NLE)和演播室。该技术可以使工作站图形系统的输出信号与外部生成的(GEN)信号进行同步(LOCK),从而确保演播室中的所有设备(摄像机、录像机、动画或字幕机等等)之间的有效协作。</p>
+<p>各个设备间行、场扫描的同步信号必须一致,如果使用复合信号,则其中的色度付载波的相位也必须相同。广播系统中的同步信号通常使用同步信号发生器产生,其中包含垂直和水平同步脉冲和色度相位脉冲。这个模拟信号通常称为Black Burst (BB)黑场同步信号。</p>
+<h6 id="双电平同步信号Bilevel-Sync"><a href="#双电平同步信号Bilevel-Sync" class="headerlink" title="双电平同步信号Bilevel Sync"></a>双电平同步信号Bilevel Sync</h6><p>传统的BB信号。有一个同步脉冲,从消隐电平向下到达同步峰值电平-285 5/7mV或者-300mV。双电平同步信号主要用于标清设备,也可以用于高清设备。</p>
+<p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%9F%B3%E9%A2%91%E4%BF%A1%E5%8F%B7%E7%A7%8D%E7%B1%BB%E5%92%8C%E7%89%A9%E7%90%86%E6%8E%A5%E5%8F%A3/CF1395EBE55345059427F716E5BEC106" alt="5"></p>
+<h6 id="三电平同步信号Bi-evel-Sync"><a href="#三电平同步信号Bi-evel-Sync" class="headerlink" title="三电平同步信号Bi-evel Sync"></a>三电平同步信号Bi-evel Sync</h6><p>有2个反向的脉冲,从消隐电平向下到达同步峰值电平-300mV,再向上到达+300mV,然后回到消隐电平。三电平的主要好处是使接收端的模拟电路更容易找到同步信号,也更容易在信号送往显示电路前从中剔除同步信号,避免串扰。三电平同步信号应用于高清设备中,是SMPTE的HD标准之一(SMPTE 240)。</p>
+<p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%9F%B3%E9%A2%91%E4%BF%A1%E5%8F%B7%E7%A7%8D%E7%B1%BB%E5%92%8C%E7%89%A9%E7%90%86%E6%8E%A5%E5%8F%A3/D1A7F6789F2749118AF22D39AD361CBD" alt="6"></p>
+<h5 id="视音频信号端子"><a href="#视音频信号端子" class="headerlink" title="视音频信号端子"></a>视音频信号端子</h5><h6 id="BNC端子"><a href="#BNC端子" class="headerlink" title="BNC端子"></a>BNC端子</h6><p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%9F%B3%E9%A2%91%E4%BF%A1%E5%8F%B7%E7%A7%8D%E7%B1%BB%E5%92%8C%E7%89%A9%E7%90%86%E6%8E%A5%E5%8F%A3/8EB58F09200C47149E967CB5D3B058C3" alt="7"></p>
+<p>Bayonet Neill-Concelman (Neill-Concelman卡销):一种同轴电缆连接头,现在由IEC-168标准定义。广泛应用于专业视频领域。在贝尔实验室工作的Paul Neill曾经开发了一种带螺纹的接头,被美国海军采用,叫做N接头,后来Carl Concelman又开发了一种接头,采用了滑入在旋转卡住的办法,称为C接头。两人合作开发了一种类似的较小的接头,成了现在的BNC。</p>
+<h6 id="RCA莲花插头RCA-plug-RCA-phono-唱机-connector"><a href="#RCA莲花插头RCA-plug-RCA-phono-唱机-connector" class="headerlink" title="RCA莲花插头RCA plug, RCA phono (唱机) connector"></a>RCA莲花插头RCA plug, RCA phono (唱机) connector</h6><p>RCA是Radio Corporation of American的缩写词,因为RCA接头由这家公司发明的。RCA俗称莲花插座,几乎所有的电视机、影碟机类产品都有这个接口。它并不是专门为哪一种接口设计,既可以用在音频,又可以用在普通的视频信号,也是DVD分量(YCICb)的插座,只不过数量是三个。 RCA接头是目前为止最为常见的一种音/视频接线端子。这种双线连接方式的端子早在收音机出现的时代便由RCA录音公司发明出来,还有一个更老式、也比较奇怪的称呼叫做”唱盘”接头。</p>
+<p>RCA端子采用同轴传输信号的方式,中轴用来传输信号,外沿一圈的接触层用来接地,可以用来传输数字音频信号和模拟视频信号。RCA音频端子一般成对地用不同颜色标注:右声道用红色,左声道用黑色或白色。有的时候,中置和环绕声道连接线会用其他的颜色标注来方便接线时区分,但整个系统中所有的RCA接头在电气性能上都是一样的。一般来讲, RCA立体声音频线都是左右声道为一组,每声道外观上是一根线。</p>
+<p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%9F%B3%E9%A2%91%E4%BF%A1%E5%8F%B7%E7%A7%8D%E7%B1%BB%E5%92%8C%E7%89%A9%E7%90%86%E6%8E%A5%E5%8F%A3/35DE177B16E04DA69EFD4AED07B47AF9" alt="8"></p>
+<p>不像射频接口那样包含了音频信号,复合视频(Composite)通常采用黄色的RCA (莲花插座)接头。”复合”含义是同一信道中传输亮度和色度信号的模拟信号,但电视机如果不能很好的分离这两种信号,就会出现虚影。</p>
+<p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%9F%B3%E9%A2%91%E4%BF%A1%E5%8F%B7%E7%A7%8D%E7%B1%BB%E5%92%8C%E7%89%A9%E7%90%86%E6%8E%A5%E5%8F%A3/3D41DD7CBD7E4997B55FC401BDCE85BC" alt="9"></p>
+<p>色差(Component)通常标记为YPb/Pr,用红、绿、蓝三种颜色来标注每条线缆和接口。绿色线缆(Y),传输亮度信号。蓝色和红色线缆(Pb和Pr)传输的是颜色差别信号。色差的效果要好于s端子,因此不少DVD以及高清播放设备上都采用该接口。如果使用优质的线材和接口,即使采用10米长的线缆,色差线也能传输优秀的画面。</p>
+<h6 id="Mini-DIN端子"><a href="#Mini-DIN端子" class="headerlink" title="Mini-DIN端子"></a>Mini-DIN端子</h6><p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%9F%B3%E9%A2%91%E4%BF%A1%E5%8F%B7%E7%A7%8D%E7%B1%BB%E5%92%8C%E7%89%A9%E7%90%86%E6%8E%A5%E5%8F%A3/E38DFDEC9E4C4B1BB656E48B8603220A" alt="10"></p>
+<p>德国标准机构Deutsches Instiut fur Normung早期开发的一组多针的电气接口称为DIN端子,后来开发了更小的接头, 叫Mini-DIN,包括3针到9针共7个完全不同的标准。其中, 4针被S-Video信号标准采用作为专用接头; 6针则被PS/2键盘鼠标设备采用。</p>
+<p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%9F%B3%E9%A2%91%E4%BF%A1%E5%8F%B7%E7%A7%8D%E7%B1%BB%E5%92%8C%E7%89%A9%E7%90%86%E6%8E%A5%E5%8F%A3/2259762BB88E4A2BB43FC0F3FC336B21" alt="11"></p>
+<p>s端子(S-Video)连接采用YIC (亮度/色度)分离式输出,使用四芯线传送信号,接口为四针接口。接口中,两针接地,另外两针分别传输亮度和色度信号。因为分别传送亮度和色度信号, s端子效果要好于复合视频。不过s端子的抗干扰能力较弱,所以s端子线的长度最好不要超过7米。</p>
+<h6 id="射频端子"><a href="#射频端子" class="headerlink" title="射频端子"></a>射频端子</h6><p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%9F%B3%E9%A2%91%E4%BF%A1%E5%8F%B7%E7%A7%8D%E7%B1%BB%E5%92%8C%E7%89%A9%E7%90%86%E6%8E%A5%E5%8F%A3/BD4D056449B3482C9C2A7AD0DB826C2B" alt="12"></p>
+<p>天线和模拟闭路连接电视机就是采用射频(RF)接口。作为最常见的视频连接方式,它可同时传输模拟视频以及音频信号。RF接口传输的是视频和音频混合编码后的信号,显示设备的电路将混合编码信号进行一系列分离、解码在输出成像。由于需要进行视频、音频混合编码,信号会互相干扰,所以它的画质输出质量是所有接口中最差的。有线电视和卫星电视接收设备也常用RF连接,但这种情况下,它们传输的是数字信号。</p>
+<h6 id="VGA端子"><a href="#VGA端子" class="headerlink" title="VGA端子"></a>VGA端子</h6><p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%9F%B3%E9%A2%91%E4%BF%A1%E5%8F%B7%E7%A7%8D%E7%B1%BB%E5%92%8C%E7%89%A9%E7%90%86%E6%8E%A5%E5%8F%A3/815FEFA445A84FAFB8C18590AA16406C" alt="13"></p>
+<p>VGA (Video Graphics Array)还有一个名称叫D-Sub, VGA接口共有15针,分成3排,每排5个孔,是显卡上应用最为广泛的接口类型,绝大多数显卡都带有此种接口。它传输红、绿、蓝模拟信号以及同步信号(水平和垂直信号)。使用VGA连接设备,线缆长度最好不要超过10米,而且要注意接头是否安装牢固,否则可能引起图像中出现虚影。</p>
+<h6 id="DVI端子"><a href="#DVI端子" class="headerlink" title="DVI端子"></a>DVI端子</h6><p>DVI (Digital Visual Interface)接口与VGA都是电脑中最常用的接口,与VGA不同的是, DVI可以传输数字信号,不用再进过数模转换,所以画面质量非常高。目前,很多高清电视上也提供了DVI接口。需要注意的是, DVI接口有多种规范,常见的是DVI-D (Digital)和DVI-I (Interated), DVI-D只能传输数字信号,大家可以用它来连接显卡和平板电视。DVI-I则在DVI-D可以和VGA相互转换。</p>
+<p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%9F%B3%E9%A2%91%E4%BF%A1%E5%8F%B7%E7%A7%8D%E7%B1%BB%E5%92%8C%E7%89%A9%E7%90%86%E6%8E%A5%E5%8F%A3/18DFB7F4DFF544D9AB8292E696DE7ABA" alt="14"></p>
+<h6 id="HDMI"><a href="#HDMI" class="headerlink" title="HDMI"></a>HDMI</h6><p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%9F%B3%E9%A2%91%E4%BF%A1%E5%8F%B7%E7%A7%8D%E7%B1%BB%E5%92%8C%E7%89%A9%E7%90%86%E6%8E%A5%E5%8F%A3/C0E920653DE54754B6A253FA3DA37A83" alt="15"></p>
+<p>HDMI (High Definition Multimedia Interface)按口是最近才出现的接口,它同DVI一样是传输全数字信号的。不同的是HDMI接口不仅能传输高清数字视频信号,还可以同时传输高质量的音频信号。同时功能跟射频接口相同,不过由于采用了全数字化的信号传输,不会像射频接口那样出现画质不佳的情况。对于没有HDMI接口的用户,可以用适配器将HDMI接口转换位DVI接口,但是这样就失去了音频信号。高质量的HDMI线材,即使长达20米,也能保证优质的画质。</p>
+<h6 id="IEEE-1394"><a href="#IEEE-1394" class="headerlink" title="IEEE 1394"></a>IEEE 1394</h6><p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%9F%B3%E9%A2%91%E4%BF%A1%E5%8F%B7%E7%A7%8D%E7%B1%BB%E5%92%8C%E7%89%A9%E7%90%86%E6%8E%A5%E5%8F%A3/5454751664204F17A4493F0AF396BA2A" alt="16"></p>
+<p>IEEE 1394也称为火线或ilLink,它能够传输数字视频和音频及机器控制信号,具有较高的带宽,且十分稳定。通常它主要用来连接数码摄像机、DVD录像机等设备。IEEE 1394接口有两种类型: 6针的六角形接口和4针的小型四角形接口。6针的六角形接口可向所连接的设备供电,而4针的四角形接口则不能。</p>
+]]></content>
+      <categories>
+        <category>视音频</category>
+      </categories>
+      <tags>
+        <tag>端子</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>视音频-色彩空间介绍(Video Demystified Chapter 3)</title>
     <url>/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%89%B2%E5%BD%A9%E7%A9%BA%E9%97%B4%E4%BB%8B%E7%BB%8D-Video-Demystified-Chapter-3/</url>
     <content><![CDATA[<p>色彩空间是表示一组颜色的数学模型。</p>
 <p>最常用的3种色彩空间是:</p>
 <p>RGB-应用于计算机图形</p>
-<p>Y1Q, YUv,或者YCbCr-视频领域使用</p>
+<p>YIQ, YUv,或者YCbCr-视频领域使用</p>
 <p>CMYK-印刷领域</p>
 <p>但这些都不直接对应直观的色调(Hue)、饱和度(Saturation)和亮度(Brightess)的说法,所以还有HSI和HSV的模型。</p>
 <a id="more"></a>
@@ -311,9 +372,9 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
+        <tag>sprintf</tag>
         <tag>字符串拼接</tag>
         <tag>strcat</tag>
-        <tag>sprintf</tag>
       </tags>
   </entry>
   <entry>
@@ -421,9 +482,9 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sprintf</tag>
         <tag>16进制转10进制</tag>
         <tag>10进制转16进制</tag>
+        <tag>sprintf</tag>
         <tag>sscanf</tag>
       </tags>
   </entry>
