@@ -1,6 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>视音频-电视制式的基本概念</title>
+    <url>/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E7%94%B5%E8%A7%86%E5%88%B6%E5%BC%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
+    <content><![CDATA[<h5 id="标清电视制式-Standard-Definition-SD"><a href="#标清电视制式-Standard-Definition-SD" class="headerlink" title="标清电视制式(Standard Definition-SD)"></a>标清电视制式(Standard Definition-SD)</h5><h6 id="NTSC"><a href="#NTSC" class="headerlink" title="NTSC"></a>NTSC</h6><p>标准编号: SMPTE 125M/267M</p>
+<p>分辨率: 720 x486 (DVMPEG2等编解码系统使用480以适应8x8的block)长宽比: 4:3 (非方形像素,像素宽小于高)</p>
+<p>扫描方式:隔行扫描、下方一场首先显示</p>
+<p>帧率: 29.97帧/秒</p>
+<a id="more"></a>
+
+<h6 id="PAL"><a href="#PAL" class="headerlink" title="PAL"></a>PAL</h6><p>标准编号: ITU.BT656/601.5</p>
+<p>分辨率: 720 x 576</p>
+<p>长宽比: 4:3 (非方形像素,像素宽大于高)</p>
+<p>扫描方式:隔行扫描、上方一场首先显示</p>
+<p>帧率: 25帧/秒</p>
+<h5 id="高清电视制式-High-Definition-SD"><a href="#高清电视制式-High-Definition-SD" class="headerlink" title="高清电视制式(High Definition-SD)"></a>高清电视制式(High Definition-SD)</h5><h6 id="720p"><a href="#720p" class="headerlink" title="720p"></a>720p</h6><p>标准编号: SMPTE 296M-2001</p>
+<p>辨率: 1280 x 720</p>
+<p>长宽比: 16:9 (方形像素)</p>
+<p>扫描方式:逐行扫描</p>
+<p>帧率: 50帧/秒、59.94帧/秒、60帧/秒</p>
+<h6 id="1080i"><a href="#1080i" class="headerlink" title="1080i"></a>1080i</h6><p>标准编号: SMPTE 274M</p>
+<p>辨率： 1920 x 1080</p>
+<p>长宽比: 16:9 (方形像素)</p>
+<p>扫描方式:隔行扫描、上方一场首先显示</p>
+<p>帧率: 25帧/秒、29.97帧/秒、30帧/秒</p>
+<h6 id="1080p"><a href="#1080p" class="headerlink" title="1080p"></a>1080p</h6><p>标准编号: SMPTE 274M</p>
+<p>分辨率: 1920 x 1080</p>
+<p>长宽比: 16:9 (方形像素)</p>
+<p>扫描方式:逐行扫描</p>
+<p>帧率: <del>23.98帧/秒、24帧/秒、25帧/秒、29.97帧/秒、30帧/秒</del> 59.94帧/秒 60帧/秒</p>
+<h5 id="标准机构"><a href="#标准机构" class="headerlink" title="标准机构"></a>标准机构</h5><h6 id="SMIPTE"><a href="#SMIPTE" class="headerlink" title="SMIPTE"></a>SMIPTE</h6><p>美国电影和电视工程师协会The Society of Motion Picture and Television Engineers,成立于1916年,现在有来自世界85个国家超过7500名的会员,制定电影电视行业的技术标准。</p>
+<h6 id="ITU"><a href="#ITU" class="headerlink" title="ITU"></a>ITU</h6><p>国际电信联盟(International Telecommunication Union), ITU的历史可以追溯到1865年成立的国际电报联盟(International Telegraph Union , ITU),经联合国同意,1947年10月15日国际电信联盟成为联合国的一个专门机构,其总部由瑞士伯尔尼迁至到日内瓦。</p>
+<h5 id="关于PAL和NTSC"><a href="#关于PAL和NTSC" class="headerlink" title="关于PAL和NTSC"></a>关于PAL和NTSC</h5><p>NTSC是National Television System Commite的缩写, (美国)国家电视标准委员会。其标准主要应用于日本、美国,加拿大、墨西哥等等, </p>
+<p>PAL是Phase Alternating Line (逐行倒相)的缩写。它是西德在1962年指定的彩色电视广播标准,它采用逐行倒相正交平衡调幅的技术方法,克服了NTSC制相位敏感造成色彩失真的缺点。西德、英国等一些西欧国家,新加坡、中国大陆及香港,澳大利亚、新西兰等国家采用这种制式。</p>
+<p>PAL由德国人Walter Bruch在1967年提出,当时他是为德律风根(Telefunken)工作。”PAL”有时亦被用来指625线,每秒25格,隔行扫描,PAL色彩编码的电视制式。</p>
+<p>PAL制式中根据不同的参数细节又可以进一步划分为G、1、D等制式,其中PAL-D制是我国大陆采用的制式。这两种制式是不能互相兼容的,如果在PAL制式的电视上播放NTSC的影像,画面将变成黑白, NTSC制式的也是一样。</p>
+<h5 id="分辨率-Resolution-、画面宽高比-Aspect-Ratio-和像素宽高比-Pixel-Aspect-Ratio"><a href="#分辨率-Resolution-、画面宽高比-Aspect-Ratio-和像素宽高比-Pixel-Aspect-Ratio" class="headerlink" title="分辨率(Resolution)、画面宽高比(Aspect Ratio)和像素宽高比(Pixel Aspect Ratio)"></a>分辨率(Resolution)、画面宽高比(Aspect Ratio)和像素宽高比(Pixel Aspect Ratio)</h5><p>分辨率就是构成画面的像素的个数,对于程序员来说,最重要的是1/0设备中的FrameBuffer的分辨率。对于电视信号来说,指信号中含有的可见画面的分辨率。</p>
+<p>宽高比是指画面物理显示尺寸的宽度比其高度:</p>
+<p>SDTV (1.33: 1)  </p>
+<p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E7%94%B5%E8%A7%86%E5%88%B6%E5%BC%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/1.jpg" alt="1"></p>
+<p>宽屏SDTV, HDTV (1.78:1)</p>
+<p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E7%94%B5%E8%A7%86%E5%88%B6%E5%BC%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/2.jpg" alt="2"></p>
+<p>35毫米胶片(1.5:1) </p>
+<p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E7%94%B5%E8%A7%86%E5%88%B6%E5%BC%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/3.jpg" alt="3"></p>
+<p>美国电影(或欧洲1.66:1) </p>
+<p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E7%94%B5%E8%A7%86%E5%88%B6%E5%BC%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/4.jpg" alt="4"></p>
+<p>全景宽银幕电影(或70mm胶片2.20:1)</p>
+<p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E7%94%B5%E8%A7%86%E5%88%B6%E5%BC%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/5.jpg" alt="5"></p>
+<p>由画面的分辨率和宽高比可以计算出<strong>像素宽高比(Pixel Aspect Ratio)</strong>:</p>
+<pre><code>(ResX * PixW) / (ResY * PixH) =AR即PixAR = PixW/ PixH=AR * ResY / Resx</code></pre><p>PAL制和NTSC制的电视在显示时,每个像素覆盖的面积不是正方形的</p>
+<p>PAL制,</p>
+<pre><code>PixAR= (4/3) * (576/720) = 1.07;</code></pre><p>NTSC制, </p>
+<pre><code>PixAR= (4/3) * (486/720) =0.9</code></pre><p>而HDTV标准都是像素横纵方向的数量比值等同于画面宽高比,像素宽高比都是1:1,就是方形像素。</p>
+<p>我们产生计算机图形时,很多都是按照方形像素的假设来做的,但如果像素宽高比不是1:1,那么这样产生的图形显示时就会变形了,所以很多图形软件都考虑了各种像素宽高比的影响,输出时进行校正保证画面在那种像素宽高比的显示设备上输出时不变形。下图示意,一个半径为某一固定像素值的圆形在计算机屏幕(通常方形像素)和PAL及NTSC显示器上显示的结果。</p>
+<p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E7%94%B5%E8%A7%86%E5%88%B6%E5%BC%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/6.jpg" alt="6"></p>
+<p>某种画面宽高比的画面在不同宽高比的显示设备上保持其比例进行显示时需要进行一些转换,下面是一些常用方法。</p>
+<p>LetterBox (信箱)-较宽画面显示在较窄监视器上,上下留空。</p>
+<p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E7%94%B5%E8%A7%86%E5%88%B6%E5%BC%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/7.jpg" alt="7">2.35:1画面显示在4:3电视上。</p>
+<p>PilarBox (邮简)-较窄画面显示在较宽监视器上,两侧留空。</p>
+<p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E7%94%B5%E8%A7%86%E5%88%B6%E5%BC%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/8.jpg" alt="8">4:3画面显示在16:9电视上。</p>
+<p>WindowBox (窗口)-画面经过LetterBox和PillarBox两道处理显示出来,四边留空。比如用HD拍的广告在SD广播中做了LetterBox,但观众用HD电视收看这个SD画面,又做了PillarBox。</p>
+<p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E7%94%B5%E8%A7%86%E5%88%B6%E5%BC%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/9.jpg" alt="9"></p>
+<p>Pan and Scan (摇动和扫描)-把电影转成电视画面常用的技术之一。编辑人员使用扫描器以4:3或者16:9点取景框在较宽的电影画面中选取一部分画面,通常集中在主要的人物活动上,制作成宽高比较窄的画面。</p>
+<p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E7%94%B5%E8%A7%86%E5%88%B6%E5%BC%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/10.jpg" alt="10"></p>
+<h5 id="扫描方式-Scan-Mode"><a href="#扫描方式-Scan-Mode" class="headerlink" title="扫描方式(Scan Mode)"></a>扫描方式(Scan Mode)</h5><p>通常显示器分隔行扫描(Interlace)和逐行扫描(Progressive)两种扫描方式。隔行扫描指显示屏在显示幅图像时,先扫描奇数行,全部完成奇数行扫描后再扫描偶数行,因此每幅图像需扫描两次才能完成,造成图像显示画面闪烁较大。因此该种扫描方式较为落后,通常用在早期的显示产品中。</p>
+<p>隔行扫描就是每一帧(frame)被分割为两场(field) ,每一场包含了一帧中所有的奇数扫描行或者偶数扫描行,通常是先扫描奇数行得到第一场,然后扫描偶数行得到第一场。由于视觉暂留效应,人眼将会看到平滑的运动而不是闪动的半帧半帧的图像。但是这时会有几乎不会被注意到的闪烁出现,使得人眼容易疲劳。当屏幕的内容是横条纹时,这种闪烁特别容易被注意到。</p>
+<p>每一帧图像由电子束顺序地一行接着一行连续扫描而成,这种扫描方式称为逐行扫描。把每一帧图像通过两场扫描完成则1隔行扫描,两场扫描中,第一场(奇数场)只扫描奇数行,依次扫描1、3、5..行,而第二场(偶数场)只扫描偶数行,依次扫描2、4、6..行。隔行扫描技术在传送信号带宽不够的情况下起了很大作用,逐行扫描和隔行扫描的显示效果主要区别在稳定性上面,隔行扫描的行间闪烁比较明显,逐行扫描克服了隔行扫描的缺点,画面平滑自然无闪烁。在电视的标准显示模式中, i表示隔行扫描, p表示逐行扫描。</p>
+<p>场的命名,以时间顺序(temporal order)成为第一场和第二场(First Field and Second Field),以空间顺序(spatial order)分为上面一场和下面一场(Top Field and Bottom rield, Upper Field and Lower Field),还有一个含义不清的说法-奇数场和偶数场(Odd Field and Even Field) 。注意NTSC制中,是lower-field-first的扫描方式,其它均为upper-field-firsto。</p>
+<p>回扫(Retracing)指CRT显示电视画面时,其电子枪的扫描束在结束一行或一帧/场画面扫描时移动到下一行(行逆程)或下一帧/场的第一行开始(场逆程)时需要进行的扫描移动,这个期间,电子束实际是被关闭的,所以也叫空白区间(Blanking Interval)。从一行的结尾到下一行开始的回扫叫水平回扫,约占每行的15%时间,从一帧/场到下一帧/场的回扫称为垂直回扫(VBI),约占一帧/场的8%时间。PAL的总扫描线数是625行, NTSC是525行, 1080i和1080p都是1125行, 720p是750行。在模拟电视信号中,行场的同步信息是加在回扫区间的信号中的,还可以夹带VITC (Vertical Interval Time Code), VIrS (VerticalInterval Test Signal)和闭路字幕(Closed Caption)。</p>
+<p>隔行扫描产生的抖动,对于图文字幕尤其明显,需要专门的防抖动技术予以消除,通常采用三行平均的算法。另外,在图文字幕的动画关键帧插值中,由于一帧中两场的显示时间有前后,所以参数插值必须按照场时间进行。</p>
+<p>另外,还有一种Progressive Segmented Frame (PSF)扫描方式,还是将一帧分为上下隔行的两场记录和发送,但播放时是按照一帧逐行在同一时刻显示。发明者们说是要以传统隔行设备记录和传送逐行画面。</p>
+<h5 id="帧率-Frame-Rate"><a href="#帧率-Frame-Rate" class="headerlink" title="帧率(Frame Rate)"></a>帧率(Frame Rate)</h5><p>为什么NTSC制是29.97? 3000/1001 NTSC制早期发展时需要兼容当时的黑白电视,包括水平扫描、颜色和声音的传送,这些限制最后使用减小场扫描频率(60Hz)来解决,最后减小了1000/10010。</p>
+<h6 id="时码"><a href="#时码" class="headerlink" title="时码"></a>时码</h6><p>LTC (longitudinallinear timecode)线性时码-时码记录在磁带的专门轨道中,与音频轨道类似,信号输入也使用XLR接口。</p>
+<p>VITC (vertical interval timecode)时码-在场逆程中含有时码信息。克服了LTC的缺点-在磁带停止或者慢速播放时不能读取。</p>
+<p>DFTC (Drop frame timecode)-在NTSC制中,如果时码按照每帧累加,并按照30帧/秒的速率来显示的话,显示的时间就比实际慢,每秒差1000/1001,每小时累计达到3.6秒。所以DFTC就是大约数每100帧扔掉一个时码计数,让计算的时码与实际时间相符。实际计算时以每10分钟为一周期,在其中的1:06:202:13:10. 3:20:00, 4:26:20, 5:33:10、 6:40:00, 7:46:20, 8:53:10时丢掉一帧的计数。</p>
+<h6 id="电影到电视影像的转换-Telecine-中的帧率转换"><a href="#电影到电视影像的转换-Telecine-中的帧率转换" class="headerlink" title="电影到电视影像的转换(Telecine)中的帧率转换"></a>电影到电视影像的转换(Telecine)中的帧率转换</h6><p>电影(24帧/秒)和PAL (25帧/秒-包括HD)每秒只差1帧,所以以前一般来说就直接一帧对一帧进行制作,这样PAL每秒会比电影多放一帧,也就是速度提高了124,而且声音的音调会升高。这就是一些DVD爱好者不喜欢PAL制DVD的原因之一。但是据说现在有些PAL制DVD采取了24+1的制作方法,就是把24帧中的一帧重复一次,从而获得跟电影一样的播放速度。</p>
+<p>而NTSC (29.97帧/秒-包括HD)因为每秒约有30帧,不能直接一帧对一帧制作,所以要通过2-3PULLDOWN等办法把24个电影帧转成30个视频帧,这30个视频帧里所包含的内容和24个电影帧是相等的,所以NTSC的播放速度和电影一样。</p>
+<p>2-3 PULLDOWN的具体解释:电影胶片以4帧为一个循环, A帧转换为视频第1帧的两场, B帧转换为视频第2帧的两场和第3帧的第一场, C帧转换为视频第3帧的第二场和第4帧的第一场, D帧转换为视频第4帧的第二场和第5帧的两场,这样以2:3:2:3的循序,通过把B和D帧重复采样一场,将4个电影帧转换为5个视频帧,视频以30帧/秒播放画面动感速度和24帧/秒播放的电影一样;实际上上由于是29.97帧秒(3000/1001),动感速度还是较电影慢了1/1000,以电影帧计算是23.98帧/秒(24/1001 )。</p>
+<p><img src="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E7%94%B5%E8%A7%86%E5%88%B6%E5%BC%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/11.jpg" alt="11"></p>
+<p>如果把上述循环从电影B帧开始看,模式变成了3:2:3:2,所以也叫3-2 PULLDOWN,但SMPTE标准(RP197)规定的是2:3模式。另外还有3:3:2:2, 2:3:32, 2:2:3:3等模式,但产生的颤抖略大。</p>
+]]></content>
+      <categories>
+        <category>视音频</category>
+      </categories>
+      <tags>
+        <tag>标清高清</tag>
+        <tag>NTSC</tag>
+        <tag>PAL</tag>
+        <tag>帧率</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>C语言-数组强制转换成结构体类型存储(2)</title>
     <url>/2019/11/16/C%E8%AF%AD%E8%A8%80-%E6%95%B0%E7%BB%84%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%88%90%E7%BB%93%E6%9E%84%E4%BD%93%E7%B1%BB%E5%9E%8B%E5%AD%98%E5%82%A8-2/</url>
     <content><![CDATA[<p>废话不多说，直接上代码</p>
@@ -110,9 +200,9 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
+        <tag>sprintf</tag>
         <tag>字符串拼接</tag>
         <tag>strcat</tag>
-        <tag>sprintf</tag>
       </tags>
   </entry>
   <entry>
@@ -220,9 +310,9 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sprintf</tag>
         <tag>16进制转10进制</tag>
         <tag>10进制转16进制</tag>
+        <tag>sprintf</tag>
         <tag>sscanf</tag>
       </tags>
   </entry>
@@ -605,37 +695,6 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2019/11/02/%E7%AE%80%E5%8D%95%E7%9A%84rtsp%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/</url>
-    <content><![CDATA[<blockquote>
-<p>这里C表示rtsp客户端,S表示rtsp服务端。 </p>
-</blockquote>
-<h6 id="C-gt-发送流媒体数据前的准备"><a href="#C-gt-发送流媒体数据前的准备" class="headerlink" title="C-&gt;:发送流媒体数据前的准备"></a>C-&gt;:发送流媒体数据前的准备</h6><ul>
-<li>C-&gt;S:OPTION request  //询问S有哪些方法可用 </li>
-<li>S-&gt;C:OPTION response //S回应信息中包括提供的所有可用方法 </li>
-</ul>
-<ul>
-<li>C-&gt;S:DESCRIBE request //要求得到S提供的媒体初始化描述信息 </li>
-<li>S-&gt;C:DESCRIBE response //S回应媒体初始化描述信息，主要是sdp </li>
-</ul>
-<ul>
-<li>C-&gt;S:SETUP request //设置会话的属性，以及传输模式，提醒S建立会话 </li>
-<li>S-&gt;C:SETUP response //S建立会话，返回会话标识符，以及会话相关信息 </li>
-</ul>
-<ul>
-<li>C-&gt;S:PLAY request //C请求播放 </li>
-<li>S-&gt;C:PLAY response //S回应该请求的信息 </li>
-</ul>
-<h6 id="S-gt-C-发送流媒体数据"><a href="#S-gt-C-发送流媒体数据" class="headerlink" title="S-&gt;C:发送流媒体数据"></a>S-&gt;C:发送流媒体数据</h6><ul>
-<li>C-&gt;S:TEARDOWN request //C请求关闭会话 </li>
-<li>S-&gt;C:TEARDOWN response //S回应该请求</li>
-</ul>
-]]></content>
-      <categories>
-        <category>流媒体</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Ubuntu配置NFS及其挂载设备</title>
     <url>/2019/11/02/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/</url>
     <content><![CDATA[<h5 id="在Ubuntu系统中安装NFS"><a href="#在Ubuntu系统中安装NFS" class="headerlink" title="在Ubuntu系统中安装NFS"></a>在Ubuntu系统中安装NFS</h5><p>执行命令：</p>
@@ -670,8 +729,39 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>工具</category>
       </categories>
       <tags>
-        <tag>ubuntu</tag>
         <tag>nfs</tag>
+        <tag>ubuntu</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2019/11/02/%E7%AE%80%E5%8D%95%E7%9A%84rtsp%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/</url>
+    <content><![CDATA[<blockquote>
+<p>这里C表示rtsp客户端,S表示rtsp服务端。 </p>
+</blockquote>
+<h6 id="C-gt-发送流媒体数据前的准备"><a href="#C-gt-发送流媒体数据前的准备" class="headerlink" title="C-&gt;:发送流媒体数据前的准备"></a>C-&gt;:发送流媒体数据前的准备</h6><ul>
+<li>C-&gt;S:OPTION request  //询问S有哪些方法可用 </li>
+<li>S-&gt;C:OPTION response //S回应信息中包括提供的所有可用方法 </li>
+</ul>
+<ul>
+<li>C-&gt;S:DESCRIBE request //要求得到S提供的媒体初始化描述信息 </li>
+<li>S-&gt;C:DESCRIBE response //S回应媒体初始化描述信息，主要是sdp </li>
+</ul>
+<ul>
+<li>C-&gt;S:SETUP request //设置会话的属性，以及传输模式，提醒S建立会话 </li>
+<li>S-&gt;C:SETUP response //S建立会话，返回会话标识符，以及会话相关信息 </li>
+</ul>
+<ul>
+<li>C-&gt;S:PLAY request //C请求播放 </li>
+<li>S-&gt;C:PLAY response //S回应该请求的信息 </li>
+</ul>
+<h6 id="S-gt-C-发送流媒体数据"><a href="#S-gt-C-发送流媒体数据" class="headerlink" title="S-&gt;C:发送流媒体数据"></a>S-&gt;C:发送流媒体数据</h6><ul>
+<li>C-&gt;S:TEARDOWN request //C请求关闭会话 </li>
+<li>S-&gt;C:TEARDOWN response //S回应该请求</li>
+</ul>
+]]></content>
+      <categories>
+        <category>流媒体</category>
+      </categories>
   </entry>
 </search>
