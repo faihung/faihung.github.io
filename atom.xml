@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.faihung.net/"/>
-  <updated>2019-11-23T07:46:04.494Z</updated>
+  <updated>2019-11-23T08:22:29.296Z</updated>
   <id>http://www.faihung.net/</id>
   
   <author>
@@ -15,6 +15,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C语言-从一包数据中提取有效的数据帧</title>
+    <link href="http://www.faihung.net/2019/11/23/C%E8%AF%AD%E8%A8%80-%E4%BB%8E%E4%B8%80%E5%8C%85%E6%95%B0%E6%8D%AE%E4%B8%AD%E6%8F%90%E5%8F%96%E6%9C%89%E6%95%88%E7%9A%84%E6%95%B0%E6%8D%AE%E5%B8%A7/"/>
+    <id>http://www.faihung.net/2019/11/23/C语言-从一包数据中提取有效的数据帧/</id>
+    <published>2019-11-23T08:15:51.000Z</published>
+    <updated>2019-11-23T08:22:29.296Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="一、应用场景"><a href="#一、应用场景" class="headerlink" title="一、应用场景"></a>一、应用场景</h5><p>有的时候我们一次接收数据可能是20个byte,需要在这20个byte中并不都是我们想要的。</p><h6 id="具体要求："><a href="#具体要求：" class="headerlink" title="具体要求："></a>具体要求：</h6><ol><li>这个有效长度必须满足收尾都是0x64</li><li>这个有效长度最短长度不得少于8个byte</li><li>这个有效长度的数据必须符合校验和的计算方式</li><li>满足上面3条即可提取这个数据帧</li><li>注意:在真正想要的数据帧之间是没有0x64的,这种情况先假设它不存在(后面会根据校验和的方式来处理)<a id="more"></a><h5 id="二、代码如下"><a href="#二、代码如下" class="headerlink" title="二、代码如下"></a>二、代码如下</h5></li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line">//校验和之前所有字节累加取和之后，对累加和最低字节取反。</span><br><span class="line">UINT8 checksum(ComFrameData *pData, int len)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    int i,sum=0;</span><br><span class="line">    UINT8 ccsum=0;  </span><br><span class="line">UINT8 *pdata;</span><br><span class="line">pdata = (UINT8 *)pData;//将结构体类型强制转换成char类型</span><br><span class="line"></span><br><span class="line">    for(i=0;i&lt;len;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        #if 1</span><br><span class="line">        printf(&quot;%X\n&quot;,*pdata);</span><br><span class="line">        #endif</span><br><span class="line">        sum += *(pdata++); </span><br><span class="line">    &#125;</span><br><span class="line">    ccsum = ~(sum&amp;0xFF);  </span><br><span class="line"></span><br><span class="line">#if 1</span><br><span class="line">    printf(&quot;累加和:0x%X\n&quot;,sum);</span><br><span class="line">    printf(&quot;校验和:0x%X\n&quot;,ccsum);</span><br><span class="line">#endif</span><br><span class="line">    return ccsum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void exception_handling_extract(UINT8 *fraBuf, UINT8 buflen, UINT8 **prealBUF, UINT8 *preallen)</span><br><span class="line">&#123;</span><br><span class="line">UINT8 len = 0;//n = 0,</span><br><span class="line">UINT8 *pcur,*p;//*pBuf,</span><br><span class="line"></span><br><span class="line">printf(&quot;接收到的数据的长度是:%d\n&quot;,buflen);</span><br><span class="line">p = fraBuf;</span><br><span class="line">while(buflen--)</span><br><span class="line">&#123;</span><br><span class="line">if(*p == 0x64)</span><br><span class="line">&#123;</span><br><span class="line">pcur = p;</span><br><span class="line">while(buflen--)</span><br><span class="line">&#123;</span><br><span class="line">p++;</span><br><span class="line">if(*p == 0x64)</span><br><span class="line">&#123;</span><br><span class="line">len = p-pcur;</span><br><span class="line">printf(&quot;两个0x64之间的数据长度:%d\n&quot;,len);</span><br><span class="line">if(len&gt;=8)</span><br><span class="line">&#123;</span><br><span class="line">//进行相应的校验和计算</span><br><span class="line">if(*(p-1) == checksum((ComFrameData*)pcur,len-1))</span><br><span class="line">&#123;</span><br><span class="line">printf(&quot;这个真实帧的校验和满足条件!\n&quot;);</span><br><span class="line">//开始提取这个有效的数据帧</span><br><span class="line">*preallen = len+1;</span><br><span class="line">*prealBUF = pcur;</span><br><span class="line">printf(&quot;prealBuf-4:%X\n&quot;,*prealBUF);</span><br><span class="line">break;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">printf(&quot;这个真实帧的校验和不满足条件!\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;else&#123;</span><br><span class="line">//说明真正想要的数据帧帧头不是前面的一个0x64,可能是这一个,或者是下一个。之后继续对p进行遍历</span><br><span class="line">pcur = p;</span><br><span class="line">len = 0;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">printf(&quot;此时N2的长度是:%d\n&quot;,buflen);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">p++;</span><br><span class="line">printf(&quot;此时N1的长度是:%d\n&quot;,buflen);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">UINT8 ReceiveBuf[20] = &#123;</span><br><span class="line">0x00, 0x64, 0x00, 0x64, 0x01, 0x04, 0x00, 0x08, </span><br><span class="line">0x55, 0x07, 0xE2, 0x01, 0x06, 0x01, 0x1C, 0x18, </span><br><span class="line">0x14, 0x64, 0x30, 0x11&#125;;//模拟接收到的MCU响应的时间</span><br><span class="line"></span><br><span class="line">//实际接收的数据</span><br><span class="line">//0x64, 0x01, 0x04, 0x00, 0x08, 0x55, 0x07, 0xE2, 0x01, 0x06, 0x01, 0x1C,0x18, 0x14, 0x64</span><br><span class="line"></span><br><span class="line">void main(void)</span><br><span class="line">&#123;</span><br><span class="line">UINT8 i,buflen,reallen;</span><br><span class="line">UINT8 Buf[64]; </span><br><span class="line">UINT8 *prealBuf;//UINT8 realBuf[32];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#if 0//这里暂时不需要对prealBuf分配内存空间,因为ReceiveBuf数组是已经假设是全局变量了。prealBuf指向就是ReceiveBuf[3],位置其实是不会变的。</span><br><span class="line">UINT8 *prealBuf = (UINT8 *)malloc(sizeof(UINT8 *)*32);//定义一个全局realBuf[32];之后memset</span><br><span class="line"></span><br><span class="line">if(prealBuf == NULL)</span><br><span class="line">&#123;</span><br><span class="line">printf(&quot;prealBuf malloc is failed\n&quot;);</span><br><span class="line">return;</span><br><span class="line">&#125;</span><br><span class="line">free(prealBuf);</span><br><span class="line">prealBuf=NULL;</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//数据帧的异常处理,接收到的一帧数据可能是20byte,提取自己想要的。</span><br><span class="line">buflen = 20;//接收数据帧的长度是一个byte一个byte的接收,还是？</span><br><span class="line">printf(&quot;prealBuf-1:%X\n&quot;,prealBuf);</span><br><span class="line">exception_handling_extract(ReceiveBuf, buflen, &amp;prealBuf, &amp;reallen);</span><br><span class="line">printf(&quot;prealBuf-2:%X\n&quot;,prealBuf);</span><br><span class="line">printf(&quot;接收的真实数据帧长度是:%d\n&quot;,reallen);</span><br><span class="line">for(i=0;i&lt;reallen;i++)</span><br><span class="line">&#123;</span><br><span class="line">printf(&quot;接收的真实数据帧是:0x%X\n&quot;,prealBuf[i]);</span><br><span class="line">&#125;</span><br><span class="line">printf(&quot;prealBuf-3:%X\n&quot;,prealBuf);</span><br><span class="line">printf(&quot;prealBuf-4:%X\n&quot;,&amp;ReceiveBuf[3]);//可以看到prealBuf此时指向的地址和ReceiveBuf[3]的地址一模一样，所以这里不需要用malloc来申请内存空间</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h5 id="三、执行效果"><a href="#三、执行效果" class="headerlink" title="三、执行效果"></a>三、执行效果</h5><p><img src="/2019/11/23/C%E8%AF%AD%E8%A8%80-%E4%BB%8E%E4%B8%80%E5%8C%85%E6%95%B0%E6%8D%AE%E4%B8%AD%E6%8F%90%E5%8F%96%E6%9C%89%E6%95%88%E7%9A%84%E6%95%B0%E6%8D%AE%E5%B8%A7/1.jpg" alt="1"></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h5 id=&quot;一、应用场景&quot;&gt;&lt;a href=&quot;#一、应用场景&quot; class=&quot;headerlink&quot; title=&quot;一、应用场景&quot;&gt;&lt;/a&gt;一、应用场景&lt;/h5&gt;&lt;p&gt;有的时候我们一次接收数据可能是20个byte,需要在这20个byte中并不都是我们想要的。&lt;/p&gt;
+&lt;h6 id=&quot;具体要求：&quot;&gt;&lt;a href=&quot;#具体要求：&quot; class=&quot;headerlink&quot; title=&quot;具体要求：&quot;&gt;&lt;/a&gt;具体要求：&lt;/h6&gt;&lt;ol&gt;
+&lt;li&gt;这个有效长度必须满足收尾都是0x64&lt;/li&gt;
+&lt;li&gt;这个有效长度最短长度不得少于8个byte&lt;/li&gt;
+&lt;li&gt;这个有效长度的数据必须符合校验和的计算方式&lt;/li&gt;
+&lt;li&gt;满足上面3条即可提取这个数据帧&lt;/li&gt;
+&lt;li&gt;注意:在真正想要的数据帧之间是没有0x64的,这种情况先假设它不存在(后面会根据校验和的方式来处理)&lt;/li&gt;&lt;/ol&gt;
+    
+    </summary>
+    
+    
+      <category term="C" scheme="http://www.faihung.net/categories/C/"/>
+    
+    
+      <category term="全局变量" scheme="http://www.faihung.net/tags/%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F/"/>
+    
+      <category term="生存周期" scheme="http://www.faihung.net/tags/%E7%94%9F%E5%AD%98%E5%91%A8%E6%9C%9F/"/>
+    
+      <category term="内存分配" scheme="http://www.faihung.net/tags/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/"/>
+    
+      <category term="指针" scheme="http://www.faihung.net/tags/%E6%8C%87%E9%92%88/"/>
+    
+  </entry>
   
   <entry>
     <title>COM口16进制通信设计</title>
@@ -556,33 +591,6 @@
       <category term="nfs" scheme="http://www.faihung.net/tags/nfs/"/>
     
       <category term="ubuntu" scheme="http://www.faihung.net/tags/ubuntu/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://www.faihung.net/2019/11/02/%E7%AE%80%E5%8D%95%E7%9A%84rtsp%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/"/>
-    <id>http://www.faihung.net/2019/11/02/简单的rtsp交互过程/</id>
-    <published>2019-11-01T16:00:00.000Z</published>
-    <updated>2019-11-02T11:06:44.334Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>这里C表示rtsp客户端,S表示rtsp服务端。 </p></blockquote><h6 id="C-gt-发送流媒体数据前的准备"><a href="#C-gt-发送流媒体数据前的准备" class="headerlink" title="C-&gt;:发送流媒体数据前的准备"></a>C-&gt;:发送流媒体数据前的准备</h6><ul><li>C-&gt;S:OPTION request  //询问S有哪些方法可用 </li><li>S-&gt;C:OPTION response //S回应信息中包括提供的所有可用方法 </li></ul><ul><li>C-&gt;S:DESCRIBE request //要求得到S提供的媒体初始化描述信息 </li><li>S-&gt;C:DESCRIBE response //S回应媒体初始化描述信息，主要是sdp </li></ul><ul><li>C-&gt;S:SETUP request //设置会话的属性，以及传输模式，提醒S建立会话 </li><li>S-&gt;C:SETUP response //S建立会话，返回会话标识符，以及会话相关信息 </li></ul><ul><li>C-&gt;S:PLAY request //C请求播放 </li><li>S-&gt;C:PLAY response //S回应该请求的信息 </li></ul><h6 id="S-gt-C-发送流媒体数据"><a href="#S-gt-C-发送流媒体数据" class="headerlink" title="S-&gt;C:发送流媒体数据"></a>S-&gt;C:发送流媒体数据</h6><ul><li>C-&gt;S:TEARDOWN request //C请求关闭会话 </li><li>S-&gt;C:TEARDOWN response //S回应该请求</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;
-&lt;p&gt;这里C表示rtsp客户端,S表示rtsp服务端。 &lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h6 id=&quot;C-gt-发送流媒体数据前的准备&quot;&gt;&lt;a href=&quot;#C-gt-发送流媒体数据前的准备&quot; class=&quot;headerlink&quot; title=&quot;
-      
-    
-    </summary>
-    
-    
-      <category term="流媒体" scheme="http://www.faihung.net/categories/%E6%B5%81%E5%AA%92%E4%BD%93/"/>
-    
     
   </entry>
   
