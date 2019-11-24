@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.faihung.net/"/>
-  <updated>2019-11-24T15:27:21.405Z</updated>
+  <updated>2019-11-24T16:13:43.851Z</updated>
   <id>http://www.faihung.net/</id>
   
   <author>
@@ -17,17 +17,46 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>视音频中ES PS TS 等流的区别</title>
+    <link href="http://www.faihung.net/2019/11/25/%E8%A7%86%E9%9F%B3%E9%A2%91%E4%B8%ADES-PS-TS-%E7%AD%89%E6%B5%81%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>http://www.faihung.net/2019/11/25/视音频中ES-PS-TS-等流的区别/</id>
+    <published>2019-11-24T16:11:55.000Z</published>
+    <updated>2019-11-24T16:13:43.851Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="一、基本概念"><a href="#一、基本概念" class="headerlink" title="一、基本概念"></a>一、基本概念</h4><h5 id="1-ES"><a href="#1-ES" class="headerlink" title="1. ES"></a>1. ES</h5><p>ES–Elementary  Streams  (原始流)是直接从编码器出来的数据流，可以是编码过的视频数据流（H.264,MJPEG等），音频数据流（AAC），或其他编码数据流的统称。ES流经过PES打包器之后，被转换成PES包。</p><a id="more"></a><p>ES是只包含一种内容的数据流，如只含视频或只含音频等，打包之后的PES也是只含一种性质的ES,如只含视频ES的PES,只含音频ES的PES等。每个ES都由若干个存取单元（AU）组成，每个视频AU或音频AU都是由头部和编码数据两部分组成，1个AU相当于编码的1幅视频图像或1个音频帧，也可以说，每个AU实际上是编码数据流的显示单元，即相当于解码的1幅视频图像或1个音频帧的取样。</p><h5 id="2-PES"><a href="#2-PES" class="headerlink" title="2. PES"></a>2. PES</h5><p>PES–Packetized  Elementary Streams  (分组的ES)，ES形成的分组称为PES分组，是用来传递ES的一种数据结构。PES流是ES流经过PES打包器处理后形成的数据流，在这个过程中完成了将ES流分组、打包、加入包头信息等操作（对ES流的第一次打包）。PES流的基本单位是PES包。PES包由包头和payload组成。</p><h5 id="3-PTS、DTS"><a href="#3-PTS、DTS" class="headerlink" title="3. PTS、DTS"></a>3. PTS、DTS</h5><p>PTS–PresentationTime Stamp（显示时间标记）表示显示单元出现在系统目标解码器（H.264、MJPEG等）的时间。</p><p>DTS–Decoding Time Stamp（解码时间标记）表示将存取单元全部字节从解码缓存器移走的时间。</p><p>PTS/DTS是打在PES包的包头里面的，这两个参数是解决音视频同步显示，防止解码器输入缓存上溢或下溢的关键。每一个I（关键帧）、P（预测帧）、B（双向预测 帧）帧的包头都有一个PTS和DTS，但PTS与DTS对于B帧不一样，无需标出B帧的DTS，对于I帧和P帧，显示前一定要存储于视频解码器的重新排序缓存器中，经过延迟（重新排序）后再显示，所以一定要分别标明PTS和DTS。</p><h5 id="4-PS"><a href="#4-PS" class="headerlink" title="4. PS"></a>4. PS</h5><p>PS–Program Stream(节目流)PS流由PS包组成，而一个PS包又由若干个PES包组成（到这里，ES经过了两层的封装）。PS包的包头中包含了同步信息与时钟恢复信息。一个PS包最多可包含具有同一时钟基准的16个视频PES包和32个音频PES包。</p><h5 id="5-TS"><a href="#5-TS" class="headerlink" title="5. TS"></a>5. TS</h5><p>TS–Transport Stream（传输流）由定长的TS包组成（188字节），而TS包是对PES包的一个重新封装（到这里，ES也经过了两层的封装）。PES包的包头信息依然存在于TS包中。</p><h5 id="6-TS流与PS流的区别"><a href="#6-TS流与PS流的区别" class="headerlink" title="6. TS流与PS流的区别"></a>6. TS流与PS流的区别</h5><p>TS流与PS流的区别在于TS流的包结构是固定长度的,而PS流的包结构是可变长度的。PS包由于长度是变化的,一旦丢失某一PS包的同步信息,接收机就会进入失步状态,从而导致严重的信息丢失事件。而TS码流由于采用了固定长度的包结构,当传输误码破坏了某一TS包的同步信息时,接收机可在固定的位置检测它后面包中的同步信息,从而恢复同步,避免了信息丢失。因此在信道环境较为恶劣、传输误码较高时一般采用TS码流,而在信环境较好、传输误码较低时一般采用PS码流。</p><h5 id="7-TS单一码流、混合码流"><a href="#7-TS单一码流、混合码流" class="headerlink" title="7.TS单一码流、混合码流"></a>7.TS单一码流、混合码流</h5><p>单一性：TS流的基本组成单位是长度为188字节的TS包。</p><p>混合性： TS流由多种数据组合而成，一个TS包中的数据可以是视频数据，音频数据，填充数据，PSI/SI表格数据等（唯一的PID对应）。</p><h4 id="二、基本流程"><a href="#二、基本流程" class="headerlink" title="二、基本流程"></a>二、基本流程</h4><p><img src="/2019/11/25/%E8%A7%86%E9%9F%B3%E9%A2%91%E4%B8%ADES-PS-TS-%E7%AD%89%E6%B5%81%E7%9A%84%E5%8C%BA%E5%88%AB/93C31267F0904D5292F6B1BF4EC9BCF6" alt="1"></p><ol><li>A/D转换后，通过MPEG-2压缩编码得到的ES基本流。这个数据流很大，并且只是I，P，B的这些视频帧或音频取样信息</li><li>通过PES打包器，打包并在每个帧中插入 PTS/DTS标志，变成PES。原来是流的格式，现在成了数据包的分割形式。</li><li>PES根据需要打包成PS或TS包进行存储（DVD）或传输(DVB)。因每路音/视频只包含一路的编码数据流，所以每路PES也只包含相应的数据流。</li></ol><p><img src="/2019/11/25/%E8%A7%86%E9%9F%B3%E9%A2%91%E4%B8%ADES-PS-TS-%E7%AD%89%E6%B5%81%E7%9A%84%E5%8C%BA%E5%88%AB/47B71D29DF514943AF79C38A7C037078" alt="2"></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;一、基本概念&quot;&gt;&lt;a href=&quot;#一、基本概念&quot; class=&quot;headerlink&quot; title=&quot;一、基本概念&quot;&gt;&lt;/a&gt;一、基本概念&lt;/h4&gt;&lt;h5 id=&quot;1-ES&quot;&gt;&lt;a href=&quot;#1-ES&quot; class=&quot;headerlink&quot; title=&quot;1. ES&quot;&gt;&lt;/a&gt;1. ES&lt;/h5&gt;&lt;p&gt;ES–Elementary  Streams  (原始流)是直接从编码器出来的数据流，可以是编码过的视频数据流（H.264,MJPEG等），音频数据流（AAC），或其他编码数据流的统称。ES流经过PES打包器之后，被转换成PES包。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="视音频" scheme="http://www.faihung.net/categories/%E8%A7%86%E9%9F%B3%E9%A2%91/"/>
+    
+    
+      <category term="AVFormat" scheme="http://www.faihung.net/tags/AVFormat/"/>
+    
+      <category term="ES" scheme="http://www.faihung.net/tags/ES/"/>
+    
+      <category term="PS" scheme="http://www.faihung.net/tags/PS/"/>
+    
+      <category term="TS" scheme="http://www.faihung.net/tags/TS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Video Timing 解释说明</title>
     <link href="http://www.faihung.net/2019/11/24/Video-Timing-%E8%A7%A3%E9%87%8A%E8%AF%B4%E6%98%8E/"/>
     <id>http://www.faihung.net/2019/11/24/Video-Timing-解释说明/</id>
     <published>2019-11-24T15:25:24.000Z</published>
-    <updated>2019-11-24T15:27:21.405Z</updated>
+    <updated>2019-11-24T15:36:09.647Z</updated>
     
-    <content type="html"><![CDATA[<h6 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h6><p>大家应该都知道，视频看起来是持续动态的，但是实际上是由一系列的静态画面，在很短的时间内更替,在人眼上就产生视觉残留，以至于你的眼睛感觉是动态画面。大家看到的视频中大多数是每秒闪过50<del>60幅画面，对于电脑画面大概是每秒闪过70</del>80幅画面。</p><a id="more"></a><p>要说timing是什么，先说下一般的图像是怎么显示在屏幕上的。</p><p>视频源发出的一幅幅的画面，送到屏幕后，屏幕将每一幅画面从上到下逐行的扫描每个像素显示在屏幕上，不间断的重复，直到一段视频数据结束。</p><p>而视频数据是连续的，怎么就知道哪段数据是显示一个画面？</p><p>怎么知道一个画面中哪一段数据又是显示这一行的？</p><p>Timing 就是解决这两问题的。</p><pre><code>Video timing 包含两个信号：水平同步Hs（horizontal sync）和垂直同步Vs（vertical sync）Vertical sync --&gt;用来标识什么时候开始送出一幅新画面Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</code></pre><h6 id="Vertical-sync-和-Horizontal-sync-信号有三种传送方式："><a href="#Vertical-sync-和-Horizontal-sync-信号有三种传送方式：" class="headerlink" title="Vertical sync 和 Horizontal sync 信号有三种传送方式："></a>Vertical sync 和 Horizontal sync 信号有三种传送方式：</h6><ol><li>单独传送vertical sync 和 Horizontal sync两路信号，如电脑上用的VGA信号，HDMI高清数字视频信号；</li><li>将vertical sync和horizontal sync信号复合在一路单独传送，如S-Video型号（其timing信号时复合在其Y信号中）；</li><li>将vertical sync和horizontal sync复合在一起的信号又再复合进视频信号中一起传送，如CVBS信号；</li></ol><h6 id="举个例子说明timing中包含了哪些信息："><a href="#举个例子说明timing中包含了哪些信息：" class="headerlink" title="举个例子说明timing中包含了哪些信息："></a>举个例子说明timing中包含了哪些信息：</h6><p>如一个视频信号timing为（1024x768@60），1024x768表示是SVGA分辨率（其中1024表示一幅图像的列数，因每一个象素点有R/G/B三点组成，故共有1024*3列；768表示一幅图像的行数，共768行），60Hz表示的就是vertical sync（即每一个画面的显示时间为1/60s=16.67ms），由于每一幅画面要扫描768行，所以每一行的扫描时间即为16.67ms/768=21.7us，即可得出horizontal sync。</p>]]></content>
+    <content type="html"><![CDATA[<h6 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h6><p>大家应该都知道，视频看起来是持续动态的，但是实际上是由一系列的静态画面，在很短的时间内更替,在人眼上就产生视觉残留，以至于你的眼睛感觉是动态画面。大家看到的视频中大多数是每秒闪过50-60幅画面，对于电脑画面大概是每秒闪过70-80幅画面。</p><a id="more"></a><p>要说timing是什么，先说下一般的图像是怎么显示在屏幕上的。</p><p>视频源发出的一幅幅的画面，送到屏幕后，屏幕将每一幅画面从上到下逐行的扫描每个像素显示在屏幕上，不间断的重复，直到一段视频数据结束。</p><p>而视频数据是连续的，怎么就知道哪段数据是显示一个画面？</p><p>怎么知道一个画面中哪一段数据又是显示这一行的？</p><p>Timing 就是解决这两问题的。</p><pre><code>Video timing 包含两个信号：水平同步Hs（horizontal sync）和垂直同步Vs（vertical sync）Vertical sync --&gt;用来标识什么时候开始送出一幅新画面Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</code></pre><h6 id="Vertical-sync-和-Horizontal-sync-信号有三种传送方式："><a href="#Vertical-sync-和-Horizontal-sync-信号有三种传送方式：" class="headerlink" title="Vertical sync 和 Horizontal sync 信号有三种传送方式："></a>Vertical sync 和 Horizontal sync 信号有三种传送方式：</h6><ol><li>单独传送vertical sync 和 Horizontal sync两路信号，如电脑上用的VGA信号，HDMI高清数字视频信号；</li><li>将vertical sync和horizontal sync信号复合在一路单独传送，如S-Video型号（其timing信号时复合在其Y信号中）；</li><li>将vertical sync和horizontal sync复合在一起的信号又再复合进视频信号中一起传送，如CVBS信号；</li></ol><h6 id="举个例子说明timing中包含了哪些信息："><a href="#举个例子说明timing中包含了哪些信息：" class="headerlink" title="举个例子说明timing中包含了哪些信息："></a>举个例子说明timing中包含了哪些信息：</h6><p>如一个视频信号timing为（1024x768@60），1024x768表示是SVGA分辨率（其中1024表示一幅图像的列数，因每一个象素点有R/G/B三点组成，故共有1024*3列；768表示一幅图像的行数，共768行），60Hz表示的就是vertical sync（即每一个画面的显示时间为1/60s=16.67ms），由于每一幅画面要扫描768行，所以每一行的扫描时间即为16.67ms/768=21.7us，即可得出horizontal sync。</p>]]></content>
     
     <summary type="html">
     
-      &lt;h6 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h6&gt;&lt;p&gt;大家应该都知道，视频看起来是持续动态的，但是实际上是由一系列的静态画面，在很短的时间内更替,在人眼上就产生视觉残留，以至于你的眼睛感觉是动态画面。大家看到的视频中大多数是每秒闪过50&lt;del&gt;60幅画面，对于电脑画面大概是每秒闪过70&lt;/del&gt;80幅画面。&lt;/p&gt;
+      &lt;h6 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h6&gt;&lt;p&gt;大家应该都知道，视频看起来是持续动态的，但是实际上是由一系列的静态画面，在很短的时间内更替,在人眼上就产生视觉残留，以至于你的眼睛感觉是动态画面。大家看到的视频中大多数是每秒闪过50-60幅画面，对于电脑画面大概是每秒闪过70-80幅画面。&lt;/p&gt;
     
     </summary>
     
@@ -355,11 +384,11 @@
       <category term="C" scheme="http://www.faihung.net/categories/C/"/>
     
     
+      <category term="sprintf" scheme="http://www.faihung.net/tags/sprintf/"/>
+    
       <category term="strcat" scheme="http://www.faihung.net/tags/strcat/"/>
     
       <category term="字符串拼接" scheme="http://www.faihung.net/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5/"/>
-    
-      <category term="sprintf" scheme="http://www.faihung.net/tags/sprintf/"/>
     
   </entry>
   
@@ -414,11 +443,11 @@
       <category term="C" scheme="http://www.faihung.net/categories/C/"/>
     
     
-      <category term="sprintf" scheme="http://www.faihung.net/tags/sprintf/"/>
-    
       <category term="16进制转10进制" scheme="http://www.faihung.net/tags/16%E8%BF%9B%E5%88%B6%E8%BD%AC10%E8%BF%9B%E5%88%B6/"/>
     
       <category term="10进制转16进制" scheme="http://www.faihung.net/tags/10%E8%BF%9B%E5%88%B6%E8%BD%AC16%E8%BF%9B%E5%88%B6/"/>
+    
+      <category term="sprintf" scheme="http://www.faihung.net/tags/sprintf/"/>
     
       <category term="sscanf" scheme="http://www.faihung.net/tags/sscanf/"/>
     
@@ -552,33 +581,6 @@
       <category term="字符串拆分" scheme="http://www.faihung.net/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%86%E5%88%86/"/>
     
       <category term="格式转换" scheme="http://www.faihung.net/tags/%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>linux 通过系统函数设置系统时间</title>
-    <link href="http://www.faihung.net/2019/11/03/linux-%E9%80%9A%E8%BF%87%E7%B3%BB%E7%BB%9F%E5%87%BD%E6%95%B0%E8%AE%BE%E7%BD%AE%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/"/>
-    <id>http://www.faihung.net/2019/11/03/linux-通过系统函数设置系统时间/</id>
-    <published>2019-11-03T09:06:09.000Z</published>
-    <updated>2019-11-03T09:09:54.432Z</updated>
-    
-    <content type="html"><![CDATA[<h5 id="一、描述："><a href="#一、描述：" class="headerlink" title="一、描述："></a>一、描述：</h5><p>通过settimeofday()函数来设置系统时间，这个函数设置的精度可以精确到微秒。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;time.h&gt;</span><br><span class="line"></span><br><span class="line">int settimeofday(const struct timeval *tv , const struct timezone *tz);</span><br><span class="line"></span><br><span class="line">struct timeval &#123;</span><br><span class="line">    time_t      tv_sec;     /* seconds */</span><br><span class="line">    suseconds_t tv_usec;    /* microseconds */</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct timezone &#123;</span><br><span class="line">    int tz_minuteswest;     /* minutes west of Greenwich */</span><br><span class="line">    int tz_dsttime;         /* type of DST correction */</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><blockquote><p>tz参数为时区，时区结构中tz_dsttime在linux中不支持，应该置为0，通常将参数tz设置为NULL，表示使用当前系统的时区。该函数是glib中的，但在mingw中没有实现。</p></blockquote><a id="more"></a><h5 id="二、代码演示："><a href="#二、代码演示：" class="headerlink" title="二、代码演示："></a>二、代码演示：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include&lt;sys/time.h&gt;</span><br><span class="line">#include&lt;unistd.h&gt;</span><br><span class="line">#include &lt;time.h&gt;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">int SetSystemTime(char *dt)</span><br><span class="line">&#123;</span><br><span class="line">    struct tm rtc_time;</span><br><span class="line">    struct tm _tm;</span><br><span class="line">    struct timeval tv;</span><br><span class="line">    time_t timep;</span><br><span class="line">    sscanf(dt, &quot;%d-%d-%d %d:%d:%d&quot;, &amp;rtc_time.tm_year,</span><br><span class="line">&amp;rtc_time.tm_mon, &amp;rtc_time.tm_mday,&amp;rtc_time.tm_hour,</span><br><span class="line">        &amp;rtc_time.tm_min, &amp;rtc_time.tm_sec);</span><br><span class="line">    _tm.tm_sec = rtc_time.tm_sec;</span><br><span class="line">    _tm.tm_min = rtc_time.tm_min;</span><br><span class="line">    _tm.tm_hour = rtc_time.tm_hour;</span><br><span class="line">    _tm.tm_mday = rtc_time.tm_mday;</span><br><span class="line">    _tm.tm_mon = rtc_time.tm_mon - 1;</span><br><span class="line">    _tm.tm_year = rtc_time.tm_year - 1900;</span><br><span class="line"> </span><br><span class="line">    timep = mktime(&amp;_tm);</span><br><span class="line">    tv.tv_sec = timep;</span><br><span class="line">    tv.tv_usec = 0;</span><br><span class="line">    // if(settimeofday (&amp;tv, (struct timezone *) 0) &lt; 0)</span><br><span class="line">if(settimeofday (&amp;tv, NULL) &lt; 0)</span><br><span class="line">    &#123;</span><br><span class="line">printf(&quot;Set system datatime error!\n&quot;);</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">printf(&quot;现在的时间是:&quot;);</span><br><span class="line">fflush(stdout);</span><br><span class="line">system(&quot;date&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">  SetSystemTime(&quot;2019-11-03 16:30:30&quot;);//2019-11-01 21:19:05  </span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h5 id="三、效果如下："><a href="#三、效果如下：" class="headerlink" title="三、效果如下："></a>三、效果如下：</h5><p><img src="/2019/11/03/linux-%E9%80%9A%E8%BF%87%E7%B3%BB%E7%BB%9F%E5%87%BD%E6%95%B0%E8%AE%BE%E7%BD%AE%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/1.jpg" alt="1"><br>注意：</p><ol><li>调用settimeofday函数时必须要在root权限下执行。</li><li>设置时间之前最好把虚拟机网络断开。</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h5 id=&quot;一、描述：&quot;&gt;&lt;a href=&quot;#一、描述：&quot; class=&quot;headerlink&quot; title=&quot;一、描述：&quot;&gt;&lt;/a&gt;一、描述：&lt;/h5&gt;&lt;p&gt;通过settimeofday()函数来设置系统时间，这个函数设置的精度可以精确到微秒。&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#include &amp;lt;time.h&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;int settimeofday(const struct timeval *tv , const struct timezone *tz);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;struct timeval &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    time_t      tv_sec;     /* seconds */&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    suseconds_t tv_usec;    /* microseconds */&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;struct timezone &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    int tz_minuteswest;     /* minutes west of Greenwich */&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    int tz_dsttime;         /* type of DST correction */&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;tz参数为时区，时区结构中tz_dsttime在linux中不支持，应该置为0，通常将参数tz设置为NULL，表示使用当前系统的时区。该函数是glib中的，但在mingw中没有实现。&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-    
-      <category term="系统函数&amp;库函数" scheme="http://www.faihung.net/categories/%E7%B3%BB%E7%BB%9F%E5%87%BD%E6%95%B0-%E5%BA%93%E5%87%BD%E6%95%B0/"/>
-    
-    
-      <category term="系统时间" scheme="http://www.faihung.net/tags/%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/"/>
     
   </entry>
   
