@@ -1,6 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>视音频-常用视频信号配图介绍</title>
+    <url>/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E5%B8%B8%E7%94%A8%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E9%85%8D%E5%9B%BE%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<h5 id="常用视频信号介绍"><a href="#常用视频信号介绍" class="headerlink" title="常用视频信号介绍"></a>常用视频信号介绍</h5><a id="more"></a>
+<p><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E5%B8%B8%E7%94%A8%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E9%85%8D%E5%9B%BE%E4%BB%8B%E7%BB%8D/1.png" alt="image"></p>
+<p><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E5%B8%B8%E7%94%A8%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E9%85%8D%E5%9B%BE%E4%BB%8B%E7%BB%8D/2.png" alt="image"></p>
+<p><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E5%B8%B8%E7%94%A8%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E9%85%8D%E5%9B%BE%E4%BB%8B%E7%BB%8D/3.png" alt="image"></p>
+<p>这里主要介绍可能用到的测试视频信号。<br>一般来讲，客户经常会用到灰阶、彩条这些测试信号，来测试画面显示是否正常。<br>例如每一阶能不能正常显示，过渡是否自然。<br>Color bar显示有没有偏色，Y/C 分离处理得好不好。<br>下面的资料可以参考一下。</p>
+<h5 id="测试信号的类别"><a href="#测试信号的类别" class="headerlink" title="测试信号的类别"></a>测试信号的类别</h5><p>Gray Scale &amp; Levels (灰度和灰阶)</p>
+<p>Geometry &amp; Convergence(几何特性和会聚)</p>
+<p>Letterbox Geometry(4:3显示比例下的几何特性)</p>
+<p>Wide Screen Enhanced(16:9显示比例显示特性)</p>
+<p>Resolution(解析度)</p>
+<p>Color Adjustment(色彩调整)</p>
+<p>Special Test(包括Y/C delay,color decoder等)</p>
+<h5 id="几种典型视频信号"><a href="#几种典型视频信号" class="headerlink" title="几种典型视频信号"></a>几种典型视频信号</h5><h6 id="Vertical-10-IRE-steps-灰阶信号）"><a href="#Vertical-10-IRE-steps-灰阶信号）" class="headerlink" title="Vertical 10 IRE steps(灰阶信号）"></a>Vertical 10 IRE steps(灰阶信号）</h6><p><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E5%B8%B8%E7%94%A8%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E9%85%8D%E5%9B%BE%E4%BB%8B%E7%BB%8D/4.png" alt="image"></p>
+<p>由左到右亮度值分别为100(white),90,80,70,60,50,40,30,20,10,7.5 IRE(black)</p>
+<p>观察重点</p>
+<p>1)每阶都能正常显示</p>
+<p>2)阶与阶之间层次分明,宽度相同</p>
+<p>3)从一阶到另一阶之间不应该有颜色变化</p>
+<h6 id="Cross-Hatch"><a href="#Cross-Hatch" class="headerlink" title="Cross Hatch"></a>Cross Hatch</h6><p><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E5%B8%B8%E7%94%A8%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E9%85%8D%E5%9B%BE%E4%BB%8B%E7%BB%8D/5.png" alt="image"></p>
+<p>主要用来设置显示的尺寸,几何特性和会聚</p>
+<p>这个画面由大小相同的水平和垂直的直线组成</p>
+<p>正常的情况下,所有的方格应该大小相同,没有扭曲</p>
+<p>边缘的标记用来设置显示的尺寸和中心</p>
+<h6 id="MultiBurst-with-label"><a href="#MultiBurst-with-label" class="headerlink" title="MultiBurst with label"></a>MultiBurst with label</h6><p><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E5%B8%B8%E7%94%A8%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E9%85%8D%E5%9B%BE%E4%BB%8B%E7%BB%8D/6.png" alt="image"></p>
+<p>主要用来检查频率响应和设置Sharpness</p>
+<p>该画面由几组频率相同的信号组成(其中3.58MHz是NTSC色负载波的频率,4.18MHz是广播频率的上限).上半部分的背景是50%的亮度,正常情况下下半部分的亮度<br>和信号的亮度相同</p>
+<p>Sharpness设置合适时,所有的信号应该有相同的亮度,且没有边缘锐化的现象</p>
+<h6 id="Resolution-200-TVL"><a href="#Resolution-200-TVL" class="headerlink" title="Resolution 200 TVL"></a>Resolution 200 TVL</h6><p><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E5%B8%B8%E7%94%A8%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E9%85%8D%E5%9B%BE%E4%BB%8B%E7%BB%8D/7.png" alt="image"></p>
+<p>用来测量水平和垂直方向的解析度,水平方向的解析度测量范围是200-540 TV line,垂直方向的解析度是200-480TV line.</p>
+<p>周围的四个圆圈的频率分别是3.0,3.58,4.18和6.75MHz,可以作为解析度测试的补充</p>
+<h6 id="Sharpness"><a href="#Sharpness" class="headerlink" title="Sharpness"></a>Sharpness</h6><p><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E5%B8%B8%E7%94%A8%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E9%85%8D%E5%9B%BE%E4%BB%8B%E7%BB%8D/8.png" alt="image"></p>
+<p>用来调整Sharpness和Vertical aperture</p>
+<p>该画面由四部分组成</p>
+<p>1)水平方向的信号用来设置频率响应</p>
+<p>2)垂直方向的信号用来设置vertical aperture</p>
+<p>3)其中的线和曲线用来侦测边缘的缺陷</p>
+<p>4)垂直和水平的线段用来侦测模糊现象</p>
+<h6 id="75-Split-Color-Bars"><a href="#75-Split-Color-Bars" class="headerlink" title="75% Split Color Bars"></a>75% Split Color Bars</h6><p><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E5%B8%B8%E7%94%A8%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E9%85%8D%E5%9B%BE%E4%BB%8B%E7%BB%8D/9.png" alt="image"></p>
+<p>主要用来校正色彩和色调</p>
+<p>校正方法:</p>
+<p>1)使灰阶信号和蓝色信号对齐来设置色度(理论上来讲,只要蓝色成分得到正确的校正,其他颜色应该可以正常的显示,因为蓝色成分经历了最多的编码)</p>
+<p>2)使洋红和青色对准来调整色调</p>
+<p>Note: 75% color bars接近广播信号中色彩显示的上限且满足FCC信号接口标准,所以经常被用来校正显示</p>
+<h6 id="Y-C-Delay"><a href="#Y-C-Delay" class="headerlink" title="Y/C Delay"></a>Y/C Delay</h6><p><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E5%B8%B8%E7%94%A8%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E9%85%8D%E5%9B%BE%E4%BB%8B%E7%BB%8D/10.png" alt="image"></p>
+<p>用来测量Y/C Delay error</p>
+<p>左边的部分用来测量Y/C Delay error;右边的部分用来观察是否存在Y/C delay error.正常情况下,红色竖条边缘应该没有扭曲</p>
+<p>Y/C delay正常的情况下,R,G,B方块应与其对应的灰色方块在0度时对齐</p>
+<h6 id="Color-Decoder"><a href="#Color-Decoder" class="headerlink" title="Color Decoder"></a>Color Decoder</h6><p><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E5%B8%B8%E7%94%A8%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E9%85%8D%E5%9B%BE%E4%BB%8B%E7%BB%8D/11.png" alt="image"></p>
+<p>用来测量RGB解码的准确度</p>
+<p>该画面包含77 IRE的灰色背景和色度范围从+25%到-25%的R,G,B色块</p>
+<p>测量时,需要只打开R,G,B中的一种颜色,然后看在0%位置,该颜色是否与其对应的背景颜色是否一致</p>
+<h6 id="Overscan"><a href="#Overscan" class="headerlink" title="Overscan"></a>Overscan</h6><p><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E5%B8%B8%E7%94%A8%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E9%85%8D%E5%9B%BE%E4%BB%8B%E7%BB%8D/12.png" alt="image"></p>
+<p>用来测量屏幕隐藏的部分的百分比,也可以用来调整显示的区域和使屏幕置中</p>
+<p>边缘的数字表示当前显示隐藏的图象的百分比.品质比较好的显示最多允许存在3%到5%隐藏比例</p>
+<p>另外可以用该画面来调整水平和垂直的位置,使上下左右有同样的隐藏比例,从而保证画面位于屏幕的中央</p>
+<h6 id="Gamma"><a href="#Gamma" class="headerlink" title="Gamma"></a>Gamma</h6><p><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E5%B8%B8%E7%94%A8%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E9%85%8D%E5%9B%BE%E4%BB%8B%E7%BB%8D/13.png" alt="image"></p>
+<p>用来测量显示设备的gamma值</p>
+<p>该画面由六组标有gamma值的灰色方块组成</p>
+<p>测量时,找出与背景颜色最接近的方块,该方块的数值就是显示设备的gamma值</p>
+<h6 id="Center-Cross"><a href="#Center-Cross" class="headerlink" title="Center Cross"></a>Center Cross</h6><p><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E5%B8%B8%E7%94%A8%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E9%85%8D%E5%9B%BE%E4%BB%8B%E7%BB%8D/14.png" alt="image"></p>
+<p>主要用来设置R,G,B CRT电子枪的静会聚(static convergence).</p>
+<p>十字线周围的短线指明了显示的安全区域,显示的区域至少应该短线包含的范围内</p>
+]]></content>
+      <categories>
+        <category>视音频</category>
+      </categories>
+      <tags>
+        <tag>视频信号</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>视音频中ES PS TS 等流的区别</title>
     <url>/2019/11/25/%E8%A7%86%E9%9F%B3%E9%A2%91%E4%B8%ADES-PS-TS-%E7%AD%89%E6%B5%81%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
     <content><![CDATA[<h4 id="一、基本概念"><a href="#一、基本概念" class="headerlink" title="一、基本概念"></a>一、基本概念</h4><h5 id="1-ES"><a href="#1-ES" class="headerlink" title="1. ES"></a>1. ES</h5><p>ES–Elementary  Streams  (原始流)是直接从编码器出来的数据流，可以是编码过的视频数据流（H.264,MJPEG等），音频数据流（AAC），或其他编码数据流的统称。ES流经过PES打包器之后，被转换成PES包。</p>
@@ -15,6 +88,7 @@
 <h5 id="6-TS流与PS流的区别"><a href="#6-TS流与PS流的区别" class="headerlink" title="6. TS流与PS流的区别"></a>6. TS流与PS流的区别</h5><p>TS流与PS流的区别在于TS流的包结构是固定长度的,而PS流的包结构是可变长度的。PS包由于长度是变化的,一旦丢失某一PS包的同步信息,接收机就会进入失步状态,从而导致严重的信息丢失事件。而TS码流由于采用了固定长度的包结构,当传输误码破坏了某一TS包的同步信息时,接收机可在固定的位置检测它后面包中的同步信息,从而恢复同步,避免了信息丢失。因此在信道环境较为恶劣、传输误码较高时一般采用TS码流,而在信环境较好、传输误码较低时一般采用PS码流。</p>
 <h5 id="7-TS单一码流、混合码流"><a href="#7-TS单一码流、混合码流" class="headerlink" title="7.TS单一码流、混合码流"></a>7.TS单一码流、混合码流</h5><p>单一性：TS流的基本组成单位是长度为188字节的TS包。</p>
 <p>混合性： TS流由多种数据组合而成，一个TS包中的数据可以是视频数据，音频数据，填充数据，PSI/SI表格数据等（唯一的PID对应）。</p>
+<h5 id="8-封装"><a href="#8-封装" class="headerlink" title="8. 封装"></a>8. 封装</h5><p>封装，就是捆绑打包, 将画面视频文件和音轨文件打包在一起,并按照一定规则建立排序和索引, 便于播放器或播放软件来索引播放. 包括AVI / PS(Program Stream)/ TS（Transport Stream）/ MKV（Matroska）等.</p>
 <h4 id="二、基本流程"><a href="#二、基本流程" class="headerlink" title="二、基本流程"></a>二、基本流程</h4><p><img src="/2019/11/25/%E8%A7%86%E9%9F%B3%E9%A2%91%E4%B8%ADES-PS-TS-%E7%AD%89%E6%B5%81%E7%9A%84%E5%8C%BA%E5%88%AB/1.jpg" alt="1"></p>
 <ol>
 <li>A/D转换后，通过MPEG-2压缩编码得到的ES基本流。这个数据流很大，并且只是I，P，B的这些视频帧或音频取样信息</li>
@@ -22,6 +96,37 @@
 <li>PES根据需要打包成PS或TS包进行存储（DVD）或传输(DVB)。因每路音/视频只包含一路的编码数据流，所以每路PES也只包含相应的数据流。</li>
 </ol>
 <p><img src="/2019/11/25/%E8%A7%86%E9%9F%B3%E9%A2%91%E4%B8%ADES-PS-TS-%E7%AD%89%E6%B5%81%E7%9A%84%E5%8C%BA%E5%88%AB/2.jpg" alt="2"></p>
+<h4 id="三、推理过程"><a href="#三、推理过程" class="headerlink" title="三、推理过程"></a>三、推理过程</h4><h5 id="3-1-TS流的解码过程：ES-PES-DTS-PTS-PCR"><a href="#3-1-TS流的解码过程：ES-PES-DTS-PTS-PCR" class="headerlink" title="3.1 TS流的解码过程：ES-PES-DTS-PTS-PCR"></a>3.1 TS流的解码过程：ES-PES-DTS-PTS-PCR</h5><ol>
+<li>获取TS中的PAT</li>
+<li>获取TS中的PMT</li>
+<li>根据PMT可以知道当前网络中传输的视频（音频）类型（H264），相应的PID，PCR的PID等信息。</li>
+<li>设置demux 模块的视频Filter 为相应视频的PID和stream type等。</li>
+<li>从视频Demux Filter 后得到的TS数据包中的payload 数据就是 one piece of PES，在TS header中有一些关于此 payload属于哪个PES的第多少个数据包。 因此软件中应该将此payload中的数据copy到PES的buffer中，用于拼接一个PES包。</li>
+<li>拼接好的PES包的包头会有PTS，DTS信息，去掉PES的header就是ES。</li>
+<li>直接将被拔掉PES包头的ES包送给decoder就可以进行解码。解码出来的数据就是一帧一帧的视频数据，这些数据至少应当与PES中的PTS关联一下，以便进行视音频同步。</li>
+<li>I，B，B，P 信息是在ES中的。</li>
+</ol>
+<h5 id="3-2-具体描述"><a href="#3-2-具体描述" class="headerlink" title="3.2 具体描述"></a>3.2 具体描述</h5><p>ES 是直接从编码器出来的数据流，可以是编码过的视频数据流，音频数据流，或其他编码数据流的统称。 ES 流经过 PES 打包器之后，被转换成 PES 包。 PES 包由包头和 payload 组成。</p>
+<p>在 PES 层，主要是在 PES 包头信息中加入 PTS( 显示时间标签 ) 和 DTS （解码时间标签）用于视频、音频同步。 其实， Mpeg-2 用于视音频同步以及系统时钟恢复的时间标签分别在 ES ， PES 和 TS 这 3 个层次中。</p>
+<p>在 ES 层，与同步有关的主要是视频缓冲验证 VBV （ Video Buffer Verifier ），用以防止解码器的缓冲器出现上溢或下溢；在 PES 层，主要是在 PES 头信息里出现的显示时间标签 PTS （ Presentation Time Stamp ）和解码时间标签 DTS （ Decoding Time Stamp ）；</p>
+<p>在 TS 层中， TS 头信息包含了节目时钟参考 PCR （ Program Clock Reference ），用于恢复出与编码端一致的系统时序时钟 STC （ System Time Clock ）。</p>
+<p>基本流程如下：</p>
+<p>首先 MPEG-2 压缩编码得到的 ES 基本流，这个数据流很大，并且只是 I ， P ， B 的这些视频帧或音频取样信息， 然后加入一些同步信息，打包成长度可变长度的数据包 PES ，原来是流的格式，现在成了数据包的分割形式。</p>
+<p>同时要注意的是， ES 是只包含一种内容的数据流，如只含视频，或只含音频等，打包之后的 PES 也是只含一种性质的 ES, 如只含视频 ES 的 PES, 只含音频 ES 的 PES 等。</p>
+<p>可以知道， ES 是编码视频数据流或音频数据流，每个 ES 都由若干个存取单元（ AU ）组成，每个视频 AU 或音频 AU 都是由头部和编码数据两部分组成， 1 个 AU 相当于编码的 1 幅视频图像或 1 个音频帧，也可以说，每个 AU 实际上是编码数据流的显示单元，即相当于解码的 1 幅视频图像或 1 个音频帧的取样。 </p>
+<p>PEG-2 对视频的压缩产生 I 帧、 P 帧、 B 帧。把帧顺序 I1,P4,B2,B3,P7,B5,B6 帧的编码 ES ，通过打包并在每个帧中插入 PTS/DTS 标志，变成 PES 。</p>
+<p>在插入 PTS/DTS 标志时，由于在 B 帧 PTS 和 DTS 相等，所以无须在 B 帧多插入 DTS 。</p>
+<p>而对于 I 帧 和 P 帧，由于经过复用后数据包的顺序会发生变化，显示前一定要存储于视频解码器的从新排序缓存器中，经过从新排序后再显示，所以一定要同时插入 PTS 和 DTS 作为从新排序的依据。</p>
+<p>其中，有否 PTS/DTS 标志，是解决视音频同步显示、防止解码器输入缓存器上溢或下溢的关键所在。 </p>
+<p>PTS 表明显示单元出现在系统目标解码器（ STD- System Target Decoder ）的时间 , DTS 表明将存取单元全部字节从 STD 的 ES 解码缓存器移走的时刻。</p>
+<p>视频编码图像帧次序为 I1,P4,B2,B3,P7,B5,B6,I10,B8,B9 的 ES ，加入 PTS/DTS 后，打包成一个个视频 PES 包。</p>
+<p>每个 PES 包都有一个包头，用于定义 PES 内的数据内容，提供定时资料。</p>
+<p>每个 I 、 P 、 B帧的包头都有一个 PTS 和 DTS ，但 PTS 与 DTS 对 B 帧都是一样的，无须标出 B 帧的 DTS 。</p>
+<p>对 I 帧和 P 帧，显示前一定要存储于视频解码器的重新排序缓存器中，经过延迟（重新排序）后再显示，一定要分别标明 PTS 和 DTS 。</p>
+<p>例如，解码器输入的图像帧次序为 I1,P4,B2,B3,P7,B5,B6,I10,B8,B9 ，依解码器输出的帧次序，应该 P4 比 B2 、 B3 在先，但显示时 P4 一定要比 B2 、 B3 在后，即 P4 要在提前插入数据流中的时间标志指引下，经过缓存器重新排序，以重建编码前视频帧次序 I1,B2,B3,P4,B5,B6,P7,B8,B9,I10 。</p>
+<p>显然， PTS/DTS 标志表明对确定事件或确定信息解码的专用时标的存在，依靠专用时标解码器，可知道该确定事件或确定信息开始解码或显示的时刻。</p>
+<p>例如， PTS/DTS 标志可用于确定编码、多路复用、解码、重建的时间。</p>
+<p>PCR<br>PCR 是 TS 里面的，即 TS packet 的 header 里面可能会有，他用来指定所期望的该 ts packet 到达 decoder 的时间，他的作用于 SCR 类似。</p>
 ]]></content>
       <categories>
         <category>视音频</category>
@@ -774,6 +879,33 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
       </tags>
   </entry>
   <entry>
+    <title>cURL-03-cURL的几种语言支持</title>
+    <url>/2019/11/03/cURL-03-cURL%E7%9A%84%E5%87%A0%E7%A7%8D%E8%AF%AD%E8%A8%80%E6%94%AF%E6%8C%81/</url>
+    <content><![CDATA[<h5 id="一、基于-C-的-HTTP-客户端"><a href="#一、基于-C-的-HTTP-客户端" class="headerlink" title="一、基于 C 的 HTTP 客户端"></a>一、基于 C 的 HTTP 客户端</h5><p>C API 在 libcurl 功能上提供了两个 API。easy 接口是一个简单的同步 API（意味着当您使用请求调用 libcurl 时，将能够满足您的请求，直到完成或发生错误）。多接口可以进一步控制 libcurl，您的应用程序可以执行多个同步传输，并控制 libcurl 何时何地移动数据。</p>
+<p>该示例使用 easy 接口。该 API 还能控制数据移动过程（使用回调），但正如其名称所示，使用起来非常简单。下面请看HTTP 的 C 语言示例,使用 libcurl easy 接口的 C HTTP 客户端。</p>
+<a id="more"></a>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt; </span><br><span class="line">#include &lt;string.h&gt; </span><br><span class="line">#include &lt;curl/curl.h&gt; </span><br><span class="line"> </span><br><span class="line">#define MAX_BUF     65536 </span><br><span class="line"> </span><br><span class="line">char wr_buf[MAX_BUF+1]; </span><br><span class="line">int  wr_index; </span><br><span class="line"> </span><br><span class="line">/* </span><br><span class="line">* Write data callback function (called within the context of </span><br><span class="line">* curl_easy_perform. </span><br><span class="line">*/ </span><br><span class="line">size_t write_data( void *buffer, size_t size, size_t nmemb, void *userp ) </span><br><span class="line">&#123; </span><br><span class="line"> int segsize = size * nmemb; </span><br><span class="line"> </span><br><span class="line"> /* Check to see if this data exceeds the size of our buffer. If so, </span><br><span class="line">  * set the user-defined context value and return 0 to indicate a </span><br><span class="line">  * problem to curl. </span><br><span class="line">  */ </span><br><span class="line"> if ( wr_index + segsize &gt; MAX_BUF ) &#123; </span><br><span class="line">   *(int *)userp = 1; </span><br><span class="line">   return 0; </span><br><span class="line"> &#125; </span><br><span class="line"> </span><br><span class="line"> /* Copy the data from the curl buffer into our buffer */ </span><br><span class="line"> memcpy( (void *)&amp;wr_buf[wr_index], buffer, (size_t)segsize ); </span><br><span class="line"> </span><br><span class="line"> /* Update the write index */ </span><br><span class="line"> wr_index += segsize; </span><br><span class="line"> </span><br><span class="line"> /* Null terminate the buffer */ </span><br><span class="line"> wr_buf[wr_index] = 0; </span><br><span class="line"> </span><br><span class="line"> /* Return the number of bytes received, indicating to curl that all is okay */ </span><br><span class="line"> return segsize; </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">/* </span><br><span class="line">* Simple curl application to read the index.html file from a Web site. </span><br><span class="line">*/ </span><br><span class="line">int main( void ) </span><br><span class="line">&#123; </span><br><span class="line"> CURL *curl; </span><br><span class="line"> CURLcode ret; </span><br><span class="line"> int  wr_error; </span><br><span class="line"> </span><br><span class="line"> wr_error = 0; </span><br><span class="line"> wr_index = 0; </span><br><span class="line"> </span><br><span class="line"> /* First step, init curl */ </span><br><span class="line"> curl = curl_easy_init(); </span><br><span class="line"> if (!curl) &#123; </span><br><span class="line">   printf(&quot;couldn&apos;t init curl\n&quot;); </span><br><span class="line">   return 0; </span><br><span class="line"> &#125; </span><br><span class="line"> </span><br><span class="line"> /* Tell curl the URL of the file we&apos;re going to retrieve */ </span><br><span class="line"> curl_easy_setopt( curl, CURLOPT_URL, &quot;www.exampledomain.com&quot; ); </span><br><span class="line"> </span><br><span class="line"> /* Tell curl that we&apos;ll receive data to the function write_data, and </span><br><span class="line">  * also provide it with a context pointer for our error return. </span><br><span class="line">  */ </span><br><span class="line"> curl_easy_setopt( curl, CURLOPT_WRITEDATA, (void *)&amp;wr_error ); </span><br><span class="line"> curl_easy_setopt( curl, CURLOPT_WRITEFUNCTION, write_data ); </span><br><span class="line"> </span><br><span class="line"> /* Allow curl to perform the action */ </span><br><span class="line"> ret = curl_easy_perform( curl ); </span><br><span class="line"> </span><br><span class="line"> printf( &quot;ret = %d (write_error = %d)\n&quot;, ret, wr_error ); </span><br><span class="line"> </span><br><span class="line"> /* Emit the page if curl indicates that no errors occurred */ </span><br><span class="line"> if ( ret == 0 ) printf( &quot;%s\n&quot;, wr_buf ); </span><br><span class="line"> </span><br><span class="line"> curl_easy_cleanup( curl ); </span><br><span class="line"> </span><br><span class="line"> return 0; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最上方是必需的 include文件，包括 cURL 根文件。接下来，定义了两个用于传输的变量。第一个变量是 wr_buf，表示将在其中写入传入数据的缓冲区。wr_index表示缓冲区的当前写入索引。</p>
+<p>转到 main函数，该函数使用 easy API 进行设置。所有 cURL 调用都通过维护特定请求状态的句柄进行操作。这称为 CURL指针引用。本例还创建一个特殊的返回码，称为 CURLcode。在使用任何 libcurl 函数之前，您需要调用 curl_easy_init获取 CURL句柄。接下来，注意 curl_easy_setopt调用的数量。它们为特定的操作配置句柄。对于这些调用，您提供句柄、命令和选项。首先，本例使用 CURLOPT_URL指定要获取的 URL。然后，它使用 CURL_WRITEDATA提供一个上下文变量（在本例中，它是内部的 write 错误变量）。最后，它使用 CURLOPT_WRITEFUNCTION指定数据可用时应该调用的函数。在启动 API 之后，API 将使用它读取的数据多次调用该函数。</p>
+<p>要开始传输，调用 curl_easy_perform。它的工作是根据之前的配置执行传输。调用该函数时，在完成传输或发生错误之前该函数不会返回。main的最后一步是提交返回状态，提交页面读取，最后使用 curl_easy_cleanup清除（当使用句柄执行完操作后）。</p>
+<p>现在看看 write_data函数。该函数是针对特定操作收到数据时调用的回调。注意，当您从网站读取数据时，将写入该数据（write_data）。将向回调提供一个缓冲区（包含可用数据）、成员数量和大小（缓冲中可用数据总量）、上下文指针。第一个任务是确保缓冲区（wr_buf）的空间足以写入数据。如果不够，它将设置上下文指针并返回 0，表示出现问题。否则，它将 cURL 缓冲区的数据复制到您的缓冲区，并增加索引，指向要写入的下一个位置。本例还终止字符串，稍后可以对其使用 printf。最后，它返回 libcurl 操作的字节数量。这将告诉 libcurl 数据被提取，它也可以丢弃该数据。这就是从网站将文件读取到内存的相对简单的方法。</p>
+<h5 id="二、基于-Python-的-HTTP-客户端"><a href="#二、基于-Python-的-HTTP-客户端" class="headerlink" title="二、基于 Python 的 HTTP 客户端"></a>二、基于 Python 的 HTTP 客户端</h5><p>Python 是一种非常有用的面向对象的脚本语言，在原型化和构建生产软件方面非常突出。示例假设您较熟悉 Python，但使用不多，因此不要期望过高。</p>
+<p>这个简单的 Python HTTP 客户端使用 pycurl，如下：</p>
+<p>使用 libcurl 的 pycurl接口的 Python HTTP 客户端</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import sys </span><br><span class="line">import pycurl </span><br><span class="line"> </span><br><span class="line">wr_buf = &apos;&apos;</span><br><span class="line"> </span><br><span class="line">def write_data( buf ): </span><br><span class="line">    global wr_buf </span><br><span class="line">    wr_buf += buf </span><br><span class="line"> </span><br><span class="line">def main(): </span><br><span class="line">    c = pycurl.Curl() </span><br><span class="line">    c.setopt( pycurl.URL, &apos;http://www.exampledomain.com&apos; ) </span><br><span class="line">    c.setopt( pycurl.WRITEFUNCTION, write_data ) </span><br><span class="line"> </span><br><span class="line">    c.perform() </span><br><span class="line"> </span><br><span class="line">    c.close() </span><br><span class="line"> </span><br><span class="line">main() </span><br><span class="line">sys.stdout.write(wr_buf)</span><br></pre></td></tr></table></figure>
+
+<p>这比 C 语言版本简单的多。它首先导入必需的模块（用于标准系统的 sys和 pycurl模块）。接下来，它定义 write 缓冲区（wr_buf）。像 C 程序中一样，声明一个 write_data函数。注意，该函数只有一个参数：从 HTTP 服务器中读取的数据缓冲区。我将该缓冲区连接到全局 write 缓冲区。main函数首先创建一个 Curl句柄，然后使用 setopt方法为传输定义 URL和 WRITEFUNCTION。它调用 perform方法启动传输并关闭句柄。最后，它调用 main函数，并将 write 缓冲区提交到 stdout。注意，在这种情况下，不需要错误上下文指针，因为使用了 Python 字符串连接，这就是说您不会使用大小固定的字符串。</p>
+]]></content>
+      <categories>
+        <category>cURL</category>
+      </categories>
+      <tags>
+        <tag>cURL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>cURL-02_在命令行中使用cURL</title>
     <url>/2019/11/03/cURL-02-%E5%9C%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E4%BD%BF%E7%94%A8cURL/</url>
     <content><![CDATA[<h4 id="一、获取和安装-cURL-libcurl"><a href="#一、获取和安装-cURL-libcurl" class="headerlink" title="一、获取和安装 cURL/libcurl"></a>一、获取和安装 cURL/libcurl</h4><p>获取和安装 libcurl 非常简单，取决于您所运行的 Linux 发行版。如果运行的是 Ubuntu，您可以使用 apt-get轻松安装这些包。以下行演示了如何为 libcurl 安装 libcurl 和 Python 绑定：</p>
@@ -842,33 +974,6 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
 
 
 <h5 id="13-cURL还有很多命令行操作，这里就不作陈诉了。"><a href="#13-cURL还有很多命令行操作，这里就不作陈诉了。" class="headerlink" title="13. cURL还有很多命令行操作，这里就不作陈诉了。"></a>13. cURL还有很多命令行操作，这里就不作陈诉了。</h5>]]></content>
-      <categories>
-        <category>cURL</category>
-      </categories>
-      <tags>
-        <tag>cURL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>cURL-03-cURL的几种语言支持</title>
-    <url>/2019/11/03/cURL-03-cURL%E7%9A%84%E5%87%A0%E7%A7%8D%E8%AF%AD%E8%A8%80%E6%94%AF%E6%8C%81/</url>
-    <content><![CDATA[<h5 id="一、基于-C-的-HTTP-客户端"><a href="#一、基于-C-的-HTTP-客户端" class="headerlink" title="一、基于 C 的 HTTP 客户端"></a>一、基于 C 的 HTTP 客户端</h5><p>C API 在 libcurl 功能上提供了两个 API。easy 接口是一个简单的同步 API（意味着当您使用请求调用 libcurl 时，将能够满足您的请求，直到完成或发生错误）。多接口可以进一步控制 libcurl，您的应用程序可以执行多个同步传输，并控制 libcurl 何时何地移动数据。</p>
-<p>该示例使用 easy 接口。该 API 还能控制数据移动过程（使用回调），但正如其名称所示，使用起来非常简单。下面请看HTTP 的 C 语言示例,使用 libcurl easy 接口的 C HTTP 客户端。</p>
-<a id="more"></a>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt; </span><br><span class="line">#include &lt;string.h&gt; </span><br><span class="line">#include &lt;curl/curl.h&gt; </span><br><span class="line"> </span><br><span class="line">#define MAX_BUF     65536 </span><br><span class="line"> </span><br><span class="line">char wr_buf[MAX_BUF+1]; </span><br><span class="line">int  wr_index; </span><br><span class="line"> </span><br><span class="line">/* </span><br><span class="line">* Write data callback function (called within the context of </span><br><span class="line">* curl_easy_perform. </span><br><span class="line">*/ </span><br><span class="line">size_t write_data( void *buffer, size_t size, size_t nmemb, void *userp ) </span><br><span class="line">&#123; </span><br><span class="line"> int segsize = size * nmemb; </span><br><span class="line"> </span><br><span class="line"> /* Check to see if this data exceeds the size of our buffer. If so, </span><br><span class="line">  * set the user-defined context value and return 0 to indicate a </span><br><span class="line">  * problem to curl. </span><br><span class="line">  */ </span><br><span class="line"> if ( wr_index + segsize &gt; MAX_BUF ) &#123; </span><br><span class="line">   *(int *)userp = 1; </span><br><span class="line">   return 0; </span><br><span class="line"> &#125; </span><br><span class="line"> </span><br><span class="line"> /* Copy the data from the curl buffer into our buffer */ </span><br><span class="line"> memcpy( (void *)&amp;wr_buf[wr_index], buffer, (size_t)segsize ); </span><br><span class="line"> </span><br><span class="line"> /* Update the write index */ </span><br><span class="line"> wr_index += segsize; </span><br><span class="line"> </span><br><span class="line"> /* Null terminate the buffer */ </span><br><span class="line"> wr_buf[wr_index] = 0; </span><br><span class="line"> </span><br><span class="line"> /* Return the number of bytes received, indicating to curl that all is okay */ </span><br><span class="line"> return segsize; </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">/* </span><br><span class="line">* Simple curl application to read the index.html file from a Web site. </span><br><span class="line">*/ </span><br><span class="line">int main( void ) </span><br><span class="line">&#123; </span><br><span class="line"> CURL *curl; </span><br><span class="line"> CURLcode ret; </span><br><span class="line"> int  wr_error; </span><br><span class="line"> </span><br><span class="line"> wr_error = 0; </span><br><span class="line"> wr_index = 0; </span><br><span class="line"> </span><br><span class="line"> /* First step, init curl */ </span><br><span class="line"> curl = curl_easy_init(); </span><br><span class="line"> if (!curl) &#123; </span><br><span class="line">   printf(&quot;couldn&apos;t init curl\n&quot;); </span><br><span class="line">   return 0; </span><br><span class="line"> &#125; </span><br><span class="line"> </span><br><span class="line"> /* Tell curl the URL of the file we&apos;re going to retrieve */ </span><br><span class="line"> curl_easy_setopt( curl, CURLOPT_URL, &quot;www.exampledomain.com&quot; ); </span><br><span class="line"> </span><br><span class="line"> /* Tell curl that we&apos;ll receive data to the function write_data, and </span><br><span class="line">  * also provide it with a context pointer for our error return. </span><br><span class="line">  */ </span><br><span class="line"> curl_easy_setopt( curl, CURLOPT_WRITEDATA, (void *)&amp;wr_error ); </span><br><span class="line"> curl_easy_setopt( curl, CURLOPT_WRITEFUNCTION, write_data ); </span><br><span class="line"> </span><br><span class="line"> /* Allow curl to perform the action */ </span><br><span class="line"> ret = curl_easy_perform( curl ); </span><br><span class="line"> </span><br><span class="line"> printf( &quot;ret = %d (write_error = %d)\n&quot;, ret, wr_error ); </span><br><span class="line"> </span><br><span class="line"> /* Emit the page if curl indicates that no errors occurred */ </span><br><span class="line"> if ( ret == 0 ) printf( &quot;%s\n&quot;, wr_buf ); </span><br><span class="line"> </span><br><span class="line"> curl_easy_cleanup( curl ); </span><br><span class="line"> </span><br><span class="line"> return 0; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最上方是必需的 include文件，包括 cURL 根文件。接下来，定义了两个用于传输的变量。第一个变量是 wr_buf，表示将在其中写入传入数据的缓冲区。wr_index表示缓冲区的当前写入索引。</p>
-<p>转到 main函数，该函数使用 easy API 进行设置。所有 cURL 调用都通过维护特定请求状态的句柄进行操作。这称为 CURL指针引用。本例还创建一个特殊的返回码，称为 CURLcode。在使用任何 libcurl 函数之前，您需要调用 curl_easy_init获取 CURL句柄。接下来，注意 curl_easy_setopt调用的数量。它们为特定的操作配置句柄。对于这些调用，您提供句柄、命令和选项。首先，本例使用 CURLOPT_URL指定要获取的 URL。然后，它使用 CURL_WRITEDATA提供一个上下文变量（在本例中，它是内部的 write 错误变量）。最后，它使用 CURLOPT_WRITEFUNCTION指定数据可用时应该调用的函数。在启动 API 之后，API 将使用它读取的数据多次调用该函数。</p>
-<p>要开始传输，调用 curl_easy_perform。它的工作是根据之前的配置执行传输。调用该函数时，在完成传输或发生错误之前该函数不会返回。main的最后一步是提交返回状态，提交页面读取，最后使用 curl_easy_cleanup清除（当使用句柄执行完操作后）。</p>
-<p>现在看看 write_data函数。该函数是针对特定操作收到数据时调用的回调。注意，当您从网站读取数据时，将写入该数据（write_data）。将向回调提供一个缓冲区（包含可用数据）、成员数量和大小（缓冲中可用数据总量）、上下文指针。第一个任务是确保缓冲区（wr_buf）的空间足以写入数据。如果不够，它将设置上下文指针并返回 0，表示出现问题。否则，它将 cURL 缓冲区的数据复制到您的缓冲区，并增加索引，指向要写入的下一个位置。本例还终止字符串，稍后可以对其使用 printf。最后，它返回 libcurl 操作的字节数量。这将告诉 libcurl 数据被提取，它也可以丢弃该数据。这就是从网站将文件读取到内存的相对简单的方法。</p>
-<h5 id="二、基于-Python-的-HTTP-客户端"><a href="#二、基于-Python-的-HTTP-客户端" class="headerlink" title="二、基于 Python 的 HTTP 客户端"></a>二、基于 Python 的 HTTP 客户端</h5><p>Python 是一种非常有用的面向对象的脚本语言，在原型化和构建生产软件方面非常突出。示例假设您较熟悉 Python，但使用不多，因此不要期望过高。</p>
-<p>这个简单的 Python HTTP 客户端使用 pycurl，如下：</p>
-<p>使用 libcurl 的 pycurl接口的 Python HTTP 客户端</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import sys </span><br><span class="line">import pycurl </span><br><span class="line"> </span><br><span class="line">wr_buf = &apos;&apos;</span><br><span class="line"> </span><br><span class="line">def write_data( buf ): </span><br><span class="line">    global wr_buf </span><br><span class="line">    wr_buf += buf </span><br><span class="line"> </span><br><span class="line">def main(): </span><br><span class="line">    c = pycurl.Curl() </span><br><span class="line">    c.setopt( pycurl.URL, &apos;http://www.exampledomain.com&apos; ) </span><br><span class="line">    c.setopt( pycurl.WRITEFUNCTION, write_data ) </span><br><span class="line"> </span><br><span class="line">    c.perform() </span><br><span class="line"> </span><br><span class="line">    c.close() </span><br><span class="line"> </span><br><span class="line">main() </span><br><span class="line">sys.stdout.write(wr_buf)</span><br></pre></td></tr></table></figure>
-
-<p>这比 C 语言版本简单的多。它首先导入必需的模块（用于标准系统的 sys和 pycurl模块）。接下来，它定义 write 缓冲区（wr_buf）。像 C 程序中一样，声明一个 write_data函数。注意，该函数只有一个参数：从 HTTP 服务器中读取的数据缓冲区。我将该缓冲区连接到全局 write 缓冲区。main函数首先创建一个 Curl句柄，然后使用 setopt方法为传输定义 URL和 WRITEFUNCTION。它调用 perform方法启动传输并关闭句柄。最后，它调用 main函数，并将 write 缓冲区提交到 stdout。注意，在这种情况下，不需要错误上下文指针，因为使用了 Python 字符串连接，这就是说您不会使用大小固定的字符串。</p>
-]]></content>
       <categories>
         <category>cURL</category>
       </categories>
