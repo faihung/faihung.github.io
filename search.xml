@@ -170,6 +170,7 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
 <h5 id="4-4-发送数据之后是否有反馈"><a href="#4-4-发送数据之后是否有反馈" class="headerlink" title="4.4    发送数据之后是否有反馈"></a>4.4    发送数据之后是否有反馈</h5><p>根据下面(5 软件图&amp;流程图)可以看到有些是有反馈的有些是没有反馈的。</p>
 <h4 id="五、软件图-amp-流程图"><a href="#五、软件图-amp-流程图" class="headerlink" title="五、软件图&amp;流程图"></a>五、软件图&amp;流程图</h4><h5 id="5-1-Request-Response图"><a href="#5-1-Request-Response图" class="headerlink" title="5.1 Request Response图"></a>5.1 Request Response图</h5><p><img src="/2019/11/23/COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E8%AE%BE%E8%AE%A1/2.jpg" alt="2"></p>
 <h5 id="5-1-流程图"><a href="#5-1-流程图" class="headerlink" title="5.1 流程图"></a>5.1 流程图</h5><p><img src="/2019/11/23/COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E8%AE%BE%E8%AE%A1/3.jpg" alt="3"></p>
+<h4 id="六、完整版程序代码"><a href="#六、完整版程序代码" class="headerlink" title="六、完整版程序代码"></a>六、完整版程序代码</h4><p>配合《mcu com软件接口设计方案》,且测试验证通过，支持和MCU多次重发3次、支持多次重读20次，每次1ms,且可设置参数。<br><a href="https://github.com/faihung/test/tree/master/5-16%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1" target="_blank" rel="noopener">参考代码</a></p>
 ]]></content>
       <categories>
         <category>工程设计</category>
@@ -557,8 +558,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sprintf</tag>
         <tag>strcat</tag>
+        <tag>sprintf</tag>
         <tag>字符串拼接</tag>
       </tags>
   </entry>
