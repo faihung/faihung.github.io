@@ -1,6 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>视音频-视频信号详解及测试-VGA</title>
+    <url>/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA/</url>
+    <content><![CDATA[<h5 id="ARGB概述"><a href="#ARGB概述" class="headerlink" title="ARGB概述"></a>ARGB概述</h5><h6 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h6><p>生活中常用设备如个人电脑、视频游戏机和家庭影院等都具有视频输出，输出信号可分为模拟信号和数字信号。这主要讲述模拟视频信号（ARGB），即以VGA 物理接口传输的RGBHV 5 线信号。   VGA 接口也叫D-Sub接口</p>
+<a id="more"></a>
+<h6 id="VGA接口"><a href="#VGA接口" class="headerlink" title="VGA接口"></a>VGA接口</h6><p>VGA 即视频图形阵列，它是由IBM 在1987年随同PS/2 个人电脑而引入的一种图形控制器标准。</p>
+<p>VGA物理接口是RGBHV 5 线信号，使用的是<br>700mV模拟R/G/B视频电平和TTL电平H/V同步信<br>号。</p>
+<p>VGA物理接口一直被广泛地使用着，它为后来的图形控制器信号而保留。尽管通常把它称为“VGA 端口”，但是在今天15 针的RGBHV 输出端口中，所传送的分辨率和彩色位深的显示格式常常超出了6 4 0 × 4 8 0 VGA 标准。</p>
+<h6 id="VGA接口定义"><a href="#VGA接口定义" class="headerlink" title="VGA接口定义"></a>VGA接口定义</h6><p><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA/1.jpg" alt="image"></p>
+<h6 id="常见ARGB接口"><a href="#常见ARGB接口" class="headerlink" title="常见ARGB接口"></a>常见ARGB接口</h6><p><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA/2.png" alt="image">)<img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA/3.png" alt="image">)<img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA/4.png" alt="image">)<img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA/5.png" alt="image"></p>
+<h6 id="支持的模拟信号分辨率"><a href="#支持的模拟信号分辨率" class="headerlink" title="支持的模拟信号分辨率"></a>支持的模拟信号分辨率</h6><p>可支持各种通用的模拟RGBHV 信号分辨率，从640×480p到2048×1536p，<br>屏幕刷新速率从60Hz 直至100Hz。</p>
+<h5 id="ARGB信号传输（模拟信号的传输）"><a href="#ARGB信号传输（模拟信号的传输）" class="headerlink" title="ARGB信号传输（模拟信号的传输）"></a>ARGB信号传输（模拟信号的传输）</h5><p>工程中构建一个VGA信号传输、分配系统时，长距离传输是一个常见问题。 由于信号传输距离较远，传输系统的参数及周围电磁环境对信号质量产生的影响不容忽视，常见到的现象表现为：图像模糊、变暗、 拖尾和重影，以及图像显示不稳定（如：跳动或黑屏等）等。</p>
+<p>以上现象产生的原因不同，解决的方法不同。我们将其分为四大类：</p>
+<p>一、由于传输系统的幅频特性及群延时特性造成的图像模糊、变暗、拖尾；</p>
+<p>二、由于设备产生自激或环境电磁干扰产生的高频干扰；</p>
+<p>三、由于系统电源地线处理不当造成的低频干扰；</p>
+<p>四、由于设备、传输系统或接插件等阻抗不匹配而引起的重影反射及显示不稳定. </p>
+<p>随着工程规模的扩大，VGA信号长距离（大于100米）和超长距离（大于500米）的应用不断出现，单纯靠电缆的传输方式明显不适应使用的要求，随着技术的发展，不断有新的传输方式出现，使这类应用成为可能。 以下为目前可实用的传输方式： </p>
+<p>模拟电缆（RGB电缆）加电缆均衡器 </p>
+<p>网线加均衡器 </p>
+<p>光纤传输 </p>
+<p>在此前提下，根据不同的距离，可采用不同的传输方式：（一般建议）</p>
+<p>50米以内：好的VGA电缆；</p>
+<p>50~100米，电缆加EQ；</p>
+<p>100~200米，网线加EQ（或有抗干扰等需求）；</p>
+<p>200米以上，光纤传输。</p>
+<h5 id="VESA介绍-视频电子标准协会"><a href="#VESA介绍-视频电子标准协会" class="headerlink" title="VESA介绍(视频电子标准协会)"></a>VESA介绍(视频电子标准协会)</h5><p>随着VGA接口的信号传输速率愈来愈高，视频电子标准协会<br>（Video Electronics Standards Association）认识到，接口性能问题则显得更加重要。VESA 于1999 年发布了不具约束力的标准，其目标是更严格地定义RGBHV接口的传输参数。该标准称为视频信号标准，即VSIS（Video Signal standard），它为RGBHV信号的大多数重要参数提供了推荐值。</p>
+<h5 id="ARGB信号特征"><a href="#ARGB信号特征" class="headerlink" title="ARGB信号特征"></a>ARGB信号特征</h5><p>800X600@60Hz为例：<br><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA/6.png" alt="image"></p>
+<p>VESA Monitor Timing Standard</p>
+<pre><code>Hor Pixels = 800; // Pixels
+Ver Pixels = 600; // Lines
+Hor Frequency = 37.879; // KHz = 26.4 usec /line
+Ver Frequency = 60.317; // Hz = 16.6 msec /frame
+Pixel Clock = 40.0; // MHz = 25.0 nsec    +/-0.05%
+
+
+
+Scan Type = NONINTERLACED; 
+Hor Sync Polarity = POSITIVE; // HBlank = 24.2% of HTotal
+Ver Sync Polarity = POSITIVE; // VBlank = 4.5% of VTotal
+
+Hor Total Time = 26.4; // (usec) =1056 Pixels
+Hor Addr Time = 20.0; // (usec) = 800 Pixels
+Hor Blank Start = 20.0; // (usec) = 800 Pixels
+Hor Blank Time = 6.4; // (usec) = 256 Pixels
+Hor Sync Start = 21; // (usec) = 840 Pixels
+
+H Right Border = 0.000; // (usec) = 0 Pixels
+H Front Porch = 1.0; // (usec) = 40 Pixels
+Hor Sync Time = 3.2; // (usec) = 128 Pixels
+H Back Porch = 2.2; // (usec) = 88 Pixels
+H Left Border = 0.000; // (usec) = 0 Pixels
+
+
+Ver Total Time = 16.579; // (msec) = 628 lines 
+Ver Addr Time  = 15.84; // (msec) = 600 lines
+Ver Blank Start = 15.84; // (msec) = 600 lines
+Ver Blank Time = 0.739; // (msec) = 28 lines
+Ver Sync Start = 15. 866; // (msec) = 601 lines
+
+V Bottom Border = 0.000; // (msec) = 0 lines
+V Front Porch = 0.026; // (msec) = 1 lines
+Ver Sync Time  = 0.106; // (msec) = 4 lines
+V Back Porch = 0.607; // (msec) = 23 lines 
+V Top Border = 0.000; // (msec) = 0 lines</code></pre><h5 id="VESA测试内容"><a href="#VESA测试内容" class="headerlink" title="VESA测试内容"></a>VESA测试内容</h5><p>在2002年VESA 对VSIS 作了补充，增加了测试规范部分。测试规范的名称简称为“测试规范－模拟显示器件图形子系统的评估”，每项测试均给出了测试需要的设备、测试图案、测试步骤和必要的分析。</p>
+<p>如果您打算执行 VSIS 测试，那么“测试规范－模拟显示器件图形子系统的评估”，是一个重要文件。这个文件有助于理解VSIS规范及其意义。</p>
+<p>可以通过VESA得到VSIS文件及其相应的测试规程。这两个文件为评测VGA接口性能提供了一种有效的方法。</p>
+<h6 id="信号测试项目"><a href="#信号测试项目" class="headerlink" title="信号测试项目"></a>信号测试项目</h6><p><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA/7.png" alt="image"></p>
+<h6 id="信号测试环境"><a href="#信号测试环境" class="headerlink" title="信号测试环境"></a>信号测试环境</h6><p><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA/8.png" alt="image"><br>H/V负载电阻：2.2K 电阻，R/G/B负载电阻： 75 欧电阻</p>
+<p>注：电阻精密度为0.1%。</p>
+<h6 id="测试图"><a href="#测试图" class="headerlink" title="测试图"></a>测试图</h6><p>推荐使用三种静态测试图案用于VSIS测量。利用这三种测试图案激励DUT以产生RGVHV信号。图案如：<br><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA/9.png" alt="image"></p>
+<p>一种称为“垂直栅格”的黑白垂直条纹交替图案，由 RGB ＝ FFh 的100 个像素和随后的RGB ＝ 00h 的100个像素组成并重复这一组合。这种栅格图案用于<br>RGB 视频幅度和瞬态响应测量。</p>
+<ul>
+<li>视频最大/最小亮度电压值</li>
+<li>视频信号上升/下降时间</li>
+<li>视频稳定建立时间</li>
+<li>视频信号过冲/下冲</li>
+<li>视频通道间时延</li>
+</ul>
+<p>水平显示的、从全黑到全白的灰度渐变斜坡或台阶信号。斜坡信号用于RGB线性和通道间失配测量。</p>
+<ul>
+<li>视频积分线性误差</li>
+<li>视频微分线性误差</li>
+<li>视频通道间失配</li>
+</ul>
+<p>全白平场信号或窗口信号，用于RGB视频噪声测量。</p>
+<ul>
+<li>视频噪声注入比</li>
+</ul>
+<h6 id="同步测量"><a href="#同步测量" class="headerlink" title="同步测量"></a>同步测量</h6><p>H 同步抖动</p>
+<p>行同步功能是用来正确地规定每一图像显示行的位置。在理想情况下，从一个H同步脉冲到下一个H同步脉冲的时间应当是恒定的。如果H同步定时发生变化，那么在一帧中的图像部分就会发生水平位移。这种同步定时的变化称为抖动。对于一些重要的内容，漂移0.02％的图像宽度就会被察觉。</p>
+<p>VSIS规定H同步抖动的最大峰峰值为像素周期的30％。这就是说，对于800×600格式，H 同步抖动的最大峰峰值为图像宽度的0.038％，而对于2048 × 1536 格式，其值为图像宽度的0.015％。</p>
+<p>H 和V 定时</p>
+<p>H定时和V定时测量是将同步位置与有源RGB视频进行比较，从而有助于确定显示器能否正确居中以及是否有正确的可寻址行数。</p>
+<p>如果1024 × 768 屏幕格式的V 定时结果只有764显示行是因为上方和下方的边界不正确。这样上方2行和下方2行的任何信息将会被丢失。</p>
+<p>H同步和V同步是测量同步脉冲的幅度、脉冲保真度和同步定时。如果这些测量参数超出容限，那么显示器的锁定可能是不可靠的。</p>
+<h6 id="视频测量"><a href="#视频测量" class="headerlink" title="视频测量"></a>视频测量</h6><p>视频测量是用来评测模拟RGB信号的特性，包括电平、瞬变特性和噪声等。假定同步正确，那么RGB 视频特性将决定显示器的保真度。</p>
+<p>这些测量可以划分为：<br>亮度电平、通道间失配、视频瞬变、线性、通道间畸变和噪声抑制比。</p>
+<p><strong>亮度电平</strong></p>
+<p>亮度电平测量用来测定DUT输出全白（其值为FFh）和黑图像信号 (其值为00h) 时的RGB 电压电平值。就理想状况而言，白电平应是700mV 而黑电平应是0mV。这些数值是绝对测量值，是以RGB信号的返回线 (接地端) 作为参考。</p>
+<p>适当的电平对于显示器的正确亮度和对比度是重要的。</p>
+<p><strong>通道间的失配</strong></p>
+<p>通道间的失配用来比较RGB通道间的幅度匹配状况。测试是在黑(00h) 白 (FFh) 之间32个等间距的电平上进行的，使用的是阶梯波测试信号。对于阶梯波中的每一个台阶，均相对于该通道的行后肩电平以测量RGB电压。然后来比较通道间的电压（G&amp;B…）。</p>
+<p>即使不考虑VSIS的规定，通道间失配的允许程度与应用也是密切相关的。通道间的失配会影响到重现的环境亮度、重现的亮度和对比度设置等</p>
+<p><strong>视频瞬变特性</strong></p>
+<p>视频瞬变特性是用来评估RGB通道中黑白电平跳变时的保真度。这项测量使用的是垂直栅格测试图案，由黑到白的过渡时间是一个像素的时间。每个通道均按10％至90％白电平幅度测量上升时间和下降时间、过冲(正向跳变) 、下冲(负向跳变) 和恢复稳定所需时间(settling time)。</p>
+<p><strong>视频瞬变</strong></p>
+<p>对于具有精密细节或锐利边界变化的任一图像而言，良好的过渡响应是非常重要的。例如，如果上升时间或下降时间过于缓慢，将会使图像的变化模糊而不清晰。过度的振铃会使图像素材在跳变之后出现亮/暗交替变化的现象。过冲和下冲是较为次要的问题，除非过渡到稳定建立需要很长的时间。事实上，某些过冲/ 下冲可能会增强图像信号跳变清晰度的感觉，许多显示器件有意地引入受控的预冲和过冲。</p>
+<p><strong>线性</strong></p>
+<p>线性是用来检查DUT在黑白之间的变化特性。在理想情况下，如果斜率恒定的黑白之间的斜坡测试信号加在DUT的输入端，其输出也应当是斜率恒定的斜坡。一般而言，DUT的输出斜坡会给出某种斜率的变化。这种变化表示出现了线性误差。</p>
+<p>线性对于再现正确的灰度级别是重要的。如果单个RGB通道之间的线性差比较大，那么黑白之间的灰度级图案可能会在某些位置出现轻微的彩色。</p>
+<p>VSIS定义了两种类型的线性测试方法。</p>
+<p>第一种方法是积分非线性(INL)，它可以检查黑色和某些其它点之间的整个斜率误差。</p>
+<p>第二种方法是微分非线性 (DNL)，它用来评测两个相邻点之间的斜率误差。</p>
+<p>测试信号使用的一种黑白斜坡信号实际上是一连串的台阶信号。如果系统使用10比特系统就有1024 级台阶。</p>
+<p><strong>噪声抑制比</strong></p>
+<p>这是一项单个RGB通道中的噪声测量。VSIS规定峰至峰噪声测量是在白色图案上进行的，带宽在500MHz以上。峰至峰噪声值不应超过白色电压的5％。</p>
+<p>VSIS规定在2秒的测量间隔内使用100000个噪声样值。</p>
+<h5 id="什么参数对用户最重要？"><a href="#什么参数对用户最重要？" class="headerlink" title="什么参数对用户最重要？"></a>什么参数对用户最重要？</h5><p>如果互操作性－即信源在多种显示器件中均能正常工作－是最重要的，那么应当关注H和V同步测量、RGB亮度电平测量以及彩条测量。这些参数有助于建立正确的同步、正确的白/黑电平，并能使所有的RGB信号有效。</p>
+<p>对于同步测量，特别要重视以下信号损伤：</p>
+<ul>
+<li>不正确的极性</li>
+<li>频率错误</li>
+<li>过度的过冲/ 下冲(特别是当偏离进入到0.5V 至2.4V范围时)</li>
+<li>非单调性地上升或下降</li>
+</ul>
+<p>如果显示系统的灰度级性能非常重要（例如诸如彩色匹配之类的应用），那么就应当特别关注通道间的失配、线性以及RGB亮度电平测量。</p>
+<p>通道间的失配测量将提供整个视频范围内各个通道相互间的跟踪是否接近的信息。</p>
+<p>线性测量提供了每个通道中黑白电平转换的有关信息。</p>
+<p>RGB亮度电平测量为整个700mV视频范围是否得到充分使用而提供了验证，因为这对于图像的对比度是否合适是很重要的。</p>
+<p>对于图像绘制应用，例如PC视频应用，应当注重噪声、瞬态响应、RGB 亮度电平、通道间的匹配（包括通道间的幅度匹配和时间对准）以及H同步抖动等项目的测量，这对图像绘制应用是十分有利的。</p>
+<p>需要注意的是，VSIS 测试没有检测运动相关图像的失真。但是，如果图像的随机噪声和抖动都很小，一般说来，尽管压缩也只会产生较低的失真。</p>
+]]></content>
+      <categories>
+        <category>视音频</category>
+      </categories>
+      <tags>
+        <tag>视频信号</tag>
+        <tag>VESA</tag>
+        <tag>ARGB</tag>
+        <tag>VSIS</tag>
+        <tag>VGA</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>视音频-常用视频信号配图介绍</title>
     <url>/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E5%B8%B8%E7%94%A8%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E9%85%8D%E5%9B%BE%E4%BB%8B%E7%BB%8D/</url>
     <content><![CDATA[<h5 id="常用视频信号介绍"><a href="#常用视频信号介绍" class="headerlink" title="常用视频信号介绍"></a>常用视频信号介绍</h5><a id="more"></a>
@@ -661,8 +805,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sprintf</tag>
         <tag>strcat</tag>
+        <tag>sprintf</tag>
         <tag>字符串拼接</tag>
       </tags>
   </entry>

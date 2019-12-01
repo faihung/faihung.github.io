@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="视频信号,VESA,ARGB,VSIS,VGA," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Faihung's blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="ARGB概述概述生活中常用设备如个人电脑、视频游戏机和家庭影院等都具有视频输出，输出信号可分为模拟信号和数字信号。这主要讲述模拟视频信号（ARGB），即以VGA 物理接口传输的RGBHV 5 线信号。   VGA 接口也叫D-Sub接口">
+<meta name="keywords" content="视频信号,VESA,ARGB,VSIS,VGA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="视音频-视频信号详解及测试-VGA">
+<meta property="og:url" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;01&#x2F;%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA&#x2F;index.html">
+<meta property="og:site_name" content="Faihung&#39;s blog">
+<meta property="og:description" content="ARGB概述概述生活中常用设备如个人电脑、视频游戏机和家庭影院等都具有视频输出，输出信号可分为模拟信号和数字信号。这主要讲述模拟视频信号（ARGB），即以VGA 物理接口传输的RGBHV 5 线信号。   VGA 接口也叫D-Sub接口">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;01&#x2F;%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA&#x2F;1.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;01&#x2F;%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA&#x2F;2.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;01&#x2F;%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA&#x2F;3.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;01&#x2F;%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA&#x2F;4.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;01&#x2F;%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA&#x2F;5.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;01&#x2F;%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA&#x2F;6.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;01&#x2F;%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA&#x2F;7.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;01&#x2F;%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA&#x2F;8.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;01&#x2F;%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA&#x2F;9.png">
+<meta property="og:updated_time" content="2019-12-01T04:18:51.448Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;01&#x2F;%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA&#x2F;1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.faihung.net/2019/12/01/视音频-视频信号详解及测试-VGA/"/>
+
+
+
+
+
+  <title>视音频-视频信号详解及测试-VGA | Faihung's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Faihung's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">作者：faihung</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" target="_blank" rel="noopener" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.faihung.net/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="faihung">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Faihung's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">视音频-视频信号详解及测试-VGA</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-01T12:11:15+08:00">
+                2019-12-01
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-12-01T12:18:51+08:00">
+                2019-12-01
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%A7%86%E9%9F%B3%E9%A2%91/" itemprop="url" rel="index">
+                    <span itemprop="name">视音频</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"> 阅读次数:</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h5 id="ARGB概述"><a href="#ARGB概述" class="headerlink" title="ARGB概述"></a>ARGB概述</h5><h6 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h6><p>生活中常用设备如个人电脑、视频游戏机和家庭影院等都具有视频输出，输出信号可分为模拟信号和数字信号。这主要讲述模拟视频信号（ARGB），即以VGA 物理接口传输的RGBHV 5 线信号。   VGA 接口也叫D-Sub接口</p>
+<a id="more"></a>
+<h6 id="VGA接口"><a href="#VGA接口" class="headerlink" title="VGA接口"></a>VGA接口</h6><p>VGA 即视频图形阵列，它是由IBM 在1987年随同PS/2 个人电脑而引入的一种图形控制器标准。</p>
+<p>VGA物理接口是RGBHV 5 线信号，使用的是<br>700mV模拟R/G/B视频电平和TTL电平H/V同步信<br>号。</p>
+<p>VGA物理接口一直被广泛地使用着，它为后来的图形控制器信号而保留。尽管通常把它称为“VGA 端口”，但是在今天15 针的RGBHV 输出端口中，所传送的分辨率和彩色位深的显示格式常常超出了6 4 0 × 4 8 0 VGA 标准。</p>
+<h6 id="VGA接口定义"><a href="#VGA接口定义" class="headerlink" title="VGA接口定义"></a>VGA接口定义</h6><p><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA/1.jpg" alt="image"></p>
+<h6 id="常见ARGB接口"><a href="#常见ARGB接口" class="headerlink" title="常见ARGB接口"></a>常见ARGB接口</h6><p><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA/2.png" alt="image">)<img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA/3.png" alt="image">)<img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA/4.png" alt="image">)<img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA/5.png" alt="image"></p>
+<h6 id="支持的模拟信号分辨率"><a href="#支持的模拟信号分辨率" class="headerlink" title="支持的模拟信号分辨率"></a>支持的模拟信号分辨率</h6><p>可支持各种通用的模拟RGBHV 信号分辨率，从640×480p到2048×1536p，<br>屏幕刷新速率从60Hz 直至100Hz。</p>
+<h5 id="ARGB信号传输（模拟信号的传输）"><a href="#ARGB信号传输（模拟信号的传输）" class="headerlink" title="ARGB信号传输（模拟信号的传输）"></a>ARGB信号传输（模拟信号的传输）</h5><p>工程中构建一个VGA信号传输、分配系统时，长距离传输是一个常见问题。 由于信号传输距离较远，传输系统的参数及周围电磁环境对信号质量产生的影响不容忽视，常见到的现象表现为：图像模糊、变暗、 拖尾和重影，以及图像显示不稳定（如：跳动或黑屏等）等。</p>
+<p>以上现象产生的原因不同，解决的方法不同。我们将其分为四大类：</p>
+<p>一、由于传输系统的幅频特性及群延时特性造成的图像模糊、变暗、拖尾；</p>
+<p>二、由于设备产生自激或环境电磁干扰产生的高频干扰；</p>
+<p>三、由于系统电源地线处理不当造成的低频干扰；</p>
+<p>四、由于设备、传输系统或接插件等阻抗不匹配而引起的重影反射及显示不稳定. </p>
+<p>随着工程规模的扩大，VGA信号长距离（大于100米）和超长距离（大于500米）的应用不断出现，单纯靠电缆的传输方式明显不适应使用的要求，随着技术的发展，不断有新的传输方式出现，使这类应用成为可能。 以下为目前可实用的传输方式： </p>
+<p>模拟电缆（RGB电缆）加电缆均衡器 </p>
+<p>网线加均衡器 </p>
+<p>光纤传输 </p>
+<p>在此前提下，根据不同的距离，可采用不同的传输方式：（一般建议）</p>
+<p>50米以内：好的VGA电缆；</p>
+<p>50~100米，电缆加EQ；</p>
+<p>100~200米，网线加EQ（或有抗干扰等需求）；</p>
+<p>200米以上，光纤传输。</p>
+<h5 id="VESA介绍-视频电子标准协会"><a href="#VESA介绍-视频电子标准协会" class="headerlink" title="VESA介绍(视频电子标准协会)"></a>VESA介绍(视频电子标准协会)</h5><p>随着VGA接口的信号传输速率愈来愈高，视频电子标准协会<br>（Video Electronics Standards Association）认识到，接口性能问题则显得更加重要。VESA 于1999 年发布了不具约束力的标准，其目标是更严格地定义RGBHV接口的传输参数。该标准称为视频信号标准，即VSIS（Video Signal standard），它为RGBHV信号的大多数重要参数提供了推荐值。</p>
+<h5 id="ARGB信号特征"><a href="#ARGB信号特征" class="headerlink" title="ARGB信号特征"></a>ARGB信号特征</h5><p>800X600@60Hz为例：<br><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA/6.png" alt="image"></p>
+<p>VESA Monitor Timing Standard</p>
+<pre><code>Hor Pixels = 800; // Pixels
+Ver Pixels = 600; // Lines
+Hor Frequency = 37.879; // KHz = 26.4 usec /line
+Ver Frequency = 60.317; // Hz = 16.6 msec /frame
+Pixel Clock = 40.0; // MHz = 25.0 nsec    +/-0.05%
+
+
+
+Scan Type = NONINTERLACED; 
+Hor Sync Polarity = POSITIVE; // HBlank = 24.2% of HTotal
+Ver Sync Polarity = POSITIVE; // VBlank = 4.5% of VTotal
+
+Hor Total Time = 26.4; // (usec) =1056 Pixels
+Hor Addr Time = 20.0; // (usec) = 800 Pixels
+Hor Blank Start = 20.0; // (usec) = 800 Pixels
+Hor Blank Time = 6.4; // (usec) = 256 Pixels
+Hor Sync Start = 21; // (usec) = 840 Pixels
+
+H Right Border = 0.000; // (usec) = 0 Pixels
+H Front Porch = 1.0; // (usec) = 40 Pixels
+Hor Sync Time = 3.2; // (usec) = 128 Pixels
+H Back Porch = 2.2; // (usec) = 88 Pixels
+H Left Border = 0.000; // (usec) = 0 Pixels
+
+
+Ver Total Time = 16.579; // (msec) = 628 lines 
+Ver Addr Time  = 15.84; // (msec) = 600 lines
+Ver Blank Start = 15.84; // (msec) = 600 lines
+Ver Blank Time = 0.739; // (msec) = 28 lines
+Ver Sync Start = 15. 866; // (msec) = 601 lines
+
+V Bottom Border = 0.000; // (msec) = 0 lines
+V Front Porch = 0.026; // (msec) = 1 lines
+Ver Sync Time  = 0.106; // (msec) = 4 lines
+V Back Porch = 0.607; // (msec) = 23 lines 
+V Top Border = 0.000; // (msec) = 0 lines</code></pre><h5 id="VESA测试内容"><a href="#VESA测试内容" class="headerlink" title="VESA测试内容"></a>VESA测试内容</h5><p>在2002年VESA 对VSIS 作了补充，增加了测试规范部分。测试规范的名称简称为“测试规范－模拟显示器件图形子系统的评估”，每项测试均给出了测试需要的设备、测试图案、测试步骤和必要的分析。</p>
+<p>如果您打算执行 VSIS 测试，那么“测试规范－模拟显示器件图形子系统的评估”，是一个重要文件。这个文件有助于理解VSIS规范及其意义。</p>
+<p>可以通过VESA得到VSIS文件及其相应的测试规程。这两个文件为评测VGA接口性能提供了一种有效的方法。</p>
+<h6 id="信号测试项目"><a href="#信号测试项目" class="headerlink" title="信号测试项目"></a>信号测试项目</h6><p><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA/7.png" alt="image"></p>
+<h6 id="信号测试环境"><a href="#信号测试环境" class="headerlink" title="信号测试环境"></a>信号测试环境</h6><p><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA/8.png" alt="image"><br>H/V负载电阻：2.2K 电阻，R/G/B负载电阻： 75 欧电阻</p>
+<p>注：电阻精密度为0.1%。</p>
+<h6 id="测试图"><a href="#测试图" class="headerlink" title="测试图"></a>测试图</h6><p>推荐使用三种静态测试图案用于VSIS测量。利用这三种测试图案激励DUT以产生RGVHV信号。图案如：<br><img src="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%B5%8B%E8%AF%95-VGA/9.png" alt="image"></p>
+<p>一种称为“垂直栅格”的黑白垂直条纹交替图案，由 RGB ＝ FFh 的100 个像素和随后的RGB ＝ 00h 的100个像素组成并重复这一组合。这种栅格图案用于<br>RGB 视频幅度和瞬态响应测量。</p>
+<ul>
+<li>视频最大/最小亮度电压值</li>
+<li>视频信号上升/下降时间</li>
+<li>视频稳定建立时间</li>
+<li>视频信号过冲/下冲</li>
+<li>视频通道间时延</li>
+</ul>
+<p>水平显示的、从全黑到全白的灰度渐变斜坡或台阶信号。斜坡信号用于RGB线性和通道间失配测量。</p>
+<ul>
+<li>视频积分线性误差</li>
+<li>视频微分线性误差</li>
+<li>视频通道间失配</li>
+</ul>
+<p>全白平场信号或窗口信号，用于RGB视频噪声测量。</p>
+<ul>
+<li>视频噪声注入比</li>
+</ul>
+<h6 id="同步测量"><a href="#同步测量" class="headerlink" title="同步测量"></a>同步测量</h6><p>H 同步抖动</p>
+<p>行同步功能是用来正确地规定每一图像显示行的位置。在理想情况下，从一个H同步脉冲到下一个H同步脉冲的时间应当是恒定的。如果H同步定时发生变化，那么在一帧中的图像部分就会发生水平位移。这种同步定时的变化称为抖动。对于一些重要的内容，漂移0.02％的图像宽度就会被察觉。</p>
+<p>VSIS规定H同步抖动的最大峰峰值为像素周期的30％。这就是说，对于800×600格式，H 同步抖动的最大峰峰值为图像宽度的0.038％，而对于2048 × 1536 格式，其值为图像宽度的0.015％。</p>
+<p>H 和V 定时</p>
+<p>H定时和V定时测量是将同步位置与有源RGB视频进行比较，从而有助于确定显示器能否正确居中以及是否有正确的可寻址行数。</p>
+<p>如果1024 × 768 屏幕格式的V 定时结果只有764显示行是因为上方和下方的边界不正确。这样上方2行和下方2行的任何信息将会被丢失。</p>
+<p>H同步和V同步是测量同步脉冲的幅度、脉冲保真度和同步定时。如果这些测量参数超出容限，那么显示器的锁定可能是不可靠的。</p>
+<h6 id="视频测量"><a href="#视频测量" class="headerlink" title="视频测量"></a>视频测量</h6><p>视频测量是用来评测模拟RGB信号的特性，包括电平、瞬变特性和噪声等。假定同步正确，那么RGB 视频特性将决定显示器的保真度。</p>
+<p>这些测量可以划分为：<br>亮度电平、通道间失配、视频瞬变、线性、通道间畸变和噪声抑制比。</p>
+<p><strong>亮度电平</strong></p>
+<p>亮度电平测量用来测定DUT输出全白（其值为FFh）和黑图像信号 (其值为00h) 时的RGB 电压电平值。就理想状况而言，白电平应是700mV 而黑电平应是0mV。这些数值是绝对测量值，是以RGB信号的返回线 (接地端) 作为参考。</p>
+<p>适当的电平对于显示器的正确亮度和对比度是重要的。</p>
+<p><strong>通道间的失配</strong></p>
+<p>通道间的失配用来比较RGB通道间的幅度匹配状况。测试是在黑(00h) 白 (FFh) 之间32个等间距的电平上进行的，使用的是阶梯波测试信号。对于阶梯波中的每一个台阶，均相对于该通道的行后肩电平以测量RGB电压。然后来比较通道间的电压（G&amp;B…）。</p>
+<p>即使不考虑VSIS的规定，通道间失配的允许程度与应用也是密切相关的。通道间的失配会影响到重现的环境亮度、重现的亮度和对比度设置等</p>
+<p><strong>视频瞬变特性</strong></p>
+<p>视频瞬变特性是用来评估RGB通道中黑白电平跳变时的保真度。这项测量使用的是垂直栅格测试图案，由黑到白的过渡时间是一个像素的时间。每个通道均按10％至90％白电平幅度测量上升时间和下降时间、过冲(正向跳变) 、下冲(负向跳变) 和恢复稳定所需时间(settling time)。</p>
+<p><strong>视频瞬变</strong></p>
+<p>对于具有精密细节或锐利边界变化的任一图像而言，良好的过渡响应是非常重要的。例如，如果上升时间或下降时间过于缓慢，将会使图像的变化模糊而不清晰。过度的振铃会使图像素材在跳变之后出现亮/暗交替变化的现象。过冲和下冲是较为次要的问题，除非过渡到稳定建立需要很长的时间。事实上，某些过冲/ 下冲可能会增强图像信号跳变清晰度的感觉，许多显示器件有意地引入受控的预冲和过冲。</p>
+<p><strong>线性</strong></p>
+<p>线性是用来检查DUT在黑白之间的变化特性。在理想情况下，如果斜率恒定的黑白之间的斜坡测试信号加在DUT的输入端，其输出也应当是斜率恒定的斜坡。一般而言，DUT的输出斜坡会给出某种斜率的变化。这种变化表示出现了线性误差。</p>
+<p>线性对于再现正确的灰度级别是重要的。如果单个RGB通道之间的线性差比较大，那么黑白之间的灰度级图案可能会在某些位置出现轻微的彩色。</p>
+<p>VSIS定义了两种类型的线性测试方法。</p>
+<p>第一种方法是积分非线性(INL)，它可以检查黑色和某些其它点之间的整个斜率误差。</p>
+<p>第二种方法是微分非线性 (DNL)，它用来评测两个相邻点之间的斜率误差。</p>
+<p>测试信号使用的一种黑白斜坡信号实际上是一连串的台阶信号。如果系统使用10比特系统就有1024 级台阶。</p>
+<p><strong>噪声抑制比</strong></p>
+<p>这是一项单个RGB通道中的噪声测量。VSIS规定峰至峰噪声测量是在白色图案上进行的，带宽在500MHz以上。峰至峰噪声值不应超过白色电压的5％。</p>
+<p>VSIS规定在2秒的测量间隔内使用100000个噪声样值。</p>
+<h5 id="什么参数对用户最重要？"><a href="#什么参数对用户最重要？" class="headerlink" title="什么参数对用户最重要？"></a>什么参数对用户最重要？</h5><p>如果互操作性－即信源在多种显示器件中均能正常工作－是最重要的，那么应当关注H和V同步测量、RGB亮度电平测量以及彩条测量。这些参数有助于建立正确的同步、正确的白/黑电平，并能使所有的RGB信号有效。</p>
+<p>对于同步测量，特别要重视以下信号损伤：</p>
+<ul>
+<li>不正确的极性</li>
+<li>频率错误</li>
+<li>过度的过冲/ 下冲(特别是当偏离进入到0.5V 至2.4V范围时)</li>
+<li>非单调性地上升或下降</li>
+</ul>
+<p>如果显示系统的灰度级性能非常重要（例如诸如彩色匹配之类的应用），那么就应当特别关注通道间的失配、线性以及RGB亮度电平测量。</p>
+<p>通道间的失配测量将提供整个视频范围内各个通道相互间的跟踪是否接近的信息。</p>
+<p>线性测量提供了每个通道中黑白电平转换的有关信息。</p>
+<p>RGB亮度电平测量为整个700mV视频范围是否得到充分使用而提供了验证，因为这对于图像的对比度是否合适是很重要的。</p>
+<p>对于图像绘制应用，例如PC视频应用，应当注重噪声、瞬态响应、RGB 亮度电平、通道间的匹配（包括通道间的幅度匹配和时间对准）以及H同步抖动等项目的测量，这对图像绘制应用是十分有利的。</p>
+<p>需要注意的是，VSIS 测试没有检测运动相关图像的失真。但是，如果图像的随机噪声和抖动都很小，一般说来，尽管压缩也只会产生较低的失真。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7/" rel="tag"># 视频信号</a>
+          
+            <a href="/tags/VESA/" rel="tag"># VESA</a>
+          
+            <a href="/tags/ARGB/" rel="tag"># ARGB</a>
+          
+            <a href="/tags/VSIS/" rel="tag"># VSIS</a>
+          
+            <a href="/tags/VGA/" rel="tag"># VGA</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/01/%E8%A7%86%E9%9F%B3%E9%A2%91-%E5%B8%B8%E7%94%A8%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7%E9%85%8D%E5%9B%BE%E4%BB%8B%E7%BB%8D/" rel="next" title="视音频-常用视频信号配图介绍">
+                <i class="fa fa-chevron-left"></i> 视音频-常用视频信号配图介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="faihung" />
+            
+              <p class="site-author-name" itemprop="name">faihung</p>
+              <p class="site-description motion-element" itemprop="description">系统、归纳、总结</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/faihung" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/faihung" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://bbs.ebaina.com/forum.php" title="Ebaina" target="_blank">Ebaina</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.amobbs.com/index.php" title="amoBBS" target="_blank">amoBBS</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#ARGB概述"><span class="nav-text">ARGB概述</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#概述"><span class="nav-text">概述</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#VGA接口"><span class="nav-text">VGA接口</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#VGA接口定义"><span class="nav-text">VGA接口定义</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#常见ARGB接口"><span class="nav-text">常见ARGB接口</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#支持的模拟信号分辨率"><span class="nav-text">支持的模拟信号分辨率</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ARGB信号传输（模拟信号的传输）"><span class="nav-text">ARGB信号传输（模拟信号的传输）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#VESA介绍-视频电子标准协会"><span class="nav-text">VESA介绍(视频电子标准协会)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ARGB信号特征"><span class="nav-text">ARGB信号特征</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#VESA测试内容"><span class="nav-text">VESA测试内容</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#信号测试项目"><span class="nav-text">信号测试项目</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#信号测试环境"><span class="nav-text">信号测试环境</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#测试图"><span class="nav-text">测试图</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#同步测量"><span class="nav-text">同步测量</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#视频测量"><span class="nav-text">视频测量</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#什么参数对用户最重要？"><span class="nav-text">什么参数对用户最重要？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">faihung</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"> 访客人数:</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"> 总访问量:</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
