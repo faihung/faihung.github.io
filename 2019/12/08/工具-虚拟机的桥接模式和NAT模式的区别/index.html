@@ -81,17 +81,17 @@
 
 
 
-<meta name="description" content="1.桥接模式通过使用物理机的网卡，有自己的IP地址，就像在电脑上虚拟出来另一台主机，它可以访问网内任何一台主机，需要手工为其配置IP地址、子网掩码、需要和宿主机器处于同一个网段，这样虚拟机才能和宿主机器进行通信。同时，由于这个虚拟系统是局域网中的一个独立主机系统，就可以手工配置他的TCP\IP信息，实现通过局域网的网关或路由进行互联网访问。 弊端:  Ip地址可能会发生变化 192.150.1.1">
+<meta name="description" content="1.桥接模式通过使用物理机的网卡，有自己的IP地址，就像在电脑上虚拟出来另一台主机，它可以访问网内任何一台主机，需要手工为其配置IP地址、子网掩码、需要和宿主机器处于同一个网段，这样虚拟机才能和宿主机器进行通信。同时，由于这个虚拟系统是局域网中的一个独立主机系统，就可以手工配置他的TCP\IP信息，实现通过局域网的网关或路由进行互联网访问。">
 <meta name="keywords" content="VMware,网络配置">
 <meta property="og:type" content="article">
 <meta property="og:title" content="工具-虚拟机的桥接模式和NAT模式的区别">
 <meta property="og:url" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;08&#x2F;%E5%B7%A5%E5%85%B7-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E5%92%8CNAT%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB&#x2F;index.html">
 <meta property="og:site_name" content="Faihung&#39;s blog">
-<meta property="og:description" content="1.桥接模式通过使用物理机的网卡，有自己的IP地址，就像在电脑上虚拟出来另一台主机，它可以访问网内任何一台主机，需要手工为其配置IP地址、子网掩码、需要和宿主机器处于同一个网段，这样虚拟机才能和宿主机器进行通信。同时，由于这个虚拟系统是局域网中的一个独立主机系统，就可以手工配置他的TCP\IP信息，实现通过局域网的网关或路由进行互联网访问。 弊端:  Ip地址可能会发生变化 192.150.1.1">
+<meta property="og:description" content="1.桥接模式通过使用物理机的网卡，有自己的IP地址，就像在电脑上虚拟出来另一台主机，它可以访问网内任何一台主机，需要手工为其配置IP地址、子网掩码、需要和宿主机器处于同一个网段，这样虚拟机才能和宿主机器进行通信。同时，由于这个虚拟系统是局域网中的一个独立主机系统，就可以手工配置他的TCP\IP信息，实现通过局域网的网关或路由进行互联网访问。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;08&#x2F;%E5%B7%A5%E5%85%B7-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E5%92%8CNAT%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB&#x2F;1.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;08&#x2F;%E5%B7%A5%E5%85%B7-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E5%92%8CNAT%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB&#x2F;2.png">
-<meta property="og:updated_time" content="2019-12-08T08:11:22.528Z">
+<meta property="og:updated_time" content="2019-12-08T08:14:31.317Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;08&#x2F;%E5%B7%A5%E5%85%B7-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E5%92%8CNAT%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB&#x2F;1.png">
 
@@ -345,7 +345,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-12-08T16:11:22+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-12-08T16:14:31+08:00">
                 2019-12-08
               </time>
             
@@ -407,6 +407,8 @@
 
       
         <h5 id="1-桥接模式"><a href="#1-桥接模式" class="headerlink" title="1.桥接模式"></a>1.桥接模式</h5><p>通过使用物理机的网卡，有自己的IP地址，就像在电脑上虚拟出来另一台主机，它可以访问网内任何一台主机，需要手工为其配置IP地址、子网掩码、需要和宿主机器处于同一个网段，这样虚拟机才能和宿主机器进行通信。同时，由于这个虚拟系统是局域网中的一个独立主机系统，就可以手工配置他的TCP\IP信息，实现通过局域网的网关或路由进行互联网访问。</p>
+<a id="more"></a>
+
 <p><strong>弊端:</strong></p>
 <ol>
 <li><p>Ip地址可能会发生变化 192.150.1.100/192.168.1.101</p>
@@ -465,6 +467,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/08/cURL-05-curl%E5%92%8Clibcurl%E7%9A%84%E5%8C%BA%E5%88%AB%E7%AE%80%E4%BB%8B-%E8%BD%AC/" rel="prev" title="cURL-05_curl和libcurl的区别简介(转)">
+                cURL-05_curl和libcurl的区别简介(转) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -545,7 +551,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
