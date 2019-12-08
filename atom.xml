@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.faihung.net/"/>
-  <updated>2019-12-01T08:30:46.876Z</updated>
+  <updated>2019-12-08T07:57:16.919Z</updated>
   <id>http://www.faihung.net/</id>
   
   <author>
@@ -15,6 +15,64 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何配置Windows、虚拟机、开发板的网络</title>
+    <link href="http://www.faihung.net/2019/12/08/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/"/>
+    <id>http://www.faihung.net/2019/12/08/如何配置Windows、虚拟机、开发板的网络/</id>
+    <published>2019-12-08T07:52:18.000Z</published>
+    <updated>2019-12-08T07:57:16.919Z</updated>
+    
+    <content type="html"><![CDATA[<p>烧录软件和方便调试先要保证电脑windos操作系统、虚拟机linuxr操作系统<br>和开发板三者之间相互Ping通，要做到这些其实很简单：</p><h5 id="1-打开windows网络和共享中心更改适配器设置"><a href="#1-打开windows网络和共享中心更改适配器设置" class="headerlink" title="1. 打开windows网络和共享中心更改适配器设置"></a>1. 打开windows网络和共享中心更改适配器设置</h5><p><img src="/2019/12/08/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/1.png" alt="1"></p><h5 id="2-打开这三个的属性，把VMware-Bridge-Protocol都勾上，如图"><a href="#2-打开这三个的属性，把VMware-Bridge-Protocol都勾上，如图" class="headerlink" title="2. 打开这三个的属性，把VMware Bridge Protocol都勾上，如图"></a>2. 打开这三个的属性，把VMware Bridge Protocol都勾上，如图</h5><p><img src="/2019/12/08/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/403FC9A009834D539C2F725237D99509" alt="2"></p><h5 id="3-打开本地连接的属性再打开IPV4的属性选择使用手动IP如下图所示"><a href="#3-打开本地连接的属性再打开IPV4的属性选择使用手动IP如下图所示" class="headerlink" title="3. 打开本地连接的属性再打开IPV4的属性选择使用手动IP如下图所示"></a>3. 打开本地连接的属性再打开IPV4的属性选择使用手动IP如下图所示</h5><p><img src="/2019/12/08/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/1C8BCDE7A0B0407EB63C6EAFC43B47F2" alt="3"></p><h5 id="4-点击VMware的虚拟机-gt-设置-网络选择桥接如下图所示"><a href="#4-点击VMware的虚拟机-gt-设置-网络选择桥接如下图所示" class="headerlink" title="4. 点击VMware的虚拟机-&gt; 设置 网络选择桥接如下图所示"></a>4. 点击VMware的虚拟机-&gt; 设置 网络选择桥接如下图所示</h5><p><img src="/2019/12/08/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/F17C595B1B994C2FA0711591E9D41A9E" alt="4"></p><p>网络选择桥接如下图所示</p><p><img src="/2019/12/08/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/25A2B065766F448AAEDE178D08450DCD" alt="5"></p><h5 id="5"><a href="#5" class="headerlink" title="5."></a>5.</h5><h6 id="5-1-点击VMware的编辑-gt-虚拟网络编辑器"><a href="#5-1-点击VMware的编辑-gt-虚拟网络编辑器" class="headerlink" title="5.1 点击VMware的编辑-&gt;虚拟网络编辑器"></a>5.1 点击VMware的编辑-&gt;虚拟网络编辑器</h6><p><img src="/2019/12/08/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/684661C0DED5480C929094E908025AAD" alt="6"></p><h6 id="5-2-点击更改设置"><a href="#5-2-点击更改设置" class="headerlink" title="5.2 点击更改设置"></a>5.2 点击更改设置</h6><p><img src="/2019/12/08/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/D3D6B5728BEA4E248AF82EC2A9D6E9E9" alt="7"></p><h6 id="5-3-点击桥接模式，选择自己要桥接的网卡-网卡要记得选对"><a href="#5-3-点击桥接模式，选择自己要桥接的网卡-网卡要记得选对" class="headerlink" title="5.3 点击桥接模式，选择自己要桥接的网卡(网卡要记得选对)"></a>5.3 点击桥接模式，选择自己要桥接的网卡(网卡要记得选对)</h6><p><img src="/2019/12/08/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/4B06CA55F38E41A7913E16C2AE2D79ED" alt="8"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;烧录软件和方便调试先要保证电脑windos操作系统、虚拟机linuxr操作系统&lt;br&gt;和开发板三者之间相互Ping通，要做到这些其实很简单：&lt;/p&gt;
+&lt;h5 id=&quot;1-打开windows网络和共享中心更改适配器设置&quot;&gt;&lt;a href=&quot;#1-打开windows网络和共享中
+      
+    
+    </summary>
+    
+    
+      <category term="工具" scheme="http://www.faihung.net/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="Windows" scheme="http://www.faihung.net/tags/Windows/"/>
+    
+      <category term="VMware" scheme="http://www.faihung.net/tags/VMware/"/>
+    
+      <category term="网络配置" scheme="http://www.faihung.net/tags/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>工具-如何配置Windows、虚拟机、开发板的网络</title>
+    <link href="http://www.faihung.net/2019/12/08/%E5%B7%A5%E5%85%B7-%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/"/>
+    <id>http://www.faihung.net/2019/12/08/工具-如何配置Windows、虚拟机、开发板的网络/</id>
+    <published>2019-12-08T07:52:18.000Z</published>
+    <updated>2019-12-08T08:00:16.400Z</updated>
+    
+    <content type="html"><![CDATA[<p>烧录软件和方便调试先要保证电脑windos操作系统、虚拟机linuxr操作系统<br>和开发板三者之间相互Ping通，要做到这些其实很简单：</p><a id="more"></a><h5 id="1-打开windows网络和共享中心更改适配器设置"><a href="#1-打开windows网络和共享中心更改适配器设置" class="headerlink" title="1. 打开windows网络和共享中心更改适配器设置"></a>1. 打开windows网络和共享中心更改适配器设置</h5><p><img src="/2019/12/08/%E5%B7%A5%E5%85%B7-%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/1.png" alt="1"></p><h5 id="2-打开这三个的属性，把VMware-Bridge-Protocol都勾上，如图"><a href="#2-打开这三个的属性，把VMware-Bridge-Protocol都勾上，如图" class="headerlink" title="2. 打开这三个的属性，把VMware Bridge Protocol都勾上，如图"></a>2. 打开这三个的属性，把VMware Bridge Protocol都勾上，如图</h5><p><img src="/2019/12/08/%E5%B7%A5%E5%85%B7-%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/2.png" alt="2"></p><h5 id="3-打开本地连接的属性再打开IPV4的属性选择使用手动IP如下图所示"><a href="#3-打开本地连接的属性再打开IPV4的属性选择使用手动IP如下图所示" class="headerlink" title="3. 打开本地连接的属性再打开IPV4的属性选择使用手动IP如下图所示"></a>3. 打开本地连接的属性再打开IPV4的属性选择使用手动IP如下图所示</h5><p><img src="/2019/12/08/%E5%B7%A5%E5%85%B7-%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/3.png" alt="3"></p><h5 id="4-点击VMware的虚拟机-gt-设置-网络选择桥接如下图所示"><a href="#4-点击VMware的虚拟机-gt-设置-网络选择桥接如下图所示" class="headerlink" title="4. 点击VMware的虚拟机-&gt; 设置 网络选择桥接如下图所示"></a>4. 点击VMware的虚拟机-&gt; 设置 网络选择桥接如下图所示</h5><p><img src="/2019/12/08/%E5%B7%A5%E5%85%B7-%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/4.png" alt="4"></p><p>网络选择桥接如下图所示</p><p><img src="/2019/12/08/%E5%B7%A5%E5%85%B7-%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/5.png" alt="5"></p><h5 id="5"><a href="#5" class="headerlink" title="5."></a>5.</h5><h6 id="5-1-点击VMware的编辑-gt-虚拟网络编辑器"><a href="#5-1-点击VMware的编辑-gt-虚拟网络编辑器" class="headerlink" title="5.1 点击VMware的编辑-&gt;虚拟网络编辑器"></a>5.1 点击VMware的编辑-&gt;虚拟网络编辑器</h6><p><img src="/2019/12/08/%E5%B7%A5%E5%85%B7-%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/6.png" alt="6"></p><h6 id="5-2-点击更改设置"><a href="#5-2-点击更改设置" class="headerlink" title="5.2 点击更改设置"></a>5.2 点击更改设置</h6><p><img src="/2019/12/08/%E5%B7%A5%E5%85%B7-%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/7.png" alt="7"></p><h6 id="5-3-点击桥接模式，选择自己要桥接的网卡-网卡要记得选对"><a href="#5-3-点击桥接模式，选择自己要桥接的网卡-网卡要记得选对" class="headerlink" title="5.3 点击桥接模式，选择自己要桥接的网卡(网卡要记得选对)"></a>5.3 点击桥接模式，选择自己要桥接的网卡(网卡要记得选对)</h6><p><img src="/2019/12/08/%E5%B7%A5%E5%85%B7-%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/8.png" alt="8"></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;烧录软件和方便调试先要保证电脑windos操作系统、虚拟机linuxr操作系统&lt;br&gt;和开发板三者之间相互Ping通，要做到这些其实很简单：&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="工具" scheme="http://www.faihung.net/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="Windows" scheme="http://www.faihung.net/tags/Windows/"/>
+    
+      <category term="VMware" scheme="http://www.faihung.net/tags/VMware/"/>
+    
+      <category term="网络配置" scheme="http://www.faihung.net/tags/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/"/>
+    
+  </entry>
   
   <entry>
     <title>视音频-视频简介</title>
@@ -154,9 +212,17 @@
     <link href="http://www.faihung.net/2019/11/24/CAN%E8%BD%AC%E4%BB%A5%E5%A4%AA%E7%BD%91/"/>
     <id>http://www.faihung.net/2019/11/24/CAN转以太网/</id>
     <published>2019-11-24T15:04:43.000Z</published>
-    <updated>2019-11-24T15:05:39.933Z</updated>
+    <updated>2019-12-08T07:25:53.642Z</updated>
+    
+    <content type="html"><![CDATA[<p>暂略</p>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;p&gt;暂略&lt;/p&gt;
+
+      
     
     </summary>
     
@@ -171,9 +237,17 @@
     <link href="http://www.faihung.net/2019/11/24/Hdmi%E8%BD%AC%E4%BB%A5%E5%A4%AA%E7%BD%91/"/>
     <id>http://www.faihung.net/2019/11/24/Hdmi转以太网/</id>
     <published>2019-11-24T15:04:21.000Z</published>
-    <updated>2019-11-24T15:05:42.365Z</updated>
+    <updated>2019-12-08T07:26:16.206Z</updated>
+    
+    <content type="html"><![CDATA[<p>暂略</p>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;p&gt;暂略&lt;/p&gt;
+
+      
     
     </summary>
     
@@ -207,11 +281,11 @@
       <category term="C" scheme="http://www.faihung.net/categories/C/"/>
     
     
+      <category term="strcat" scheme="http://www.faihung.net/tags/strcat/"/>
+    
       <category term="指针" scheme="http://www.faihung.net/tags/%E6%8C%87%E9%92%88/"/>
     
       <category term="ip地址" scheme="http://www.faihung.net/tags/ip%E5%9C%B0%E5%9D%80/"/>
-    
-      <category term="strcat" scheme="http://www.faihung.net/tags/strcat/"/>
     
       <category term="strtok" scheme="http://www.faihung.net/tags/strtok/"/>
     
@@ -242,13 +316,13 @@
       <category term="C" scheme="http://www.faihung.net/categories/C/"/>
     
     
-      <category term="指针" scheme="http://www.faihung.net/tags/%E6%8C%87%E9%92%88/"/>
-    
       <category term="全局变量" scheme="http://www.faihung.net/tags/%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F/"/>
     
       <category term="生存周期" scheme="http://www.faihung.net/tags/%E7%94%9F%E5%AD%98%E5%91%A8%E6%9C%9F/"/>
     
       <category term="内存分配" scheme="http://www.faihung.net/tags/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/"/>
+    
+      <category term="指针" scheme="http://www.faihung.net/tags/%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
@@ -461,11 +535,11 @@
       <category term="C" scheme="http://www.faihung.net/categories/C/"/>
     
     
-      <category term="sprintf" scheme="http://www.faihung.net/tags/sprintf/"/>
+      <category term="字符串拼接" scheme="http://www.faihung.net/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5/"/>
     
       <category term="strcat" scheme="http://www.faihung.net/tags/strcat/"/>
     
-      <category term="字符串拼接" scheme="http://www.faihung.net/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5/"/>
+      <category term="sprintf" scheme="http://www.faihung.net/tags/sprintf/"/>
     
   </entry>
   
@@ -490,11 +564,11 @@
     
       <category term="sprintf" scheme="http://www.faihung.net/tags/sprintf/"/>
     
-      <category term="sscanf" scheme="http://www.faihung.net/tags/sscanf/"/>
-    
       <category term="整数转字符串" scheme="http://www.faihung.net/tags/%E6%95%B4%E6%95%B0%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     
       <category term="字符串转整数" scheme="http://www.faihung.net/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B4%E6%95%B0/"/>
+    
+      <category term="sscanf" scheme="http://www.faihung.net/tags/sscanf/"/>
     
   </entry>
   
@@ -520,64 +594,13 @@
       <category term="C" scheme="http://www.faihung.net/categories/C/"/>
     
     
-      <category term="16进制转10进制" scheme="http://www.faihung.net/tags/16%E8%BF%9B%E5%88%B6%E8%BD%AC10%E8%BF%9B%E5%88%B6/"/>
-    
-      <category term="10进制转16进制" scheme="http://www.faihung.net/tags/10%E8%BF%9B%E5%88%B6%E8%BD%AC16%E8%BF%9B%E5%88%B6/"/>
-    
       <category term="sprintf" scheme="http://www.faihung.net/tags/sprintf/"/>
     
       <category term="sscanf" scheme="http://www.faihung.net/tags/sscanf/"/>
     
-  </entry>
-  
-  <entry>
-    <title>Camera-摄像头工作原理（转载）</title>
-    <link href="http://www.faihung.net/2019/11/09/Camera-%E6%91%84%E5%83%8F%E5%A4%B4%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/"/>
-    <id>http://www.faihung.net/2019/11/09/Camera-摄像头工作原理（转载）/</id>
-    <published>2019-11-09T13:13:43.000Z</published>
-    <updated>2019-11-09T13:18:18.675Z</updated>
+      <category term="16进制转10进制" scheme="http://www.faihung.net/tags/16%E8%BF%9B%E5%88%B6%E8%BD%AC10%E8%BF%9B%E5%88%B6/"/>
     
-    <content type="html"><![CDATA[<blockquote><p>回想这工作的这几年，尝尽社会的辛酸艰难，从一开始什么都没有到30万，从30万到200万，从200万到1300万，不是炫耀，我只是想通过我自己的经历告诉我的朋友们「手机像素越高，拍的照片越清晰」</p></blockquote><a id="more"></a><h5 id="摄像头结构"><a href="#摄像头结构" class="headerlink" title="摄像头结构"></a>摄像头结构</h5><p><img src="/2019/11/09/Camera-%E6%91%84%E5%83%8F%E5%A4%B4%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/1.png" alt="1"></p><p><img src="/2019/11/09/Camera-%E6%91%84%E5%83%8F%E5%A4%B4%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/2.png" alt="2"></p><p>我初中的时候，有一次我考了年级第7名，学校奖励了 200块钱，我当时非常开心，第一时间就想去买一个照相机，我想把自己那时看到的画面都记录下来，可惜的是，我看上那个最便宜的也要两百多，然后我妈跟我说先把钱存她那里，等过阵子有钱了再给我买，然后，你可能想知道然后怎么了，然后就没有然后了，我最开始的照相机就是大学的时候，我哥给我买的那个大块头手机，铃声一响起来，一头熟睡的母猪都能被吵醒。</p><p>最开始的照相机是那种手动对焦的，就是转动马达让感光芯片能接收到最好的信号，俗称对焦。</p><p><img src="/2019/11/09/Camera-%E6%91%84%E5%83%8F%E5%A4%B4%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/3.png" alt="3"></p><h5 id="最原始的Camera成像原理"><a href="#最原始的Camera成像原理" class="headerlink" title="最原始的Camera成像原理"></a>最原始的Camera成像原理</h5><p>说起成像原理，我们不得不说小孔成像，就是有了小孔成像，我们才有了相机这么神奇的东西。</p><p>小孔成像是是比较古老的方式了，随着现在技术的发展，已经使用了新的方式替代小孔成像，因为小孔成像的孔很小，也造成了拍摄存在很多局限性。</p><p><img src="/2019/11/09/Camera-%E6%91%84%E5%83%8F%E5%A4%B4%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/4.png" alt="4"></p><h5 id="现代Camera-工作原理"><a href="#现代Camera-工作原理" class="headerlink" title="现代Camera 工作原理"></a>现代Camera 工作原理</h5><p>camera工作原理是外部光线穿过 lens 后， 经过 color filter 滤波后照射到 Sensor 面上， Sensor 将从 lens 上传导过来的光线转换为电信号，再通过内部的 AD 转换为数字信号。如果 Sensor 没有集 成 DSP，则通过 DVP 的方式传输到baseband，此时的数据格式是 RAW DATA。如果集成 了 DSP， RAW DATA 数据经过 AWB、 则 color matrix、 lens shading、 gamma、 sharpness、 AE 和 de-noise 处理（手机一般在cpu isp端做），后输出 YUV 或者 RGB 格式的数据。最后会由 CPU 送到 framebuffer 中进行显示，这样我们就看到 camera 拍摄到的景象了。</p><p><img src="/2019/11/09/Camera-%E6%91%84%E5%83%8F%E5%A4%B4%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/5.png" alt="5"></p><p>我们先用眼睛通过目镜确定当前拍摄的这个人是不是一个靓仔，然后呢，让这个靓仔做一个比较帅点的姿势，然后按下快门就，挡光板抬起，把光线照到感光器上，感光器是一个模拟图片，通过ADC转换数字信号，存储到存储芯片上。</p><p><img src="/2019/11/09/Camera-%E6%91%84%E5%83%8F%E5%A4%B4%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/6.png" alt="6"></p><h5 id="Camera硬件原理图"><a href="#Camera硬件原理图" class="headerlink" title="Camera硬件原理图"></a>Camera硬件原理图</h5><p>硬件原理图分析</p><p><img src="/2019/11/09/Camera-%E6%91%84%E5%83%8F%E5%A4%B4%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/7.png" alt="7"></p><p><strong>POWER:</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">VDD_CAMA28   ----2.8v   camera的模拟电压</span><br><span class="line">VDD_CAMD28   ----1.5v   camera的工作电压</span><br><span class="line">VDD_CAMIO28  ----2.8v   camera的GPIO口数字电压</span><br></pre></td></tr></table></figure><p><strong>OUTPUT:</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CAM_DATA: camera的数据管脚。此数据脚可以输出的格式有YUV、RGB、JPEG</span><br><span class="line"></span><br><span class="line">CAM_VSYNC: camera的帧同步信号管脚。一个VYSNC信号结束表示一帧（即一个画面）的数据已经输出完毕</span><br><span class="line"></span><br><span class="line">CAM_HSYNC: camera行同步信号管脚。一个HSYNC信号结束表示一行的数据已经输出完毕</span><br><span class="line"></span><br><span class="line">CAM_PCLK: 像素同步信号管脚。一个PCLK信号结束表示一个数据已经输出完毕</span><br></pre></td></tr></table></figure><p><strong>INPUT:</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CAM_PWDN:  camera的使能管脚，当camera处于PWDN模式时，一切对camera的操作都是无效的，因此，在RST之前，一定要将PWDN管脚置为normal模式</span><br><span class="line"></span><br><span class="line">CAM_RST:  camera的复位管脚。此方式为硬复位模式，一般管脚置为低，camera处于硬复位状态，camera的各个IO口恢复到出厂默认状态。只有在XCLK开启后，将RESET置为低，硬复位才有效，否则复位无效。</span><br><span class="line"></span><br><span class="line">CAM_MCLK:  camera工作时钟管脚。此管脚为主控提供camera的工作时钟</span><br><span class="line"></span><br><span class="line">CAM_I2C:  camera与主控的通信管脚 Camera主要的通信接口是i2c，数据传输是mipi</span><br></pre></td></tr></table></figure><p><strong>我们在软件调试时，camera大致流程：</strong></p><p>第一步，给sensor进行上电和输出时钟信号；</p><p>第二步，然后通过i2c进行通信，通过发送地址，cpu查找camera；</p><p>第三步，在打开camera时，通过i2c下发，对sensor寄存器进行适配和准备工作；</p><p>第四步，camera数据输出，通过mipi给到cpu端进行采集；</p><h5 id="Sensor类型"><a href="#Sensor类型" class="headerlink" title="Sensor类型"></a>Sensor类型</h5><h6 id="1-常见的摄像头传感器类型主要有两种"><a href="#1-常见的摄像头传感器类型主要有两种" class="headerlink" title="1. 常见的摄像头传感器类型主要有两种"></a>1. 常见的摄像头传感器类型主要有两种</h6><p><strong>CCD（Chagre Couled Device）</strong>，即电荷耦合器，目前被广泛应用于大部分数码相机上，这是一种特殊的半导体材料，它由大量独立的光敏元件组成，这些光敏元件通常按矩阵排列。光线透过镜头照射到CCD上，并转换成电荷，每个元件上的电荷量取决于其受到的光照强度。当摄影者按动快门时，CCD可将各个元件的信息传送到模/数转换器上，然后将模拟电信号转变为数字信号，数字信号再以一定的格式压缩后存入缓存内，这样就完成了数码相片的整个拍摄。</p><p><strong>CMOS（Complementary Metal-Oxide-Semiconductor）</strong>，即互补金属氧化物半导体，它在微处理器和闪存等半导体技术上占有重要的地位，也是一种可用来感受光线变化的半导体，其组成元素主要是硅和锗，通过CMOS上带负电和带正电的晶体管来实现基本功能。这两个互补效应所产生的电流即可被处理芯片记录和解读成影像。由于CMOS结构相对简单，与现有的大规模集成电路生产工艺相同，从而生产成本可以降低，理论上讲，CMOS的信号是以点为单位的电荷信号，CCD是以行为单位的电流信号，相比较而言，前者更为敏感、速度更快、更为省电。目前CMOS技术发展还不成熟，这种高质量的CMOS还只应用于一些专业的数码相机上，而在一些低档数码相机上常使用廉价低档的CMOS，成像质量一般比较差。所以目前要购买消费级数码相机的话，建议用户最好选择以CCD为影像传感器的产品</p><h6 id="2-图像采集数据的模式有两种"><a href="#2-图像采集数据的模式有两种" class="headerlink" title="2. 图像采集数据的模式有两种"></a>2. 图像采集数据的模式有两种</h6><p>Color Filter Array—CFA 图像传感器都采用一定的模式来采集图像数据，常用的有 BGR 模式和 CFA 模式。</p><p><strong>BGR 模式：</strong><br>BGR 模式是一种可直接进行显示和压缩等处理的图像数据模式，它由 R( 红)、G( 绿) 、B( 蓝) 三原色值来共同确定 1 个像素点，例如富士数码相机采用的 SUPER CCD 图像传感器就采用这种模式，其优点是图像传感器产生的图像数据无需插值就可直接进行显示等后续处理，图像效果最好，但是成本高，常用于专业相机中。</p><p><strong>CFA 模式：</strong><br>为了减少成本，缩小体积，市场上的数码相机大多采用 CFA 模式，即在像素阵列的表面覆盖一层彩色滤波阵列（Color Filter Array，CFA），彩色滤波阵列有多种，现在应用最广泛的是 Bayer 格式滤波阵列，满足 GRBG 规律，绿色像素数是红色或蓝色像素数的两倍，这是因为人眼对可见光光谱敏感度的峰值位于中波段，这正好对应着绿色光谱成分。在该模式下图像数据只用R, G, B三个值中的一个值来表示一个像素点，而缺失另外两个颜色值，这时得到的是一副马赛克图片，为了得到全彩色的图像，需要使用其周围像素点的色彩信息来估计缺失的另外两种颜色，这种处理叫做色彩插值。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;回想这工作的这几年，尝尽社会的辛酸艰难，从一开始什么都没有到30万，从30万到200万，从200万到1300万，不是炫耀，我只是想通过我自己的经历告诉我的朋友们「手机像素越高，拍的照片越清晰」&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-    
-      <category term="Camera" scheme="http://www.faihung.net/categories/Camera/"/>
-    
-    
-      <category term="摄像头" scheme="http://www.faihung.net/tags/%E6%91%84%E5%83%8F%E5%A4%B4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>cURL-04_基于libcurl库的开发</title>
-    <link href="http://www.faihung.net/2019/11/06/cURL-04-%E5%9F%BA%E4%BA%8Elibcurl%E5%BA%93%E7%9A%84%E5%BC%80%E5%8F%91/"/>
-    <id>http://www.faihung.net/2019/11/06/cURL-04-基于libcurl库的开发/</id>
-    <published>2019-11-06T14:36:01.000Z</published>
-    <updated>2019-11-06T14:37:30.283Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>libcurl是一个简单易用的基于URL传输的客户端开发库，支持多种平台以及三十多种开发语言绑定。libcurl是线程安全的，兼容IPv6，功能强大且运行效率高，很多知名公司如Google、Adobe的产品都应用过libcurl。</p></blockquote><p>做libcurl开发，需要将静态库文件加到编译链接环境中，并且要dll动态运行库支持。</p><a id="more"></a><h5 id="1-关于curl-global-init-和curl-global-cleanup"><a href="#1-关于curl-global-init-和curl-global-cleanup" class="headerlink" title="1. 关于curl_global_init()和curl_global_cleanup()"></a>1. 关于curl_global_init()和curl_global_cleanup()</h5><p>libcurl提供了一组C语言API函数直接调用。首先需要提到的两个函数就是curl_global_init()和curl_global_cleanup()。</p><p>libcurl要用到一系列的全局常量，curl_global_init()函数就是初始化这些变量，并分配一些全局资源；curl_global_cleanup()则负责释放这些资源。因此一般情况下，在调用libcurl函数之前，先用curl_global_init(CURL_GLOBAL_ALL)做初始化，在调用完毕后，用curl_global_cleanup()退出。</p><p>需要注意的是，这些全局变量和资源并不是线程安全的，因此，在多线程应用的环境中，最好不要多次调用curl_global_init()和curl_global_cleanup()，调用其他函数并不会改变这些全局变量和资源。</p><h5 id="2-调用方式"><a href="#2-调用方式" class="headerlink" title="2. 调用方式"></a>2. 调用方式</h5><p>libcurl支持3种不同的接口调用方式，分别是”easy”、”multi”和”share”模式。</p><p>libcurl-easy是一组同步接口，函数都是curl_easy_*形式，这种模式调用curl_easy_perform()函数进行URL数据传输，直到传输完成函数才返回；</p><p>libcurl-multi是一组异步接口，函数都是curl_multi_*形式，调用curl_multi_perform()函数进行传输，但是每次调用只传一片数据，我们可以用select()函数控制多个下载任务进行同步下载，来实现在一个线程中同时下载多个文件；</p><p>libcurl-share允许在多线程中操作共享数据。下面以libcurl-easy为例讲一下libcurl的函数。</p><h6 id="1-CURL-curl-easy-init"><a href="#1-CURL-curl-easy-init" class="headerlink" title="1. CURL *curl_easy_init()"></a>1. CURL *curl_easy_init()</h6><blockquote><p>此函数需要最先被调用，返回CRUL easy句柄；后续其他函数调用都要用到这个句柄。如果没有调用curl_global_init()，该函数自动调用，但是考虑到线程安全的问题，最好自己调用curl_global_init()。</p></blockquote><h6 id="2-CURLcode-curl-easy-setopt-CURL-handle-CURLoption-option-parameter"><a href="#2-CURLcode-curl-easy-setopt-CURL-handle-CURLoption-option-parameter" class="headerlink" title="2. CURLcode curl_easy_setopt(CURL *handle, CURLoption option, parameter)"></a>2. CURLcode curl_easy_setopt(CURL *handle, CURLoption option, parameter)</h6><blockquote><p>所有参数和选项设置都是通过这个函数完成的，它告诉libcurl怎样去进行传输。参数handle即为curl_easy_init()返回的句柄，后面根据option的类型，设置相应的parameter值，该函数每次调用只能设置一个选项。</p></blockquote><p>这里只总结一下与下载有关的常用选项设置。</p><pre><code>CURLOPT_URL</code></pre><p>字符串类型，该选项设置要处理的URL地址，该选项是进行curl_easy_perform之前唯一必须要设置的选项。</p><pre><code>CURLOPT_COOKIE</code></pre><p>字符串类型，设置http头中的cookie信息。</p><pre><code>CURLOPT_COOKIEFILE</code></pre><p>字符串类型，同CURLOPT_COOKIE，不过cookie信息从文件中读取。</p><pre><code>CURLOPT_FOLLOWLOCATION  </code></pre><p>布尔值类型，该参数设置为非零值表示follow服务器返回的重定向信息。</p><pre><code>CURLOPT_POSTFIELDS</code></pre><p>字符串类型，提交http的post操作字符串数据。</p><pre><code>CURLOPT_TIMEOUT</code></pre><p>long数值类型，设置函数执行的最长时间，时间单位为s。</p><pre><code>CURLOPT_CONNECTTIMEOUT</code></pre><p>long数值类型，设置连接服务器最长时间，时间单位为s；当置为0时表示无限长。</p><pre><code>CURLOPT_MAX_RECV_SPEED_LARGE</code></pre><p>curl_off_t类型数据，指定下载过程中最大速度，单位bytes/s。</p><pre><code>CURLOPT_HEADERFUNCTION</code></pre><p>函数指针类型，该选项设置一个处理接收到的header数据的回调函数，函数原型为：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">size_t function( void *ptr, size_t size, size_t nmemb, void *stream)；</span><br></pre></td></tr></table></figure><p>其中，ptr指向接收到的header头数据，数据大小为size*nmemb，stream指向调用CURLOPT_WRITEHEADER选项设置的参数。该回调函数应返回实际处理的数据量大小，或者出错返回-1。</p><pre><code>CURLOPT_WRITEFUNCTION</code></pre><p>函数指针类型，该选项设置一个处理接收到的下载数据的回调函数，函数原型为：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">size_t function( void *ptr, size_t size, size_t nmemb, void *stream);</span><br></pre></td></tr></table></figure><p>其中，ptr指向接收到的数据，数据大小为size*nmemb，stream指向调用CURLOPT_WRITEDATA选项设置的参数。</p><p>如果函数指针置为NULL，则会调用默认的函数，将数据写入到由CURLOPT_WRITEDATA指定的FILE*中。</p><pre><code>CURLOPT_HTTPHEADER</code></pre><p>curl_slist结构体类型，该选项自定义请求头信息。</p><pre><code>CURLOPT_NOPROGRESS</code></pre><p>布尔值类型，设置该值为非零值关闭PHP为CRUL传输显示的进度条。</p><h6 id="3-void-curl-easy-reset-CURL-handle"><a href="#3-void-curl-easy-reset-CURL-handle" class="headerlink" title="3. void curl_easy_reset(CURL *handle )"></a>3. void curl_easy_reset(CURL *handle )</h6><p>重新初始化CURL句柄的选项设置。</p><h6 id="4-CURLcode-curl-easy-getinfo-CURL-curl-CURLINFO-info-…"><a href="#4-CURLcode-curl-easy-getinfo-CURL-curl-CURLINFO-info-…" class="headerlink" title="4. CURLcode curl_easy_getinfo(CURL *curl, CURLINFO info, … )"></a>4. CURLcode curl_easy_getinfo(CURL *curl, CURLINFO info, … )</h6><p>查询CRUL会话的内部信息，具体说明请参考curl自带文档。</p><h6 id="5-void-curl-easy-cleanup-CURL-handle"><a href="#5-void-curl-easy-cleanup-CURL-handle" class="headerlink" title="5. void curl_easy_cleanup(CURL * handle )"></a>5. void curl_easy_cleanup(CURL * handle )</h6><p>该函数与curl_easy_init函数成对出现，handle即为调用curl_easy_init返回的句柄。该函数在CURL会话结束退出时调用，之后handle无效。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;libcurl是一个简单易用的基于URL传输的客户端开发库，支持多种平台以及三十多种开发语言绑定。libcurl是线程安全的，兼容IPv6，功能强大且运行效率高，很多知名公司如Google、Adobe的产品都应用过libcurl。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;做libcurl开发，需要将静态库文件加到编译链接环境中，并且要dll动态运行库支持。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="cURL" scheme="http://www.faihung.net/categories/cURL/"/>
-    
-    
-      <category term="cURL" scheme="http://www.faihung.net/tags/cURL/"/>
+      <category term="10进制转16进制" scheme="http://www.faihung.net/tags/10%E8%BF%9B%E5%88%B6%E8%BD%AC16%E8%BF%9B%E5%88%B6/"/>
     
   </entry>
   
