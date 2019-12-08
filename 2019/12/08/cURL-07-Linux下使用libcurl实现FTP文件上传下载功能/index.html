@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Timing,Vertical sync,Horizontal sync," />
+  <meta name="keywords" content="cURL," />
 
 
 
@@ -81,16 +81,23 @@
 
 
 
-<meta name="description" content="前言大家应该都知道，视频看起来是持续动态的，但是实际上是由一系列的静态画面，在很短的时间内更替,在人眼上就产生视觉残留，以至于你的眼睛感觉是动态画面。大家看到的视频中大多数是每秒闪过50-60幅画面，对于电脑画面大概是每秒闪过70-80幅画面。">
-<meta name="keywords" content="Timing,Vertical sync,Horizontal sync">
+<meta name="description" content="Linux下使用libcurl实现FTP单个文件或者压缩包上传下载功能">
+<meta name="keywords" content="cURL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Video Timing 解释说明">
-<meta property="og:url" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;11&#x2F;24&#x2F;Video-Timing-%E8%A7%A3%E9%87%8A%E8%AF%B4%E6%98%8E&#x2F;index.html">
+<meta property="og:title" content="cURL-07_Linux下使用libcurl实现FTP文件上传下载功能">
+<meta property="og:url" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;08&#x2F;cURL-07-Linux%E4%B8%8B%E4%BD%BF%E7%94%A8libcurl%E5%AE%9E%E7%8E%B0FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E5%8A%9F%E8%83%BD&#x2F;index.html">
 <meta property="og:site_name" content="Faihung&#39;s blog">
-<meta property="og:description" content="前言大家应该都知道，视频看起来是持续动态的，但是实际上是由一系列的静态画面，在很短的时间内更替,在人眼上就产生视觉残留，以至于你的眼睛感觉是动态画面。大家看到的视频中大多数是每秒闪过50-60幅画面，对于电脑画面大概是每秒闪过70-80幅画面。">
+<meta property="og:description" content="Linux下使用libcurl实现FTP单个文件或者压缩包上传下载功能">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-24T15:36:09.647Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;08&#x2F;cURL-07-Linux%E4%B8%8B%E4%BD%BF%E7%94%A8libcurl%E5%AE%9E%E7%8E%B0FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E5%8A%9F%E8%83%BD&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;08&#x2F;cURL-07-Linux%E4%B8%8B%E4%BD%BF%E7%94%A8libcurl%E5%AE%9E%E7%8E%B0FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E5%8A%9F%E8%83%BD&#x2F;2.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;08&#x2F;cURL-07-Linux%E4%B8%8B%E4%BD%BF%E7%94%A8libcurl%E5%AE%9E%E7%8E%B0FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E5%8A%9F%E8%83%BD&#x2F;3.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;08&#x2F;cURL-07-Linux%E4%B8%8B%E4%BD%BF%E7%94%A8libcurl%E5%AE%9E%E7%8E%B0FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E5%8A%9F%E8%83%BD&#x2F;4.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;08&#x2F;cURL-07-Linux%E4%B8%8B%E4%BD%BF%E7%94%A8libcurl%E5%AE%9E%E7%8E%B0FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E5%8A%9F%E8%83%BD&#x2F;5.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;08&#x2F;cURL-07-Linux%E4%B8%8B%E4%BD%BF%E7%94%A8libcurl%E5%AE%9E%E7%8E%B0FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E5%8A%9F%E8%83%BD&#x2F;6.png">
+<meta property="og:updated_time" content="2019-12-08T10:27:26.000Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;08&#x2F;cURL-07-Linux%E4%B8%8B%E4%BD%BF%E7%94%A8libcurl%E5%AE%9E%E7%8E%B0FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E5%8A%9F%E8%83%BD&#x2F;1.png">
 
 
 
@@ -120,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://www.faihung.net/2019/11/24/Video-Timing-解释说明/"/>
+  <link rel="canonical" href="http://www.faihung.net/2019/12/08/cURL-07-Linux下使用libcurl实现FTP文件上传下载功能/"/>
 
 
 
 
 
-  <title>Video Timing 解释说明 | Faihung's blog</title>
+  <title>cURL-07_Linux下使用libcurl实现FTP文件上传下载功能 | Faihung's blog</title>
   
 
 
@@ -297,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.faihung.net/2019/11/24/Video-Timing-%E8%A7%A3%E9%87%8A%E8%AF%B4%E6%98%8E/">
+    <link itemprop="mainEntityOfPage" href="http://www.faihung.net/2019/12/08/cURL-07-Linux%E4%B8%8B%E4%BD%BF%E7%94%A8libcurl%E5%AE%9E%E7%8E%B0FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E5%8A%9F%E8%83%BD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="faihung">
@@ -314,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Video Timing 解释说明</h1>
+          <h1 class="post-title" itemprop="name headline">cURL-07_Linux下使用libcurl实现FTP文件上传下载功能</h1>
         
 
         <div class="post-meta">
@@ -326,8 +333,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-24T23:25:24+08:00">
-                2019-11-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-08T18:24:54+08:00">
+                2019-12-08
               </time>
             
 
@@ -342,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-24T23:36:09+08:00">
-                2019-11-24
+              <time title="更新于" itemprop="dateModified" datetime="2019-12-08T18:27:26+08:00">
+                2019-12-08
               </time>
             
           </span>
@@ -361,8 +368,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%A7%86%E9%9F%B3%E9%A2%91/" itemprop="url" rel="index">
-                    <span itemprop="name">视音频</span>
+                  <a href="/categories/cURL/" itemprop="url" rel="index">
+                    <span itemprop="name">cURL</span>
                   </a>
                 </span>
 
@@ -403,22 +410,31 @@
       
 
       
-        <h6 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h6><p>大家应该都知道，视频看起来是持续动态的，但是实际上是由一系列的静态画面，在很短的时间内更替,在人眼上就产生视觉残留，以至于你的眼睛感觉是动态画面。大家看到的视频中大多数是每秒闪过50-60幅画面，对于电脑画面大概是每秒闪过70-80幅画面。</p>
+        <blockquote>
+<p>Linux下使用libcurl实现FTP单个文件或者压缩包上传下载功能</p>
+</blockquote>
 <a id="more"></a>
 
-<p>要说timing是什么，先说下一般的图像是怎么显示在屏幕上的。</p>
-<p>视频源发出的一幅幅的画面，送到屏幕后，屏幕将每一幅画面从上到下逐行的扫描每个像素显示在屏幕上，不间断的重复，直到一段视频数据结束。</p>
-<p>而视频数据是连续的，怎么就知道哪段数据是显示一个画面？</p>
-<p>怎么知道一个画面中哪一段数据又是显示这一行的？</p>
-<p>Timing 就是解决这两问题的。</p>
-<pre><code>Video timing 包含两个信号：水平同步Hs（horizontal sync）和垂直同步Vs（vertical sync）
-Vertical sync --&gt;用来标识什么时候开始送出一幅新画面
-Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</code></pre><h6 id="Vertical-sync-和-Horizontal-sync-信号有三种传送方式："><a href="#Vertical-sync-和-Horizontal-sync-信号有三种传送方式：" class="headerlink" title="Vertical sync 和 Horizontal sync 信号有三种传送方式："></a>Vertical sync 和 Horizontal sync 信号有三种传送方式：</h6><ol>
-<li>单独传送vertical sync 和 Horizontal sync两路信号，如电脑上用的VGA信号，HDMI高清数字视频信号；</li>
-<li>将vertical sync和horizontal sync信号复合在一路单独传送，如S-Video型号（其timing信号时复合在其Y信号中）；</li>
-<li>将vertical sync和horizontal sync复合在一起的信号又再复合进视频信号中一起传送，如CVBS信号；</li>
-</ol>
-<h6 id="举个例子说明timing中包含了哪些信息："><a href="#举个例子说明timing中包含了哪些信息：" class="headerlink" title="举个例子说明timing中包含了哪些信息："></a>举个例子说明timing中包含了哪些信息：</h6><p>如一个视频信号timing为（1024x768@60），1024x768表示是SVGA分辨率（其中1024表示一幅图像的列数，因每一个象素点有R/G/B三点组成，故共有1024*3列；768表示一幅图像的行数，共768行），60Hz表示的就是vertical sync（即每一个画面的显示时间为1/60s=16.67ms），由于每一幅画面要扫描768行，所以每一行的扫描时间即为16.67ms/768=21.7us，即可得出horizontal sync。</p>
+<h5 id="一、关于FTP"><a href="#一、关于FTP" class="headerlink" title="一、关于FTP"></a>一、关于FTP</h5><p>参考：<br><a href="https://www.faihung.net/2019/12/07/%E5%B7%A5%E5%85%B7-%E5%9C%A8WIN10%E4%B8%8A%E6%90%AD%E5%BB%BAFtp%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E8%BD%AC%EF%BC%89/">在WIN10上搭建Ftp服务器</a></p>
+<h5 id="二、FTP上传"><a href="#二、FTP上传" class="headerlink" title="二、FTP上传"></a>二、FTP上传</h5><p>该FTP上传代码为官网上的demo例程代码，若要为己所用，只需将宏定义修改并准备一个要上传的文件即可。当然，该函数只能上传一个文件或者压缩包至FTP服务器，若要上传多个文件，可以在此例程上进行修改。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;curl/curl.h&gt;</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;sys/stat.h&gt;</span><br><span class="line">#include &lt;fcntl.h&gt;</span><br><span class="line">#include &lt;errno.h&gt;</span><br><span class="line">#ifdef WIN32</span><br><span class="line">#include &lt;io.h&gt;</span><br><span class="line">#else</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">#define LOCAL_FILE      &quot;/mnt/hgfs/VMWARE/test/8-curl/1206.rar&quot; //要上传的文件</span><br><span class="line">#define UPLOAD_FILE_AS  &quot;while-uploading.txt&quot;</span><br><span class="line">#define REMOTE_URL      &quot;ftp://192.168.31.175/&quot;  UPLOAD_FILE_AS //FTP服务器地址</span><br><span class="line">#define RENAME_FILE_TO  &quot;1206.rar&quot;//最终写入到这个文件名中</span><br><span class="line"></span><br><span class="line">static size_t read_callback(void *ptr, size_t size, size_t nmemb, void *stream)</span><br><span class="line">&#123;</span><br><span class="line">  curl_off_t nread;</span><br><span class="line"></span><br><span class="line">  size_t retcode = fread(ptr, size, nmemb, stream);</span><br><span class="line"></span><br><span class="line">  nread = (curl_off_t)retcode;</span><br><span class="line"></span><br><span class="line">  fprintf(stderr, &quot; We read %&quot; CURL_FORMAT_CURL_OFF_T</span><br><span class="line">          &quot; bytes from file\n&quot;, nread);</span><br><span class="line">  return retcode;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">  CURL *curl;</span><br><span class="line">  CURLcode res;</span><br><span class="line">  FILE *hd_src;</span><br><span class="line">  struct stat file_info;</span><br><span class="line">  curl_off_t fsize;</span><br><span class="line"></span><br><span class="line">  struct curl_slist *headerlist = NULL;</span><br><span class="line">  static const char buf_1 [] = &quot;RNFR &quot; UPLOAD_FILE_AS;</span><br><span class="line">  static const char buf_2 [] = &quot;RNTO &quot; RENAME_FILE_TO;</span><br><span class="line"></span><br><span class="line">  /* 获得上传文件的大小 */ </span><br><span class="line">  if(stat(LOCAL_FILE, &amp;file_info)) &#123;</span><br><span class="line">    printf(&quot;Couldn&apos;t open &apos;%s&apos;: %s\n&quot;, LOCAL_FILE, strerror(errno));</span><br><span class="line">    return 1;</span><br><span class="line">  &#125;</span><br><span class="line">  fsize = (curl_off_t)file_info.st_size;</span><br><span class="line"></span><br><span class="line">  printf(&quot;Local file size: %&quot; CURL_FORMAT_CURL_OFF_T &quot; bytes.\n&quot;, fsize);</span><br><span class="line"></span><br><span class="line">  /* 获得FILE类型变量 */ </span><br><span class="line">  hd_src = fopen(LOCAL_FILE, &quot;rb&quot;);</span><br><span class="line"></span><br><span class="line">  /* 初始化 */ </span><br><span class="line">  curl_global_init(CURL_GLOBAL_ALL);</span><br><span class="line"></span><br><span class="line">  /* 获得curl操作符 */ </span><br><span class="line">  curl = curl_easy_init();</span><br><span class="line">  if(curl) &#123;</span><br><span class="line">    /*建立一个传递给libcurl的命令列表 */ </span><br><span class="line">    headerlist = curl_slist_append(headerlist, buf_1);</span><br><span class="line">    headerlist = curl_slist_append(headerlist, buf_2);</span><br><span class="line"></span><br><span class="line">    /* 使用curl提供的Read功能 */ </span><br><span class="line">    curl_easy_setopt(curl, CURLOPT_READFUNCTION, read_callback);</span><br><span class="line"></span><br><span class="line">    /* 上传使能 */ </span><br><span class="line">    curl_easy_setopt(curl, CURLOPT_UPLOAD, 1L);</span><br><span class="line"></span><br><span class="line">    /* 设置特定目标 */ </span><br><span class="line">    curl_easy_setopt(curl, CURLOPT_URL, REMOTE_URL);</span><br><span class="line"></span><br><span class="line">    /* 传递最后一个FTP命令以在传输后运行 */ </span><br><span class="line">    curl_easy_setopt(curl, CURLOPT_POSTQUOTE, headerlist);</span><br><span class="line"></span><br><span class="line">    /*指定上传文件 */ </span><br><span class="line">    curl_easy_setopt(curl, CURLOPT_READDATA, hd_src);</span><br><span class="line"></span><br><span class="line">    /*设置要上传的文件的大小（可选） */ </span><br><span class="line">    curl_easy_setopt(curl, CURLOPT_INFILESIZE_LARGE,</span><br><span class="line">                     (curl_off_t)fsize);</span><br><span class="line"></span><br><span class="line">    /* 运行 */ </span><br><span class="line">    res = curl_easy_perform(curl);</span><br><span class="line">    /* 容错处理 */ </span><br><span class="line">    if(res != CURLE_OK)</span><br><span class="line">      fprintf(stderr, &quot;curl_easy_perform() failed: %s\n&quot;,</span><br><span class="line">              curl_easy_strerror(res));</span><br><span class="line"></span><br><span class="line">    /* 清除FTP命令列表 */ </span><br><span class="line">    curl_slist_free_all(headerlist);</span><br><span class="line"></span><br><span class="line">    /*释放所有curl资源 */ </span><br><span class="line">    curl_easy_cleanup(curl);</span><br><span class="line">  &#125;</span><br><span class="line">  fclose(hd_src); /*关闭本地文件 */ </span><br><span class="line"></span><br><span class="line">  /*释放所有curl资源 */ </span><br><span class="line">  curl_global_cleanup();</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>保存代码，文件名命名为“ftpupload.c”，并在/mnt/hgfs/VMWARE/test/8-curl文件夹中准备“1206.rar”文件（即代码中指定的要上传的文件名），使用gcc编译，编译指令：</p>
+<pre><code>gcc -o ftpupload ftpupload.c -lcurl</code></pre><p>执行结果：</p>
+<p><img src="/2019/12/08/cURL-07-Linux%E4%B8%8B%E4%BD%BF%E7%94%A8libcurl%E5%AE%9E%E7%8E%B0FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E5%8A%9F%E8%83%BD/1.png" alt="1"></p>
+<p>上传前的代码：</p>
+<p><img src="/2019/12/08/cURL-07-Linux%E4%B8%8B%E4%BD%BF%E7%94%A8libcurl%E5%AE%9E%E7%8E%B0FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E5%8A%9F%E8%83%BD/2.png" alt="2"></p>
+<p>上传到FTP服务器之后：</p>
+<p><img src="/2019/12/08/cURL-07-Linux%E4%B8%8B%E4%BD%BF%E7%94%A8libcurl%E5%AE%9E%E7%8E%B0FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E5%8A%9F%E8%83%BD/3.png" alt="3"></p>
+<p>至此，上传功能完成。</p>
+<h5 id="三、FTP下载"><a href="#三、FTP下载" class="headerlink" title="三、FTP下载"></a>三、FTP下载</h5><p>同样，该FTP下载代码为官网上的demo例程代码，若要为己所用，只需将宏定义修改并指定一个要下载的文件即可。当然，该函数只能下载一个文件或者压缩包至FTP客户端，若要下载多个文件，可以在此例程上进行修改。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;curl/curl.h&gt;</span><br><span class="line"></span><br><span class="line">struct FtpFile &#123;</span><br><span class="line">  const char *filename;</span><br><span class="line">  FILE *stream;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">static size_t my_fwrite(void *buffer, size_t size, size_t nmemb, void *stream)</span><br><span class="line">&#123;</span><br><span class="line">  struct FtpFile *out = (struct FtpFile *)stream;</span><br><span class="line">  if(out &amp;&amp; !out-&gt;stream) &#123;</span><br><span class="line">    /* 打开文件以进行写操作 */ </span><br><span class="line">    out-&gt;stream = fopen(out-&gt;filename, &quot;wb&quot;);</span><br><span class="line">    if(!out-&gt;stream)</span><br><span class="line">      return -1; /* failure, can&apos;t open file to write */ </span><br><span class="line">  &#125;</span><br><span class="line">  return fwrite(buffer, size, nmemb, out-&gt;stream);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">  CURL *curl;</span><br><span class="line">  CURLcode res;</span><br><span class="line">  struct FtpFile ftpfile = &#123;</span><br><span class="line">    &quot;/mnt/hgfs/VMWARE/test/8-curl/1208.rar&quot;, /* 若FTP下载成功，名命下载后的文件为&quot;curl.txt&quot; */ </span><br><span class="line">    NULL</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  curl_global_init(CURL_GLOBAL_DEFAULT);</span><br><span class="line"></span><br><span class="line">  curl = curl_easy_init();</span><br><span class="line">  if(curl) &#123;</span><br><span class="line">    curl_easy_setopt(curl, CURLOPT_URL,</span><br><span class="line">                     &quot;ftp://192.168.31.175/1208.rar&quot;);//下载指定的文件</span><br><span class="line">    /* 定义回调函数，以便在需要写入数据时进行调用 */ </span><br><span class="line">    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, my_fwrite);</span><br><span class="line">    /*设置一个指向我们的结构的指针传递给回调函数*/ </span><br><span class="line">    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &amp;ftpfile);</span><br><span class="line"></span><br><span class="line">    /* 打开完整的协议/调试输出*/ </span><br><span class="line">    curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);</span><br><span class="line"></span><br><span class="line">    res = curl_easy_perform(curl);</span><br><span class="line"></span><br><span class="line">    /* 释放所有curl资源*/ </span><br><span class="line">    curl_easy_cleanup(curl);</span><br><span class="line"></span><br><span class="line">    if(CURLE_OK != res) &#123;</span><br><span class="line">      /*容错处理 */ </span><br><span class="line">      fprintf(stderr, &quot;curl told us %d\n&quot;, res);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  if(ftpfile.stream)</span><br><span class="line">    fclose(ftpfile.stream); /* 关闭本地文件 */ </span><br><span class="line"> /*释放所有curl资源*/</span><br><span class="line">  curl_global_cleanup();</span><br><span class="line"></span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用gcc编译，编译指令：</p>
+<pre><code>gcc -o ftpDown ftpDown.c -lcurl</code></pre><p>执行结果：</p>
+<p><img src="/2019/12/08/cURL-07-Linux%E4%B8%8B%E4%BD%BF%E7%94%A8libcurl%E5%AE%9E%E7%8E%B0FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E5%8A%9F%E8%83%BD/4.png" alt="4"></p>
+<p>下载之前，放在FTP服务器中时：</p>
+<p><img src="/2019/12/08/cURL-07-Linux%E4%B8%8B%E4%BD%BF%E7%94%A8libcurl%E5%AE%9E%E7%8E%B0FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E5%8A%9F%E8%83%BD/5.png" alt="5"></p>
+<p>下载之后，放在本地文件中中时：</p>
+<p><img src="/2019/12/08/cURL-07-Linux%E4%B8%8B%E4%BD%BF%E7%94%A8libcurl%E5%AE%9E%E7%8E%B0FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E5%8A%9F%E8%83%BD/6.png" alt="6"></p>
 
       
     </div>
@@ -436,11 +452,7 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
       
         <div class="post-tags">
           
-            <a href="/tags/Timing/" rel="tag"># Timing</a>
-          
-            <a href="/tags/Vertical-sync/" rel="tag"># Vertical sync</a>
-          
-            <a href="/tags/Horizontal-sync/" rel="tag"># Horizontal sync</a>
+            <a href="/tags/cURL/" rel="tag"># cURL</a>
           
         </div>
       
@@ -453,8 +465,8 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/24/CAN%E8%BD%AC%E4%BB%A5%E5%A4%AA%E7%BD%91/" rel="next" title="CAN转以太网">
-                <i class="fa fa-chevron-left"></i> CAN转以太网
+              <a href="/2019/12/08/cURL-06-cURL%E5%92%8Clibcuel%E7%9A%84%E5%AE%89%E8%A3%85%E7%9A%84%E5%AE%89%E8%A3%85%E9%80%94%E5%BE%84/" rel="next" title="cURL-06_cURL和libcuel的安装的安装途径">
+                <i class="fa fa-chevron-left"></i> cURL-06_cURL和libcuel的安装的安装途径
               </a>
             
           </div>
@@ -462,10 +474,6 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/11/25/%E8%A7%86%E9%9F%B3%E9%A2%91%E4%B8%ADES-PS-TS-%E7%AD%89%E6%B5%81%E7%9A%84%E5%8C%BA%E5%88%AB/" rel="prev" title="视音频中ES PS TS 等流的区别">
-                视音频中ES PS TS 等流的区别 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -642,7 +650,7 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Vertical-sync-和-Horizontal-sync-信号有三种传送方式："><span class="nav-text">Vertical sync 和 Horizontal sync 信号有三种传送方式：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#举个例子说明timing中包含了哪些信息："><span class="nav-text">举个例子说明timing中包含了哪些信息：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、关于FTP"><span class="nav-text">一、关于FTP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、FTP上传"><span class="nav-text">二、FTP上传</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三、FTP下载"><span class="nav-text">三、FTP下载</span></a></li></ol></div>
             
 
           </div>
