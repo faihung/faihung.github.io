@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>如何配置Windows、虚拟机、开发板的网络</title>
-    <url>/2019/12/08/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/</url>
-    <content><![CDATA[<p>烧录软件和方便调试先要保证电脑windos操作系统、虚拟机linuxr操作系统<br>和开发板三者之间相互Ping通，要做到这些其实很简单：</p>
-<h5 id="1-打开windows网络和共享中心更改适配器设置"><a href="#1-打开windows网络和共享中心更改适配器设置" class="headerlink" title="1. 打开windows网络和共享中心更改适配器设置"></a>1. 打开windows网络和共享中心更改适配器设置</h5><p><img src="/2019/12/08/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/1.png" alt="1"></p>
-<h5 id="2-打开这三个的属性，把VMware-Bridge-Protocol都勾上，如图"><a href="#2-打开这三个的属性，把VMware-Bridge-Protocol都勾上，如图" class="headerlink" title="2. 打开这三个的属性，把VMware Bridge Protocol都勾上，如图"></a>2. 打开这三个的属性，把VMware Bridge Protocol都勾上，如图</h5><p><img src="/2019/12/08/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/403FC9A009834D539C2F725237D99509" alt="2"></p>
-<h5 id="3-打开本地连接的属性再打开IPV4的属性选择使用手动IP如下图所示"><a href="#3-打开本地连接的属性再打开IPV4的属性选择使用手动IP如下图所示" class="headerlink" title="3. 打开本地连接的属性再打开IPV4的属性选择使用手动IP如下图所示"></a>3. 打开本地连接的属性再打开IPV4的属性选择使用手动IP如下图所示</h5><p><img src="/2019/12/08/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/1C8BCDE7A0B0407EB63C6EAFC43B47F2" alt="3"></p>
-<h5 id="4-点击VMware的虚拟机-gt-设置-网络选择桥接如下图所示"><a href="#4-点击VMware的虚拟机-gt-设置-网络选择桥接如下图所示" class="headerlink" title="4. 点击VMware的虚拟机-&gt; 设置 网络选择桥接如下图所示"></a>4. 点击VMware的虚拟机-&gt; 设置 网络选择桥接如下图所示</h5><p><img src="/2019/12/08/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/F17C595B1B994C2FA0711591E9D41A9E" alt="4"></p>
-<p>网络选择桥接如下图所示</p>
-<p><img src="/2019/12/08/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/25A2B065766F448AAEDE178D08450DCD" alt="5"></p>
-<h5 id="5"><a href="#5" class="headerlink" title="5."></a>5.</h5><h6 id="5-1-点击VMware的编辑-gt-虚拟网络编辑器"><a href="#5-1-点击VMware的编辑-gt-虚拟网络编辑器" class="headerlink" title="5.1 点击VMware的编辑-&gt;虚拟网络编辑器"></a>5.1 点击VMware的编辑-&gt;虚拟网络编辑器</h6><p><img src="/2019/12/08/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/684661C0DED5480C929094E908025AAD" alt="6"></p>
-<h6 id="5-2-点击更改设置"><a href="#5-2-点击更改设置" class="headerlink" title="5.2 点击更改设置"></a>5.2 点击更改设置</h6><p><img src="/2019/12/08/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/D3D6B5728BEA4E248AF82EC2A9D6E9E9" alt="7"></p>
-<h6 id="5-3-点击桥接模式，选择自己要桥接的网卡-网卡要记得选对"><a href="#5-3-点击桥接模式，选择自己要桥接的网卡-网卡要记得选对" class="headerlink" title="5.3 点击桥接模式，选择自己要桥接的网卡(网卡要记得选对)"></a>5.3 点击桥接模式，选择自己要桥接的网卡(网卡要记得选对)</h6><p><img src="/2019/12/08/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEWindows%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%81%E5%BC%80%E5%8F%91%E6%9D%BF%E7%9A%84%E7%BD%91%E7%BB%9C/4B06CA55F38E41A7913E16C2AE2D79ED" alt="8"></p>
+    <title>工具-虚拟机的桥接模式和NAT模式的区别</title>
+    <url>/2019/12/08/%E5%B7%A5%E5%85%B7-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E5%92%8CNAT%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<h5 id="1-桥接模式"><a href="#1-桥接模式" class="headerlink" title="1.桥接模式"></a>1.桥接模式</h5><p>通过使用物理机的网卡，有自己的IP地址，就像在电脑上虚拟出来另一台主机，它可以访问网内任何一台主机，需要手工为其配置IP地址、子网掩码、需要和宿主机器处于同一个网段，这样虚拟机才能和宿主机器进行通信。同时，由于这个虚拟系统是局域网中的一个独立主机系统，就可以手工配置他的TCP\IP信息，实现通过局域网的网关或路由进行互联网访问。</p>
+<p><strong>弊端:</strong></p>
+<ol>
+<li><p>Ip地址可能会发生变化 192.150.1.100/192.168.1.101</p>
+</li>
+<li><p>如果这时传递文件时需要依靠交换机/路由器</p>
+</li>
+</ol>
+<p><img src="/2019/12/08/%E5%B7%A5%E5%85%B7-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E5%92%8CNAT%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/1.png" alt="1"></p>
+<h5 id="2-NAT模式"><a href="#2-NAT模式" class="headerlink" title="2.NAT模式"></a>2.NAT模式</h5><p>使用NAT模式，就是让虚拟系统借助NAT（网络地址的转换功能），通过宿主机器所在的网络来访问公网，也就是说使用NAT模式可以实现在虚拟系统里访问互联网，NAT模式下的虚拟系统的TCP/IP配置是由VMnet8（NAT）虚拟网络的DHCP服务器提供的，无法进行手工修改，因此虚拟系统也就无法和本局域网中的其他真是主机进行通讯。采用NAT模式的虚拟机的有点就是，想要接入互联网十分方便，只要宿主机能访问到互联网即可。</p>
+<p><strong>特点:</strong></p>
+<ol>
+<li><p>NAT模式时,只能由真实的计算机连接虚拟网络空间,其他的计算机由于网络不在一个网段内,则不能通信.</p>
+</li>
+<li><p>NAT模式时,IP地址一般都是固定不变的.所以无论在哪里.Ip都能直接连接.</p>
+</li>
+</ol>
+<p><img src="/2019/12/08/%E5%B7%A5%E5%85%B7-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E5%92%8CNAT%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/2.png" alt="2"></p>
 ]]></content>
       <categories>
         <category>工具</category>
       </categories>
       <tags>
-        <tag>Windows</tag>
         <tag>VMware</tag>
         <tag>网络配置</tag>
       </tags>
@@ -474,9 +481,9 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
         <category>C</category>
       </categories>
       <tags>
-        <tag>strcat</tag>
         <tag>指针</tag>
         <tag>ip地址</tag>
+        <tag>strcat</tag>
         <tag>strtok</tag>
       </tags>
   </entry>
@@ -500,10 +507,10 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
         <category>C</category>
       </categories>
       <tags>
+        <tag>指针</tag>
         <tag>全局变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
-        <tag>指针</tag>
       </tags>
   </entry>
   <entry>
@@ -933,9 +940,9 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>字符串拼接</tag>
-        <tag>strcat</tag>
         <tag>sprintf</tag>
+        <tag>strcat</tag>
+        <tag>字符串拼接</tag>
       </tags>
   </entry>
   <entry>
@@ -978,9 +985,9 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
       </categories>
       <tags>
         <tag>sprintf</tag>
+        <tag>sscanf</tag>
         <tag>整数转字符串</tag>
         <tag>字符串转整数</tag>
-        <tag>sscanf</tag>
       </tags>
   </entry>
   <entry>
@@ -1043,10 +1050,10 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sprintf</tag>
-        <tag>sscanf</tag>
         <tag>16进制转10进制</tag>
         <tag>10进制转16进制</tag>
+        <tag>sprintf</tag>
+        <tag>sscanf</tag>
       </tags>
   </entry>
   <entry>
