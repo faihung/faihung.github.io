@@ -4,6 +4,8 @@
     <title>cURL-06_cURL和libcuel的安装的安装途径</title>
     <url>/2019/12/08/cURL-06-cURL%E5%92%8Clibcuel%E7%9A%84%E5%AE%89%E8%A3%85%E7%9A%84%E5%AE%89%E8%A3%85%E9%80%94%E5%BE%84/</url>
     <content><![CDATA[<p>cURL的安装一般有三种方式:<a href="https://ec.haxx.se/" target="_blank" rel="noopener">https://ec.haxx.se/</a></p>
+<a id="more"></a>
+
 <h5 id="一、ubuntu16-04-安装curl，一般用于命令行工具操作"><a href="#一、ubuntu16-04-安装curl，一般用于命令行工具操作" class="headerlink" title="一、ubuntu16.04 安装curl，一般用于命令行工具操作"></a>一、ubuntu16.04 安装curl，一般用于命令行工具操作</h5><h6 id="1-直接安装"><a href="#1-直接安装" class="headerlink" title="1. 直接安装"></a>1. 直接安装</h6><pre><code>sudo apt install curl</code></pre><h6 id="2-或者是下载软件压缩包安装-Ubuntu下安装cURL库用于libcurl开发"><a href="#2-或者是下载软件压缩包安装-Ubuntu下安装cURL库用于libcurl开发" class="headerlink" title="2. 或者是下载软件压缩包安装-Ubuntu下安装cURL库用于libcurl开发"></a>2. 或者是下载软件压缩包安装-Ubuntu下安装cURL库用于libcurl开发</h6><p>2.1 下载curl包（可以在这个网站上找最新的版本 <a href="http://curl.haxx.se/download/）" target="_blank" rel="noopener">http://curl.haxx.se/download/）</a></p>
 <p><img src="/2019/12/08/cURL-06-cURL%E5%92%8Clibcuel%E7%9A%84%E5%AE%89%E8%A3%85%E7%9A%84%E5%AE%89%E8%A3%85%E9%80%94%E5%BE%84/1.png" alt="1"></p>
 <pre><code>wget https://curl.haxx.se/download/curl-7.55.1.tar.gz</code></pre><p>2.2 解压</p>
