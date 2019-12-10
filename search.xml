@@ -37,7 +37,7 @@
       </tags>
   </entry>
   <entry>
-    <title>cURL-06_cURL和libcuel的安装的安装途径</title>
+    <title>cURL-06_cURL和libcurl的安装的安装途径</title>
     <url>/2019/12/08/cURL-06-cURL%E5%92%8Clibcuel%E7%9A%84%E5%AE%89%E8%A3%85%E7%9A%84%E5%AE%89%E8%A3%85%E9%80%94%E5%BE%84/</url>
     <content><![CDATA[<p>cURL的安装一般有三种方式:<a href="https://ec.haxx.se/" target="_blank" rel="noopener">https://ec.haxx.se/</a></p>
 <a id="more"></a>
@@ -1091,9 +1091,9 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sprintf</tag>
         <tag>strcat</tag>
         <tag>字符串拼接</tag>
+        <tag>sprintf</tag>
       </tags>
   </entry>
   <entry>
@@ -1201,9 +1201,9 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
+        <tag>sprintf</tag>
         <tag>16进制转10进制</tag>
         <tag>10进制转16进制</tag>
-        <tag>sprintf</tag>
         <tag>sscanf</tag>
       </tags>
   </entry>
