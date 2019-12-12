@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>cURL-08_ARM交叉编译</title>
+    <url>/2019/12/12/cURL-08-ARM%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91/</url>
+    <content><![CDATA[<p><a href="https://www.faihung.net/2019/12/08/cURL-06-cURL%E5%92%8Clibcuel%E7%9A%84%E5%AE%89%E8%A3%85%E7%9A%84%E5%AE%89%E8%A3%85%E9%80%94%E5%BE%84/">前面</a>提到过libcurl在Ubuntu环境下的编译安装，本章主要是嵌入式环境下的ARM交叉编译</p>
+<p>执行<a href="https://www.faihung.net/2019/12/08/cURL-06-cURL%E5%92%8Clibcuel%E7%9A%84%E5%AE%89%E8%A3%85%E7%9A%84%E5%AE%89%E8%A3%85%E9%80%94%E5%BE%84/">前面</a>的操作之后，进行arm的交叉编译</p>
+<pre><code>./configure --host=arm-himix200-linux CC=arm-himix200-linux-gcc CXX=arm-himix200-linux-g++ </code></pre><a id="more"></a>
+
+
+<p>交叉编译，说实话整了好几个小时没怎么明白，不知道为什么不行。</p>
+<p>但是，我把原有工程的的cURL模块拆分出来，修改了Makefile之后，可以交叉编译可以在设备中运行。</p>
+<p>目前关于cURL的交叉编译就告一段落，之后有时间在研究编译。</p>
+]]></content>
+      <categories>
+        <category>cURL</category>
+      </categories>
+      <tags>
+        <tag>cURL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>cURL-07_Linux下使用libcurl实现FTP文件上传下载功能</title>
     <url>/2019/12/08/cURL-07-Linux%E4%B8%8B%E4%BD%BF%E7%94%A8libcurl%E5%AE%9E%E7%8E%B0FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E5%8A%9F%E8%83%BD/</url>
     <content><![CDATA[<blockquote>
