@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="字节对齐,大小端,pragma pack(),通信设计,数据结构构造,流程图,解耦合," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Faihung's blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="一、16进制数据格式通过串口调试工具验证拿到MCU板子，根据《mcu com软件接口设计方案_v002.xlsx》进行串口调试验证，见下表。">
+<meta name="keywords" content="字节对齐,大小端,pragma pack(),通信设计,数据结构构造,流程图,解耦合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="工程设计-COM口16进制通信设计">
+<meta property="og:url" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;11&#x2F;23&#x2F;%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E8%AE%BE%E8%AE%A1&#x2F;index.html">
+<meta property="og:site_name" content="Faihung&#39;s blog">
+<meta property="og:description" content="一、16进制数据格式通过串口调试工具验证拿到MCU板子，根据《mcu com软件接口设计方案_v002.xlsx》进行串口调试验证，见下表。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;11&#x2F;23&#x2F;%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E8%AE%BE%E8%AE%A1&#x2F;1.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;11&#x2F;23&#x2F;%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E8%AE%BE%E8%AE%A1&#x2F;2.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;11&#x2F;23&#x2F;%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E8%AE%BE%E8%AE%A1&#x2F;3.jpg">
+<meta property="og:updated_time" content="2019-12-14T15:29:56.953Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;11&#x2F;23&#x2F;%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E8%AE%BE%E8%AE%A1&#x2F;1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.faihung.net/2019/11/23/工程设计-COM口16进制通信设计/"/>
+
+
+
+
+
+  <title>工程设计-COM口16进制通信设计 | Faihung's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Faihung's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">作者：faihung</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" target="_blank" rel="noopener" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.faihung.net/2019/11/23/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="faihung">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Faihung's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">工程设计-COM口16进制通信设计</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-23T15:42:21+08:00">
+                2019-11-23
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-12-14T23:29:56+08:00">
+                2019-12-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index">
+                    <span itemprop="name">工程设计</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"> 阅读次数:</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="一、16进制数据格式通过串口调试工具验证"><a href="#一、16进制数据格式通过串口调试工具验证" class="headerlink" title="一、16进制数据格式通过串口调试工具验证"></a>一、16进制数据格式通过串口调试工具验证</h4><p>拿到MCU板子，根据《mcu com软件接口设计方案_v002.xlsx》进行串口调试验证，见下表。</p>
+<a id="more"></a>
+
+<p><img src="/2019/11/23/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E8%AE%BE%E8%AE%A1/1.jpg" alt="1"><br>具体操作是用一个串口监视MCU的运行打印信息，用另一个串口作为16进制指令调试发送。稍微验证符合要求，即可进行下一步。</p>
+<h4 id="二、数据格式耦合-解耦合"><a href="#二、数据格式耦合-解耦合" class="headerlink" title="二、数据格式耦合/解耦合"></a>二、数据格式耦合/解耦合</h4><p>数据的传输最终是按照大小端、高低位一个bit个bit的buffer数组方式进行传输。所以我们发送/接收都需要对数据进行封装与解析。</p>
+<h5 id="2-1-数据结构类型"><a href="#2-1-数据结构类型" class="headerlink" title="2.1    数据结构类型"></a>2.1    数据结构类型</h5><p>根据上图构造一个可拓展的数据结构类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br></pre></td><td class="code"><pre><span class="line">#ifndef _HEX_H_</span><br><span class="line">#define _HEX_H_</span><br><span class="line"></span><br><span class="line">typedef unsigned char UINT8;</span><br><span class="line">typedef unsigned short int UINT16;</span><br><span class="line">typedef unsigned int UINT32;</span><br><span class="line"></span><br><span class="line">#define COMMFRA_SEND_HEAD               0x64</span><br><span class="line">#define COMMFRA_SEND_UP_DOWN            0x01</span><br><span class="line">#define COMMFRA_SEND_TAIL               0x64</span><br><span class="line"></span><br><span class="line">#pragma   pack(1)</span><br><span class="line">typedef enum&#123;//关键字</span><br><span class="line">    RESET,</span><br><span class="line">	SOFT_HARD_VER,</span><br><span class="line">	HEART,</span><br><span class="line">	SET_MCU_TIME,</span><br><span class="line">	GET_MCU_TIME,</span><br><span class="line">	SWITCH_SIM,</span><br><span class="line">	GET_SIM,</span><br><span class="line">	GET_GPS,</span><br><span class="line">	LOW_POWER,</span><br><span class="line">	POWER_STATE,</span><br><span class="line">	POWER_OFF,</span><br><span class="line">	FIRMWARE_UPDATE,</span><br><span class="line">	</span><br><span class="line">	SET_SAMPLING_RATE = 0x10,</span><br><span class="line">	GET_SAMPLING_RATE,</span><br><span class="line">	START_SENSOR,</span><br><span class="line">	STOP_SENSOR,</span><br><span class="line">	CHECK_SENSOR,</span><br><span class="line">	SENSOR_BUFFER_FULL,</span><br><span class="line">	GET_SENSOR,</span><br><span class="line">	UPLOAD_SENSOR,</span><br><span class="line">	</span><br><span class="line">	START_BUZZER = 0x20</span><br><span class="line">&#125;keyword;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">typedef enum&#123;</span><br><span class="line">	KEY1 = 0x55,</span><br><span class="line">	KEY2 = 0xAA,</span><br><span class="line">	KEY3 = 0x01,</span><br><span class="line">	KEY4 = 0x02,</span><br><span class="line">&#125;key;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">联合体里面的单元数组，在定义的时候会按照最大的长度进行分配内存，所以接收到校验和,帧尾有时候会跑到item数据域中去，</span><br><span class="line">后面的结构体的校验和、帧尾会匹配不到。</span><br><span class="line">解决这种问题：</span><br><span class="line">1. 定义发送/接收item数据域的内容时,用指针变量，用的时候malloc堆内存，用的时候再free。但有的时候会遗忘。</span><br><span class="line">2. union中的成员，同一时刻只会用一种，将所有的item数据域的内容长度按照最长的分配。帧尾和校验和在在item数据域中去找。</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">typedef union&#123;</span><br><span class="line"></span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">		&#125;ComFrameDataReset_Request;//item-reset 			</span><br><span class="line">	&#125;ComFrameDataReset;</span><br><span class="line"></span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">		&#125;ComFrameDataVer_Request;  //获取软硬件板本，</span><br><span class="line">	</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 data[2];</span><br><span class="line">		&#125;ComFrameDataVer_Response;  //得到软硬件板本，</span><br><span class="line">	&#125;ComFrameDataVer;//item-Version</span><br><span class="line"></span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[2];</span><br><span class="line">		&#125;ComFrameDataHeart_Request;  </span><br><span class="line">		</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[2];</span><br><span class="line">		&#125;ComFrameDataHeart_Response;</span><br><span class="line">	&#125;ComFrameDataHeart;//item-Heart</span><br><span class="line"></span><br><span class="line">#if 1</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[7];</span><br><span class="line">		&#125;ComFrameDataSetMCUTime_Request;  </span><br><span class="line"> </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[7];</span><br><span class="line">		&#125;ComFrameDataSetMCUTime_Response;  	</span><br><span class="line">	&#125;ComFrameDataSetMCUTime;//item-SetMCUTime	</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">		&#125;ComFrameDataGetMCUTime_Request;  </span><br><span class="line">	</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[7];</span><br><span class="line">		&#125;ComFrameDataGetMCUTime_Response; </span><br><span class="line">	&#125;ComFrameDataGetMCUTime; //item-GetMCUTime</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataSwitchSIM_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[2];</span><br><span class="line">		&#125;ComFrameDataSwitchSIM_Response;</span><br><span class="line">	&#125;ComFrameDataSwitchSIM;//切换SIM卡</span><br><span class="line">		</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">		&#125;ComFrameDataGetSIM_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataGetSIM_Response;</span><br><span class="line">	&#125;ComFrameDataGetSIM;//获取目前使用的SIM卡</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">		&#125;ComFrameDataStartGPS_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">		&#125;ComFrameDataStartGPS_Response;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataGPS_Response;//响应成功or失败</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">		&#125;ComFrameDataGPSGet_Request;//读取GPS坐标，那么下面是不是还有一个响应</span><br><span class="line">		</span><br><span class="line">	&#125;ComFrameDataGPS;//GPS坐标</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">		&#125;ComFrameData4GInLowPower_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameData4GInLowPower_Response; </span><br><span class="line">	&#125;ComFrameData4GInLowPower;//进入低功耗</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">		&#125;ComFrameData4GExitLowPower_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameData4GExitLowPower_Response; </span><br><span class="line">	&#125;ComFrameData4GExitLowPower;//退出低功耗</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">		&#125;ComFrameDataPower_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[12];//这里数据大小的内容长度不能大于强制转换的数组的数据域内容，否则会错位</span><br><span class="line">		&#125;ComFrameDataPower_Response;//是主动获取还是定时上报</span><br><span class="line">	&#125;ComFrameDataPower;//电源情况</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">		&#125;ComFrameDataPowerOff_Request; </span><br><span class="line">	&#125;ComFrameDataPowerOff;</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataPowerOff_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataPowerOff_Response; </span><br><span class="line">	&#125;ComFrameDataFrimwareUpdate;//更新程序</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataSetSampleRate_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataSetSampleRate_Response;</span><br><span class="line">	&#125;ComFrameDataSetSampleRate;//设置采样率</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataGetSampleRate_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataGetSampleRate_Response;</span><br><span class="line">	&#125;ComFrameDataGetSampleRate;//读取采样率</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataStartSensor_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[2];</span><br><span class="line">		&#125;ComFrameDataStartSensor_Response;</span><br><span class="line">	&#125;ComFrameDataStartSensor;//启动传感器</span><br><span class="line"></span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataStopSensor_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[2];</span><br><span class="line">		&#125;ComFrameDataStopSensor_Response;</span><br><span class="line">	&#125;ComFrameDataStopSensor;//停止传感器</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataCheckSensor_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[2];</span><br><span class="line">		&#125;ComFrameDataCheckSensor_Response;</span><br><span class="line">	&#125;ComFrameDataCheckSensor;//传感器自检</span><br><span class="line">		</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[3];</span><br><span class="line">		&#125;ComFrameDataSensorBuffFull_Response;		</span><br><span class="line">	&#125;ComFrameDataSensorBuffFull;//传感器buffer满</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[3];</span><br><span class="line">		&#125;ComFrameDataGetSensor_Request;	</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataGetSensor_Response;				</span><br><span class="line">	&#125;ComFrameDataGetSensor;//获取传感器数据</span><br><span class="line"></span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[2];</span><br><span class="line">		&#125;ComFrameDataStartBuzzer_Request;	</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[2];</span><br><span class="line">		&#125;ComFrameDataStartBuzzer_Response;		</span><br><span class="line">	&#125;ComFrameDataStartBuzzer;//启动蜂鸣器</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;ComFrameDataItem;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">typedef struct&#123;</span><br><span class="line">    UINT8   		frame_start;</span><br><span class="line">    UINT8   		frame_up_down;</span><br><span class="line">	</span><br><span class="line">    UINT8   		frame_key_word;</span><br><span class="line">    UINT16   		frame_datalength;//UINT8 (frame_datalength_high+frame_datalength_low)   		</span><br><span class="line">	</span><br><span class="line">    ComFrameDataItem   frame_item;</span><br><span class="line">	//将校验和帧尾从这里拿出去，放到每一个组包/解包函数中去。</span><br><span class="line">    //UINT8   		frame_CRC;</span><br><span class="line">    //UINT8   		frame_stop;</span><br><span class="line">&#125;ComFrameData;</span><br><span class="line"></span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-2-强制转换和初始化"><a href="#2-2-强制转换和初始化" class="headerlink" title="2.2    强制转换和初始化"></a>2.2    强制转换和初始化</h5><p>数据传输之前，需要将buffer数组强制成转换成我们需要的数据结构类型，然后再进行赋值。<br>数据接收之后，需要将buffer数组强制转换成我们需要的数据结构类型，便于查看。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pdata = (UINT8 *)pData;//将结构体类型强制转换成unsigned char类型</span><br><span class="line">pBuf = (ComFrameData *)fraBuf;//将unsigned char类型强制转换成结构体类型</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-3-注意字节对齐与大小端"><a href="#2-3-注意字节对齐与大小端" class="headerlink" title="2.3    注意字节对齐与大小端"></a>2.3    注意字节对齐与大小端</h5><p>整个数据结构中有char型、short型、char型数组，所以需要考虑到32位机字节对齐的问题。加上：</p>
+<pre><code>#pragma   pack(1)，强制连续存放，对齐边界为1。</code></pre><h4 id="三、数据格式的组包-解包"><a href="#三、数据格式的组包-解包" class="headerlink" title="三、数据格式的组包/解包"></a>三、数据格式的组包/解包</h4><p>数据传输时，需要对数据进行初始化、校验、打包。</p>
+<h5 id="3-1-校验和"><a href="#3-1-校验和" class="headerlink" title="3.1 校验和"></a>3.1 校验和</h5><p>在组包解包之前有校验和，这里从帧头开始到校验和之前开始累加，对最低byte取反即可。具体代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">UINT8 checksum(ComFrameData *pData, int len)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    int i,sum=0;</span><br><span class="line">    UINT8 ccsum=0;  </span><br><span class="line">	UINT8 *pdata;</span><br><span class="line">	pdata = (UINT8 *)pData;//将结构体类型强制转换成char类型</span><br><span class="line">	</span><br><span class="line">    for(i=0;i&lt;len;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        #if 1</span><br><span class="line">        printf(&quot;%X\n&quot;,*pdata);</span><br><span class="line">        #endif</span><br><span class="line">        sum += *(pdata++); </span><br><span class="line">    &#125;</span><br><span class="line">    ccsum = ~(sum&amp;0xFF);  </span><br><span class="line">	</span><br><span class="line">#if 1</span><br><span class="line">    printf(&quot;累加和:0x%X\n&quot;,sum);</span><br><span class="line">    printf(&quot;校验和:0x%X\n&quot;,ccsum);</span><br><span class="line">#endif</span><br><span class="line">    return ccsum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-2-将要Request的组包"><a href="#3-2-将要Request的组包" class="headerlink" title="3.2 将要Request的组包"></a>3.2 将要Request的组包</h5><p>举个例子，对上图Excel表中的reset命令进行组包，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">void commFraSend_ResetBulid_Request(UINT8 *fraBuf, UINT8 *plen)</span><br><span class="line">&#123;</span><br><span class="line">	ComFrameData *pBuf;</span><br><span class="line">	pBuf = (ComFrameData *)fraBuf;//将char类型强制转换成结构体类型</span><br><span class="line">	UINT8 frame_CRC,frame_stop;	</span><br><span class="line">	</span><br><span class="line">	pBuf-&gt;frame_start   		= COMMFRA_SEND_HEAD;	//64</span><br><span class="line">	pBuf-&gt;frame_up_down 		= COMMFRA_SEND_UP_DOWN; //1</span><br><span class="line">	pBuf-&gt;frame_key_word		= RESET;				//0 </span><br><span class="line">	</span><br><span class="line">	pBuf-&gt;frame_datalength		= 0x0001;				//高低位 大小端</span><br><span class="line">	pBuf-&gt;frame_item.ComFrameDataReset.ComFrameDataReset_Request.item_key	= KEY1;					//55</span><br><span class="line">	</span><br><span class="line">	frame_CRC 			= checksum(pBuf,6);</span><br><span class="line">	frame_stop    		= COMMFRA_SEND_TAIL;</span><br><span class="line">	printf(&quot;帧尾:0x%X\n&quot;,frame_stop);</span><br><span class="line">	*plen = sizeof(pBuf-&gt;frame_start)</span><br><span class="line">			+sizeof(pBuf-&gt;frame_up_down)</span><br><span class="line">			+sizeof(pBuf-&gt;frame_key_word)</span><br><span class="line">			+sizeof(pBuf-&gt;frame_datalength)</span><br><span class="line">			+sizeof(pBuf-&gt;frame_item.ComFrameDataReset.ComFrameDataReset_Request.item_key)</span><br><span class="line">			+sizeof(frame_CRC)</span><br><span class="line">			+sizeof(frame_stop);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-3-将要Response的解包"><a href="#3-3-将要Response的解包" class="headerlink" title="3.3 将要Response的解包"></a>3.3 将要Response的解包</h5><p>举个例子，对上图Excel表中的Response命令进行解包包，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">void commFraSend_SetMCUTimeAnalysis_Response(UINT8 *fraBuf)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	char i,item_len;</span><br><span class="line">	ComFrameData *pBuf;</span><br><span class="line">	pBuf = (ComFrameData *)fraBuf;//将char类型强制转换成结构体类型</span><br><span class="line">	UINT8 frame_CRC,frame_stop;</span><br><span class="line">	</span><br><span class="line">	printf(&quot;帧头:0x%X\n&quot;,pBuf-&gt;frame_start);</span><br><span class="line">	printf(&quot;上下行:0x%X\n&quot;,pBuf-&gt;frame_up_down);</span><br><span class="line">	printf(&quot;关键字:0x%X\n&quot;,pBuf-&gt;frame_key_word);</span><br><span class="line">	</span><br><span class="line">	item_len = (pBuf-&gt;frame_datalength&amp;0xFF)|(pBuf-&gt;frame_datalength&gt;&gt;8);</span><br><span class="line">	printf(&quot;数据长度:0x%X\n&quot;,item_len);</span><br><span class="line">	</span><br><span class="line">	printf(&quot;数据域-Key:0x%X\n&quot;,pBuf-&gt;frame_item.ComFrameDataSetMCUTime.ComFrameDataSetMCUTime_Response.item_key);</span><br><span class="line">	for(i=0;i&lt;item_len-1;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;数据域内容:0x%X\n&quot;,pBuf-&gt;frame_item.ComFrameDataSetMCUTime.ComFrameDataSetMCUTime_Response.item_data[i]);</span><br><span class="line">	&#125;	</span><br><span class="line">	</span><br><span class="line">	frame_CRC = pBuf-&gt;frame_item.ComFrameDataSetMCUTime.ComFrameDataSetMCUTime_Response.item_data[i];</span><br><span class="line">	frame_stop = pBuf-&gt;frame_item.ComFrameDataSetMCUTime.ComFrameDataSetMCUTime_Response.item_data[i+1];</span><br><span class="line">	</span><br><span class="line">	printf(&quot;校验:0x%X\n&quot;,frame_CRC);</span><br><span class="line">	printf(&quot;帧尾:0x%X\n&quot;,frame_stop);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="3-4-对接收数据进行的异常处理"><a href="#3-4-对接收数据进行的异常处理" class="headerlink" title="3.4 对接收数据进行的异常处理"></a>3.4 对接收数据进行的异常处理</h5><p>关于异常处理与提取,接收数据可能是20个byte,需要在这20个byte中提取有效的长度。</p>
+<ol>
+<li>这个有效长度必须满足收尾都是0x64</li>
+<li>这个有效长度最短长度不得少于8个byte</li>
+<li>这个有效长度的数据必须符合校验和的计算方式</li>
+<li>满足上面3条即可提取这个数据帧</li>
+<li>注意:在真正想要的数据帧之间是没有0x64的,这种情况先假设它不存在(后面会根据校验和的方式来处理)</li>
+</ol>
+<p>代码如下：（循环遍历+判断条件）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">UINT8 ReceiveBuf[20] = &#123;</span><br><span class="line">0x00, 0x64, 0x00, 0x64, 0x01, 0x04, 0x00, 0x08, </span><br><span class="line">0x55, 0x07, 0xE2, 0x01, 0x06, 0x01, 0x1C, 0x18, </span><br><span class="line">0x14, 0x64, 0x30, 0x11&#125;;//模拟接收到的MCU响应的时间</span><br><span class="line"></span><br><span class="line">void exception_handling_extract(UINT8 *fraBuf, UINT8 buflen, UINT8 **prealBUF, UINT8 *preallen)</span><br><span class="line">&#123;</span><br><span class="line">	UINT8 len = 0;//n = 0,</span><br><span class="line">	UINT8 *pcur,*p;//*pBuf,</span><br><span class="line">	</span><br><span class="line">	printf(&quot;接收到的数据的长度是:%d\n&quot;,buflen);</span><br><span class="line">	p = fraBuf;</span><br><span class="line">	while(buflen--)</span><br><span class="line">	&#123;</span><br><span class="line">		if(*p == 0x64)</span><br><span class="line">		&#123;</span><br><span class="line">			pcur = p;</span><br><span class="line">			while(buflen--)</span><br><span class="line">			&#123;</span><br><span class="line">				p++;</span><br><span class="line">				if(*p == 0x64)</span><br><span class="line">				&#123;</span><br><span class="line">					len = p-pcur;</span><br><span class="line">					printf(&quot;两个0x64之间的数据长度:%d\n&quot;,len);</span><br><span class="line">					if(len&gt;=8)</span><br><span class="line">					&#123;</span><br><span class="line">						//进行相应的校验和计算</span><br><span class="line">						if(*(p-1) == checksum((ComFrameData*)pcur,len-1))</span><br><span class="line">						&#123;</span><br><span class="line">							printf(&quot;这个真实帧的校验和满足条件!\n&quot;);</span><br><span class="line">							//开始提取这个有效的数据帧</span><br><span class="line">							*preallen = len+1;</span><br><span class="line">							*prealBUF = pcur;</span><br><span class="line">							break;</span><br><span class="line">						&#125;else&#123;</span><br><span class="line">							printf(&quot;这个真实帧的校验和不满足条件!\n&quot;);</span><br><span class="line">						&#125;</span><br><span class="line">						</span><br><span class="line">					&#125;else&#123;</span><br><span class="line">						//说明真正想要的数据帧帧头不是前面的一个0x64,可能是这一个,或者是下一个。之后继续对p进行遍历</span><br><span class="line">						pcur = p;</span><br><span class="line">						len = 0;</span><br><span class="line">					&#125;	</span><br><span class="line">				&#125;</span><br><span class="line">				</span><br><span class="line">				printf(&quot;此时N2的长度是:%d\n&quot;,buflen);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		p++;	</span><br><span class="line">		printf(&quot;此时N1的长度是:%d\n&quot;,buflen);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="四、SEND-RECEIVE-数据"><a href="#四、SEND-RECEIVE-数据" class="headerlink" title="四、SEND/RECEIVE-数据"></a>四、SEND/RECEIVE-数据</h4><p>海思和MCU通信是通过串口通信，这里有现成的接口函数，驱动部分不需要做出太多的改动，现在主要考虑的应用逻辑部分。</p>
+<h5 id="4-1-数据长度必须要满足最小值"><a href="#4-1-数据长度必须要满足最小值" class="headerlink" title="4.1    数据长度必须要满足最小值"></a>4.1    数据长度必须要满足最小值</h5><h5 id="4-2-帧头、帧尾要符合要求，最好要有冗余检测"><a href="#4-2-帧头、帧尾要符合要求，最好要有冗余检测" class="headerlink" title="4.2    帧头、帧尾要符合要求，最好要有冗余检测"></a>4.2    帧头、帧尾要符合要求，最好要有冗余检测</h5><h5 id="4-3-校验对比"><a href="#4-3-校验对比" class="headerlink" title="4.3    校验对比"></a>4.3    校验对比</h5><p>前面在组包的时候已经有了，在接收数据的时候可以对刚接收到的数据进行校验对比。</p>
+<h5 id="4-4-发送数据之后是否有反馈"><a href="#4-4-发送数据之后是否有反馈" class="headerlink" title="4.4    发送数据之后是否有反馈"></a>4.4    发送数据之后是否有反馈</h5><p>根据下面(5 软件图&amp;流程图)可以看到有些是有反馈的有些是没有反馈的。</p>
+<h4 id="五、软件图-amp-流程图"><a href="#五、软件图-amp-流程图" class="headerlink" title="五、软件图&amp;流程图"></a>五、软件图&amp;流程图</h4><h5 id="5-1-Request-Response图"><a href="#5-1-Request-Response图" class="headerlink" title="5.1 Request Response图"></a>5.1 Request Response图</h5><p><img src="/2019/11/23/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E8%AE%BE%E8%AE%A1/2.jpg" alt="2"></p>
+<h5 id="5-1-流程图"><a href="#5-1-流程图" class="headerlink" title="5.1 流程图"></a>5.1 流程图</h5><p><img src="/2019/11/23/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E8%AE%BE%E8%AE%A1/3.jpg" alt="3"></p>
+<h4 id="六、完整版程序代码"><a href="#六、完整版程序代码" class="headerlink" title="六、完整版程序代码"></a>六、完整版程序代码</h4><p>配合《mcu com软件接口设计方案》,且测试验证通过，支持和MCU多次重发3次、支持多次重读20次，每次1ms,且可设置参数。<br><a href="https://github.com/faihung/test/tree/master/5-16%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1" target="_blank" rel="noopener">参考代码</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%AD%97%E8%8A%82%E5%AF%B9%E9%BD%90/" rel="tag"># 字节对齐</a>
+          
+            <a href="/tags/%E5%A4%A7%E5%B0%8F%E7%AB%AF/" rel="tag"># 大小端</a>
+          
+            <a href="/tags/pragma-pack/" rel="tag"># pragma pack()</a>
+          
+            <a href="/tags/%E9%80%9A%E4%BF%A1%E8%AE%BE%E8%AE%A1/" rel="tag"># 通信设计</a>
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%9E%84%E9%80%A0/" rel="tag"># 数据结构构造</a>
+          
+            <a href="/tags/%E6%B5%81%E7%A8%8B%E5%9B%BE/" rel="tag"># 流程图</a>
+          
+            <a href="/tags/%E8%A7%A3%E8%80%A6%E5%90%88/" rel="tag"># 解耦合</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/17/%E8%A7%86%E9%9F%B3%E9%A2%91-%E8%A7%86%E9%9F%B3%E9%A2%91%E4%BF%A1%E5%8F%B7%E7%A7%8D%E7%B1%BB%E5%92%8C%E7%89%A9%E7%90%86%E6%8E%A5%E5%8F%A3/" rel="next" title="视音频-视音频信号种类和物理接口">
+                <i class="fa fa-chevron-left"></i> 视音频-视音频信号种类和物理接口
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/23/C%E8%AF%AD%E8%A8%80-%E4%BB%8E%E4%B8%80%E5%8C%85%E6%95%B0%E6%8D%AE%E4%B8%AD%E6%8F%90%E5%8F%96%E6%9C%89%E6%95%88%E7%9A%84%E6%95%B0%E6%8D%AE%E5%B8%A7/" rel="prev" title="C语言-从一包数据中提取有效的数据帧">
+                C语言-从一包数据中提取有效的数据帧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="faihung" />
+            
+              <p class="site-author-name" itemprop="name">faihung</p>
+              <p class="site-description motion-element" itemprop="description">系统、归纳、总结</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/faihung" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/faihung" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://bbs.ebaina.com/forum.php" title="Ebaina" target="_blank">Ebaina</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.amobbs.com/index.php" title="amoBBS" target="_blank">amoBBS</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、16进制数据格式通过串口调试工具验证"><span class="nav-text">一、16进制数据格式通过串口调试工具验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、数据格式耦合-解耦合"><span class="nav-text">二、数据格式耦合/解耦合</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-数据结构类型"><span class="nav-text">2.1    数据结构类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-强制转换和初始化"><span class="nav-text">2.2    强制转换和初始化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-注意字节对齐与大小端"><span class="nav-text">2.3    注意字节对齐与大小端</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、数据格式的组包-解包"><span class="nav-text">三、数据格式的组包/解包</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-校验和"><span class="nav-text">3.1 校验和</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-将要Request的组包"><span class="nav-text">3.2 将要Request的组包</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-将要Response的解包"><span class="nav-text">3.3 将要Response的解包</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-4-对接收数据进行的异常处理"><span class="nav-text">3.4 对接收数据进行的异常处理</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、SEND-RECEIVE-数据"><span class="nav-text">四、SEND/RECEIVE-数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-数据长度必须要满足最小值"><span class="nav-text">4.1    数据长度必须要满足最小值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-帧头、帧尾要符合要求，最好要有冗余检测"><span class="nav-text">4.2    帧头、帧尾要符合要求，最好要有冗余检测</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-3-校验对比"><span class="nav-text">4.3    校验对比</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-4-发送数据之后是否有反馈"><span class="nav-text">4.4    发送数据之后是否有反馈</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五、软件图-amp-流程图"><span class="nav-text">五、软件图&amp;流程图</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-1-Request-Response图"><span class="nav-text">5.1 Request Response图</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-1-流程图"><span class="nav-text">5.1 流程图</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#六、完整版程序代码"><span class="nav-text">六、完整版程序代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">faihung</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"> 访客人数:</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"> 总访问量:</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
