@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.faihung.net/"/>
-  <updated>2019-12-14T15:25:12.233Z</updated>
+  <updated>2019-12-14T16:14:09.103Z</updated>
   <id>http://www.faihung.net/</id>
   
   <author>
@@ -21,13 +21,27 @@
     <link href="http://www.faihung.net/2019/12/14/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/"/>
     <id>http://www.faihung.net/2019/12/14/工程设计-FTP文件上传与下载/</id>
     <published>2019-12-14T15:25:12.000Z</published>
-    <updated>2019-12-14T15:25:12.233Z</updated>
+    <updated>2019-12-14T16:14:09.103Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="主要目的"><a href="#主要目的" class="headerlink" title="主要目的"></a>主要目的</h4><h5 id="下载文件"><a href="#下载文件" class="headerlink" title="下载文件"></a>下载文件</h5><h6 id="应用程序"><a href="#应用程序" class="headerlink" title="应用程序"></a>应用程序</h6><p>av_streamer input_streamer output_app</p><a id="more"></a><h6 id="系统库"><a href="#系统库" class="headerlink" title="系统库"></a>系统库</h6><p>libapp_para.so<br>libntptime.so<br>libsys_commom.so<br>libsys_serial.so<br>libdevsdk.so<br>librtmp_push.so<br>libsys_httppro.so<br>libdhclient.so<br>librtsp.so<br>libsys_media.so<br>libnnie_ai.so<br>libsys_base.so<br>libsys_mp4_storage.so</p><h6 id="MCU程序"><a href="#MCU程序" class="headerlink" title="MCU程序"></a>MCU程序</h6><p>和上面类似（略）</p><h5 id="上传日志"><a href="#上传日志" class="headerlink" title="上传日志"></a>上传日志</h5><p>程序运行记录（略）</p><h4 id="第一阶段-正常环境下"><a href="#第一阶段-正常环境下" class="headerlink" title="第一阶段-正常环境下"></a>第一阶段-正常环境下</h4><p>还是直接看图比较直观。<br><img src="/2019/12/14/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/1.png" alt="1"></p><h4 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h4><p><a href="https://github.com/faihung/cURL" target="_blank" rel="noopener">参考代码</a></p>]]></content>
     
     <summary type="html">
+    
+      &lt;h4 id=&quot;主要目的&quot;&gt;&lt;a href=&quot;#主要目的&quot; class=&quot;headerlink&quot; title=&quot;主要目的&quot;&gt;&lt;/a&gt;主要目的&lt;/h4&gt;&lt;h5 id=&quot;下载文件&quot;&gt;&lt;a href=&quot;#下载文件&quot; class=&quot;headerlink&quot; title=&quot;下载文件&quot;&gt;&lt;/a&gt;下载文件&lt;/h5&gt;&lt;h6 id=&quot;应用程序&quot;&gt;&lt;a href=&quot;#应用程序&quot; class=&quot;headerlink&quot; title=&quot;应用程序&quot;&gt;&lt;/a&gt;应用程序&lt;/h6&gt;&lt;p&gt;av_streamer input_streamer output_app&lt;/p&gt;
     
     </summary>
     
     
+      <category term="工程设计" scheme="http://www.faihung.net/categories/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1/"/>
+    
+    
+      <category term="cURL" scheme="http://www.faihung.net/tags/cURL/"/>
+    
+      <category term="FTP" scheme="http://www.faihung.net/tags/FTP/"/>
+    
+      <category term="流程图" scheme="http://www.faihung.net/tags/%E6%B5%81%E7%A8%8B%E5%9B%BE/"/>
+    
+      <category term="http" scheme="http://www.faihung.net/tags/http/"/>
     
   </entry>
   

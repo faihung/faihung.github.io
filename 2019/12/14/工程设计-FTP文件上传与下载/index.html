@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="cURL,FTP,流程图,http," />
 
 
 
@@ -81,16 +81,18 @@
 
 
 
-<meta name="description" content="系统、归纳、总结">
-<meta name="keywords" content="个人博客">
+<meta name="description" content="主要目的下载文件应用程序av_streamer input_streamer output_app">
+<meta name="keywords" content="cURL,FTP,流程图,http">
 <meta property="og:type" content="article">
 <meta property="og:title" content="工程设计-FTP文件上传与下载">
 <meta property="og:url" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;14&#x2F;%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD&#x2F;index.html">
 <meta property="og:site_name" content="Faihung&#39;s blog">
-<meta property="og:description" content="系统、归纳、总结">
+<meta property="og:description" content="主要目的下载文件应用程序av_streamer input_streamer output_app">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-14T15:25:12.233Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;14&#x2F;%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD&#x2F;1.png">
+<meta property="og:updated_time" content="2019-12-14T16:14:09.103Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;14&#x2F;%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD&#x2F;1.png">
 
 
 
@@ -342,12 +344,34 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-12-14T23:25:12+08:00">
-                2019-12-14
+              <time title="更新于" itemprop="dateModified" datetime="2019-12-15T00:14:09+08:00">
+                2019-12-15
               </time>
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index">
+                    <span itemprop="name">工程设计</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -381,7 +405,15 @@
       
 
       
-        
+        <h4 id="主要目的"><a href="#主要目的" class="headerlink" title="主要目的"></a>主要目的</h4><h5 id="下载文件"><a href="#下载文件" class="headerlink" title="下载文件"></a>下载文件</h5><h6 id="应用程序"><a href="#应用程序" class="headerlink" title="应用程序"></a>应用程序</h6><p>av_streamer input_streamer output_app</p>
+<a id="more"></a>
+
+<h6 id="系统库"><a href="#系统库" class="headerlink" title="系统库"></a>系统库</h6><p>libapp_para.so<br>libntptime.so<br>libsys_commom.so<br>libsys_serial.so<br>libdevsdk.so<br>librtmp_push.so<br>libsys_httppro.so<br>libdhclient.so<br>librtsp.so<br>libsys_media.so<br>libnnie_ai.so<br>libsys_base.so<br>libsys_mp4_storage.so</p>
+<h6 id="MCU程序"><a href="#MCU程序" class="headerlink" title="MCU程序"></a>MCU程序</h6><p>和上面类似（略）</p>
+<h5 id="上传日志"><a href="#上传日志" class="headerlink" title="上传日志"></a>上传日志</h5><p>程序运行记录（略）</p>
+<h4 id="第一阶段-正常环境下"><a href="#第一阶段-正常环境下" class="headerlink" title="第一阶段-正常环境下"></a>第一阶段-正常环境下</h4><p>还是直接看图比较直观。<br><img src="/2019/12/14/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/1.png" alt="1"></p>
+<h4 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h4><p><a href="https://github.com/faihung/cURL" target="_blank" rel="noopener">参考代码</a></p>
+
       
     </div>
     
@@ -395,6 +427,18 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/cURL/" rel="tag"># cURL</a>
+          
+            <a href="/tags/FTP/" rel="tag"># FTP</a>
+          
+            <a href="/tags/%E6%B5%81%E7%A8%8B%E5%9B%BE/" rel="tag"># 流程图</a>
+          
+            <a href="/tags/http/" rel="tag"># http</a>
+          
+        </div>
       
 
       
@@ -465,8 +509,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -507,7 +560,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -571,6 +624,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要目的"><span class="nav-text">主要目的</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#下载文件"><span class="nav-text">下载文件</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#应用程序"><span class="nav-text">应用程序</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#系统库"><span class="nav-text">系统库</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#MCU程序"><span class="nav-text">MCU程序</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#上传日志"><span class="nav-text">上传日志</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第一阶段-正常环境下"><span class="nav-text">第一阶段-正常环境下</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#附录"><span class="nav-text">附录</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
