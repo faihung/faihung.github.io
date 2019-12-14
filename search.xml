@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>问题-notepadd++  ANSI编码与UTF-8编码</title>
+    <url>/2019/12/15/%E9%97%AE%E9%A2%98-notepadd-ANSI%E7%BC%96%E7%A0%81%E4%B8%8EUTF-8%E7%BC%96%E7%A0%81/</url>
+    <content><![CDATA[<p>之前有一种见鬼的感觉，主要表现在写脚本上（写脚本主要是因为空格的原因），写程序倒是不会出现。结果导致脚本执行不成功。</p>
+<a id="more"></a>
+
+<p>使用UTF-8编码</p>
+<p><img src="/2019/12/15/%E9%97%AE%E9%A2%98-notepadd-ANSI%E7%BC%96%E7%A0%81%E4%B8%8EUTF-8%E7%BC%96%E7%A0%81/1.png" alt="1"></p>
+<p>使用ANSI编码</p>
+<p><img src="/2019/12/15/%E9%97%AE%E9%A2%98-notepadd-ANSI%E7%BC%96%E7%A0%81%E4%B8%8EUTF-8%E7%BC%96%E7%A0%81/2.png" alt="2"></p>
+<p>这种情况要记住，以后不要在这上面浪费时间了。</p>
+]]></content>
+      <categories>
+        <category>问题</category>
+      </categories>
+      <tags>
+        <tag>notepadd</tag>
+        <tag>UTF-8</tag>
+        <tag>ANSI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>工程设计-html boa cgi上传文件</title>
+    <url>/2019/12/15/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-html-boa-cgi%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<p>暂略</p>
+]]></content>
+      <categories>
+        <category>工程设计</category>
+      </categories>
+      <tags>
+        <tag>html</tag>
+        <tag>boa</tag>
+        <tag>cgi</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>工程设计-FTP文件上传与下载</title>
     <url>/2019/12/14/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/</url>
     <content><![CDATA[<h4 id="主要目的"><a href="#主要目的" class="headerlink" title="主要目的"></a>主要目的</h4><h5 id="下载文件"><a href="#下载文件" class="headerlink" title="下载文件"></a>下载文件</h5><h6 id="应用程序"><a href="#应用程序" class="headerlink" title="应用程序"></a>应用程序</h6><p>av_streamer input_streamer output_app</p>
