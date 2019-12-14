@@ -439,9 +439,9 @@
     
       <category term="指针" scheme="http://www.faihung.net/tags/%E6%8C%87%E9%92%88/"/>
     
-      <category term="strcat" scheme="http://www.faihung.net/tags/strcat/"/>
-    
       <category term="ip地址" scheme="http://www.faihung.net/tags/ip%E5%9C%B0%E5%9D%80/"/>
+    
+      <category term="strcat" scheme="http://www.faihung.net/tags/strcat/"/>
     
       <category term="strtok" scheme="http://www.faihung.net/tags/strtok/"/>
     
@@ -472,13 +472,13 @@
       <category term="C" scheme="http://www.faihung.net/categories/C/"/>
     
     
+      <category term="指针" scheme="http://www.faihung.net/tags/%E6%8C%87%E9%92%88/"/>
+    
       <category term="全局变量" scheme="http://www.faihung.net/tags/%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F/"/>
     
       <category term="生存周期" scheme="http://www.faihung.net/tags/%E7%94%9F%E5%AD%98%E5%91%A8%E6%9C%9F/"/>
     
       <category term="内存分配" scheme="http://www.faihung.net/tags/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/"/>
-    
-      <category term="指针" scheme="http://www.faihung.net/tags/%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
