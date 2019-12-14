@@ -327,9 +327,9 @@ stemp 4 make install</code></pre><p>2.4 使用 curl –version 检查是否更�
         <category>工具</category>
       </categories>
       <tags>
+        <tag>Windows</tag>
         <tag>VMware</tag>
         <tag>网络配置</tag>
-        <tag>Windows</tag>
       </tags>
   </entry>
   <entry>
@@ -801,8 +801,8 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
       </categories>
       <tags>
         <tag>指针</tag>
-        <tag>ip地址</tag>
         <tag>strcat</tag>
+        <tag>ip地址</tag>
         <tag>strtok</tag>
       </tags>
   </entry>
@@ -826,10 +826,10 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
         <category>C</category>
       </categories>
       <tags>
-        <tag>指针</tag>
         <tag>全局变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
+        <tag>指针</tag>
       </tags>
   </entry>
   <entry>
@@ -1259,9 +1259,9 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>strcat</tag>
         <tag>sprintf</tag>
         <tag>字符串拼接</tag>
+        <tag>strcat</tag>
       </tags>
   </entry>
   <entry>
@@ -1682,14 +1682,14 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
       </tags>
   </entry>
   <entry>
-    <title>虚拟机VMware与Windows主机共享文件介绍</title>
-    <url>/2019/11/03/%E8%99%9A%E6%8B%9F%E6%9C%BAVMware%E4%B8%8EWindows%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D/</url>
+    <title>工具-虚拟机VMware与Windows主机共享文件介绍</title>
+    <url>/2019/11/03/%E5%B7%A5%E5%85%B7-%E8%99%9A%E6%8B%9F%E6%9C%BAVMware%E4%B8%8EWindows%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D/</url>
     <content><![CDATA[<h5 id="一、设置共享文件夹功能"><a href="#一、设置共享文件夹功能" class="headerlink" title="一、设置共享文件夹功能"></a>一、设置共享文件夹功能</h5><p>虚拟机VMware提供了在宿主机与虚拟机系统之间交换文件的共享文件夹（Shared Folder）功能。不管虚拟机操作系统是Linux还是Windows都可用。你可以通过设置（ Settings）&gt;共享文件夹（Shared Folder）来设置。但是此功能选项必须要安装虚拟机工具（VMware Tools），否则如下所示，否则该功能选项不可用。</p>
-<p><img src="/2019/11/03/%E8%99%9A%E6%8B%9F%E6%9C%BAVMware%E4%B8%8EWindows%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D/1.jpg" alt="1"></p>
+<p><img src="/2019/11/03/%E5%B7%A5%E5%85%B7-%E8%99%9A%E6%8B%9F%E6%9C%BAVMware%E4%B8%8EWindows%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D/1.jpg" alt="1"></p>
 <a id="more"></a>
 <h5 id="二、安装虚拟机工具步骤如下所示："><a href="#二、安装虚拟机工具步骤如下所示：" class="headerlink" title="二、安装虚拟机工具步骤如下所示："></a>二、安装虚拟机工具步骤如下所示：</h5><h6 id="1-在对应虚拟机的设置选项（Settings-下，为虚拟机光驱指定虚拟机系统的镜像文件。"><a href="#1-在对应虚拟机的设置选项（Settings-下，为虚拟机光驱指定虚拟机系统的镜像文件。" class="headerlink" title="1. 在对应虚拟机的设置选项（Settings)下，为虚拟机光驱指定虚拟机系统的镜像文件。"></a>1. 在对应虚拟机的设置选项（Settings)下，为虚拟机光驱指定虚拟机系统的镜像文件。</h6><p>注意：在执行下面步骤前，必须确保虚拟机的电源开启、虚拟机系统正在运行。</p>
-<p><img src="/2019/11/03/%E8%99%9A%E6%8B%9F%E6%9C%BAVMware%E4%B8%8EWindows%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D/2.png" alt="2"></p>
-<h6 id="2-在VM下选择”Install-VMware-Tools”"><a href="#2-在VM下选择”Install-VMware-Tools”" class="headerlink" title="2. 在VM下选择”Install VMware Tools”."></a>2. 在VM下选择”Install VMware Tools”.</h6><p><img src="/2019/11/03/%E8%99%9A%E6%8B%9F%E6%9C%BAVMware%E4%B8%8EWindows%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D/3.png" alt="3"></p>
+<p><img src="/2019/11/03/%E5%B7%A5%E5%85%B7-%E8%99%9A%E6%8B%9F%E6%9C%BAVMware%E4%B8%8EWindows%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D/2.png" alt="2"></p>
+<h6 id="2-在VM下选择”Install-VMware-Tools”"><a href="#2-在VM下选择”Install-VMware-Tools”" class="headerlink" title="2. 在VM下选择”Install VMware Tools”."></a>2. 在VM下选择”Install VMware Tools”.</h6><p><img src="/2019/11/03/%E5%B7%A5%E5%85%B7-%E8%99%9A%E6%8B%9F%E6%9C%BAVMware%E4%B8%8EWindows%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D/3.png" alt="3"></p>
 <ol start="3">
 <li>然后安装虚拟机组件工具，详细步骤如下所示：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@DB-Server ~]# cd /mnt</span><br><span class="line">[root@DB-Server mnt]# mkdir cdrom</span><br><span class="line">[root@DB-Server mnt]# mount /dev/cdrom  /mnt/cdrom</span><br><span class="line">[root@DB-Server mnt]# cd /mnt/cdrom</span><br><span class="line">[root@DB-Server cdrom]# cp  VMwareTools-8.8.2-590212.tar.gz /tmp</span><br><span class="line">[root@DB-Server cdrom]#tar xz</span><br><span class="line">[root@DB-Server tmp]# ls</span><br><span class="line">gconfd-root     orbit-root           VMwareTools-8.8.2-590212.tar.gz</span><br><span class="line">keyring-qO15Cg  ssh-EWUeHQ4064       vmware-tools-distrib</span><br><span class="line">mapping-root    virtual-root.9mZzaq</span><br><span class="line">[root@DB-Server tmp]# cd vmware-tools-distrib/</span><br><span class="line">[root@DB-Server vmware-tools-distrib]# ls</span><br><span class="line">bin  doc  etc  FILES  INSTALL  installer  lib  vmware-install.pl</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">[root@DB-Server vmware-tools-distrib]# ./vmware-install.pl </span><br><span class="line">A previous installation of VMware Tools has been detected.</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">之后直接安装即可。</span><br></pre></td></tr></table></figure>
 安装完成后重启虚拟机</li>
@@ -1704,13 +1704,13 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
       </tags>
   </entry>
   <entry>
-    <title>Source Insight 使用技巧整理</title>
-    <url>/2019/11/03/Source-Insight-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E6%95%B4%E7%90%86/</url>
+    <title>工具-Source Insight 使用技巧整理</title>
+    <url>/2019/11/03/%E5%B7%A5%E5%85%B7-Source-Insight-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E6%95%B4%E7%90%86/</url>
     <content><![CDATA[<h4 id="通用设置"><a href="#通用设置" class="headerlink" title="通用设置"></a>通用设置</h4><p>Options - File Type Options:</p>
 <ul>
 <li>显示行号：勾选Show line mumbers</li>
 <li>选中自动高亮：勾选Hightlight references to selected sysmbol</li>
-<li>转换tab成空格：勾选Expand tabs to spaces，设置Tab width：4<br><img src="/2019/11/03/Source-Insight-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E6%95%B4%E7%90%86/1.png" alt="1"></li>
+<li>转换tab成空格：勾选Expand tabs to spaces，设置Tab width：4<br><img src="/2019/11/03/%E5%B7%A5%E5%85%B7-Source-Insight-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E6%95%B4%E7%90%86/1.png" alt="1"></li>
 </ul>
 <a id="more"></a>
 <p><strong>高亮选中符号：</strong><br>F8</p>
@@ -1727,7 +1727,7 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
 </ol>
 <p><strong>替换：</strong><br>Ctrl + h<br><strong>查找：</strong><br>Ctrl + f<br><strong>全局查找：</strong><br>Ctrl + /<br><strong>向上搜索</strong><br>Ctrl + F3<br><strong>向下搜索</strong><br>Ctrl + F4<br><strong>跳转到行：</strong><br>F5<br><strong>跳转到定义：</strong><br>Ctrl + 鼠标左键</p>
 <h4 id="显示中文乱码"><a href="#显示中文乱码" class="headerlink" title="显示中文乱码"></a>显示中文乱码</h4><p>File - Reload As Encoding - GB2312</p>
-<p><img src="/2019/11/03/Source-Insight-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E6%95%B4%E7%90%86/2.png" alt="2"></p>
+<p><img src="/2019/11/03/%E5%B7%A5%E5%85%B7-Source-Insight-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E6%95%B4%E7%90%86/2.png" alt="2"></p>
 <h4 id="添加注释快捷键"><a href="#添加注释快捷键" class="headerlink" title="添加注释快捷键"></a>添加注释快捷键</h4><blockquote>
 <p>添加一些配置文件宏，比如：注释掉代码：单行注释、多行注释，将选中内容注释掉；在一行代码的前、后添加注释性文字等。</p>
 </blockquote>
@@ -1754,8 +1754,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
       </tags>
   </entry>
   <entry>
-    <title>Ubuntu配置NFS及其挂载设备</title>
-    <url>/2019/11/02/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/</url>
+    <title>工具-Ubuntu配置NFS及其挂载设备</title>
+    <url>/2019/11/02/%E5%B7%A5%E5%85%B7-Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/</url>
     <content><![CDATA[<h5 id="在Ubuntu系统中安装NFS"><a href="#在Ubuntu系统中安装NFS" class="headerlink" title="在Ubuntu系统中安装NFS"></a>在Ubuntu系统中安装NFS</h5><p>执行命令：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get install nfs-kernel-server</span><br></pre></td></tr></table></figure>
 <blockquote>
@@ -1765,18 +1765,18 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
 
 <h5 id="在Ubuntu系统中的-mnt下建立共享项目nfs-shared"><a href="#在Ubuntu系统中的-mnt下建立共享项目nfs-shared" class="headerlink" title="在Ubuntu系统中的/mnt下建立共享项目nfs_shared"></a>在Ubuntu系统中的/mnt下建立共享项目nfs_shared</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># mkdir nfs_shared </span><br><span class="line"># chmod 777 -R nfs_shared/</span><br></pre></td></tr></table></figure>
 <p>保证使用者都能够读、写、执行。如图</p>
-<p><img src="/2019/11/02/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/1.png" alt="1"></p>
+<p><img src="/2019/11/02/%E5%B7%A5%E5%85%B7-Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/1.png" alt="1"></p>
 <h5 id="在Ubuntu系统中修改NFS配置文件"><a href="#在Ubuntu系统中修改NFS配置文件" class="headerlink" title="在Ubuntu系统中修改NFS配置文件"></a>在Ubuntu系统中修改NFS配置文件</h5><p>执行命令：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo vi /etc/exports</span><br></pre></td></tr></table></figure>
 <p>在exports最后一行添加：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/mnt/nfs_shared 192.168.0.*(rw,sync,no_root_squash,no_subtree_check)</span><br><span class="line">其中，</span><br><span class="line">/mnt/nfs_shared  ---要共享的目录</span><br><span class="line">192.168.0.*---允许访问的网段，也可以是ip地址、主机名（能够被服务器解析）、</span><br><span class="line">     *（所有人都能访问）</span><br><span class="line">(rw,sync,no_root_squash,no_subtree_check)---</span><br><span class="line">rw:读/写权限</span><br><span class="line">sync:数据同步写入内存和硬盘</span><br><span class="line">no_root_squash:服务器允许远程系统以root特权存取该目录</span><br><span class="line">no_subtree_check:关闭子树检查</span><br></pre></td></tr></table></figure>
-<p><img src="/2019/11/02/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/2.png" alt="2"></p>
+<p><img src="/2019/11/02/%E5%B7%A5%E5%85%B7-Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/2.png" alt="2"></p>
 <h5 id="在Ubuntu系统中启动服务"><a href="#在Ubuntu系统中启动服务" class="headerlink" title="在Ubuntu系统中启动服务"></a>在Ubuntu系统中启动服务</h5><p>依次执行下列命令：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo service rpcbind restart</span><br><span class="line">sudo service rpcbind restart</span><br></pre></td></tr></table></figure>
-<p><img src="/2019/11/02/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/3.png" alt="3"></p>
+<p><img src="/2019/11/02/%E5%B7%A5%E5%85%B7-Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/3.png" alt="3"></p>
 <h5 id="测试验证"><a href="#测试验证" class="headerlink" title="测试验证"></a>测试验证</h5><h6 id="测试Ubuntu-nfs"><a href="#测试Ubuntu-nfs" class="headerlink" title="测试Ubuntu nfs"></a>测试Ubuntu nfs</h6><p>执行命令：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$showmount -e</span><br></pre></td></tr></table></figure>
-<p><img src="/2019/11/02/Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/4.png" alt="4"></p>
+<p><img src="/2019/11/02/%E5%B7%A5%E5%85%B7-Ubuntu%E9%85%8D%E7%BD%AENFS%E5%8F%8A%E5%85%B6%E6%8C%82%E8%BD%BD%E8%AE%BE%E5%A4%87/4.png" alt="4"></p>
 <h6 id="设备挂载"><a href="#设备挂载" class="headerlink" title="设备挂载"></a>设备挂载</h6><p>在《Hi3519AV100 SDK 安装及升级使用说明.pdf》中4.2 使用 NFS 文件系统进行开发可以看到：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mount -t nfs -o nolock -o tcp -o rsize=32768,wsize=32768 xx.xx.xx.xx:/your-nfs-path /mnt</span><br></pre></td></tr></table></figure>
 
