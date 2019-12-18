@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;08&#x2F;cURL-06-cURL%E5%92%8Clibcuel%E7%9A%84%E5%AE%89%E8%A3%85%E7%9A%84%E5%AE%89%E8%A3%85%E9%80%94%E5%BE%84&#x2F;1.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;08&#x2F;cURL-06-cURL%E5%92%8Clibcuel%E7%9A%84%E5%AE%89%E8%A3%85%E7%9A%84%E5%AE%89%E8%A3%85%E9%80%94%E5%BE%84&#x2F;2.png">
-<meta property="og:updated_time" content="2019-12-09T12:02:48.818Z">
+<meta property="og:updated_time" content="2019-12-16T10:02:40.128Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;08&#x2F;cURL-06-cURL%E5%92%8Clibcuel%E7%9A%84%E5%AE%89%E8%A3%85%E7%9A%84%E5%AE%89%E8%A3%85%E9%80%94%E5%BE%84&#x2F;1.png">
 
@@ -345,8 +345,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-12-09T20:02:48+08:00">
-                2019-12-09
+              <time title="更新于" itemprop="dateModified" datetime="2019-12-16T18:02:40+08:00">
+                2019-12-16
               </time>
             
           </span>
@@ -418,7 +418,7 @@ stemp 2 ./configure
 stemp 3 make
 stemp 4 make install</code></pre><p>2.4 使用 curl –version 检查是否更新成功</p>
 <p><img src="/2019/12/08/cURL-06-cURL%E5%92%8Clibcuel%E7%9A%84%E5%AE%89%E8%A3%85%E7%9A%84%E5%AE%89%E8%A3%85%E9%80%94%E5%BE%84/2.png" alt="2"></p>
-<h5 id="二、ubuntu16-04-安装libcurl-主要用于ubuntu中应用程序开发-curl和libcurl的区别"><a href="#二、ubuntu16-04-安装libcurl-主要用于ubuntu中应用程序开发-curl和libcurl的区别" class="headerlink" title="二、ubuntu16.04 安装libcurl,主要用于ubuntu中应用程序开发(curl和libcurl的区别)"></a>二、ubuntu16.04 安装libcurl,主要用于ubuntu中应用程序开发(curl和libcurl的区别)</h5><pre><code>sudo apt install libcurl4-openssl-dev</code></pre><p>可以看到-ubuntu系统中/usr/include/curl中的头文件</p>
+<h5 id="二、ubuntu16-04-安装libcurl-主要用于ubuntu中应用程序开发-curl和libcurl的区别"><a href="#二、ubuntu16-04-安装libcurl-主要用于ubuntu中应用程序开发-curl和libcurl的区别" class="headerlink" title="二、ubuntu16.04 安装libcurl,主要用于ubuntu中应用程序开发(curl和libcurl的区别)"></a>二、ubuntu16.04 安装libcurl,主要用于ubuntu中应用程序开发(curl和libcurl的区别)</h5><pre><code>sudo apt install libcurl4-openssl-dev</code></pre><p>可以看到-ubuntu系统中/usr/include/curl中的头文件,此操作可以作为Ubuntu虚拟程序中的&lt;curl/curl.h&gt;,一般作为Ubuntu平台模拟程序使用。</p>
 <p>库文件：/usr/lib/x86_64-linux-gnu/libcurl.so.4</p>
 <h5 id="三、linux下编译安装libcurl"><a href="#三、linux下编译安装libcurl" class="headerlink" title="三、linux下编译安装libcurl"></a>三、linux下编译安装libcurl</h5><h6 id="1-直接下载"><a href="#1-直接下载" class="headerlink" title="1. 直接下载"></a>1. 直接下载</h6><pre><code>git clone https://github.com/curl/curl.git </code></pre><h6 id="2-tar解压后，进入curl工程目录输入指令：-buidconf，产生configure脚本"><a href="#2-tar解压后，进入curl工程目录输入指令：-buidconf，产生configure脚本" class="headerlink" title="2.tar解压后，进入curl工程目录输入指令：./buidconf，产生configure脚本"></a>2.tar解压后，进入curl工程目录输入指令：./buidconf，产生configure脚本</h6><p>之后和第一条步骤类似</p>
 
