@@ -88,15 +88,15 @@
       </tags>
   </entry>
   <entry>
-    <title>工程设计-FTP文件上传与下载</title>
-    <url>/2019/12/14/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/</url>
+    <title>工程设计-设备端FTP文件上传与下载(1)</title>
+    <url>/2019/12/14/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%AE%BE%E5%A4%87%E7%AB%AFFTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD(1)/</url>
     <content><![CDATA[<h4 id="主要目的"><a href="#主要目的" class="headerlink" title="主要目的"></a>主要目的</h4><h5 id="下载文件"><a href="#下载文件" class="headerlink" title="下载文件"></a>下载文件</h5><h6 id="应用程序"><a href="#应用程序" class="headerlink" title="应用程序"></a>应用程序</h6><p>av_streamer input_streamer output_app</p>
 <a id="more"></a>
 
 <h6 id="系统库"><a href="#系统库" class="headerlink" title="系统库"></a>系统库</h6><p>libapp_para.so<br>libntptime.so<br>libsys_commom.so<br>libsys_serial.so<br>libdevsdk.so<br>librtmp_push.so<br>libsys_httppro.so<br>libdhclient.so<br>librtsp.so<br>libsys_media.so<br>libnnie_ai.so<br>libsys_base.so<br>libsys_mp4_storage.so</p>
 <h6 id="MCU程序"><a href="#MCU程序" class="headerlink" title="MCU程序"></a>MCU程序</h6><p>和上面类似（略）</p>
 <h5 id="上传日志"><a href="#上传日志" class="headerlink" title="上传日志"></a>上传日志</h5><p>程序运行记录（略）</p>
-<h4 id="第一阶段-正常环境下"><a href="#第一阶段-正常环境下" class="headerlink" title="第一阶段-正常环境下"></a>第一阶段-正常环境下</h4><p>还是直接看图比较直观。<br><img src="/2019/12/14/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-FTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/1.png" alt="1"></p>
+<h4 id="第一阶段-正常环境下"><a href="#第一阶段-正常环境下" class="headerlink" title="第一阶段-正常环境下"></a>第一阶段-正常环境下</h4><p>还是直接看图比较直观。<br><img src="/2019/12/14/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%AE%BE%E5%A4%87%E7%AB%AFFTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD(1)/1.png" alt="1"></p>
 <h4 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h4><p><a href="https://github.com/faihung/cURL" target="_blank" rel="noopener">参考代码</a></p>
 ]]></content>
       <categories>
@@ -431,9 +431,9 @@ stemp 4 make install</code></pre><p>2.4 使用 curl –version 检查是否更�
         <category>工具</category>
       </categories>
       <tags>
-        <tag>Windows</tag>
         <tag>VMware</tag>
         <tag>网络配置</tag>
+        <tag>Windows</tag>
       </tags>
   </entry>
   <entry>
@@ -984,9 +984,9 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
         <tag>字节对齐</tag>
         <tag>大小端</tag>
         <tag>pragma pack()</tag>
+        <tag>流程图</tag>
         <tag>通信设计</tag>
         <tag>数据结构构造</tag>
-        <tag>流程图</tag>
         <tag>解耦合</tag>
       </tags>
   </entry>
