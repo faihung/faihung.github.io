@@ -11,6 +11,11 @@
 <h5 id="一、应用场景"><a href="#一、应用场景" class="headerlink" title="一、应用场景"></a>一、应用场景</h5><p>服务器只有一个，而设备却有很多种，且分布在全国各地，各个地方情况不一样。<br>有的地方因为设备或者其它原因，软件不需要更新。<br>有的设备因为硬件与软件兼容性问题，只能升级特定的版本。<br>所以远程升级必须需要满足下面两种情况。</p>
 <h5 id="二、远程升级满足下面两种情况"><a href="#二、远程升级满足下面两种情况" class="headerlink" title="二、远程升级满足下面两种情况"></a>二、远程升级满足下面两种情况</h5><h6 id="2-1-后台服务器的手动升级-暴力升级"><a href="#2-1-后台服务器的手动升级-暴力升级" class="headerlink" title="2.1 后台服务器的手动升级(暴力升级)"></a>2.1 后台服务器的手动升级(暴力升级)</h6><h6 id="2-2-设备端的自动升级"><a href="#2-2-设备端的自动升级" class="headerlink" title="2.2 设备端的自动升级"></a>2.2 设备端的自动升级</h6><p>参考：<img src="/2019/12/22/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%AE%BE%E5%A4%87%E7%AB%AF%E7%89%88%E6%9C%AC%E5%8F%B7%E7%AE%A1%E7%90%86-2/1.png" alt="1"></p>
 <h5 id="三、关于版本号管控"><a href="#三、关于版本号管控" class="headerlink" title="三、关于版本号管控"></a>三、关于版本号管控</h5><p>版本号管控或称三段式管控，形如：3.000.00000，3.100.10000,以10进制字符串的方式体现出来。（关于版本号的管控也可以按照设备发送的地方进行管控。按照时间来，按照地方来都可以。）</p>
+<p>注意：16进制数据和字符串型数据容易混淆</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">HISI_APP:3.01.0001 </span><br><span class="line">16进制方式：(0x03 0x2e 0x00 0x01 0x2e 0x00 0x00 0x00 0x01) </span><br><span class="line">字符串方式：(0x33 0x2e 0x30 0x31 0x2e 0x30 0x30 0x30 0x31)</span><br></pre></td></tr></table></figure>
+
+
+
 <h6 id="3-1-第3段—-00001，子功能升级-amp-BUG的修改（软件对应子功能添加-amp-BUG的修改的升级）"><a href="#3-1-第3段—-00001，子功能升级-amp-BUG的修改（软件对应子功能添加-amp-BUG的修改的升级）" class="headerlink" title="3.1 第3段—-00001，子功能升级&amp;BUG的修改（软件对应子功能添加&amp;BUG的修改的升级）"></a>3.1 第3段—-00001，子功能升级&amp;BUG的修改（软件对应子功能添加&amp;BUG的修改的升级）</h6><p>从文本文件中读取的’.’后面的第一位，为1表示该不可以升级，为0表示该段程序可以升级。</p>
 <p>之后的4位，表示版本号的范围：0000-9999。</p>
 <p>关于兼容性：修改bug有9999种版本完全够用，可能还没有达到这么多，就进入了系列升级。</p>
@@ -73,9 +78,9 @@
         <category>C</category>
       </categories>
       <tags>
+        <tag>指针</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
-        <tag>指针</tag>
         <tag>局部变量</tag>
         <tag>数组取值</tag>
       </tags>
@@ -958,10 +963,10 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
         <category>C</category>
       </categories>
       <tags>
+        <tag>指针</tag>
         <tag>全局变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
-        <tag>指针</tag>
       </tags>
   </entry>
   <entry>
