@@ -118,15 +118,15 @@ xian-3.000.00001  到xian-3.000.00001不升级</code></pre><p>5.所以从上面�
       </tags>
   </entry>
   <entry>
-    <title>工程设计-设备端版本号管理(2)</title>
-    <url>/2019/12/22/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%AE%BE%E5%A4%87%E7%AB%AF%E7%89%88%E6%9C%AC%E5%8F%B7%E7%AE%A1%E7%90%86-2/</url>
+    <title>工程设计-软件升级之设备端版本号管理(2)</title>
+    <url>/2019/12/22/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E4%B9%8B%E8%AE%BE%E5%A4%87%E7%AB%AF%E7%89%88%E6%9C%AC%E5%8F%B7%E7%AE%A1%E7%90%86-2/</url>
     <content><![CDATA[<blockquote>
 <p>关于版本号管理，之前升级都是在嵌入式设备中移植一个微型服务器，然后通过web端进行升级。现在是设备作为客户端向http发送版本号，http发送下载指令，设备端再想ftp服务器请求下载文件。所以思维方式要转换一下。<br>并且预期忘版本号的管理符合git库版本管理规则。</p>
 </blockquote>
 <a id="more"></a>
 
 <h5 id="一、应用场景"><a href="#一、应用场景" class="headerlink" title="一、应用场景"></a>一、应用场景</h5><p>服务器只有一个，而设备却有很多种，且分布在全国各地，各个地方情况不一样。<br>有的地方因为设备或者其它原因，软件不需要更新。<br>有的设备因为硬件与软件兼容性问题，只能升级特定的版本。<br>所以远程升级必须需要满足下面两种情况。</p>
-<h5 id="二、远程升级满足下面两种情况"><a href="#二、远程升级满足下面两种情况" class="headerlink" title="二、远程升级满足下面两种情况"></a>二、远程升级满足下面两种情况</h5><h6 id="2-1-后台服务器的手动升级-暴力升级"><a href="#2-1-后台服务器的手动升级-暴力升级" class="headerlink" title="2.1 后台服务器的手动升级(暴力升级)"></a>2.1 后台服务器的手动升级(暴力升级)</h6><h6 id="2-2-设备端的自动升级"><a href="#2-2-设备端的自动升级" class="headerlink" title="2.2 设备端的自动升级"></a>2.2 设备端的自动升级</h6><p>参考：<img src="/2019/12/22/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%AE%BE%E5%A4%87%E7%AB%AF%E7%89%88%E6%9C%AC%E5%8F%B7%E7%AE%A1%E7%90%86-2/1.png" alt="1"></p>
+<h5 id="二、远程升级满足下面两种情况"><a href="#二、远程升级满足下面两种情况" class="headerlink" title="二、远程升级满足下面两种情况"></a>二、远程升级满足下面两种情况</h5><h6 id="2-1-后台服务器的手动升级-暴力升级"><a href="#2-1-后台服务器的手动升级-暴力升级" class="headerlink" title="2.1 后台服务器的手动升级(暴力升级)"></a>2.1 后台服务器的手动升级(暴力升级)</h6><h6 id="2-2-设备端的自动升级"><a href="#2-2-设备端的自动升级" class="headerlink" title="2.2 设备端的自动升级"></a>2.2 设备端的自动升级</h6><p>参考：<img src="/2019/12/22/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E4%B9%8B%E8%AE%BE%E5%A4%87%E7%AB%AF%E7%89%88%E6%9C%AC%E5%8F%B7%E7%AE%A1%E7%90%86-2/1.png" alt="1"></p>
 <h5 id="三、关于版本号管控"><a href="#三、关于版本号管控" class="headerlink" title="三、关于版本号管控"></a>三、关于版本号管控</h5><p>版本号管控或称三段式管控，形如：3.000.00000，3.100.10000,以10进制字符串的方式体现出来。（关于版本号的管控也可以按照设备发送的地方进行管控。按照时间来进行版本号回退管理，按照空间(发货地点)来进行分支进退管理。）</p>
 <p>注意：16进制数据和字符串型数据容易混淆</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">HISI_APP:3.01.0001 </span><br><span class="line">16进制方式：(0x03 0x2e 0x00 0x01 0x2e 0x00 0x00 0x00 0x01) </span><br><span class="line">字符串方式：(0x33 0x2e 0x30 0x31 0x2e 0x30 0x30 0x30 0x31)</span><br></pre></td></tr></table></figure>
@@ -196,9 +196,9 @@ xian-3.000.00001  到xian-3.000.00001不升级</code></pre><p>5.所以从上面�
       </categories>
       <tags>
         <tag>指针</tag>
-        <tag>局部变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
+        <tag>局部变量</tag>
         <tag>数组取值</tag>
       </tags>
   </entry>
@@ -238,15 +238,15 @@ xian-3.000.00001  到xian-3.000.00001不升级</code></pre><p>5.所以从上面�
       </tags>
   </entry>
   <entry>
-    <title>工程设计-设备端FTP文件上传与下载(1)</title>
-    <url>/2019/12/14/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%AE%BE%E5%A4%87%E7%AB%AFFTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD-1/</url>
+    <title>工程设计-软件升级之设备端FTP文件上传与下载(1)</title>
+    <url>/2019/12/14/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E4%B9%8B%E8%AE%BE%E5%A4%87%E7%AB%AFFTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD-1/</url>
     <content><![CDATA[<h4 id="主要目的"><a href="#主要目的" class="headerlink" title="主要目的"></a>主要目的</h4><h5 id="下载文件"><a href="#下载文件" class="headerlink" title="下载文件"></a>下载文件</h5><h6 id="应用程序"><a href="#应用程序" class="headerlink" title="应用程序"></a>应用程序</h6><p>av_streamer input_streamer output_app</p>
 <a id="more"></a>
 
 <h6 id="系统库"><a href="#系统库" class="headerlink" title="系统库"></a>系统库</h6><p>libapp_para.so<br>libntptime.so<br>libsys_commom.so<br>libsys_serial.so<br>libdevsdk.so<br>librtmp_push.so<br>libsys_httppro.so<br>libdhclient.so<br>librtsp.so<br>libsys_media.so<br>libnnie_ai.so<br>libsys_base.so<br>libsys_mp4_storage.so</p>
 <h6 id="MCU程序"><a href="#MCU程序" class="headerlink" title="MCU程序"></a>MCU程序</h6><p>和上面类似（略）</p>
 <h5 id="上传日志"><a href="#上传日志" class="headerlink" title="上传日志"></a>上传日志</h5><p>程序运行记录（略）</p>
-<h4 id="第一阶段-正常环境下"><a href="#第一阶段-正常环境下" class="headerlink" title="第一阶段-正常环境下"></a>第一阶段-正常环境下</h4><p>还是直接看图比较直观。<br><img src="/2019/12/14/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%AE%BE%E5%A4%87%E7%AB%AFFTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD-1/1.png" alt="1"></p>
+<h4 id="第一阶段-正常环境下"><a href="#第一阶段-正常环境下" class="headerlink" title="第一阶段-正常环境下"></a>第一阶段-正常环境下</h4><p>还是直接看图比较直观。<br><img src="/2019/12/14/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E4%B9%8B%E8%AE%BE%E5%A4%87%E7%AB%AFFTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD-1/1.png" alt="1"></p>
 <h4 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h4><p><a href="https://github.com/faihung/cURL" target="_blank" rel="noopener">参考代码</a></p>
 ]]></content>
       <categories>
@@ -581,8 +581,8 @@ stemp 4 make install</code></pre><p>2.4 使用 curl –version 检查是否更�
         <category>工具</category>
       </categories>
       <tags>
-        <tag>VMware</tag>
         <tag>Windows</tag>
+        <tag>VMware</tag>
         <tag>网络配置</tag>
       </tags>
   </entry>
@@ -1081,9 +1081,9 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
       </categories>
       <tags>
         <tag>指针</tag>
+        <tag>全局变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
-        <tag>全局变量</tag>
       </tags>
   </entry>
   <entry>
@@ -1134,9 +1134,9 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
         <tag>字节对齐</tag>
         <tag>大小端</tag>
         <tag>pragma pack()</tag>
-        <tag>流程图</tag>
         <tag>通信设计</tag>
         <tag>数据结构构造</tag>
+        <tag>流程图</tag>
         <tag>解耦合</tag>
       </tags>
   </entry>

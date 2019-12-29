@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="FTP,流程图,http,版本号," />
 
 
 
@@ -81,15 +81,18 @@
 
 
 
-<meta name="description" content="系统、归纳、总结">
-<meta name="keywords" content="个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Faihung&#39;s blog">
-<meta property="og:url" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;archives&#x2F;2019&#x2F;12&#x2F;index.html">
+<meta name="description" content="关于版本号管理，之前升级都是在嵌入式设备中移植一个微型服务器，然后通过web端进行升级。现在是设备作为客户端向http发送版本号，http发送下载指令，设备端再想ftp服务器请求下载文件。所以思维方式要转换一下。并且预期忘版本号的管理符合git库版本管理规则。">
+<meta name="keywords" content="FTP,流程图,http,版本号">
+<meta property="og:type" content="article">
+<meta property="og:title" content="工程设计-软件升级之设备端版本号管理(2)">
+<meta property="og:url" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;22&#x2F;%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E4%B9%8B%E8%AE%BE%E5%A4%87%E7%AB%AF%E7%89%88%E6%9C%AC%E5%8F%B7%E7%AE%A1%E7%90%86-2&#x2F;index.html">
 <meta property="og:site_name" content="Faihung&#39;s blog">
-<meta property="og:description" content="系统、归纳、总结">
+<meta property="og:description" content="关于版本号管理，之前升级都是在嵌入式设备中移植一个微型服务器，然后通过web端进行升级。现在是设备作为客户端向http发送版本号，http发送下载指令，设备端再想ftp服务器请求下载文件。所以思维方式要转换一下。并且预期忘版本号的管理符合git库版本管理规则。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;22&#x2F;%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E4%B9%8B%E8%AE%BE%E5%A4%87%E7%AB%AF%E7%89%88%E6%9C%AC%E5%8F%B7%E7%AE%A1%E7%90%86-2&#x2F;1.png">
+<meta property="og:updated_time" content="2019-12-29T15:50:44.020Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2019&#x2F;12&#x2F;22&#x2F;%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E4%B9%8B%E8%AE%BE%E5%A4%87%E7%AB%AF%E7%89%88%E6%9C%AC%E5%8F%B7%E7%AE%A1%E7%90%86-2&#x2F;1.png">
 
 
 
@@ -119,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://www.faihung.net/archives/2019/12/"/>
+  <link rel="canonical" href="http://www.faihung.net/2019/12/22/工程设计-软件升级之设备端版本号管理-2/"/>
 
 
 
 
 
-  <title>归档 | Faihung's blog</title>
+  <title>工程设计-软件升级之设备端版本号管理(2) | Faihung's blog</title>
   
 
 
@@ -144,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -282,410 +285,214 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        OK! 目前共计 45 篇日志。 继续努力。
-      </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.faihung.net/2019/12/22/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E4%B9%8B%E8%AE%BE%E5%A4%87%E7%AB%AF%E7%89%88%E6%9C%AC%E5%8F%B7%E7%AE%A1%E7%90%86-2/">
 
-      
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="faihung">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Faihung's blog">
+    </span>
+
+    
+      <header class="post-header">
 
         
         
+          <h1 class="post-title" itemprop="name headline">工程设计-软件升级之设备端版本号管理(2)</h1>
         
 
-        
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-22T22:44:26+08:00">
+                2019-12-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-12-29T23:50:44+08:00">
+                2019-12-29
+              </time>
+            
+          </span>
+
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/12/29/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E4%B9%8B%E8%AE%BE%E5%A4%87%E7%AB%AF%E7%89%88%E6%9C%AC%E5%8F%B7%E7%AE%A1%E7%90%86-3/" itemprop="url">
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
               
-                <span itemprop="name">工程设计-软件升级之设备端版本号管理(3)</span>
+                <span class="post-meta-item-text">分类于</span>
               
-            </a>
-        
-      </h2>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index">
+                    <span itemprop="name">工程设计</span>
+                  </a>
+                </span>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-12-29T23:30:15+08:00"
-              content="2019-12-29" >
-          12-29
-        </time>
-      </div>
+                
+                
+              
+            </span>
+          
 
-    </header>
-  </article>
+          
+            
+          
 
+          
+          
 
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"> 阅读次数:</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/12/22/%E7%B3%BB%E7%BB%9F%E5%87%BD%E6%95%B0-%E5%BA%93%E5%87%BD%E6%95%B0-Linux%E4%B8%AD%E7%9A%84popen%E5%87%BD%E6%95%B0%E5%92%8Csystem%E5%87%BD%E6%95%B0-%E8%BD%AC/" itemprop="url">
-              
-                <span itemprop="name">系统函数&库函数-Linux中的popen函数和system函数(转)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-12-22T23:57:19+08:00"
-              content="2019-12-22" >
-          12-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/12/22/%E7%B3%BB%E7%BB%9F%E5%87%BD%E6%95%B0-%E5%BA%93%E5%87%BD%E6%95%B0-popen-%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E5%8F%8A%E5%9C%BA%E6%99%AF-%E8%BD%AC/" itemprop="url">
-              
-                <span itemprop="name">系统函数&库函数-popen 的使用方法及场景(转)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-12-22T23:56:46+08:00"
-              content="2019-12-22" >
-          12-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
+        <blockquote>
+<p>关于版本号管理，之前升级都是在嵌入式设备中移植一个微型服务器，然后通过web端进行升级。现在是设备作为客户端向http发送版本号，http发送下载指令，设备端再想ftp服务器请求下载文件。所以思维方式要转换一下。<br>并且预期忘版本号的管理符合git库版本管理规则。</p>
+</blockquote>
+<a id="more"></a>
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/12/22/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E4%B9%8B%E8%AE%BE%E5%A4%87%E7%AB%AF%E7%89%88%E6%9C%AC%E5%8F%B7%E7%AE%A1%E7%90%86-2/" itemprop="url">
-              
-                <span itemprop="name">工程设计-软件升级之设备端版本号管理(2)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-12-22T22:44:26+08:00"
-              content="2019-12-22" >
-          12-22
-        </time>
-      </div>
-
-    </header>
-  </article>
+<h5 id="一、应用场景"><a href="#一、应用场景" class="headerlink" title="一、应用场景"></a>一、应用场景</h5><p>服务器只有一个，而设备却有很多种，且分布在全国各地，各个地方情况不一样。<br>有的地方因为设备或者其它原因，软件不需要更新。<br>有的设备因为硬件与软件兼容性问题，只能升级特定的版本。<br>所以远程升级必须需要满足下面两种情况。</p>
+<h5 id="二、远程升级满足下面两种情况"><a href="#二、远程升级满足下面两种情况" class="headerlink" title="二、远程升级满足下面两种情况"></a>二、远程升级满足下面两种情况</h5><h6 id="2-1-后台服务器的手动升级-暴力升级"><a href="#2-1-后台服务器的手动升级-暴力升级" class="headerlink" title="2.1 后台服务器的手动升级(暴力升级)"></a>2.1 后台服务器的手动升级(暴力升级)</h6><h6 id="2-2-设备端的自动升级"><a href="#2-2-设备端的自动升级" class="headerlink" title="2.2 设备端的自动升级"></a>2.2 设备端的自动升级</h6><p>参考：<img src="/2019/12/22/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E4%B9%8B%E8%AE%BE%E5%A4%87%E7%AB%AF%E7%89%88%E6%9C%AC%E5%8F%B7%E7%AE%A1%E7%90%86-2/1.png" alt="1"></p>
+<h5 id="三、关于版本号管控"><a href="#三、关于版本号管控" class="headerlink" title="三、关于版本号管控"></a>三、关于版本号管控</h5><p>版本号管控或称三段式管控，形如：3.000.00000，3.100.10000,以10进制字符串的方式体现出来。（关于版本号的管控也可以按照设备发送的地方进行管控。按照时间来进行版本号回退管理，按照空间(发货地点)来进行分支进退管理。）</p>
+<p>注意：16进制数据和字符串型数据容易混淆</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HISI_APP:3.01.0001 </span><br><span class="line">16进制方式：(0x03 0x2e 0x00 0x01 0x2e 0x00 0x00 0x00 0x01) </span><br><span class="line">字符串方式：(0x33 0x2e 0x30 0x31 0x2e 0x30 0x30 0x30 0x31)</span><br></pre></td></tr></table></figure>
 
 
 
+<h6 id="3-1-第3段—-00001，子功能升级-amp-BUG的修改（软件对应子功能添加-amp-BUG的修改的升级）"><a href="#3-1-第3段—-00001，子功能升级-amp-BUG的修改（软件对应子功能添加-amp-BUG的修改的升级）" class="headerlink" title="3.1 第3段—-00001，子功能升级&amp;BUG的修改（软件对应子功能添加&amp;BUG的修改的升级）"></a>3.1 第3段—-00001，子功能升级&amp;BUG的修改（软件对应子功能添加&amp;BUG的修改的升级）</h6><p>从文本文件中读取的’.’后面的第一位，为1表示该不可以升级，为0表示该段程序可以升级。</p>
+<p>之后的4位，表示版本号的范围：0000-9999。</p>
+<p>关于兼容性：修改bug有9999种版本完全够用，可能还没有达到这么多，就进入了系列升级。</p>
+<h6 id="3-2-第2段—-001，产品系列的升级（软件对应硬件方面的升级）"><a href="#3-2-第2段—-001，产品系列的升级（软件对应硬件方面的升级）" class="headerlink" title="3.2 第2段—-001，产品系列的升级（软件对应硬件方面的升级）"></a>3.2 第2段—-001，产品系列的升级（软件对应硬件方面的升级）</h6><p>从文本文件中读取的’.’后面的第一位，为1表示该不可以升级，为0表示该段程序可以升级。</p>
+<p>之后的2位，表示版本号的范围：00-99</p>
+<p>关于兼容性：修改bug有99种版本完全够用，可能还没有达到这么多，就进入了换代升级</p>
+<h6 id="3-3-第1段—-3，产品的换代升级（软件对应产品发布方面的升级）"><a href="#3-3-第1段—-3，产品的换代升级（软件对应产品发布方面的升级）" class="headerlink" title="3.3 第1段—-3，产品的换代升级（软件对应产品发布方面的升级）"></a>3.3 第1段—-3，产品的换代升级（软件对应产品发布方面的升级）</h6>
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/12/15/C%E8%AF%AD%E8%A8%80-%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/" itemprop="url">
-              
-                <span itemprop="name">C语言-函数返回局部变量的几种方式</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-12-15T12:46:13+08:00"
-              content="2019-12-15" >
-          12-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/12/15/%E9%97%AE%E9%A2%98-notepadd-ANSI%E7%BC%96%E7%A0%81%E4%B8%8EUTF-8%E7%BC%96%E7%A0%81/" itemprop="url">
-              
-                <span itemprop="name">问题-notepadd++  ANSI编码与UTF-8编码</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-12-15T00:33:10+08:00"
-              content="2019-12-15" >
-          12-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/12/15/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-html-boa-cgi%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6/" itemprop="url">
-              
-                <span itemprop="name">工程设计-html boa cgi上传文件</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-12-15T00:20:25+08:00"
-              content="2019-12-15" >
-          12-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/12/14/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E4%B9%8B%E8%AE%BE%E5%A4%87%E7%AB%AFFTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD-1/" itemprop="url">
-              
-                <span itemprop="name">工程设计-软件升级之设备端FTP文件上传与下载(1)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-12-14T23:25:12+08:00"
-              content="2019-12-14" >
-          12-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/12/12/cURL-09-%E4%BD%BF%E7%94%A8curl%E5%BA%93%E8%BF%9B%E8%A1%8Chttp%E9%80%9A%E4%BF%A1-%E8%BD%AC/" itemprop="url">
-              
-                <span itemprop="name">cURL-09_使用curl库进行http通信(转)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-12-12T15:37:14+08:00"
-              content="2019-12-12" >
-          12-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/12/12/cURL-08-ARM%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91/" itemprop="url">
-              
-                <span itemprop="name">cURL-08_ARM交叉编译</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-12-12T14:24:59+08:00"
-              content="2019-12-12" >
-          12-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/FTP/" rel="tag"># FTP</a>
+          
+            <a href="/tags/%E6%B5%81%E7%A8%8B%E5%9B%BE/" rel="tag"># 流程图</a>
+          
+            <a href="/tags/http/" rel="tag"># http</a>
+          
+            <a href="/tags/%E7%89%88%E6%9C%AC%E5%8F%B7/" rel="tag"># 版本号</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/15/C%E8%AF%AD%E8%A8%80-%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/" rel="next" title="C语言-函数返回局部变量的几种方式">
+                <i class="fa fa-chevron-left"></i> C语言-函数返回局部变量的几种方式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/22/%E7%B3%BB%E7%BB%9F%E5%87%BD%E6%95%B0-%E5%BA%93%E5%87%BD%E6%95%B0-popen-%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E5%8F%8A%E5%9C%BA%E6%99%AF-%E8%BD%AC/" rel="prev" title="系统函数&库函数-popen 的使用方法及场景(转)">
+                系统函数&库函数-popen 的使用方法及场景(转) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2019/12/page/2/">2</a><a class="extend next" rel="next" href="/archives/2019/12/page/2/">&lt;i class=&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -693,6 +500,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -713,8 +524,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -819,6 +639,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、应用场景"><span class="nav-text">一、应用场景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、远程升级满足下面两种情况"><span class="nav-text">二、远程升级满足下面两种情况</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#2-1-后台服务器的手动升级-暴力升级"><span class="nav-text">2.1 后台服务器的手动升级(暴力升级)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-2-设备端的自动升级"><span class="nav-text">2.2 设备端的自动升级</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三、关于版本号管控"><span class="nav-text">三、关于版本号管控</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#3-1-第3段—-00001，子功能升级-amp-BUG的修改（软件对应子功能添加-amp-BUG的修改的升级）"><span class="nav-text">3.1 第3段—-00001，子功能升级&amp;BUG的修改（软件对应子功能添加&amp;BUG的修改的升级）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-2-第2段—-001，产品系列的升级（软件对应硬件方面的升级）"><span class="nav-text">3.2 第2段—-001，产品系列的升级（软件对应硬件方面的升级）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-3-第1段—-3，产品的换代升级（软件对应产品发布方面的升级）"><span class="nav-text">3.3 第1段—-3，产品的换代升级（软件对应产品发布方面的升级）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -979,6 +815,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
