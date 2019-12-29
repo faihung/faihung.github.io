@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.faihung.net/"/>
-  <updated>2019-12-22T16:05:12.314Z</updated>
+  <updated>2019-12-29T15:38:30.021Z</updated>
   <id>http://www.faihung.net/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>工程设计-软件升级之设备端版本号管理(3)</title>
+    <link href="http://www.faihung.net/2019/12/29/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E4%B9%8B%E8%AE%BE%E5%A4%87%E7%AB%AF%E7%89%88%E6%9C%AC%E5%8F%B7%E7%AE%A1%E7%90%86-3/"/>
+    <id>http://www.faihung.net/2019/12/29/工程设计-软件升级之设备端版本号管理-3/</id>
+    <published>2019-12-29T15:30:15.000Z</published>
+    <updated>2019-12-29T15:38:30.021Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>关于版本号管控需要满足以空间分支为主导,用时间变更作定位,方便bug查找修改。</p></blockquote><p>1.需要满足设备的向上兼容,通过版本号的变更迭代可以实现。形如：3.000.0001</p><p>2.需要满足事物存在的3要素：</p><ul><li><p>时间(就是设备发货时间,也是设备的初始版本号,例如3.000.0001到3.000.0002的变更，就是一个时间变迁的过程)</p></li><li><p>地点(就是设备发货地点,同时对应代码库的分支)</p></li><li><p>设备(设备是必须存在的)</p></li></ul><p>每往一个地方发送设备,设备端代码通过git库建立一个分支,之后这个分支代码就主要是这个地方设备运行代码,方便以后bug查找,但不会对这个分支代码进行修改。<br>初始版本,以发往四川的为例：sichuan-3.000.0001</p><p>3.我们的程序不断的在master分支上进行更新迭代。</p><p>4.关于升级,会出现两种情况。(其它各种情况都离不开这两种情况)</p><p>4.1 一种情况就是某一个地方的设备出现了bug被人发现了,这个时候必须要对这个地方的设备进行升级,此时修改master分支测试验证通过<br>将master分支代码克隆到这个地方分支上去,代码的版本号变更由sichuan-3.000.0001到sichuan-3.000.0002的变更。</p><p>4.2 此时master分支,对4.1中bug进行修复并验证通过,同时我们也解决了一个其它的代码bug或者实现了一个功能,代码测试验证通过之后,感觉可以升级了,<br>这就是第二种情况升级(第二种升级又是系列情况升级)。<br>但并不是所有的设备都能升级,所以将master分支代码克隆到能够升级的地方分支上去。(时刻谨记地点分支代码不是用来修改的,是用来定位查找bug的)<br>形如：</p><pre><code>sichuan-3.000.0002到sichuan-3.001.0000的升级tieling-3.000.0001到tieling-3.001.0000的升级xian-3.000.00001  到xian-3.000.00001不升级</code></pre><p>5.所以从上面可以看出：sichuan-3.000.00000,从右往左起,<br>第1段是bug&amp;功能的升级<br>第2段是代码进行系列的升级<br>第3段前半部分是地方名称,后半部分是产品换代升级</p><p>6.代码的升级虽然是在服务器端升级的,但其实还是由设备端提供代码进行升级的。<br>所以每发一批设备,设备端都要给服务器端一个版本号：地点+一串号码,用来放入软件升级代码中去。</p><p>每次发出去之前,肯定要经过相应的一系列测试,这些测试必然包括版本升级测试。<br>(关于软件升级版本号必然是以if else if的方式不端的扩张的,因为它是未知的。)</p><p>7.软件升级代码以后要集中到运行程序中去,这样软件升级代码自身也会不断的迭代更新。</p><blockquote><p>注：此只为自己的一些不成熟的想法，真正版本号管理需要领导们自己决定。</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;关于版本号管控需要满足以空间分支为主导,用时间变更作定位,方便bug查找修改。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;1.需要满足设备的向上兼容,通过版本号的变更迭代可以实现。形如：3.000.0001&lt;/p&gt;
+&lt;p&gt;2.需要满足事物存在的3要
+      
+    
+    </summary>
+    
+    
+      <category term="工程设计" scheme="http://www.faihung.net/categories/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>系统函数&amp;库函数-Linux中的popen函数和system函数(转)</title>
@@ -72,9 +100,9 @@
     <link href="http://www.faihung.net/2019/12/22/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%AE%BE%E5%A4%87%E7%AB%AF%E7%89%88%E6%9C%AC%E5%8F%B7%E7%AE%A1%E7%90%86-2/"/>
     <id>http://www.faihung.net/2019/12/22/工程设计-设备端版本号管理-2/</id>
     <published>2019-12-22T14:44:26.000Z</published>
-    <updated>2019-12-22T14:51:23.692Z</updated>
+    <updated>2019-12-22T16:13:15.077Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>关于版本号管理，之前升级都是在嵌入式设备中移植一个微型服务器，然后通过web端进行升级。现在是设备作为客户端向http发送版本号，http发送下载指令，设备端再想ftp服务器请求下载文件。所以思维方式要转换一下。<br>并且预期忘版本号的管理符合git库版本管理规则。</p></blockquote><a id="more"></a><h5 id="一、应用场景"><a href="#一、应用场景" class="headerlink" title="一、应用场景"></a>一、应用场景</h5><p>服务器只有一个，而设备却有很多种，且分布在全国各地，各个地方情况不一样。<br>有的地方因为设备或者其它原因，软件不需要更新。<br>有的设备因为硬件与软件兼容性问题，只能升级特定的版本。<br>所以远程升级必须需要满足下面两种情况。</p><h5 id="二、远程升级满足下面两种情况"><a href="#二、远程升级满足下面两种情况" class="headerlink" title="二、远程升级满足下面两种情况"></a>二、远程升级满足下面两种情况</h5><h6 id="2-1-后台服务器的手动升级-暴力升级"><a href="#2-1-后台服务器的手动升级-暴力升级" class="headerlink" title="2.1 后台服务器的手动升级(暴力升级)"></a>2.1 后台服务器的手动升级(暴力升级)</h6><h6 id="2-2-设备端的自动升级"><a href="#2-2-设备端的自动升级" class="headerlink" title="2.2 设备端的自动升级"></a>2.2 设备端的自动升级</h6><p>参考：<img src="/2019/12/22/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%AE%BE%E5%A4%87%E7%AB%AF%E7%89%88%E6%9C%AC%E5%8F%B7%E7%AE%A1%E7%90%86-2/1.png" alt="1"></p><h5 id="三、关于版本号管控"><a href="#三、关于版本号管控" class="headerlink" title="三、关于版本号管控"></a>三、关于版本号管控</h5><p>版本号管控或称三段式管控，形如：3.000.00000，3.100.10000,以10进制字符串的方式体现出来。（关于版本号的管控也可以按照设备发送的地方进行管控。按照时间来，按照地方来都可以。）</p><p>注意：16进制数据和字符串型数据容易混淆</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HISI_APP:3.01.0001 </span><br><span class="line">16进制方式：(0x03 0x2e 0x00 0x01 0x2e 0x00 0x00 0x00 0x01) </span><br><span class="line">字符串方式：(0x33 0x2e 0x30 0x31 0x2e 0x30 0x30 0x30 0x31)</span><br></pre></td></tr></table></figure><h6 id="3-1-第3段—-00001，子功能升级-amp-BUG的修改（软件对应子功能添加-amp-BUG的修改的升级）"><a href="#3-1-第3段—-00001，子功能升级-amp-BUG的修改（软件对应子功能添加-amp-BUG的修改的升级）" class="headerlink" title="3.1 第3段—-00001，子功能升级&amp;BUG的修改（软件对应子功能添加&amp;BUG的修改的升级）"></a>3.1 第3段—-00001，子功能升级&amp;BUG的修改（软件对应子功能添加&amp;BUG的修改的升级）</h6><p>从文本文件中读取的’.’后面的第一位，为1表示该不可以升级，为0表示该段程序可以升级。</p><p>之后的4位，表示版本号的范围：0000-9999。</p><p>关于兼容性：修改bug有9999种版本完全够用，可能还没有达到这么多，就进入了系列升级。</p><h6 id="3-2-第2段—-001，产品系列的升级（软件对应硬件方面的升级）"><a href="#3-2-第2段—-001，产品系列的升级（软件对应硬件方面的升级）" class="headerlink" title="3.2 第2段—-001，产品系列的升级（软件对应硬件方面的升级）"></a>3.2 第2段—-001，产品系列的升级（软件对应硬件方面的升级）</h6><p>从文本文件中读取的’.’后面的第一位，为1表示该不可以升级，为0表示该段程序可以升级。</p><p>之后的2位，表示版本号的范围：00-99</p><p>关于兼容性：修改bug有99种版本完全够用，可能还没有达到这么多，就进入了换代升级</p><h6 id="3-3-第1段—-3，产品的换代升级（软件对应产品发布方面的升级）"><a href="#3-3-第1段—-3，产品的换代升级（软件对应产品发布方面的升级）" class="headerlink" title="3.3 第1段—-3，产品的换代升级（软件对应产品发布方面的升级）"></a>3.3 第1段—-3，产品的换代升级（软件对应产品发布方面的升级）</h6>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>关于版本号管理，之前升级都是在嵌入式设备中移植一个微型服务器，然后通过web端进行升级。现在是设备作为客户端向http发送版本号，http发送下载指令，设备端再想ftp服务器请求下载文件。所以思维方式要转换一下。<br>并且预期忘版本号的管理符合git库版本管理规则。</p></blockquote><a id="more"></a><h5 id="一、应用场景"><a href="#一、应用场景" class="headerlink" title="一、应用场景"></a>一、应用场景</h5><p>服务器只有一个，而设备却有很多种，且分布在全国各地，各个地方情况不一样。<br>有的地方因为设备或者其它原因，软件不需要更新。<br>有的设备因为硬件与软件兼容性问题，只能升级特定的版本。<br>所以远程升级必须需要满足下面两种情况。</p><h5 id="二、远程升级满足下面两种情况"><a href="#二、远程升级满足下面两种情况" class="headerlink" title="二、远程升级满足下面两种情况"></a>二、远程升级满足下面两种情况</h5><h6 id="2-1-后台服务器的手动升级-暴力升级"><a href="#2-1-后台服务器的手动升级-暴力升级" class="headerlink" title="2.1 后台服务器的手动升级(暴力升级)"></a>2.1 后台服务器的手动升级(暴力升级)</h6><h6 id="2-2-设备端的自动升级"><a href="#2-2-设备端的自动升级" class="headerlink" title="2.2 设备端的自动升级"></a>2.2 设备端的自动升级</h6><p>参考：<img src="/2019/12/22/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%AE%BE%E5%A4%87%E7%AB%AF%E7%89%88%E6%9C%AC%E5%8F%B7%E7%AE%A1%E7%90%86-2/1.png" alt="1"></p><h5 id="三、关于版本号管控"><a href="#三、关于版本号管控" class="headerlink" title="三、关于版本号管控"></a>三、关于版本号管控</h5><p>版本号管控或称三段式管控，形如：3.000.00000，3.100.10000,以10进制字符串的方式体现出来。（关于版本号的管控也可以按照设备发送的地方进行管控。按照时间来进行版本号回退管理，按照空间(发货地点)来进行分支进退管理。）</p><p>注意：16进制数据和字符串型数据容易混淆</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HISI_APP:3.01.0001 </span><br><span class="line">16进制方式：(0x03 0x2e 0x00 0x01 0x2e 0x00 0x00 0x00 0x01) </span><br><span class="line">字符串方式：(0x33 0x2e 0x30 0x31 0x2e 0x30 0x30 0x30 0x31)</span><br></pre></td></tr></table></figure><h6 id="3-1-第3段—-00001，子功能升级-amp-BUG的修改（软件对应子功能添加-amp-BUG的修改的升级）"><a href="#3-1-第3段—-00001，子功能升级-amp-BUG的修改（软件对应子功能添加-amp-BUG的修改的升级）" class="headerlink" title="3.1 第3段—-00001，子功能升级&amp;BUG的修改（软件对应子功能添加&amp;BUG的修改的升级）"></a>3.1 第3段—-00001，子功能升级&amp;BUG的修改（软件对应子功能添加&amp;BUG的修改的升级）</h6><p>从文本文件中读取的’.’后面的第一位，为1表示该不可以升级，为0表示该段程序可以升级。</p><p>之后的4位，表示版本号的范围：0000-9999。</p><p>关于兼容性：修改bug有9999种版本完全够用，可能还没有达到这么多，就进入了系列升级。</p><h6 id="3-2-第2段—-001，产品系列的升级（软件对应硬件方面的升级）"><a href="#3-2-第2段—-001，产品系列的升级（软件对应硬件方面的升级）" class="headerlink" title="3.2 第2段—-001，产品系列的升级（软件对应硬件方面的升级）"></a>3.2 第2段—-001，产品系列的升级（软件对应硬件方面的升级）</h6><p>从文本文件中读取的’.’后面的第一位，为1表示该不可以升级，为0表示该段程序可以升级。</p><p>之后的2位，表示版本号的范围：00-99</p><p>关于兼容性：修改bug有99种版本完全够用，可能还没有达到这么多，就进入了换代升级</p><h6 id="3-3-第1段—-3，产品的换代升级（软件对应产品发布方面的升级）"><a href="#3-3-第1段—-3，产品的换代升级（软件对应产品发布方面的升级）" class="headerlink" title="3.3 第1段—-3，产品的换代升级（软件对应产品发布方面的升级）"></a>3.3 第1段—-3，产品的换代升级（软件对应产品发布方面的升级）</h6>]]></content>
     
     <summary type="html">
     
@@ -124,11 +152,11 @@
     
       <category term="指针" scheme="http://www.faihung.net/tags/%E6%8C%87%E9%92%88/"/>
     
+      <category term="局部变量" scheme="http://www.faihung.net/tags/%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/"/>
+    
       <category term="生存周期" scheme="http://www.faihung.net/tags/%E7%94%9F%E5%AD%98%E5%91%A8%E6%9C%9F/"/>
     
       <category term="内存分配" scheme="http://www.faihung.net/tags/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/"/>
-    
-      <category term="局部变量" scheme="http://www.faihung.net/tags/%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/"/>
     
       <category term="数组取值" scheme="http://www.faihung.net/tags/%E6%95%B0%E7%BB%84%E5%8F%96%E5%80%BC/"/>
     
@@ -387,9 +415,9 @@
       <category term="工具" scheme="http://www.faihung.net/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-      <category term="Windows" scheme="http://www.faihung.net/tags/Windows/"/>
-    
       <category term="VMware" scheme="http://www.faihung.net/tags/VMware/"/>
+    
+      <category term="Windows" scheme="http://www.faihung.net/tags/Windows/"/>
     
       <category term="网络配置" scheme="http://www.faihung.net/tags/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/"/>
     
@@ -523,33 +551,6 @@
       <category term="PS" scheme="http://www.faihung.net/tags/PS/"/>
     
       <category term="TS" scheme="http://www.faihung.net/tags/TS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Video Timing 解释说明</title>
-    <link href="http://www.faihung.net/2019/11/24/Video-Timing-%E8%A7%A3%E9%87%8A%E8%AF%B4%E6%98%8E/"/>
-    <id>http://www.faihung.net/2019/11/24/Video-Timing-解释说明/</id>
-    <published>2019-11-24T15:25:24.000Z</published>
-    <updated>2019-11-24T15:36:09.647Z</updated>
-    
-    <content type="html"><![CDATA[<h6 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h6><p>大家应该都知道，视频看起来是持续动态的，但是实际上是由一系列的静态画面，在很短的时间内更替,在人眼上就产生视觉残留，以至于你的眼睛感觉是动态画面。大家看到的视频中大多数是每秒闪过50-60幅画面，对于电脑画面大概是每秒闪过70-80幅画面。</p><a id="more"></a><p>要说timing是什么，先说下一般的图像是怎么显示在屏幕上的。</p><p>视频源发出的一幅幅的画面，送到屏幕后，屏幕将每一幅画面从上到下逐行的扫描每个像素显示在屏幕上，不间断的重复，直到一段视频数据结束。</p><p>而视频数据是连续的，怎么就知道哪段数据是显示一个画面？</p><p>怎么知道一个画面中哪一段数据又是显示这一行的？</p><p>Timing 就是解决这两问题的。</p><pre><code>Video timing 包含两个信号：水平同步Hs（horizontal sync）和垂直同步Vs（vertical sync）Vertical sync --&gt;用来标识什么时候开始送出一幅新画面Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</code></pre><h6 id="Vertical-sync-和-Horizontal-sync-信号有三种传送方式："><a href="#Vertical-sync-和-Horizontal-sync-信号有三种传送方式：" class="headerlink" title="Vertical sync 和 Horizontal sync 信号有三种传送方式："></a>Vertical sync 和 Horizontal sync 信号有三种传送方式：</h6><ol><li>单独传送vertical sync 和 Horizontal sync两路信号，如电脑上用的VGA信号，HDMI高清数字视频信号；</li><li>将vertical sync和horizontal sync信号复合在一路单独传送，如S-Video型号（其timing信号时复合在其Y信号中）；</li><li>将vertical sync和horizontal sync复合在一起的信号又再复合进视频信号中一起传送，如CVBS信号；</li></ol><h6 id="举个例子说明timing中包含了哪些信息："><a href="#举个例子说明timing中包含了哪些信息：" class="headerlink" title="举个例子说明timing中包含了哪些信息："></a>举个例子说明timing中包含了哪些信息：</h6><p>如一个视频信号timing为（1024x768@60），1024x768表示是SVGA分辨率（其中1024表示一幅图像的列数，因每一个象素点有R/G/B三点组成，故共有1024*3列；768表示一幅图像的行数，共768行），60Hz表示的就是vertical sync（即每一个画面的显示时间为1/60s=16.67ms），由于每一幅画面要扫描768行，所以每一行的扫描时间即为16.67ms/768=21.7us，即可得出horizontal sync。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h6 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h6&gt;&lt;p&gt;大家应该都知道，视频看起来是持续动态的，但是实际上是由一系列的静态画面，在很短的时间内更替,在人眼上就产生视觉残留，以至于你的眼睛感觉是动态画面。大家看到的视频中大多数是每秒闪过50-60幅画面，对于电脑画面大概是每秒闪过70-80幅画面。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="视音频" scheme="http://www.faihung.net/categories/%E8%A7%86%E9%9F%B3%E9%A2%91/"/>
-    
-    
-      <category term="Timing" scheme="http://www.faihung.net/tags/Timing/"/>
-    
-      <category term="Vertical sync" scheme="http://www.faihung.net/tags/Vertical-sync/"/>
-    
-      <category term="Horizontal sync" scheme="http://www.faihung.net/tags/Horizontal-sync/"/>
     
   </entry>
   
