@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.faihung.net/"/>
-  <updated>2019-12-29T15:38:30.021Z</updated>
+  <updated>2019-12-30T15:45:58.160Z</updated>
   <id>http://www.faihung.net/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Git-01_gitlab的Web端界面</title>
+    <link href="http://www.faihung.net/2019/12/30/Git-01-gitlab%E7%9A%84Web%E7%AB%AF%E7%95%8C%E9%9D%A2/"/>
+    <id>http://www.faihung.net/2019/12/30/Git-01-gitlab的Web端界面/</id>
+    <published>2019-12-30T15:42:15.000Z</published>
+    <updated>2019-12-30T15:45:58.160Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="一、gitlab的登录"><a href="#一、gitlab的登录" class="headerlink" title="一、gitlab的登录"></a>一、gitlab的登录</h4><p>Web网页输入：<a href="http://xxx.wicp.vip/" target="_blank" rel="noopener">http://xxx.wicp.vip/</a> 进入gitlab登录界面，输入账号密码之后，选择 standard登录，进入Web页面。不同权限的人进入的界面是不一样的。<br>如下：<br><img src="/2019/12/30/Git-01-gitlab%E7%9A%84Web%E7%AB%AF%E7%95%8C%E9%9D%A2/1.png" alt="1"></p><h4 id="二、gitlab-Web端的介绍"><a href="#二、gitlab-Web端的介绍" class="headerlink" title="二、gitlab Web端的介绍"></a>二、gitlab Web端的介绍</h4><p>点击Web端菜单栏上标签按钮，可以进入不同的功能任务主窗口。</p><h5 id="2-1-gitlab-一个logo标志-，进入或者恢复初始界面。"><a href="#2-1-gitlab-一个logo标志-，进入或者恢复初始界面。" class="headerlink" title="2.1 gitlab(一个logo标志)，进入或者恢复初始界面。"></a>2.1 gitlab(一个logo标志)，进入或者恢复初始界面。</h5><h5 id="2-2-Project，根据下拉列表或者Project标签页中的Tab列表选择同类型的项目。如下图"><a href="#2-2-Project，根据下拉列表或者Project标签页中的Tab列表选择同类型的项目。如下图" class="headerlink" title="2.2 Project，根据下拉列表或者Project标签页中的Tab列表选择同类型的项目。如下图"></a>2.2 Project，根据下拉列表或者Project标签页中的Tab列表选择同类型的项目。如下图</h5><p><img src="/2019/12/30/Git-01-gitlab%E7%9A%84Web%E7%AB%AF%E7%95%8C%E9%9D%A2/2.png" alt="2"><br><img src="/2019/12/30/Git-01-gitlab%E7%9A%84Web%E7%AB%AF%E7%95%8C%E9%9D%A2/3.png" alt="3"></p><h6 id="2-2-1点击按钮“New-project”建立项目"><a href="#2-2-1点击按钮“New-project”建立项目" class="headerlink" title="2.2.1点击按钮“New project”建立项目"></a>2.2.1点击按钮“New project”建立项目</h6><p><img src="/2019/12/30/Git-01-gitlab%E7%9A%84Web%E7%AB%AF%E7%95%8C%E9%9D%A2/4.png" alt="4"><br>可以看到主窗口中有三个待选标签页：Blank project、Create from template、 Import project分别表示不同project的创建方式，一般我们用第一种。</p><p>根据项目Group的下拉菜单，选择beacom_firmware开发小组，输入项目名名称test，添加项目描述信息。</p><p>最后选择Visibility Level 的权限(可以选上README文件，最后会生成一个README文件)，点击按钮“Create project”就在这个开发小组中可以建立一个项目了。<br>如下图：<br><img src="/2019/12/30/Git-01-gitlab%E7%9A%84Web%E7%AB%AF%E7%95%8C%E9%9D%A2/5.png" alt="5"></p><p>注意: </p><ol><li>点击按钮“clone”弹出一个对话框，上面有关于SSH和HTTP方式的链接，后续会有介绍。</li><li>每建立一个project 都会有这样一个命令：Command line instructions，这个是让我我们上传代码的命令，后面所有的操作基本上都是围绕这几步来，一般我们用这个命令：Create a new repository，后续会有介绍。</li></ol><h6 id="2-2-2回到刚才的Project-gt-Your-project-页面中可以看到新建的子项目xxx-firmware-test，以后开发就可以从这里进入"><a href="#2-2-2回到刚才的Project-gt-Your-project-页面中可以看到新建的子项目xxx-firmware-test，以后开发就可以从这里进入" class="headerlink" title="2.2.2回到刚才的Project-&gt;Your project 页面中可以看到新建的子项目xxx_firmware/test，以后开发就可以从这里进入"></a>2.2.2回到刚才的Project-&gt;Your project 页面中可以看到新建的子项目xxx_firmware/test，以后开发就可以从这里进入</h6><h5 id="2-3-Group-根据顶级菜单的下拉列表或者是子菜单的Tab列表都可以进如到不同的开发小组中去。"><a href="#2-3-Group-根据顶级菜单的下拉列表或者是子菜单的Tab列表都可以进如到不同的开发小组中去。" class="headerlink" title="2.3 Group,根据顶级菜单的下拉列表或者是子菜单的Tab列表都可以进如到不同的开发小组中去。"></a>2.3 Group,根据顶级菜单的下拉列表或者是子菜单的Tab列表都可以进如到不同的开发小组中去。</h5><p>以XXX_firmware开发小组为例，可以看到左边的的功能菜单上有：<br><img src="/2019/12/30/Git-01-gitlab%E7%9A%84Web%E7%AB%AF%E7%95%8C%E9%9D%A2/6.png" alt="6"></p><h6 id="2-3-1-Owerview"><a href="#2-3-1-Owerview" class="headerlink" title="2.3.1 Owerview"></a>2.3.1 Owerview</h6><p>是一些项目细节或者是开发人员的活跃记录，如上图和下图所示。<br><img src="/2019/12/30/Git-01-gitlab%E7%9A%84Web%E7%AB%AF%E7%95%8C%E9%9D%A2/7.png" alt="7"></p><h6 id="2-3-2-Issues"><a href="#2-3-2-Issues" class="headerlink" title="2.3.2 Issues"></a>2.3.2 Issues</h6><p>在这里这个项目组成员可以提交一些问题，大家相互交流，项目开发进度等等，代码发布版本都可以在这里做记录，这里没做研究。</p><h6 id="2-3-3-Merge-Requests"><a href="#2-3-3-Merge-Requests" class="headerlink" title="2.3.3 Merge Requests"></a>2.3.3 Merge Requests</h6><p>主要是别人提交代码请求合并的记录</p><h6 id="2-3-4-Kubernetes"><a href="#2-3-4-Kubernetes" class="headerlink" title="2.3.4 Kubernetes"></a>2.3.4 Kubernetes</h6><p>略</p><h6 id="2-3-5-Members"><a href="#2-3-5-Members" class="headerlink" title="2.3.5 Members"></a>2.3.5 Members</h6><p>这里有开发人员的相关信息，包括各级权限。</p><h5 id="2-4-Activity"><a href="#2-4-Activity" class="headerlink" title="2.4 Activity"></a>2.4 Activity</h5><p>不同人员各种代码提交、活跃记录都在上面。</p><h5 id="2-5-Milestones"><a href="#2-5-Milestones" class="headerlink" title="2.5 Milestones"></a>2.5 Milestones</h5><p>同2.3.2Issues中的milestones,就是项目开发达到某一个程度，比如可以发布的一个版本。（后面给代码打标签设置版本号还会提到如：git tag v1.0）</p><h5 id="2-6-Snippet"><a href="#2-6-Snippet" class="headerlink" title="2.6 Snippet"></a>2.6 Snippet</h5><p>个人的一些工作中的Idea启发,都可以记录在这里，有权限设置，相当于个人blog。</p><h5 id="2-7-“-”"><a href="#2-7-“-”" class="headerlink" title="2.7 “+”"></a>2.7 “+”</h5><p>根据下拉列表看到New Project、New group、New snippet，这个前面都有相关介绍。</p><h5 id="2-8-Issues"><a href="#2-8-Issues" class="headerlink" title="2.8 Issues"></a>2.8 Issues</h5><p>同2.3.2 Issues</p><h5 id="2-9-Merge-Requests"><a href="#2-9-Merge-Requests" class="headerlink" title="2.9 Merge Requests"></a>2.9 Merge Requests</h5><p>同2.3.3 Merge Requests</p><h5 id="2-9-Todos"><a href="#2-9-Todos" class="headerlink" title="2.9 Todos"></a>2.9 Todos</h5><p>接下来要做的事情，同2.3.2 Issues</p><h5 id="2-10？"><a href="#2-10？" class="headerlink" title="2.10？"></a>2.10？</h5><p>一款工具不能少的，常见帮助信息。</p><h5 id="2-11-账户设置"><a href="#2-11-账户设置" class="headerlink" title="2.11 账户设置"></a>2.11 账户设置</h5><p>选择账户中下拉列表Setings进入账户设置。如下图</p><p><img src="/2019/12/30/Git-01-gitlab%E7%9A%84Web%E7%AB%AF%E7%95%8C%E9%9D%A2/8.png" alt="8"></p><p>这里主要是一些个人信息的设置，比如修改账户密码、邮箱等。还有一个重要的操作修改添加SSH Keys后面会有介绍。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;一、gitlab的登录&quot;&gt;&lt;a href=&quot;#一、gitlab的登录&quot; class=&quot;headerlink&quot; title=&quot;一、gitlab的登录&quot;&gt;&lt;/a&gt;一、gitlab的登录&lt;/h4&gt;&lt;p&gt;Web网页输入：&lt;a href=&quot;http://xxx.wicp.v
+      
+    
+    </summary>
+    
+    
+      <category term="Git" scheme="http://www.faihung.net/categories/Git/"/>
+    
+    
+      <category term="gitlab" scheme="http://www.faihung.net/tags/gitlab/"/>
+    
+      <category term="github" scheme="http://www.faihung.net/tags/github/"/>
+    
+  </entry>
   
   <entry>
     <title>工程设计-软件升级之设备端版本号管理(3)</title>
@@ -152,11 +180,11 @@
     
       <category term="指针" scheme="http://www.faihung.net/tags/%E6%8C%87%E9%92%88/"/>
     
+      <category term="局部变量" scheme="http://www.faihung.net/tags/%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/"/>
+    
       <category term="生存周期" scheme="http://www.faihung.net/tags/%E7%94%9F%E5%AD%98%E5%91%A8%E6%9C%9F/"/>
     
       <category term="内存分配" scheme="http://www.faihung.net/tags/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/"/>
-    
-      <category term="局部变量" scheme="http://www.faihung.net/tags/%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/"/>
     
       <category term="数组取值" scheme="http://www.faihung.net/tags/%E6%95%B0%E7%BB%84%E5%8F%96%E5%80%BC/"/>
     
@@ -415,9 +443,9 @@
       <category term="工具" scheme="http://www.faihung.net/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-      <category term="Windows" scheme="http://www.faihung.net/tags/Windows/"/>
-    
       <category term="VMware" scheme="http://www.faihung.net/tags/VMware/"/>
+    
+      <category term="Windows" scheme="http://www.faihung.net/tags/Windows/"/>
     
       <category term="网络配置" scheme="http://www.faihung.net/tags/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/"/>
     
@@ -522,35 +550,6 @@
     
     
       <category term="视频信号" scheme="http://www.faihung.net/tags/%E8%A7%86%E9%A2%91%E4%BF%A1%E5%8F%B7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>视音频中ES PS TS 等流的区别</title>
-    <link href="http://www.faihung.net/2019/11/25/%E8%A7%86%E9%9F%B3%E9%A2%91%E4%B8%ADES-PS-TS-%E7%AD%89%E6%B5%81%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
-    <id>http://www.faihung.net/2019/11/25/视音频中ES-PS-TS-等流的区别/</id>
-    <published>2019-11-24T16:11:55.000Z</published>
-    <updated>2019-11-30T15:11:08.167Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="一、基本概念"><a href="#一、基本概念" class="headerlink" title="一、基本概念"></a>一、基本概念</h4><h5 id="1-ES"><a href="#1-ES" class="headerlink" title="1. ES"></a>1. ES</h5><p>ES–Elementary  Streams  (原始流)是直接从编码器出来的数据流，可以是编码过的视频数据流（H.264,MJPEG等），音频数据流（AAC），或其他编码数据流的统称。ES流经过PES打包器之后，被转换成PES包。</p><a id="more"></a><p>ES是只包含一种内容的数据流，如只含视频或只含音频等，打包之后的PES也是只含一种性质的ES,如只含视频ES的PES,只含音频ES的PES等。每个ES都由若干个存取单元（AU）组成，每个视频AU或音频AU都是由头部和编码数据两部分组成，1个AU相当于编码的1幅视频图像或1个音频帧，也可以说，每个AU实际上是编码数据流的显示单元，即相当于解码的1幅视频图像或1个音频帧的取样。</p><h5 id="2-PES"><a href="#2-PES" class="headerlink" title="2. PES"></a>2. PES</h5><p>PES–Packetized  Elementary Streams  (分组的ES)，ES形成的分组称为PES分组，是用来传递ES的一种数据结构。PES流是ES流经过PES打包器处理后形成的数据流，在这个过程中完成了将ES流分组、打包、加入包头信息等操作（对ES流的第一次打包）。PES流的基本单位是PES包。PES包由包头和payload组成。</p><h5 id="3-PTS、DTS"><a href="#3-PTS、DTS" class="headerlink" title="3. PTS、DTS"></a>3. PTS、DTS</h5><p>PTS–PresentationTime Stamp（显示时间标记）表示显示单元出现在系统目标解码器（H.264、MJPEG等）的时间。</p><p>DTS–Decoding Time Stamp（解码时间标记）表示将存取单元全部字节从解码缓存器移走的时间。</p><p>PTS/DTS是打在PES包的包头里面的，这两个参数是解决音视频同步显示，防止解码器输入缓存上溢或下溢的关键。每一个I（关键帧）、P（预测帧）、B（双向预测 帧）帧的包头都有一个PTS和DTS，但PTS与DTS对于B帧不一样，无需标出B帧的DTS，对于I帧和P帧，显示前一定要存储于视频解码器的重新排序缓存器中，经过延迟（重新排序）后再显示，所以一定要分别标明PTS和DTS。</p><h5 id="4-PS"><a href="#4-PS" class="headerlink" title="4. PS"></a>4. PS</h5><p>PS–Program Stream(节目流)PS流由PS包组成，而一个PS包又由若干个PES包组成（到这里，ES经过了两层的封装）。PS包的包头中包含了同步信息与时钟恢复信息。一个PS包最多可包含具有同一时钟基准的16个视频PES包和32个音频PES包。</p><h5 id="5-TS"><a href="#5-TS" class="headerlink" title="5. TS"></a>5. TS</h5><p>TS–Transport Stream（传输流）由定长的TS包组成（188字节），而TS包是对PES包的一个重新封装（到这里，ES也经过了两层的封装）。PES包的包头信息依然存在于TS包中。</p><h5 id="6-TS流与PS流的区别"><a href="#6-TS流与PS流的区别" class="headerlink" title="6. TS流与PS流的区别"></a>6. TS流与PS流的区别</h5><p>TS流与PS流的区别在于TS流的包结构是固定长度的,而PS流的包结构是可变长度的。PS包由于长度是变化的,一旦丢失某一PS包的同步信息,接收机就会进入失步状态,从而导致严重的信息丢失事件。而TS码流由于采用了固定长度的包结构,当传输误码破坏了某一TS包的同步信息时,接收机可在固定的位置检测它后面包中的同步信息,从而恢复同步,避免了信息丢失。因此在信道环境较为恶劣、传输误码较高时一般采用TS码流,而在信环境较好、传输误码较低时一般采用PS码流。</p><h5 id="7-TS单一码流、混合码流"><a href="#7-TS单一码流、混合码流" class="headerlink" title="7.TS单一码流、混合码流"></a>7.TS单一码流、混合码流</h5><p>单一性：TS流的基本组成单位是长度为188字节的TS包。</p><p>混合性： TS流由多种数据组合而成，一个TS包中的数据可以是视频数据，音频数据，填充数据，PSI/SI表格数据等（唯一的PID对应）。</p><h5 id="8-封装"><a href="#8-封装" class="headerlink" title="8. 封装"></a>8. 封装</h5><p>封装，就是捆绑打包, 将画面视频文件和音轨文件打包在一起,并按照一定规则建立排序和索引, 便于播放器或播放软件来索引播放. 包括AVI / PS(Program Stream)/ TS（Transport Stream）/ MKV（Matroska）等.</p><h4 id="二、基本流程"><a href="#二、基本流程" class="headerlink" title="二、基本流程"></a>二、基本流程</h4><p><img src="/2019/11/25/%E8%A7%86%E9%9F%B3%E9%A2%91%E4%B8%ADES-PS-TS-%E7%AD%89%E6%B5%81%E7%9A%84%E5%8C%BA%E5%88%AB/1.jpg" alt="1"></p><ol><li>A/D转换后，通过MPEG-2压缩编码得到的ES基本流。这个数据流很大，并且只是I，P，B的这些视频帧或音频取样信息</li><li>通过PES打包器，打包并在每个帧中插入 PTS/DTS标志，变成PES。原来是流的格式，现在成了数据包的分割形式。</li><li>PES根据需要打包成PS或TS包进行存储（DVD）或传输(DVB)。因每路音/视频只包含一路的编码数据流，所以每路PES也只包含相应的数据流。</li></ol><p><img src="/2019/11/25/%E8%A7%86%E9%9F%B3%E9%A2%91%E4%B8%ADES-PS-TS-%E7%AD%89%E6%B5%81%E7%9A%84%E5%8C%BA%E5%88%AB/2.jpg" alt="2"></p><h4 id="三、推理过程"><a href="#三、推理过程" class="headerlink" title="三、推理过程"></a>三、推理过程</h4><h5 id="3-1-TS流的解码过程：ES-PES-DTS-PTS-PCR"><a href="#3-1-TS流的解码过程：ES-PES-DTS-PTS-PCR" class="headerlink" title="3.1 TS流的解码过程：ES-PES-DTS-PTS-PCR"></a>3.1 TS流的解码过程：ES-PES-DTS-PTS-PCR</h5><ol><li>获取TS中的PAT</li><li>获取TS中的PMT</li><li>根据PMT可以知道当前网络中传输的视频（音频）类型（H264），相应的PID，PCR的PID等信息。</li><li>设置demux 模块的视频Filter 为相应视频的PID和stream type等。</li><li>从视频Demux Filter 后得到的TS数据包中的payload 数据就是 one piece of PES，在TS header中有一些关于此 payload属于哪个PES的第多少个数据包。 因此软件中应该将此payload中的数据copy到PES的buffer中，用于拼接一个PES包。</li><li>拼接好的PES包的包头会有PTS，DTS信息，去掉PES的header就是ES。</li><li>直接将被拔掉PES包头的ES包送给decoder就可以进行解码。解码出来的数据就是一帧一帧的视频数据，这些数据至少应当与PES中的PTS关联一下，以便进行视音频同步。</li><li>I，B，B，P 信息是在ES中的。</li></ol><h5 id="3-2-具体描述"><a href="#3-2-具体描述" class="headerlink" title="3.2 具体描述"></a>3.2 具体描述</h5><p>ES 是直接从编码器出来的数据流，可以是编码过的视频数据流，音频数据流，或其他编码数据流的统称。 ES 流经过 PES 打包器之后，被转换成 PES 包。 PES 包由包头和 payload 组成。</p><p>在 PES 层，主要是在 PES 包头信息中加入 PTS( 显示时间标签 ) 和 DTS （解码时间标签）用于视频、音频同步。 其实， Mpeg-2 用于视音频同步以及系统时钟恢复的时间标签分别在 ES ， PES 和 TS 这 3 个层次中。</p><p>在 ES 层，与同步有关的主要是视频缓冲验证 VBV （ Video Buffer Verifier ），用以防止解码器的缓冲器出现上溢或下溢；在 PES 层，主要是在 PES 头信息里出现的显示时间标签 PTS （ Presentation Time Stamp ）和解码时间标签 DTS （ Decoding Time Stamp ）；</p><p>在 TS 层中， TS 头信息包含了节目时钟参考 PCR （ Program Clock Reference ），用于恢复出与编码端一致的系统时序时钟 STC （ System Time Clock ）。</p><p>基本流程如下：</p><p>首先 MPEG-2 压缩编码得到的 ES 基本流，这个数据流很大，并且只是 I ， P ， B 的这些视频帧或音频取样信息， 然后加入一些同步信息，打包成长度可变长度的数据包 PES ，原来是流的格式，现在成了数据包的分割形式。</p><p>同时要注意的是， ES 是只包含一种内容的数据流，如只含视频，或只含音频等，打包之后的 PES 也是只含一种性质的 ES, 如只含视频 ES 的 PES, 只含音频 ES 的 PES 等。</p><p>可以知道， ES 是编码视频数据流或音频数据流，每个 ES 都由若干个存取单元（ AU ）组成，每个视频 AU 或音频 AU 都是由头部和编码数据两部分组成， 1 个 AU 相当于编码的 1 幅视频图像或 1 个音频帧，也可以说，每个 AU 实际上是编码数据流的显示单元，即相当于解码的 1 幅视频图像或 1 个音频帧的取样。 </p><p>PEG-2 对视频的压缩产生 I 帧、 P 帧、 B 帧。把帧顺序 I1,P4,B2,B3,P7,B5,B6 帧的编码 ES ，通过打包并在每个帧中插入 PTS/DTS 标志，变成 PES 。</p><p>在插入 PTS/DTS 标志时，由于在 B 帧 PTS 和 DTS 相等，所以无须在 B 帧多插入 DTS 。</p><p>而对于 I 帧 和 P 帧，由于经过复用后数据包的顺序会发生变化，显示前一定要存储于视频解码器的从新排序缓存器中，经过从新排序后再显示，所以一定要同时插入 PTS 和 DTS 作为从新排序的依据。</p><p>其中，有否 PTS/DTS 标志，是解决视音频同步显示、防止解码器输入缓存器上溢或下溢的关键所在。 </p><p>PTS 表明显示单元出现在系统目标解码器（ STD- System Target Decoder ）的时间 , DTS 表明将存取单元全部字节从 STD 的 ES 解码缓存器移走的时刻。</p><p>视频编码图像帧次序为 I1,P4,B2,B3,P7,B5,B6,I10,B8,B9 的 ES ，加入 PTS/DTS 后，打包成一个个视频 PES 包。</p><p>每个 PES 包都有一个包头，用于定义 PES 内的数据内容，提供定时资料。</p><p>每个 I 、 P 、 B帧的包头都有一个 PTS 和 DTS ，但 PTS 与 DTS 对 B 帧都是一样的，无须标出 B 帧的 DTS 。</p><p>对 I 帧和 P 帧，显示前一定要存储于视频解码器的重新排序缓存器中，经过延迟（重新排序）后再显示，一定要分别标明 PTS 和 DTS 。</p><p>例如，解码器输入的图像帧次序为 I1,P4,B2,B3,P7,B5,B6,I10,B8,B9 ，依解码器输出的帧次序，应该 P4 比 B2 、 B3 在先，但显示时 P4 一定要比 B2 、 B3 在后，即 P4 要在提前插入数据流中的时间标志指引下，经过缓存器重新排序，以重建编码前视频帧次序 I1,B2,B3,P4,B5,B6,P7,B8,B9,I10 。</p><p>显然， PTS/DTS 标志表明对确定事件或确定信息解码的专用时标的存在，依靠专用时标解码器，可知道该确定事件或确定信息开始解码或显示的时刻。</p><p>例如， PTS/DTS 标志可用于确定编码、多路复用、解码、重建的时间。</p><p>PCR<br>PCR 是 TS 里面的，即 TS packet 的 header 里面可能会有，他用来指定所期望的该 ts packet 到达 decoder 的时间，他的作用于 SCR 类似。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;一、基本概念&quot;&gt;&lt;a href=&quot;#一、基本概念&quot; class=&quot;headerlink&quot; title=&quot;一、基本概念&quot;&gt;&lt;/a&gt;一、基本概念&lt;/h4&gt;&lt;h5 id=&quot;1-ES&quot;&gt;&lt;a href=&quot;#1-ES&quot; class=&quot;headerlink&quot; title=&quot;1. ES&quot;&gt;&lt;/a&gt;1. ES&lt;/h5&gt;&lt;p&gt;ES–Elementary  Streams  (原始流)是直接从编码器出来的数据流，可以是编码过的视频数据流（H.264,MJPEG等），音频数据流（AAC），或其他编码数据流的统称。ES流经过PES打包器之后，被转换成PES包。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="视音频" scheme="http://www.faihung.net/categories/%E8%A7%86%E9%9F%B3%E9%A2%91/"/>
-    
-    
-      <category term="AVFormat" scheme="http://www.faihung.net/tags/AVFormat/"/>
-    
-      <category term="ES" scheme="http://www.faihung.net/tags/ES/"/>
-    
-      <category term="PS" scheme="http://www.faihung.net/tags/PS/"/>
-    
-      <category term="TS" scheme="http://www.faihung.net/tags/TS/"/>
     
   </entry>
   
