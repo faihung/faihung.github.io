@@ -263,9 +263,9 @@ xian-3.000.00001  到xian-3.000.00001不升级</code></pre><p>5.所以从上面�
       </categories>
       <tags>
         <tag>指针</tag>
-        <tag>局部变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
+        <tag>局部变量</tag>
         <tag>数组取值</tag>
       </tags>
   </entry>
@@ -1148,9 +1148,9 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
       </categories>
       <tags>
         <tag>指针</tag>
+        <tag>全局变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
-        <tag>全局变量</tag>
       </tags>
   </entry>
   <entry>
@@ -1580,8 +1580,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>strcat</tag>
         <tag>sprintf</tag>
+        <tag>strcat</tag>
         <tag>字符串拼接</tag>
       </tags>
   </entry>
@@ -1624,8 +1624,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sscanf</tag>
         <tag>sprintf</tag>
+        <tag>sscanf</tag>
         <tag>整数转字符串</tag>
         <tag>字符串转整数</tag>
       </tags>
@@ -1690,10 +1690,10 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sscanf</tag>
         <tag>16进制转10进制</tag>
         <tag>10进制转16进制</tag>
         <tag>sprintf</tag>
+        <tag>sscanf</tag>
       </tags>
   </entry>
   <entry>
@@ -1899,7 +1899,7 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
       </tags>
   </entry>
   <entry>
-    <title>sscanf()函数使用详解</title>
+    <title>C语言-sscanf()函数使用详解</title>
     <url>/2019/11/03/C%E8%AF%AD%E8%A8%80-sscanf-%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/</url>
     <content><![CDATA[<h4 id="一、描述："><a href="#一、描述：" class="headerlink" title="一、描述："></a>一、描述：</h4><p>sscanf通常被用来解析并转换字符串，其格式定义灵活多变，可以实现很强大的字符串解析功能。</p>
 <p>sscanf的原型</p>
@@ -2020,8 +2020,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>工具</category>
       </categories>
       <tags>
-        <tag>VMware</tag>
         <tag>ubuntu</tag>
+        <tag>VMware</tag>
       </tags>
   </entry>
   <entry>
