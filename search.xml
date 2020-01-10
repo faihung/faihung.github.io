@@ -699,9 +699,9 @@ stemp 4 make install</code></pre><p>2.4 使用 curl –version 检查是否更�
         <category>工具</category>
       </categories>
       <tags>
+        <tag>Windows</tag>
         <tag>VMware</tag>
         <tag>网络配置</tag>
-        <tag>Windows</tag>
       </tags>
   </entry>
   <entry>
@@ -1631,8 +1631,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>strcat</tag>
         <tag>sprintf</tag>
+        <tag>strcat</tag>
         <tag>字符串拼接</tag>
       </tags>
   </entry>
