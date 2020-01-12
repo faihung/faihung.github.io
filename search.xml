@@ -228,6 +228,8 @@
 <li><p>设备(设备是必须存在的)</p>
 </li>
 </ul>
+<a id="more"></a>
+
 <p>每往一个地方发送设备,设备端代码通过git库建立一个分支,之后这个分支代码就主要是这个地方设备运行代码,方便以后bug查找,但不会对这个分支代码进行修改。<br>初始版本,以发往四川的为例：sichuan-3.000.0001</p>
 <p>3.我们的程序不断的在master分支上进行更新迭代。</p>
 <p>4.关于升级,会出现两种情况。(其它各种情况都离不开这两种情况)</p>
@@ -408,9 +410,9 @@ xian-3.000.00001  到xian-3.000.00001不升级</code></pre><p>5.所以从上面�
       </categories>
       <tags>
         <tag>指针</tag>
-        <tag>局部变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
+        <tag>局部变量</tag>
         <tag>数组取值</tag>
       </tags>
   </entry>
@@ -1293,9 +1295,9 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
       </categories>
       <tags>
         <tag>指针</tag>
+        <tag>全局变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
-        <tag>全局变量</tag>
       </tags>
   </entry>
   <entry>
@@ -1725,9 +1727,9 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
+        <tag>sprintf</tag>
         <tag>strcat</tag>
         <tag>字符串拼接</tag>
-        <tag>sprintf</tag>
       </tags>
   </entry>
   <entry>
@@ -1769,8 +1771,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sscanf</tag>
         <tag>sprintf</tag>
+        <tag>sscanf</tag>
         <tag>整数转字符串</tag>
         <tag>字符串转整数</tag>
       </tags>
@@ -1835,10 +1837,10 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sscanf</tag>
-        <tag>sprintf</tag>
         <tag>16进制转10进制</tag>
         <tag>10进制转16进制</tag>
+        <tag>sprintf</tag>
+        <tag>sscanf</tag>
       </tags>
   </entry>
   <entry>

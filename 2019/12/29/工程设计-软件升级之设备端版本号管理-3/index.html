@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="Faihung&#39;s blog">
 <meta property="og:description" content="关于版本号管控需要满足以空间分支为主导,用时间变更作定位,方便bug查找修改。  1.需要满足设备的向上兼容,通过版本号的变更迭代可以实现。形如：3.000.0001 2.需要满足事物存在的3要素：  时间(就是设备发货时间,也是设备的初始版本号,例如3.000.0001到3.000.0002的变更，就是一个时间变迁的过程)  地点(就是设备发货地点,同时对应代码库的分支)  设备(设备是必须存">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-29T15:38:30.021Z">
+<meta property="og:updated_time" content="2020-01-12T07:39:10.173Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -342,8 +342,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-12-29T23:38:30+08:00">
-                2019-12-29
+              <time title="更新于" itemprop="dateModified" datetime="2020-01-12T15:39:10+08:00">
+                2020-01-12
               </time>
             
           </span>
@@ -416,6 +416,8 @@
 <li><p>设备(设备是必须存在的)</p>
 </li>
 </ul>
+<a id="more"></a>
+
 <p>每往一个地方发送设备,设备端代码通过git库建立一个分支,之后这个分支代码就主要是这个地方设备运行代码,方便以后bug查找,但不会对这个分支代码进行修改。<br>初始版本,以发往四川的为例：sichuan-3.000.0001</p>
 <p>3.我们的程序不断的在master分支上进行更新迭代。</p>
 <p>4.关于升级,会出现两种情况。(其它各种情况都离不开这两种情况)</p>
