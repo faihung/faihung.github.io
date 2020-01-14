@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>shell-shell命令监测程序运行状态</title>
+    <url>/2020/01/14/shell-shell%E5%91%BD%E4%BB%A4%E7%9B%91%E6%B5%8B%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81/</url>
+    <content><![CDATA[<blockquote>
+<p>在系统没有断电的前提下，监控脚本一直处于运行中</p>
+</blockquote>
+<p>1.将av_streamer -i input_stream.so -o output_app.so 后台重定向到无底洞中去或者是运行在后台中</p>
+<a id="more"></a>
+
+<p>2.检测程序运行的命令</p>
+<pre><code>ps |grep -w av_streamer  |grep -v grep|wc -l</code></pre><p>监测到运行程序返回1</p>
+<p>没有监测到则返回0​​​</p>
+<p>3.根据检测到的状态决定是否启动程序<br>返回0启动程序 av_streamer -i input_stream.so -o output_app.so<br>返回1打印：程序正在运行。</p>
+<p>具体表现在</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"></span><br><span class="line">count=0</span><br><span class="line">while true</span><br><span class="line">do</span><br><span class="line">	ProcNumber=`ps |grep -w av_streamer  |grep -v grep|wc -l`</span><br><span class="line">	if [ 1 -eq $ProcNumber ];then</span><br><span class="line">#		echo &quot;task running...&quot; </span><br><span class="line">		count=$((count + 1))</span><br><span class="line">		echo &quot;task running is&quot; $count</span><br><span class="line">		sleep 30s</span><br><span class="line">	else                                                   </span><br><span class="line">		echo &quot;task not run...&quot;   </span><br><span class="line">		sleep 30s</span><br><span class="line">		av_streamer -i input_stream.so -o output_app.so &amp;</span><br><span class="line">		echo &quot;task start run...&quot;</span><br><span class="line">	fi       </span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>shell</category>
+      </categories>
+      <tags>
+        <tag>shell</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Git-03_gitlab的应用场景</title>
     <url>/2020/01/12/Git-03-gitlab%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/</url>
     <content><![CDATA[<blockquote>
@@ -1348,9 +1371,9 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
         <tag>字节对齐</tag>
         <tag>大小端</tag>
         <tag>pragma pack()</tag>
+        <tag>流程图</tag>
         <tag>通信设计</tag>
         <tag>数据结构构造</tag>
-        <tag>流程图</tag>
         <tag>解耦合</tag>
       </tags>
   </entry>
@@ -1727,8 +1750,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sprintf</tag>
         <tag>strcat</tag>
+        <tag>sprintf</tag>
         <tag>字符串拼接</tag>
       </tags>
   </entry>
@@ -1771,8 +1794,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sprintf</tag>
         <tag>sscanf</tag>
+        <tag>sprintf</tag>
         <tag>整数转字符串</tag>
         <tag>字符串转整数</tag>
       </tags>
@@ -1837,10 +1860,10 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
+        <tag>sscanf</tag>
         <tag>16进制转10进制</tag>
         <tag>10进制转16进制</tag>
         <tag>sprintf</tag>
-        <tag>sscanf</tag>
       </tags>
   </entry>
   <entry>
@@ -2167,8 +2190,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>工具</category>
       </categories>
       <tags>
-        <tag>ubuntu</tag>
         <tag>VMware</tag>
+        <tag>ubuntu</tag>
       </tags>
   </entry>
   <entry>
