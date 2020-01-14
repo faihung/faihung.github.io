@@ -1371,9 +1371,9 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
         <tag>字节对齐</tag>
         <tag>大小端</tag>
         <tag>pragma pack()</tag>
-        <tag>流程图</tag>
         <tag>通信设计</tag>
         <tag>数据结构构造</tag>
+        <tag>流程图</tag>
         <tag>解耦合</tag>
       </tags>
   </entry>
@@ -1750,8 +1750,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>strcat</tag>
         <tag>sprintf</tag>
+        <tag>strcat</tag>
         <tag>字符串拼接</tag>
       </tags>
   </entry>
@@ -1794,8 +1794,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sscanf</tag>
         <tag>sprintf</tag>
+        <tag>sscanf</tag>
         <tag>整数转字符串</tag>
         <tag>字符串转整数</tag>
       </tags>
@@ -1860,10 +1860,10 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sscanf</tag>
         <tag>16进制转10进制</tag>
         <tag>10进制转16进制</tag>
         <tag>sprintf</tag>
+        <tag>sscanf</tag>
       </tags>
   </entry>
   <entry>
@@ -2190,8 +2190,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>工具</category>
       </categories>
       <tags>
-        <tag>VMware</tag>
         <tag>ubuntu</tag>
+        <tag>VMware</tag>
       </tags>
   </entry>
   <entry>
