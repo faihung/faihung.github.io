@@ -1,6 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>makefile-1.1-Makefile基本概念</title>
+    <url>/2020/02/15/makefile-1-1-Makefile%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
+    <content><![CDATA[<h5 id="一、一个示例"><a href="#一、一个示例" class="headerlink" title="一、一个示例"></a>一、一个示例</h5><p>先看一个代码演示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	printf(&quot;hello world!\n&quot;);</span><br><span class="line">	printf(&quot;hello maekfile\n&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>makefile</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hello:helloworld.o</span><br><span class="line">	gcc -o hello helloworld.o</span><br><span class="line">helloworld.o:helloworld.c</span><br><span class="line">	gcc -o helloworld.o -c helloworld.c</span><br><span class="line">clean:</span><br><span class="line">	rm hello helloworld.o</span><br></pre></td></tr></table></figure>
+<p>执行: make</p>
+<p><img src="/2020/02/15/makefile-1-1-Makefile%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/1.jpg" alt="1"></p>
+<p>执行: ./hello</p>
+<p><img src="/2020/02/15/makefile-1-1-Makefile%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/2.jpg" alt="2"></p>
+<h5 id="二、什么是Makefile"><a href="#二、什么是Makefile" class="headerlink" title="二、什么是Makefile?"></a>二、什么是Makefile?</h5><p>make命令执行时，需要一个makefile文件，以告诉make命令需要怎么样的去编译和链接程序。</p>
+<p>makefile文件保存了编译器和连接器的参数选项,还表述了所有源文件之间的关系(源代码文件需要的特定的包含文件,可执行文件要求包含的目标文件模块及库等)。</p>
+<p>创建程序(make程序)首先读取makefile文件,然后再激活编译器,汇编器,资源编译器和连接器以便产生最后的输出,最后输出并生成的通常是可执行文件。</p>
+<p>创建程序利用内置的推理规则来激活编译器,以便通过对特定CPP文件的编译来产生特定的OBJ文件。</p>
+<p><img src="/2020/02/15/makefile-1-1-Makefile%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/3.jpg" alt="3"></p>
+<h5 id="三、Make是如何工作的？"><a href="#三、Make是如何工作的？" class="headerlink" title="三、Make是如何工作的？"></a>三、Make是如何工作的？</h5><p>在默认的方式下，也就是我们只输入make命令。那么，</p>
+<p>1、make会在当前目录下找名字叫“Makefile”或“makefile”的文件。</p>
+<p>2、如果找到，它会找文件中的第一个目标文件（target），在上面的例子中，他会找到“hello”这个文件，并把这个文件作为最终的目标文件。</p>
+<p>3、如果hello文件不存在，或是hello所依赖的后面的 .o 文件的文件修改时间要比hello这个文件新，那么，他就会执行后面所定义的命令来生成hello这个文件。</p>
+<p>4、如果hello所依赖的.o文件也不存在，那么make会在当前文件中找目标为.o文件的依赖性，如果找到则再根据那一个规则生成.o文件。（这有点像一个堆栈的过程）</p>
+<p>5、当然，你的C文件和H文件是存在的啦，于是make会生成 .o 文件，然后再用 .o 文件生成make的终极任务，也就是执行文件hello了。</p>
+<p>这就是整个make的依赖性，make会一层又一层地去找文件的依赖关系，直到最终编译出第一个目标文件。在找寻的过程中，如果出现错误，比如最后被依赖的文件找不到，那么make就会直接退出，并报错，而对于所定义的命令的错误，或是编译不成功，make根本不理。make只管文件的依赖性，即，如果在我找了依赖关系之后，冒号后面的文件还是不在，那么对不起，我就不工作啦。</p>
+<h5 id="四、学习Makefile的必要性"><a href="#四、学习Makefile的必要性" class="headerlink" title="四、学习Makefile的必要性"></a>四、学习Makefile的必要性</h5><p>会不会写Makefile从侧面可以看出一个人是否具有完成大型项目工程的能力。</p>
+<ul>
+<li>Linux/Unix环境下开发必备技能</li>
+<li>系统架构师、项目经理核心技能</li>
+<li>研究开源项目、Linux内核的地图</li>
+<li>加深对底层软件构造系统及过程的理解</li>
+</ul>
+<h5 id="五、如何学习Makefile？"><a href="#五、如何学习Makefile？" class="headerlink" title="五、如何学习Makefile？"></a>五、如何学习Makefile？</h5><h6 id="5-1-理论基础"><a href="#5-1-理论基础" class="headerlink" title="5.1 理论基础"></a>5.1 理论基础</h6><blockquote>
+<p>面向依赖的思维</p>
+</blockquote>
+<ul>
+<li><p><a href="https://pan.baidu.com/s/1qLoethrcmuhqnqNfu8P9lg" target="_blank" rel="noopener">程序员的自我修养(装载&amp;库)(高清带完整书签版)</a></p>
+<blockquote>
+<p>提取码：6ukr</p>
+</blockquote>
+</li>
+<li><p><a href="https://pan.baidu.com/s/1VQ07fDdRuLOrT6rK2ZKmBQ" target="_blank" rel="noopener">GNU+makefile中文手册</a></p>
+<blockquote>
+<p>提取码：le6g </p>
+</blockquote>
+</li>
+<li><p><a href="https://pan.baidu.com/s/1zJr2rC6UoFzDDdXnB9EwEg" target="_blank" rel="noopener">深入理解软件构造系统 原理与最佳实践</a></p>
+<blockquote>
+<p>提取码：pwpa</p>
+</blockquote>
+</li>
+</ul>
+<h6 id="5-2-学习环境"><a href="#5-2-学习环境" class="headerlink" title="5.2 学习环境"></a>5.2 学习环境</h6><ul>
+<li>Linux、Unix环境</li>
+<li>Windows下的cygwin等模拟环境</li>
+</ul>
+<h6 id="5-3-项目编程基础"><a href="#5-3-项目编程基础" class="headerlink" title="5.3 项目编程基础"></a>5.3 项目编程基础</h6><ul>
+<li><p>C语言基础</p>
+</li>
+<li><p>C语言项目基础</p>
+<ul>
+<li><p>C语言实战之学生成绩管理系统</p>
+</li>
+<li><p>多文件源码管理、头文件包含、函数的声明与定义</p>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>makefile</category>
+      </categories>
+      <tags>
+        <tag>make</tag>
+        <tag>makefile</tag>
+        <tag>资料</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>shell-shell命令监测程序运行状态</title>
     <url>/2020/01/14/shell-shell%E5%91%BD%E4%BB%A4%E7%9B%91%E6%B5%8B%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81/</url>
     <content><![CDATA[<blockquote>
@@ -433,9 +509,9 @@ xian-3.000.00001  到xian-3.000.00001不升级</code></pre><p>5.所以从上面�
       </categories>
       <tags>
         <tag>指针</tag>
+        <tag>局部变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
-        <tag>局部变量</tag>
         <tag>数组取值</tag>
       </tags>
   </entry>
@@ -1318,9 +1394,9 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
       </categories>
       <tags>
         <tag>指针</tag>
-        <tag>全局变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
+        <tag>全局变量</tag>
       </tags>
   </entry>
   <entry>
