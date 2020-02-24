@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>工程设计-COM口16进制通信之数据通信超时与异常处理</title>
+    <url>/2020/02/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E4%B9%8B%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E8%B6%85%E6%97%B6%E4%B8%8E%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<p>本文主要是补充 <a href="https://www.faihung.net/2019/11/23/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E8%AE%BE%E8%AE%A1/">工程设计-COM口16进制通信设计</a></p>
+<a id="more"></a>
+
+<h5 id="一、最初版"><a href="#一、最初版" class="headerlink" title="一、最初版"></a>一、最初版</h5><h6 id="1-流程图"><a href="#1-流程图" class="headerlink" title="1.流程图"></a>1.流程图</h6><p><img src="/2020/02/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E4%B9%8B%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E8%B6%85%E6%97%B6%E4%B8%8E%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/1.png" alt="1"><br><img src="/2020/02/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E4%B9%8B%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E8%B6%85%E6%97%B6%E4%B8%8E%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/2.png" alt="2"></p>
+<h6 id="2-异常处理"><a href="#2-异常处理" class="headerlink" title="2.异常处理"></a>2.异常处理</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bool exception_handling_extract(UINT8 *fraBuf, UINT8 buflen, UINT8 **prealBUF, UINT8 *preallen)</span><br><span class="line">&#123;</span><br><span class="line">	UINT8 len = 0;</span><br><span class="line">	UINT8 *pcur,*p;</span><br><span class="line">	UINT8 reclen = 0;</span><br><span class="line"></span><br><span class="line">	p = fraBuf;</span><br><span class="line">    while(buflen--)</span><br><span class="line">    &#123;</span><br><span class="line">        if(*p == 0x64)</span><br><span class="line">        &#123;</span><br><span class="line">            pcur = p;</span><br><span class="line">            reclen = (*(p+3)&lt;&lt;8)|(*(p+4));</span><br><span class="line">            //进行相应的校验和计算</span><br><span class="line">            if((*(p+4+reclen+1)) == Com_checksum((ComFrameData*)pcur,5+reclen) &amp;&amp; (*(p+4+reclen+1+1)==0x64))//校验和相等且0x64为最后一位</span><br><span class="line">            &#123;</span><br><span class="line">#if 1</span><br><span class="line">                printf(&quot;This real frame&apos;s checksum is ok\n&quot;);</span><br><span class="line">#endif</span><br><span class="line">				//开始提取这个有效的数据帧</span><br><span class="line">				*preallen = reclen+7;</span><br><span class="line">				*prealBUF = pcur;					</span><br><span class="line">                return true;                </span><br><span class="line">                </span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                printf(&quot;This real frame&apos;s checksum isn&apos;t ok\n&quot;);</span><br><span class="line">            &#125;           </span><br><span class="line">        &#125;</span><br><span class="line">        p++;	</span><br><span class="line">    &#125;   </span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="3-超时处理"><a href="#3-超时处理" class="headerlink" title="3.超时处理"></a>3.超时处理</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bool comm_waitAckHex(struct seriainfo seriaattrs_ttyAMA1, hisi2mcu_real_data_t hisi2mcu_realcmd, rerealdata_t rerealdata, mult_repeat_t mult_repeat)</span><br><span class="line">&#123;</span><br><span class="line">    int i,j,k,l,m,n;</span><br><span class="line">    UINT8 Rec_Buf[180];</span><br><span class="line">    UINT8 *pprealBuf;</span><br><span class="line">    UINT8 reallen;</span><br><span class="line"></span><br><span class="line">    memset(Rec_Buf, 0, sizeof(Rec_Buf));</span><br><span class="line">    serial_flush(&amp;seriaattrs_ttyAMA1,SERIAL_IOFLUSH);</span><br><span class="line">    for(i=0;i&lt;mult_repeat.w_times;i++)//多次重发</span><br><span class="line">    &#123;    </span><br><span class="line">        if(0 != serial_write_data(seriaattrs_ttyAMA1.serial_fd, hisi2mcu_realcmd.SendFrameBuf, hisi2mcu_realcmd.buf_hex_len))</span><br><span class="line">        &#123;</span><br><span class="line">            printf(&quot;Send MCU&apos;s data is error!\n&quot;);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">			for(m=1;m&lt;=mult_repeat.r_times;m++)//最多读20次</span><br><span class="line">			&#123;</span><br><span class="line">				usleep(mult_repeat.delay_us*1000);///?????????????????</span><br><span class="line">				if(0 != serial_read_data(seriaattrs_ttyAMA1.serial_fd, Rec_Buf, sizeof(Rec_Buf)))</span><br><span class="line">				&#123;</span><br><span class="line">					printf(&quot;Receive MCU&apos;s data is error!\n&quot;);</span><br><span class="line">				&#125;else&#123;</span><br><span class="line">					if(Rec_Buf[0] == 0x64)//Rec_Buf[0] != 0x00</span><br><span class="line">					&#123;</span><br><span class="line">						break;//收到数据</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;			</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">        if(Rec_Buf[0] == 0x64)//Rec_Buf[0] != 0x00</span><br><span class="line">        &#123;</span><br><span class="line">            break;//收到数据</span><br><span class="line">        &#125;       </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        if(exception_handling_extract(Rec_Buf, rerealdata.rebuflen, &amp;pprealBuf, &amp;reallen))</span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            memcpy(rerealdata.prealBuf, pprealBuf, reallen);</span><br><span class="line">            return true;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            printf(&quot;Debug1.5---exception handling extract is faled,KEY-&gt;0x%X,key-&gt;0x%X\n&quot;,hisi2mcu_realcmd.SendFrameBuf[2],hisi2mcu_realcmd.SendFrameBuf[5]);</span><br><span class="line">        &#125;       </span><br><span class="line">    </span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="二、改进版"><a href="#二、改进版" class="headerlink" title="二、改进版"></a>二、改进版</h5><h6 id="1-流程图-1"><a href="#1-流程图-1" class="headerlink" title="1. 流程图"></a>1. 流程图</h6><p><img src="/2020/02/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E4%B9%8B%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E8%B6%85%E6%97%B6%E4%B8%8E%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/3.png" alt="3"></p>
+<h6 id="2-代码"><a href="#2-代码" class="headerlink" title="2. 代码"></a>2. 代码</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">UINT8 Com_checksum(ComFrameData *pData, int len)</span><br><span class="line">&#123;</span><br><span class="line">    int i,sum=0;</span><br><span class="line">    UINT8 ccsum=0;  </span><br><span class="line">	UINT8 *pdata;</span><br><span class="line">	pdata = (UINT8 *)pData;</span><br><span class="line">	</span><br><span class="line">    for(i=0;i&lt;len;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        #if 0</span><br><span class="line">        printf(&quot;%X\n&quot;,*pdata);</span><br><span class="line">        #endif</span><br><span class="line">        sum += *(pdata++); </span><br><span class="line">    &#125;</span><br><span class="line">    ccsum = ~(sum&amp;0xFF);  </span><br><span class="line">	</span><br><span class="line">#if 0</span><br><span class="line">    printf(&quot;sum:0x%X\n&quot;,sum);</span><br><span class="line">    printf(&quot;ccsum:0x%X\n&quot;,ccsum);</span><br><span class="line">#endif</span><br><span class="line">    return ccsum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">bool hisi2mcu_serial_uni_func(struct seriainfo seriaattrs_ttyAMA1,</span><br><span class="line">								const char *hexCmd,</span><br><span class="line">								const char *hexCheck,</span><br><span class="line">								char *hexRecbuf,</span><br><span class="line">								unsigned int hexRecbuf_size,</span><br><span class="line">								unsigned int retryNum</span><br><span class="line">								unsigned int delay_us)</span><br><span class="line">&#123;</span><br><span class="line">	int len = 0;</span><br><span class="line">	unsigned int loop = 0;</span><br><span class="line">	UINT8 i,reclen = 0;</span><br><span class="line">	UINT8 *preal,</span><br><span class="line">	UINT8 recbuf[180];</span><br><span class="line">	</span><br><span class="line">	memset(hexRecbuf, 0x00, hexRecbuf_size);</span><br><span class="line">	serial_flush(&amp;seriaattrs_ttyAMA1,SERIAL_IOFLUSH);</span><br><span class="line">	while(loop &lt; retryNum)</span><br><span class="line">	&#123;</span><br><span class="line">		loop++;</span><br><span class="line">		len = strlen(hexCmd);</span><br><span class="line">		if(0 != serial_write_data(seriaattrs_ttyAMA1.serial_fd, (unsigned char *)hexCmd, len))</span><br><span class="line">        &#123;</span><br><span class="line">            printf(&quot;send MCU&apos;s data is error!\n&quot;);</span><br><span class="line">			continue;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">			usleep(delay_us*1000);</span><br><span class="line">			memset(hexRecbuf, 0x00, hexRecbuf_size);</span><br><span class="line">			if(0 != serial_read_data(seriaattrs_ttyAMA1.serial_fd, hexRecbuf, hexRecbuf_size))</span><br><span class="line">			&#123;</span><br><span class="line">				printf(&quot;receive MCU&apos;s data is error!\n&quot;);</span><br><span class="line">				continue;</span><br><span class="line">			&#125;else&#123;</span><br><span class="line">				while(*(hexRecbuf++) == 0x64)</span><br><span class="line">				&#123;</span><br><span class="line">					preal = hexRecbuf-1;</span><br><span class="line">					if(!((*preal+1 == 0x01)&amp;&amp;(*(preal+2)&lt;=0x20)))</span><br><span class="line">					&#123;</span><br><span class="line">						printf(&quot;data format is not meet requirements!\n&quot;);</span><br><span class="line">						continue;</span><br><span class="line">					&#125;else&#123;</span><br><span class="line">						reclen = (*(preal+3)&lt;&lt;8)|(*(preal+4));</span><br><span class="line">						//进行相应的校验和计算,校验和相等且0x64为最后一位</span><br><span class="line">						if(!((*(preal+4+reclen+1)==Com_checksum(preal,5+reclen)) &amp;&amp; (*(preal+4+reclen+1+1)==0x64)))</span><br><span class="line">						&#123;</span><br><span class="line">							printf(&quot;checksum does not meet requirements or end bit isn&apos;t 0x64!\n&quot;);</span><br><span class="line">							continue;</span><br><span class="line">						&#125;else&#123;</span><br><span class="line">							memcpy(recbuf, preal, reclen+7);</span><br><span class="line">							for(i=0;i&lt;=3;i++)//比较帧头、上下行、关键字</span><br><span class="line">							&#123;</span><br><span class="line">								if(recbuf[i] != hexCheck++)</span><br><span class="line">								&#123;</span><br><span class="line">									return bool_false;</span><br><span class="line">								&#125;</span><br><span class="line">							&#125;	</span><br><span class="line">							return bool_true;		</span><br><span class="line">						&#125;</span><br><span class="line">						</span><br><span class="line">					&#125;</span><br><span class="line">					</span><br><span class="line">				&#125;</span><br><span class="line">				continue;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	return bool_false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>工程设计</category>
+      </categories>
+      <tags>
+        <tag>通信设计</tag>
+        <tag>流程图</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>makefile-1.1-Makefile基本概念</title>
     <url>/2020/02/15/makefile-1-1-Makefile%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
     <content><![CDATA[<h5 id="一、一个示例"><a href="#一、一个示例" class="headerlink" title="一、一个示例"></a>一、一个示例</h5><p>先看一个代码演示：</p>
@@ -509,9 +537,9 @@ xian-3.000.00001  到xian-3.000.00001不升级</code></pre><p>5.所以从上面�
       </categories>
       <tags>
         <tag>指针</tag>
-        <tag>局部变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
+        <tag>局部变量</tag>
         <tag>数组取值</tag>
       </tags>
   </entry>
@@ -1394,9 +1422,9 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
       </categories>
       <tags>
         <tag>指针</tag>
+        <tag>全局变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
-        <tag>全局变量</tag>
       </tags>
   </entry>
   <entry>
@@ -1826,9 +1854,9 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sprintf</tag>
         <tag>strcat</tag>
         <tag>字符串拼接</tag>
+        <tag>sprintf</tag>
       </tags>
   </entry>
   <entry>
@@ -1870,8 +1898,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sprintf</tag>
         <tag>sscanf</tag>
+        <tag>sprintf</tag>
         <tag>整数转字符串</tag>
         <tag>字符串转整数</tag>
       </tags>
@@ -1936,10 +1964,10 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
+        <tag>sscanf</tag>
+        <tag>sprintf</tag>
         <tag>16进制转10进制</tag>
         <tag>10进制转16进制</tag>
-        <tag>sprintf</tag>
-        <tag>sscanf</tag>
       </tags>
   </entry>
   <entry>
@@ -2266,8 +2294,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>工具</category>
       </categories>
       <tags>
-        <tag>ubuntu</tag>
         <tag>VMware</tag>
+        <tag>ubuntu</tag>
       </tags>
   </entry>
   <entry>
