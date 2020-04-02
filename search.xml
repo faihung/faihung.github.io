@@ -1,6 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>海思-VENC模块学习</title>
+    <url>/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h4 id="一、VENC是什么？"><a href="#一、VENC是什么？" class="headerlink" title="一、VENC是什么？"></a>一、VENC是什么？</h4><p>VENC 模块，即视频编码模块。本模块支持多路实时编码，且每路编码彼此独立，++编码协议和编码 profile 可以不同++ 。本模块支持视频编码同时，调度 Region 模块对编码图像内容进行叠加和遮挡。<br><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/3241E904069B487B93998E8A354E869D" alt="1"></p>
+<a id="more"></a>
+
+<ol>
+<li><p>VENC 模块由编码通道组子模块（GROUP）和编码协议子模块（H.264/JPEG/MJPEG/MPEG-4）组成。</p>
+</li>
+<li><p>通道组支持接收 YUV 格式图像输入，支持格式为 Semi-planar YUV 4:2:0 或 Semi-planar YUV 4:2:2，其中 H264E/MPEG-4 只支持 Semi-planar YUV 4:2:0，JPEG/MJPEG支持 Semi-planar YUV 4:2:0 或 Semi-planar YUV 4:2:2。通道组模块接收外部原始图像数据，而不关心图像数据是来自哪个外部模块。</p>
+</li>
+<li><p>完成视频区域管理之后，图像被送入具体协议类型编码通道，完成视频编码，输出码流。</p>
+</li>
+</ol>
+<h5 id="1-1编码通道与通道组"><a href="#1-1编码通道与通道组" class="headerlink" title="1.1编码通道与通道组"></a>1.1编码通道与通道组</h5><p><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/45D0254295F0450692A6E24A7BF63883" alt="2"></p>
+<ol>
+<li>编码通道做为基本容器，保存不同编码通道的用户设置，管理不同编码通道的内部资源。编码通道完成图像转化为码流的功能，具体由码率控制器和编码器协同完成。这里的编码器指的是狭义上的编码器，只完成编码功能。码率控制器提供了对编码参数的控制和调整，从而对输出码率进行控制。</li>
+<li>编码通道可分为主编码通道和次编码通道。对于一帧输入图像，VENC 仅支持一路主编码通道，不支持次编码通道。</li>
+<li>编码通道组是指芯片启动一次，能够同时处理的编码通道的集合。VENC 编码通道组支持启动一次，仅编码一路主码流通道（H.264/JPEG/MJPEG/MPEG-4） 。所以在创建编码通道时，只允许注册一个主码流通道。</li>
+<li>码率控制器分别提供了对 H.264\MPEG-4\MJPEG 协议编码通道 CBR、VBR、FIXQP 等三种码率控制模式；</li>
+<li>对图像质量和码率进行调节。Hi3521/Hi3520A/Hi3518/Hi3516C/Hi3520D/Hi3515A/Hi3515C 不支持 MPEG-4 编码，所以，也不支持 MPEG-4 类型的码率控制。</li>
+</ol>
+<h5 id="1-2码率"><a href="#1-2码率" class="headerlink" title="1.2码率"></a>1.2码率</h5><p><strong>CBR（Constant Bit Rate）固定比特率。</strong><br>即在码率统计时间内保证编码码率平稳。码率稳定主要由两个量来评估，这两个量都可以由用户在创建编码通道时指定。</p>
+<ol>
+<li><p>码率统计时间</p>
+<blockquote>
+<p>单位为秒(s)，码率统计时间越长，每帧图像的码率波动对于码率调节的影响越弱，码率的调节会更缓慢，图像质量的波动会更轻微；码率统计时间越短，每帧图像的码率波动对于码率调节的影响越强，图像码率的调节会更灵敏，图像质量的波动会更剧烈。</p>
+</blockquote>
+</li>
+<li><p>码率的波动等级</p>
+<blockquote>
+<p>系统提供了 6 阶的图像质量波动等级，波动等级越大，系统允许码率的波动范围更大。如果波动等级设置高，对于一些图像复杂，变化剧烈的场景，图像质量可能会更平稳，适用于网络带宽富裕的场景；如果波动等级设置低，编码的码率会比较平稳，对于一些图像复杂，变化剧烈的场景，图像质量可能不如高波动等级，适用于带宽不富裕的场景。</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>VBR（Variable Bit Rate）可变比特率。</strong><br>即在码率统计时间内编码码率波动，从而保证编码图像质量平稳。以 H.264 编码为例，VENC 模块提供用户可设置 MaxQp，MinQp，MaxBitrate。MaxQp，MinQp 用于控制图像的质量范围， MaxBitrate 用于钳位码率统计时间内的最大编码码率。</p>
+<p><strong>Fix Qp</strong><br>固定 Qp 值。在码率统计时间内，编码图像所有宏块 Qp 值相同，采用用户设定的图像 Qp 值，I 帧和 P 帧的 QP 值可以分别设置。</p>
+<h5 id="1-3跳帧"><a href="#1-3跳帧" class="headerlink" title="1.3跳帧"></a>1.3跳帧</h5><p>H.264 编码提供 3 种跳帧参考模式：<br><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/8C241F318AD54018A2F4BAD78D456684" alt="3"></p>
+<p><strong>1 倍跳帧参考；</strong></p>
+<blockquote>
+<p>I1 是 I 帧，p1,p2…p12 都是 P 帧。图中有箭头指入的帧，如 I1,p2,p4 等为参考帧，没有箭头指入的帧，如 p1,p3，是非参考帧。<br>用户在保存码流时，可以只保存 4 倍跳帧参考的参考帧，如 I1,p4,p8；也可以保存所有参考帧，甚至所有的帧。     </p>
+</blockquote>
+<p><strong>2 倍跳帧参考；</strong></p>
+<blockquote>
+<p>图中有箭头指入的帧，如 I1,p2,p4 等为参考帧，没有箭头指入的帧，如p1,p3，是非参考帧。用户在保存码流的时候可以保存所有参考帧，也可以保存所有的帧。    </p>
+</blockquote>
+<p><strong>4 倍跳帧参考；</strong></p>
+<blockquote>
+<p>所有的帧都是参考帧，用户在保存码流的时候需要保存所有参考帧。    </p>
+</blockquote>
+<h5 id="1-4其他"><a href="#1-4其他" class="headerlink" title="1.4其他"></a>1.4其他</h5><p><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/AE5963911C4B4FC9868658DAD03CC068" alt="4"><br><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/E0A0389F9D4644EDA1C5ACE682384091" alt="5"><br><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/A3D1E6D621744B4491B4C48FBC5ED146" alt="6"><br><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/89F9EE0B16E44E49BC8305D839423E20" alt="7"></p>
+<h4 id="二、数据类型分类学习"><a href="#二、数据类型分类学习" class="headerlink" title="二、数据类型分类学习"></a>二、数据类型分类学习</h4><h5 id="2-1-三种码流（H264、JPEG、MPEG-4的包PACK类型）"><a href="#2-1-三种码流（H264、JPEG、MPEG-4的包PACK类型）" class="headerlink" title="2.1 三种码流（H264、JPEG、MPEG-4的包PACK类型）"></a>2.1 三种码流（H264、JPEG、MPEG-4的包PACK类型）</h5><h6 id="2-1-1-H264E-NALU-TYPE-E"><a href="#2-1-1-H264E-NALU-TYPE-E" class="headerlink" title="2.1.1 H264E_NALU_TYPE_E"></a>2.1.1 H264E_NALU_TYPE_E</h6><p><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/CBD87D3BC01E4659AA7B514040FDEFCE" alt="8"></p>
+<h6 id="2-1-2-H264E-REFSLICE-TYPE-E"><a href="#2-1-2-H264E-REFSLICE-TYPE-E" class="headerlink" title="2.1.2 H264E_REFSLICE_TYPE_E"></a>2.1.2 H264E_REFSLICE_TYPE_E</h6><p>定义获取的 H.264 码流属于何种跳帧参考模式下的参考帧。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    H264E_REFSLICE_FOR_1X = 1,</span><br><span class="line">    H264E_REFSLICE_FOR_2X = 2,</span><br><span class="line">    H264E_REFSLICE_FOR_4X = 5,</span><br><span class="line">    H264E_REFSLICE_FOR_BUTT</span><br><span class="line">&#125; H264E_REFSLICE_TYPE_E;</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/3147A0D63C4E4039A03AE033F5DF206B" alt="9"></p>
+<h6 id="2-1-3-JPEGE-PACK-TYPE-E"><a href="#2-1-3-JPEGE-PACK-TYPE-E" class="headerlink" title="2.1.3 JPEGE_PACK_TYPE_E"></a>2.1.3 JPEGE_PACK_TYPE_E</h6><p><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/00DD140D5E9F4D9DB8F961B7D63DDB60" alt="10"><br><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/2C9289EF27E341739E1ECF001971C026" alt="11"></p>
+<h6 id="2-1-4-MPEG4E-PACK-TYPE-E"><a href="#2-1-4-MPEG4E-PACK-TYPE-E" class="headerlink" title="2.1.4 MPEG4E_PACK_TYPE_E"></a>2.1.4 MPEG4E_PACK_TYPE_E</h6><p><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/AC90053EB6EE41638EB3E5525CC79706" alt="12"></p>
+<h5 id="2-2-VENC-DATA-TYPE-U"><a href="#2-2-VENC-DATA-TYPE-U" class="headerlink" title="2.2 VENC_DATA_TYPE_U"></a>2.2 VENC_DATA_TYPE_U</h5><p><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/EC8835598A934E5DBDAFA51885707B27" alt="13"></p>
+<h5 id="2-3-VENC-PACK-S-帧码流包结构体"><a href="#2-3-VENC-PACK-S-帧码流包结构体" class="headerlink" title="2.3 VENC_PACK_S(帧码流包结构体)"></a>2.3 VENC_PACK_S(帧码流包结构体)</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">typedef struct hiVENC_PACK_S</span><br><span class="line">&#123;</span><br><span class="line">    HI_U32 u32PhyAddr[2];//码流包物理地址</span><br><span class="line">    HI_U8  *pu8Addr[2];//码流包首地址</span><br><span class="line">    HI_U32 u32Len[2];//码流包长度</span><br><span class="line">    VENC_DATA_TYPE_U  DataType;// 码流类型，支持 H.264/JPEG/MPEG-4 协议类型的数据包</span><br><span class="line">    HI_U64 u64PTS;//时间戳</span><br><span class="line">    HI_BOOL bFieldEnd;//场结束标识？？场是个什么概念？？</span><br><span class="line">    HI_BOOL bFrameEnd;//帧结束标识</span><br><span class="line">&#125;VENC_PACK_S;</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/6877045D41D54A7CB0BFB3079A142D43" alt="14"></p>
+<h5 id="2-4-协议码流特征-H264、JPEG、MPEG-4"><a href="#2-4-协议码流特征-H264、JPEG、MPEG-4" class="headerlink" title="2.4 协议码流特征(H264、JPEG、MPEG-4)"></a>2.4 协议码流特征(H264、JPEG、MPEG-4)</h5><p>暂略</p>
+]]></content>
+      <categories>
+        <category>海思</category>
+      </categories>
+      <tags>
+        <tag>VENC</tag>
+        <tag>编码通道</tag>
+        <tag>码率</tag>
+        <tag>跳帧</tag>
+        <tag>数据帧类型</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>工程设计-库函数方式实现文件的解压缩</title>
     <url>/2020/02/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E5%BA%93%E5%87%BD%E6%95%B0%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E7%9A%84%E8%A7%A3%E5%8E%8B%E7%BC%A9/</url>
     <content><![CDATA[<h4 id="一、-为什么要用函数方式来解压缩文件"><a href="#一、-为什么要用函数方式来解压缩文件" class="headerlink" title="一、    为什么要用函数方式来解压缩文件"></a>一、    为什么要用函数方式来解压缩文件</h4><p>之前关于算法模型的下载更新之后的一系列操作，如删除之前的文件、改变现有文件权限等操作用的是shell命令方式执行的。这种方式是在现有程序进程的基础上重新开启一个新的进程来执行shell命令。而用到的系统命令函数system、popen函数等会返回出各种程序状态，这些状态是不可控的，所以我们需要用到相应的库函数来实现它们的功能，目前都已经实现和验证它们的功能。</p>
@@ -595,9 +668,9 @@ xian-3.000.00001  到xian-3.000.00001不升级</code></pre><p>5.所以从上面�
         <category>C</category>
       </categories>
       <tags>
+        <tag>指针</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
-        <tag>指针</tag>
         <tag>局部变量</tag>
         <tag>数组取值</tag>
       </tags>
@@ -1586,6 +1659,10 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
       <categories>
         <category>工程设计</category>
       </categories>
+      <tags>
+        <tag>海思</tag>
+        <tag>rtsp</tag>
+      </tags>
   </entry>
   <entry>
     <title>C语言-ip地址合法性判断</title>
@@ -1634,10 +1711,10 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
         <category>C</category>
       </categories>
       <tags>
+        <tag>指针</tag>
         <tag>全局变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
-        <tag>指针</tag>
       </tags>
   </entry>
   <entry>
@@ -1689,8 +1766,8 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
         <tag>大小端</tag>
         <tag>pragma pack()</tag>
         <tag>通信设计</tag>
-        <tag>流程图</tag>
         <tag>数据结构构造</tag>
+        <tag>流程图</tag>
         <tag>解耦合</tag>
       </tags>
   </entry>
@@ -2596,8 +2673,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>工具</category>
       </categories>
       <tags>
-        <tag>ubuntu</tag>
         <tag>nfs</tag>
+        <tag>ubuntu</tag>
       </tags>
   </entry>
   <entry>

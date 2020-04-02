@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="VENC,编码通道,码率,跳帧,数据帧类型," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Faihung's blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="一、VENC是什么？VENC 模块，即视频编码模块。本模块支持多路实时编码，且每路编码彼此独立，++编码协议和编码 profile 可以不同++ 。本模块支持视频编码同时，调度 Region 模块对编码图像内容进行叠加和遮挡。">
+<meta name="keywords" content="VENC,编码通道,码率,跳帧,数据帧类型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="海思-VENC模块学习">
+<meta property="og:url" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;02&#x2F;%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0&#x2F;index.html">
+<meta property="og:site_name" content="Faihung&#39;s blog">
+<meta property="og:description" content="一、VENC是什么？VENC 模块，即视频编码模块。本模块支持多路实时编码，且每路编码彼此独立，++编码协议和编码 profile 可以不同++ 。本模块支持视频编码同时，调度 Region 模块对编码图像内容进行叠加和遮挡。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;02&#x2F;%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0&#x2F;3241E904069B487B93998E8A354E869D">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;02&#x2F;%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0&#x2F;45D0254295F0450692A6E24A7BF63883">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;02&#x2F;%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0&#x2F;8C241F318AD54018A2F4BAD78D456684">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;02&#x2F;%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0&#x2F;AE5963911C4B4FC9868658DAD03CC068">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;02&#x2F;%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0&#x2F;E0A0389F9D4644EDA1C5ACE682384091">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;02&#x2F;%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0&#x2F;A3D1E6D621744B4491B4C48FBC5ED146">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;02&#x2F;%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0&#x2F;89F9EE0B16E44E49BC8305D839423E20">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;02&#x2F;%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0&#x2F;CBD87D3BC01E4659AA7B514040FDEFCE">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;02&#x2F;%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0&#x2F;3147A0D63C4E4039A03AE033F5DF206B">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;02&#x2F;%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0&#x2F;00DD140D5E9F4D9DB8F961B7D63DDB60">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;02&#x2F;%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0&#x2F;2C9289EF27E341739E1ECF001971C026">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;02&#x2F;%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0&#x2F;AC90053EB6EE41638EB3E5525CC79706">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;02&#x2F;%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0&#x2F;EC8835598A934E5DBDAFA51885707B27">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;02&#x2F;%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0&#x2F;6877045D41D54A7CB0BFB3079A142D43">
+<meta property="og:updated_time" content="2020-04-02T15:43:42.377Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;02&#x2F;%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0&#x2F;3241E904069B487B93998E8A354E869D">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.faihung.net/2020/04/02/海思-VENC模块学习/"/>
+
+
+
+
+
+  <title>海思-VENC模块学习 | Faihung's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Faihung's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">作者：faihung</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" target="_blank" rel="noopener" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.faihung.net/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="faihung">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Faihung's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">海思-VENC模块学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-02T23:39:33+08:00">
+                2020-04-02
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-04-02T23:43:42+08:00">
+                2020-04-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B5%B7%E6%80%9D/" itemprop="url" rel="index">
+                    <span itemprop="name">海思</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"> 阅读次数:</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="一、VENC是什么？"><a href="#一、VENC是什么？" class="headerlink" title="一、VENC是什么？"></a>一、VENC是什么？</h4><p>VENC 模块，即视频编码模块。本模块支持多路实时编码，且每路编码彼此独立，++编码协议和编码 profile 可以不同++ 。本模块支持视频编码同时，调度 Region 模块对编码图像内容进行叠加和遮挡。<br><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/3241E904069B487B93998E8A354E869D" alt="1"></p>
+<a id="more"></a>
+
+<ol>
+<li><p>VENC 模块由编码通道组子模块（GROUP）和编码协议子模块（H.264/JPEG/MJPEG/MPEG-4）组成。</p>
+</li>
+<li><p>通道组支持接收 YUV 格式图像输入，支持格式为 Semi-planar YUV 4:2:0 或 Semi-planar YUV 4:2:2，其中 H264E/MPEG-4 只支持 Semi-planar YUV 4:2:0，JPEG/MJPEG支持 Semi-planar YUV 4:2:0 或 Semi-planar YUV 4:2:2。通道组模块接收外部原始图像数据，而不关心图像数据是来自哪个外部模块。</p>
+</li>
+<li><p>完成视频区域管理之后，图像被送入具体协议类型编码通道，完成视频编码，输出码流。</p>
+</li>
+</ol>
+<h5 id="1-1编码通道与通道组"><a href="#1-1编码通道与通道组" class="headerlink" title="1.1编码通道与通道组"></a>1.1编码通道与通道组</h5><p><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/45D0254295F0450692A6E24A7BF63883" alt="2"></p>
+<ol>
+<li>编码通道做为基本容器，保存不同编码通道的用户设置，管理不同编码通道的内部资源。编码通道完成图像转化为码流的功能，具体由码率控制器和编码器协同完成。这里的编码器指的是狭义上的编码器，只完成编码功能。码率控制器提供了对编码参数的控制和调整，从而对输出码率进行控制。</li>
+<li>编码通道可分为主编码通道和次编码通道。对于一帧输入图像，VENC 仅支持一路主编码通道，不支持次编码通道。</li>
+<li>编码通道组是指芯片启动一次，能够同时处理的编码通道的集合。VENC 编码通道组支持启动一次，仅编码一路主码流通道（H.264/JPEG/MJPEG/MPEG-4） 。所以在创建编码通道时，只允许注册一个主码流通道。</li>
+<li>码率控制器分别提供了对 H.264\MPEG-4\MJPEG 协议编码通道 CBR、VBR、FIXQP 等三种码率控制模式；</li>
+<li>对图像质量和码率进行调节。Hi3521/Hi3520A/Hi3518/Hi3516C/Hi3520D/Hi3515A/Hi3515C 不支持 MPEG-4 编码，所以，也不支持 MPEG-4 类型的码率控制。</li>
+</ol>
+<h5 id="1-2码率"><a href="#1-2码率" class="headerlink" title="1.2码率"></a>1.2码率</h5><p><strong>CBR（Constant Bit Rate）固定比特率。</strong><br>即在码率统计时间内保证编码码率平稳。码率稳定主要由两个量来评估，这两个量都可以由用户在创建编码通道时指定。</p>
+<ol>
+<li><p>码率统计时间</p>
+<blockquote>
+<p>单位为秒(s)，码率统计时间越长，每帧图像的码率波动对于码率调节的影响越弱，码率的调节会更缓慢，图像质量的波动会更轻微；码率统计时间越短，每帧图像的码率波动对于码率调节的影响越强，图像码率的调节会更灵敏，图像质量的波动会更剧烈。</p>
+</blockquote>
+</li>
+<li><p>码率的波动等级</p>
+<blockquote>
+<p>系统提供了 6 阶的图像质量波动等级，波动等级越大，系统允许码率的波动范围更大。如果波动等级设置高，对于一些图像复杂，变化剧烈的场景，图像质量可能会更平稳，适用于网络带宽富裕的场景；如果波动等级设置低，编码的码率会比较平稳，对于一些图像复杂，变化剧烈的场景，图像质量可能不如高波动等级，适用于带宽不富裕的场景。</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>VBR（Variable Bit Rate）可变比特率。</strong><br>即在码率统计时间内编码码率波动，从而保证编码图像质量平稳。以 H.264 编码为例，VENC 模块提供用户可设置 MaxQp，MinQp，MaxBitrate。MaxQp，MinQp 用于控制图像的质量范围， MaxBitrate 用于钳位码率统计时间内的最大编码码率。</p>
+<p><strong>Fix Qp</strong><br>固定 Qp 值。在码率统计时间内，编码图像所有宏块 Qp 值相同，采用用户设定的图像 Qp 值，I 帧和 P 帧的 QP 值可以分别设置。</p>
+<h5 id="1-3跳帧"><a href="#1-3跳帧" class="headerlink" title="1.3跳帧"></a>1.3跳帧</h5><p>H.264 编码提供 3 种跳帧参考模式：<br><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/8C241F318AD54018A2F4BAD78D456684" alt="3"></p>
+<p><strong>1 倍跳帧参考；</strong></p>
+<blockquote>
+<p>I1 是 I 帧，p1,p2…p12 都是 P 帧。图中有箭头指入的帧，如 I1,p2,p4 等为参考帧，没有箭头指入的帧，如 p1,p3，是非参考帧。<br>用户在保存码流时，可以只保存 4 倍跳帧参考的参考帧，如 I1,p4,p8；也可以保存所有参考帧，甚至所有的帧。     </p>
+</blockquote>
+<p><strong>2 倍跳帧参考；</strong></p>
+<blockquote>
+<p>图中有箭头指入的帧，如 I1,p2,p4 等为参考帧，没有箭头指入的帧，如p1,p3，是非参考帧。用户在保存码流的时候可以保存所有参考帧，也可以保存所有的帧。    </p>
+</blockquote>
+<p><strong>4 倍跳帧参考；</strong></p>
+<blockquote>
+<p>所有的帧都是参考帧，用户在保存码流的时候需要保存所有参考帧。    </p>
+</blockquote>
+<h5 id="1-4其他"><a href="#1-4其他" class="headerlink" title="1.4其他"></a>1.4其他</h5><p><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/AE5963911C4B4FC9868658DAD03CC068" alt="4"><br><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/E0A0389F9D4644EDA1C5ACE682384091" alt="5"><br><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/A3D1E6D621744B4491B4C48FBC5ED146" alt="6"><br><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/89F9EE0B16E44E49BC8305D839423E20" alt="7"></p>
+<h4 id="二、数据类型分类学习"><a href="#二、数据类型分类学习" class="headerlink" title="二、数据类型分类学习"></a>二、数据类型分类学习</h4><h5 id="2-1-三种码流（H264、JPEG、MPEG-4的包PACK类型）"><a href="#2-1-三种码流（H264、JPEG、MPEG-4的包PACK类型）" class="headerlink" title="2.1 三种码流（H264、JPEG、MPEG-4的包PACK类型）"></a>2.1 三种码流（H264、JPEG、MPEG-4的包PACK类型）</h5><h6 id="2-1-1-H264E-NALU-TYPE-E"><a href="#2-1-1-H264E-NALU-TYPE-E" class="headerlink" title="2.1.1 H264E_NALU_TYPE_E"></a>2.1.1 H264E_NALU_TYPE_E</h6><p><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/CBD87D3BC01E4659AA7B514040FDEFCE" alt="8"></p>
+<h6 id="2-1-2-H264E-REFSLICE-TYPE-E"><a href="#2-1-2-H264E-REFSLICE-TYPE-E" class="headerlink" title="2.1.2 H264E_REFSLICE_TYPE_E"></a>2.1.2 H264E_REFSLICE_TYPE_E</h6><p>定义获取的 H.264 码流属于何种跳帧参考模式下的参考帧。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    H264E_REFSLICE_FOR_1X = 1,</span><br><span class="line">    H264E_REFSLICE_FOR_2X = 2,</span><br><span class="line">    H264E_REFSLICE_FOR_4X = 5,</span><br><span class="line">    H264E_REFSLICE_FOR_BUTT</span><br><span class="line">&#125; H264E_REFSLICE_TYPE_E;</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/3147A0D63C4E4039A03AE033F5DF206B" alt="9"></p>
+<h6 id="2-1-3-JPEGE-PACK-TYPE-E"><a href="#2-1-3-JPEGE-PACK-TYPE-E" class="headerlink" title="2.1.3 JPEGE_PACK_TYPE_E"></a>2.1.3 JPEGE_PACK_TYPE_E</h6><p><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/00DD140D5E9F4D9DB8F961B7D63DDB60" alt="10"><br><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/2C9289EF27E341739E1ECF001971C026" alt="11"></p>
+<h6 id="2-1-4-MPEG4E-PACK-TYPE-E"><a href="#2-1-4-MPEG4E-PACK-TYPE-E" class="headerlink" title="2.1.4 MPEG4E_PACK_TYPE_E"></a>2.1.4 MPEG4E_PACK_TYPE_E</h6><p><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/AC90053EB6EE41638EB3E5525CC79706" alt="12"></p>
+<h5 id="2-2-VENC-DATA-TYPE-U"><a href="#2-2-VENC-DATA-TYPE-U" class="headerlink" title="2.2 VENC_DATA_TYPE_U"></a>2.2 VENC_DATA_TYPE_U</h5><p><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/EC8835598A934E5DBDAFA51885707B27" alt="13"></p>
+<h5 id="2-3-VENC-PACK-S-帧码流包结构体"><a href="#2-3-VENC-PACK-S-帧码流包结构体" class="headerlink" title="2.3 VENC_PACK_S(帧码流包结构体)"></a>2.3 VENC_PACK_S(帧码流包结构体)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">typedef struct hiVENC_PACK_S</span><br><span class="line">&#123;</span><br><span class="line">    HI_U32 u32PhyAddr[2];//码流包物理地址</span><br><span class="line">    HI_U8  *pu8Addr[2];//码流包首地址</span><br><span class="line">    HI_U32 u32Len[2];//码流包长度</span><br><span class="line">    VENC_DATA_TYPE_U  DataType;// 码流类型，支持 H.264/JPEG/MPEG-4 协议类型的数据包</span><br><span class="line">    HI_U64 u64PTS;//时间戳</span><br><span class="line">    HI_BOOL bFieldEnd;//场结束标识？？场是个什么概念？？</span><br><span class="line">    HI_BOOL bFrameEnd;//帧结束标识</span><br><span class="line">&#125;VENC_PACK_S;</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/6877045D41D54A7CB0BFB3079A142D43" alt="14"></p>
+<h5 id="2-4-协议码流特征-H264、JPEG、MPEG-4"><a href="#2-4-协议码流特征-H264、JPEG、MPEG-4" class="headerlink" title="2.4 协议码流特征(H264、JPEG、MPEG-4)"></a>2.4 协议码流特征(H264、JPEG、MPEG-4)</h5><p>暂略</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/VENC/" rel="tag"># VENC</a>
+          
+            <a href="/tags/%E7%BC%96%E7%A0%81%E9%80%9A%E9%81%93/" rel="tag"># 编码通道</a>
+          
+            <a href="/tags/%E7%A0%81%E7%8E%87/" rel="tag"># 码率</a>
+          
+            <a href="/tags/%E8%B7%B3%E5%B8%A7/" rel="tag"># 跳帧</a>
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E5%B8%A7%E7%B1%BB%E5%9E%8B/" rel="tag"># 数据帧类型</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E5%BA%93%E5%87%BD%E6%95%B0%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E7%9A%84%E8%A7%A3%E5%8E%8B%E7%BC%A9/" rel="next" title="工程设计-库函数方式实现文件的解压缩">
+                <i class="fa fa-chevron-left"></i> 工程设计-库函数方式实现文件的解压缩
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="faihung" />
+            
+              <p class="site-author-name" itemprop="name">faihung</p>
+              <p class="site-description motion-element" itemprop="description">系统、归纳、总结</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/faihung" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/faihung" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://bbs.ebaina.com/forum.php" title="Ebaina" target="_blank">Ebaina</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.amobbs.com/index.php" title="amoBBS" target="_blank">amoBBS</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="ttps://blog.csdn.net/leixiaohua1020" title="leixiaohua" target="_blank">leixiaohua</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、VENC是什么？"><span class="nav-text">一、VENC是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1编码通道与通道组"><span class="nav-text">1.1编码通道与通道组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2码率"><span class="nav-text">1.2码率</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3跳帧"><span class="nav-text">1.3跳帧</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-4其他"><span class="nav-text">1.4其他</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、数据类型分类学习"><span class="nav-text">二、数据类型分类学习</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-三种码流（H264、JPEG、MPEG-4的包PACK类型）"><span class="nav-text">2.1 三种码流（H264、JPEG、MPEG-4的包PACK类型）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#2-1-1-H264E-NALU-TYPE-E"><span class="nav-text">2.1.1 H264E_NALU_TYPE_E</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-1-2-H264E-REFSLICE-TYPE-E"><span class="nav-text">2.1.2 H264E_REFSLICE_TYPE_E</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-1-3-JPEGE-PACK-TYPE-E"><span class="nav-text">2.1.3 JPEGE_PACK_TYPE_E</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-1-4-MPEG4E-PACK-TYPE-E"><span class="nav-text">2.1.4 MPEG4E_PACK_TYPE_E</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-VENC-DATA-TYPE-U"><span class="nav-text">2.2 VENC_DATA_TYPE_U</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-VENC-PACK-S-帧码流包结构体"><span class="nav-text">2.3 VENC_PACK_S(帧码流包结构体)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-4-协议码流特征-H264、JPEG、MPEG-4"><span class="nav-text">2.4 协议码流特征(H264、JPEG、MPEG-4)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">faihung</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"> 访客人数:</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"> 总访问量:</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
