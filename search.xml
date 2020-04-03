@@ -1,6 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>RTSP-RTSP简单介绍</title>
+    <url>/2020/04/03/RTSP-RTSP%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<h4 id="一、概要"><a href="#一、概要" class="headerlink" title="一、概要"></a>一、概要</h4><p>RTSP（Real Time Streaming Protocol）实时流协议：一种流媒体控制协议，可对流媒体进行暂停、快进、快倒等操作。</p>
+<p>流媒体就是实时在线点播。而流媒体与普通媒体的差别在于：对于普通媒体，在访问它之前要得到全部的内容；对于流媒体，则在完全接收到全部内容之前就开始访问。</p>
+<p>本文主要介绍RTSP的基本消息信令及手机与HMS的RTSP的消息交互过程。</p>
+<a id="more"></a>
+
+<h4 id="二、流媒体基本业务组网图"><a href="#二、流媒体基本业务组网图" class="headerlink" title="二、流媒体基本业务组网图"></a>二、流媒体基本业务组网图</h4><p><img src="/2020/04/03/RTSP-RTSP%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/9032D6CBB3104562A1D5D01358B7836B" alt="1"></p>
+<h4 id="三、RTSP-介绍"><a href="#三、RTSP-介绍" class="headerlink" title="三、RTSP 介绍"></a>三、RTSP 介绍</h4><h5 id="3-1-RTSP是什么？"><a href="#3-1-RTSP是什么？" class="headerlink" title="3.1    RTSP是什么？"></a>3.1    RTSP是什么？</h5><p>RTSP（Real Time Streaming Protocol），实时流协议，是一种应用层的协议，用于实时的控制数据的传输。RTSP提供一个可扩展的架构来实现控制实时媒体的在线点播，如音频或是视频内容。数据源可以是直播信号也可以是制作好的媒体文件。RTSP能够同时控制多个数据传输会话过程。</p>
+<h5 id="3-2-RTSP-URL的语法结构"><a href="#3-2-RTSP-URL的语法结构" class="headerlink" title="3.2    RTSP URL的语法结构"></a>3.2    RTSP URL的语法结构</h5><p>一个终端用户是通过在播放器中输入URL地址开始进行观看流媒体业务的第一步，而对于使用RTSP协议的移动流媒体点播而言，URL的一般写法如下：</p>
+<p>一个以“rtsp”或是“rtspu”开始的URL链接用于指定当前使用的是RTSP 协议。RTSP URL的语法结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rtsp_URL	=	(“rtsp:”| “rtspu:”) “//” host [“:”port”] /[abs_path]/content_name</span><br></pre></td></tr></table></figure>
+<p>host：可以是一个有效的域名或是IP地址。</p>
+<p>port：端口号，对于RTSP协议来说，缺省的端口号为554，即如HTTP的缺省端口号是80一样。当我们在确认流媒体服务器提供的端口号为554时，此项可以省略</p>
+<p>说明：当HMS服务器使用的端口号为554时，我们在写点播链接时，可以不用写明端口号，但当使用非554端口时，在RTSP URL中一定要指定相应的端口。</p>
+<p>注：我们在点播时使用的都是rtsp，而没有使用到rtspu。</p>
+<h5 id="3-3-RTSP-消息"><a href="#3-3-RTSP-消息" class="headerlink" title="3.3    RTSP 消息"></a>3.3    RTSP 消息</h5><h6 id="3-3-1-消息"><a href="#3-3-1-消息" class="headerlink" title="3.3.1    消息"></a>3.3.1    消息</h6><p>RTSP是一种基于文本的协议，用CRLF作为一行的结束符。使用基于文本协议的好处在于我们可以随时在使用过程中的增加自定义的参数，也可以随便将协议包抓住很直观的进行分析。</p>
+<p>RTSP从传输方向上有两种消息，即“请求消息”及“回应消息”。一个消息一般由头和内容组成，不过也有很多的消息是只有消息头（message head or header）而没有消息体（message body）的。</p>
+<h6 id="3-3-2-请求消息"><a href="#3-3-2-请求消息" class="headerlink" title="3.3.2    请求消息"></a>3.3.2    请求消息</h6><p>一个请求消息（a request message）即可以由客户端向服务端发起也可以由服务端向客户端发起。请求消息的语法结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Request	=	Request-Line</span><br><span class="line">		*(	general-header	 | request-header | entity-header)</span><br><span class="line">			CRLF</span><br><span class="line">			[message-body]</span><br></pre></td></tr></table></figure>
+<p><strong>1. Request Line</strong></p>
+<p>请求消息的第一行的语法结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Request-Line	=	Method 空格 Request-URI 空格 RTSP-Version CRLF</span><br><span class="line">其中在消息行中出现的第一个单词即是所使用的信令标志。</span><br></pre></td></tr></table></figure>
+<p>目前已经有的信息标志如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Method 		=	“DESCRIBE” </span><br><span class="line">			|	“ANNOUNCE”</span><br><span class="line">			|	“GET_PARAMETER”</span><br><span class="line">			|	“OPTIONS”</span><br><span class="line">			|	“PAUSE”</span><br><span class="line">			|	“PLAY”</span><br><span class="line">			|	“RECORD”</span><br><span class="line">			|	“REDIRECT”</span><br><span class="line">			|	“SETUP”</span><br><span class="line">			|	“SET_PARAMETER”</span><br><span class="line">			|	“TEARDOWN”</span><br><span class="line">			|	extension-method</span><br></pre></td></tr></table></figure>
+<p>extension-method    = 标志<br>我们可以使用自己定义的信令标示符</p>
+<p>Request-URI = “*” | absolute_URI<br>    请使用请求媒体存放的绝对路径</p>
+<p>RTSP-Version = “RTSP” “/” 1<em>DIGIT “.” 1</em>DIGIT<br>    RTSP的版本号</p>
+<p>例子：DESCRIBE rtsp://211.94.164.227/3.3gp RTSP/1.0</p>
+<p><strong>2.    Request Header Fields</strong></p>
+<p>在消息头中除了第一行的内容外，还有一些需求提供附加信息。其中有些是一定要的，后续我们会详细介绍经常用到的几个域的含义。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Request-header	=	Accept</span><br><span class="line">			|	Accept-Encoding</span><br><span class="line">			|	Accept-Language</span><br><span class="line">			|	Authorization</span><br><span class="line">			|	From</span><br><span class="line">			|	If-Modified-Since</span><br><span class="line">			|	Range</span><br><span class="line">			|	Referer</span><br><span class="line">			|	User-Agent</span><br></pre></td></tr></table></figure>
+
+<h6 id="3-3-3-响应消息"><a href="#3-3-3-响应消息" class="headerlink" title="3.3.3    响应消息"></a>3.3.3    响应消息</h6><p>客户端或是服务端在接收并解释一个请求消息后，会回复一个消息（response message）给请求方。响应消息的语法结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Response		=	Status-Line</span><br><span class="line">			*(	general-header</span><br><span class="line">			|	response-header</span><br><span class="line">			|	entity-header)</span><br><span class="line">				CRLF</span><br><span class="line">				[message-body]</span><br></pre></td></tr></table></figure>
+<p><strong>1. Status-Line</strong></p>
+<p>响应消息的第一行是状态行（status-line），每个元素之间用空格分开。除了最后的CRLF之外，在此行的中间不得有CR或是LF的出现。它的语法格式如下，</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Status-Line = RTSP-Version 空格 Status-Code 空格 Reason-Phrase CRLF</span><br></pre></td></tr></table></figure>
+<p>Status-Code 是一个三位数的整数，用于描述接收方对所收到请求消息的执行结果，而Reason-Phrase是对Status-Code给出一个简短的文字描述，便于我们在收到一个消息后，不用每次都去查看code的解释，而只需要看Reason-Phrase就可以大概了解当前请求的执行状态。</p>
+<p>Status-Code的第一位数字指定了这个回复消息的种类，一共有5类：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1XX: Informational – 请求被接收到，继续处理</span><br><span class="line">2XX: Success – 请求被成功的接收，解析并接受</span><br><span class="line">3XX: Redirection – 为完成请求需要更多的操作</span><br><span class="line">4XX: Client Error – 请求消息中包含语法错误或是不能够被有效执行</span><br><span class="line">5XX: Server Error – 服务器响应失败，无法处理正确的有效的请求消息</span><br></pre></td></tr></table></figure>
+<p>我们在处理问题时经常会遇到的状态码有如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Status-Code 	=	“200”		:OK</span><br><span class="line">			|	“400”		:Bad Request</span><br><span class="line">			|	“404”		:Not Found</span><br><span class="line">			|	“500”		Internal Server Error</span><br></pre></td></tr></table></figure>
+<p>RTSP的状态码也是可以扩展的。服务器可以根据实际情况定义相应的状态码及描述信息。</p>
+<p><strong>2. Response Header Fields</strong></p>
+<p>在响应消息的域中存放的是无法放在Status-Line中,而又需要传送给请求者的一些附加信息。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Response-header 	=	Location</span><br><span class="line">				|	Proxy-Authenticate</span><br><span class="line">				|	Public</span><br><span class="line">				|	Retry-After</span><br><span class="line">				|	Server</span><br><span class="line">				|	Vary</span><br><span class="line">				|	WWW-Authenticate</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="3-4-信令"><a href="#3-4-信令" class="headerlink" title="3.4    信令"></a>3.4    信令</h5><p>信令指的是在Request-URI中指定的需要被接收者完成的操作。信令（The method）大小写敏感，不能以字符”$”开始，并且一定要是一个标记符。<br>概要描述如下：<br><img src="/2020/04/03/RTSP-RTSP%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/969B618568454206BC751B7993F209EC" alt="2"></p>
+<p>C：客户端<br>S：服务端<br>下面介绍几个常用的信令</p>
+<h6 id="3-4-1-OPTIONS"><a href="#3-4-1-OPTIONS" class="headerlink" title="3.4.1    OPTIONS"></a>3.4.1    OPTIONS</h6><p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C-&gt;S: </span><br><span class="line">OPTIONS * RTSP/1.0 </span><br><span class="line">CSeq: 1 </span><br><span class="line">Require: implicit-play </span><br><span class="line">Proxy-Require: gzipped-messages </span><br><span class="line"></span><br><span class="line">S-&gt;C: </span><br><span class="line">RTSP/1.0 200 OK </span><br><span class="line">CSeq: 1 </span><br><span class="line">Public: DESCRIBE, SETUP, TEARDOWN, PLAY, PAUSE</span><br></pre></td></tr></table></figure>
+<p>OPTIONS消息可以在任何时间被发起，如MOTO835手机就会每隔60秒左右向服务器端发送一个OPTIONS的消息，而HMS服务器在检查MOTO835是否仍在线时，也是通过来检查服务器端是否定时收到OPTIONS的消息来实现的。但需注意的是，并不是所有的手机和播放器会定时发送OPTIONS消息到服务器端，即使有发送，发送OPTIONS的消息的时间间隔也是不尽相同的。</p>
+<h6 id="3-4-2-DESCRIBE"><a href="#3-4-2-DESCRIBE" class="headerlink" title="3.4.2    DESCRIBE"></a>3.4.2    DESCRIBE</h6><p>DESCRIBE消息是由客户端发送到服务器端，用于客户端得到请求链接（request URL）中指定的媒体文件的相关描述。DESCRIBE的这一对交互消息完成了RTSP的媒体初始化。<br>例子：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C-&gt;S: </span><br><span class="line">DESCRIBE rtsp://server.example.com/fizzle/foo RTSP/1.0 </span><br><span class="line">CSeq: 312 </span><br><span class="line">Accept: application/sdp, application/rtsl, application/mheg </span><br><span class="line"></span><br><span class="line">S-&gt;C: </span><br><span class="line">RTSP/1.0 200 OK </span><br><span class="line">CSeq: 312 </span><br><span class="line">Date: 23 Jan 1997 15:35:06 GMT </span><br><span class="line">Content-Type: application/sdp </span><br><span class="line">Content-Length: 376 </span><br><span class="line"></span><br><span class="line">v=0 （这里就是MESSAGE BODY，它的长度由Content_Length来指定）</span><br><span class="line">o=mhandley 2890844526 2890842807 IN IP4 126.16.64.4 </span><br><span class="line">s=SDP Seminar </span><br><span class="line">i=A Seminar on the session description protocol </span><br><span class="line">u=http://www.cs.ucl.ac.uk/staff/M.Handley/sdp.03.ps e=mjh@isi.edu (Mark Handley) </span><br><span class="line">c=IN IP4 224.2.17.12/127 </span><br><span class="line">t=2873397496 2873404696 </span><br><span class="line">a=recvonly </span><br><span class="line">m=audio 3456 RTP/AVP 0 </span><br><span class="line">m=video 2232 RTP/AVP 31 </span><br><span class="line">m=whiteboard 32416 UDP WB </span><br><span class="line">a=orient:portrait</span><br></pre></td></tr></table></figure>
+<p>DESCRIBE的响应消息必须包含所有的媒体初始化信息。对于基于RTSP的系统，媒体初始化是必须的，但是并不一定要通过DESCRIBE消息来得到，这里是一个RTSP的客户端得到初始化信息的三种方式：</p>
+<ul>
+<li>通过RTSP的DESCRIBE</li>
+<li>一些其它的协议，如HTTP，email attachment等</li>
+<li>命令行方式</li>
+</ul>
+<h6 id="3-4-3-SETUP"><a href="#3-4-3-SETUP" class="headerlink" title="3.4.3    SETUP"></a>3.4.3    SETUP</h6><p>SETUP请求用于指定流媒体使用的传输机置。在请求消息中会指定客户端在数据传输时相关的传送参数，而在响应消息中将包含由服务器端所指定的传输参数。服务器端在回复SETUP消息时将会生成一个session ID.<br>例子：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C-&gt;S: </span><br><span class="line">SETUP rtsp://example.com/foo/bar/baz.3gp RTSP/1.0 </span><br><span class="line">CSeq: 302 </span><br><span class="line">Transport: RTP/AVP;unicast;client_port=4588-4589 </span><br><span class="line"></span><br><span class="line">S-&gt;C: </span><br><span class="line">RTSP/1.0 200 OK </span><br><span class="line">CSeq: 302 </span><br><span class="line">Date: 23 Jan 1997 15:35:06 GMT </span><br><span class="line">Session: 47112344 </span><br><span class="line">Transport: RTP/AVP;unicast; </span><br><span class="line">client_port=4588-4589;server_port=6256-6257</span><br></pre></td></tr></table></figure>
+<p>服务器端在回复SETUP消息时将会生成一个session ID. </p>
+<h6 id="3-4-4-PLAY"><a href="#3-4-4-PLAY" class="headerlink" title="3.4.4    PLAY"></a>3.4.4    PLAY</h6><p>PLAY消息是告诉服务器端可以使用在SETUP消息中所指定的传输机置开始传送数据。需要指出的是，客户端不应该发送任何PLAY请求直到所有的SETUP消息被成功解析。PLAY消息会在range中指定媒体的播放时间，服务器在接到PLAY消息后会由range中指定的开始点开始发送媒体数据直到range中指定的结束点。</p>
+<p>所有的PLAY消息都是必须按顺序被处理的，即当一个PLAY的请求到达时，而上一个PLAY请求还未完成，后面的PLAY请求将被延时，直到第一个PLAY处理完成时才会被处理。例子：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C-&gt;S: </span><br><span class="line">PLAY rtsp://audio.example.com/audio RTSP/1.0 </span><br><span class="line">CSeq: 835 </span><br><span class="line">Session: 12345678 </span><br><span class="line">Range: npt=10-15</span><br></pre></td></tr></table></figure>
+
+<h6 id="3-4-5-PAUSE"><a href="#3-4-5-PAUSE" class="headerlink" title="3.4.5    PAUSE"></a>3.4.5    PAUSE</h6><p>PAUSE消息是用于暂时中断流媒体的传送。当暂停的时间过长（这个值应在SETUP消息中由timeout参数指定），服务器可以自动断开这个会话，释放所占用的资源。例子: </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C-&gt;S: </span><br><span class="line">PAUSE rtsp://example.com/fizzle/foo RTSP/1.0 </span><br><span class="line">CSeq: 834 </span><br><span class="line">Session: 12345678 </span><br><span class="line"></span><br><span class="line">S-&gt;C: </span><br><span class="line">RTSP/1.0 200 OK </span><br><span class="line">CSeq: 834 </span><br><span class="line">Date: 23 Jan 1997 15:35:06 GMT</span><br></pre></td></tr></table></figure>
+<p>服务器不是必须要支持PAUSE信令的，例如，对于直播的节目，就可以不支持暂停。当一个服务器不支持某一个信令时，必须要返回给客户端以“501 Not Implemented”的响应消息，并且客户端应该不再尝试向服务器端发送这个请求。</p>
+<h6 id="3-4-6-TEARDOWN"><a href="#3-4-6-TEARDOWN" class="headerlink" title="3.4.6    TEARDOWN"></a>3.4.6    TEARDOWN</h6><p>TEARDOWN消息是用于停止媒体数据的传送，并释放所占用的资源。<br>例子： </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C-&gt;S: </span><br><span class="line">TEARDOWN rtsp://example.com/fizzle/foo RTSP/1.0 </span><br><span class="line">CSeq: 892 </span><br><span class="line">Session: 12345678 </span><br><span class="line"></span><br><span class="line">S-&gt;C: </span><br><span class="line">RTSP/1.0 200 OK </span><br><span class="line">CSeq: 892</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-5-Header-Field-解析"><a href="#3-5-Header-Field-解析" class="headerlink" title="3.5    Header Field 解析"></a>3.5    Header Field 解析</h5><p>在每个消息中都会包含一定的字段用于描述一些信息。</p>
+<ul>
+<li>Type ”g” 指通用，在请求消息和响应消息中都可能出现</li>
+<li>Type “R” 指请求消息</li>
+<li>Type “r” 指响应消息</li>
+<li>Type “e” 指实体头字段</li>
+</ul>
+<p><strong>RTSP头字段简述：</strong></p>
+<p><img src="/2020/04/03/RTSP-RTSP%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/2F44D9901BAF4D20ACE5AC56CEF9DDC9" alt="3"><br><img src="/2020/04/03/RTSP-RTSP%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/DB20301F3E48479BBBB15FB8B171C731" alt="4"></p>
+<p>下面简要介绍一些在RTSP中常用到的头字段，详细的信息请查看RFC 2326。</p>
+<h6 id="3-5-1-Accept"><a href="#3-5-1-Accept" class="headerlink" title="3.5.1    Accept"></a>3.5.1    Accept</h6><p>Accept字段可用于指定可被接受的描述类型<br>例子: </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Accept: application/rtsl, application/sdp;level=2</span><br></pre></td></tr></table></figure>
+<h6 id="3-5-2-Cseq"><a href="#3-5-2-Cseq" class="headerlink" title="3.5.2    Cseq"></a>3.5.2    Cseq</h6><p>Cseq域指定一对RTSP请求-响应消息的序列号。在请求消息及响应消息中一定要指定这个域。对于请求消息，会有一个具有相同Cseq域内容的响应消息与之对应。<br>例子：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C-&gt;S: </span><br><span class="line">SETUP rtsp://example.com/foo/bar/baz.3gp RTSP/1.0 </span><br><span class="line">CSeq: 302 </span><br><span class="line">Transport: RTP/AVP;unicast;client_port=4588-4589 </span><br><span class="line"></span><br><span class="line">S-&gt;C: </span><br><span class="line">RTSP/1.0 200 OK </span><br><span class="line">CSeq: 302 </span><br><span class="line">Date: 23 Jan 1997 15:35:06 GMT </span><br><span class="line">Session: 47112344 </span><br><span class="line">Transport: RTP/AVP;unicast; </span><br><span class="line">client_port=4588-4589;server_port=6256-6257</span><br></pre></td></tr></table></figure>
+
+<h6 id="3-5-3-Range"><a href="#3-5-3-Range" class="headerlink" title="3.5.3    Range"></a>3.5.3    Range</h6><p>Range用于在请求消息和响应消息中指定播放的时间段。<br>例子：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Range: clock=19960213T143205Z-;time=19970123T143720Z</span><br></pre></td></tr></table></figure>
+<h6 id="3-5-4-RTP-Info"><a href="#3-5-4-RTP-Info" class="headerlink" title="3.5.4    RTP-Info"></a>3.5.4    RTP-Info</h6><p>这个域用于在回复PLAY消息中指定RTP特殊的参数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">url:		与设置的RTP参数对应的流媒体链接</span><br><span class="line">seq:	    流媒体第一个包的序列号</span><br><span class="line">rtptime:	用于回复range域对应的RTP时间戳</span><br><span class="line">RTP-Info语法结构： </span><br><span class="line">   RTP-Info         = &quot;RTP-Info&quot; &quot;:&quot; 1#stream-url 1*parameter</span><br><span class="line">   stream-url       = &quot;url&quot; &quot;=&quot; url</span><br><span class="line">   parameter        = &quot;;&quot; &quot;seq&quot; &quot;=&quot; 1*DIGIT</span><br><span class="line">                    | &quot;;&quot; &quot;rtptime&quot; &quot;=&quot; 1*DIGIT</span><br></pre></td></tr></table></figure>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">RTP-Info:url=rtsp://foo.com/bar.avi/streamid=0;seq=45102,url=rtsp://foo.com/bar.avi/streamid=1;seq=30211</span><br></pre></td></tr></table></figure>
+
+<h6 id="3-5-5-Session"><a href="#3-5-5-Session" class="headerlink" title="3.5.5    Session"></a>3.5.5    Session</h6><p>Session域在请求与响应消息中用于识别一个RTSP会话（RTSP session即一个完整的RTSP交互过程。例如：在点播流媒体时，一个典型的会话过程包括一个客户建立一个传输通道（SETUP），用PLAY开始传输流，最后用TEARDOWN来断开这个连接）。一旦客户端接收到Session标识，在这个会话中的任何请求都需要附加这个域。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Session语法结构：</span><br><span class="line">Session  = &quot;Session&quot; &quot;:&quot; session-id [ &quot;;&quot; &quot;timeout&quot; &quot;=&quot; delta-seconds ]</span><br><span class="line">例子：</span><br><span class="line">Session: 12345678</span><br></pre></td></tr></table></figure>
+
+<h6 id="3-5-6-Transport"><a href="#3-5-6-Transport" class="headerlink" title="3.5.6    Transport"></a>3.5.6    Transport</h6><p>这个域在请求消息中是标识哪一种传输协议将被使用，并指定一些在描述说明中没有指定的参数的值。使用的传输协议之间用逗号分隔，参数之间用分号分隔</p>
+<p>常用参数：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">unicast | multicast:		单播还是组播（缺省值为multicast）.</span><br><span class="line">destination:		        指定流将被传送到到哪个地址</span><br><span class="line">port:           (RTP协议):指定RTP/RTCP端口号（multicast）。一般为一个范围。e.g., port=3456-3457.</span><br><span class="line">Client_port: 		        客户端选择的用于接收媒体数据及控制信息的单播 RTP/RTCP端口号。e.g., port=3456-3457</span><br><span class="line">Server_port: 		        服务器端用于接收媒体数据和控制信息的单播 RTP/RTCP端口号。e.g., port=3456-3457</span><br></pre></td></tr></table></figure>
+<p>例子: </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Transport:RTP/AVP;multicast;ttl=127;mode=&quot;PLAY&quot;, RTP/AVP;unicast;client_port=3456-3457;mode=&quot;PLAY&quot;</span><br></pre></td></tr></table></figure>
+
+<h6 id="3-5-7-User-Agent"><a href="#3-5-7-User-Agent" class="headerlink" title="3.5.7 User-Agent"></a>3.5.7 User-Agent</h6><p>这个域用于用户标识，不同公司或是型号的手机发出的消息中的这个域的内容都不大相同。有时会指出手机的版本号，播放器的型号等等。在HMS中的terminal.xml文件就是根据这个域中的内容来完成简单的终端适配的功能。</p>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">User-Agent:01056SS68001117616022101802836055;14;41;4578;327;13824;0;1;0x0202;0x00000B;0x028010</span><br></pre></td></tr></table></figure>
+
+<h4 id="四、移动流媒体与RTSP"><a href="#四、移动流媒体与RTSP" class="headerlink" title="四、移动流媒体与RTSP"></a>四、移动流媒体与RTSP</h4><p>移动流媒体技术就是把连续的影像和声音信息经过压缩处理后放到网络服务器上，让移动终端用户能够一边下载一边观看、收听，而不需要等到整个多媒体文件下载完成就可以即时观看的技术。实际上移动流媒体技术是网络音视频技术和移动通讯技术发展到一定阶段的产物，它是融合很多网络技术之后所产生的技术，它会涉及到流媒体数据的采集、压缩、存输以及网络通信等多项技术。它大致分为下面两大类业务类型：</p>
+<ol>
+<li><p>流媒体点播(VOD)</p>
+<blockquote>
+<p>内容提供商将预先录制好的多媒体内容编码压缩成相应格式，存放在内容服务器上并把内容的描述信息以及链接放置在流媒体的portal上。最终用户就可以通过访问portal，发现感兴趣的内容，有选择的进行播放。</p>
+</blockquote>
+</li>
+<li><p>流媒体直播</p>
+<blockquote>
+<p>流媒体编码服务器将实时信号编码压缩成相应的格式，并经由流媒体服务器分发到用户的终端播放器。根据实时内容信号源的不同，又可以分为电视直播、远程监控等。对于点播和直播，都是使用的RTSP协议。下面我们介绍在实际应用中RTSP消息是如何交互来完成点播或是直播功能。</p>
+</blockquote>
+</li>
+</ol>
+<h5 id="4-1-点播流程"><a href="#4-1-点播流程" class="headerlink" title="4.1    点播流程"></a>4.1    点播流程</h5><p>一个移动用户使用手机通过访问网页得到URI，在URI中指定了流媒体服务器的地址及想要访问的媒体内容。通过RTSP SETUP消息来建立客户端与流媒体服务器之间的连接，然后客户端通过发送一个RTSP PLAY的消息来通知服务器开始传送一个或多个媒体流。</p>
+<p>具体消息交互过程如下：<br><img src="/2020/04/03/RTSP-RTSP%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/F634B9CE295148A3A99B68682B05C55C" alt="5"></p>
+<p>每次客户端发送一个请求消息，服务器端都会回一个相应的响应消息。</p>
+<ol>
+<li>手机通过上网得到带有流媒体地址的网页，并点播一个节目</li>
+<li>手机上发RTSP：DESCRIBE的消息给服务器，服务器处理其中的URL链接，得到相应文件的SDP信息，附加在响应消息中返回给手机。如果此时服务器找不到手机想要点播的文件，就会回应400的错误给手机，显示文件不存在。</li>
+<li>手机根据收到的SDP的信息向服务器发送RTSP:SETUP消息，与服务器建立连接。如果媒体文件包含音频和视频，就会有两次SETUP的交互消息。一个是音频的信息，一个是视频的信息。如果交互成功，服务器会发送200的OK消息给手机</li>
+<li>手机在SETUP消息执行成功后，会向服务器发送RTSP：PLAY的消息，要求服务器开始发送数据。服务器在收到PLAY消息后，即会开始传送UDP/RTP包。</li>
+<li>如果在播放过程中需要暂停，手机会发送RTSP：PAUSE的消息给服务器，服务器在收到暂停消息后，即会停止发数据包，手机停止播放。如果需要继续播放，手机只需要再发送RTSP：PLAY的消息给服务器，服务器根据暂停的位置继续开始播放。</li>
+<li>当播放完成后，手机会自动向服务器发送RTSP：TEARDOWN消息，当服务器收到下线消息后，就会断开与手机的连接，释放所占用的资源。</li>
+<li>点播过程结束。</li>
+</ol>
+<h5 id="4-2-SDP"><a href="#4-2-SDP" class="headerlink" title="4.2    SDP"></a>4.2    SDP</h5><p>在播放过程中，手机得到内容的相关信息是很重要的，如果这些内容不正确，也会影响播放的正确性，下面简要介绍一下SDP。</p>
+<p>SDP文件（Session Description Protocol）包含了会话的描述，媒体类型，媒体的码率。客户端通过RTSP DESCRIBE来得到SDP文件。</p>
+<p>RTSP需要一个内容的描述。而SDP就被用于客户端与服务端的一种内容描述的格式。在传送给客户的SDP内容应该声明了这个对话所要访问的媒体内容的媒体编码类型。对于流媒体服务而言，以下几个域是在SDP中一定要包含的。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">“a=control:”</span><br><span class="line">“a=range:”</span><br><span class="line">“a=rtpmap:”</span><br><span class="line">“a=fmtp:”</span><br></pre></td></tr></table></figure>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">v=0</span><br><span class="line">o=ghost 2890844526 2890842807 IN IP4 192.168.10.10</span><br><span class="line">s=3GPP Unicast SDP Example</span><br><span class="line">i=Example of Unicast SDP file</span><br><span class="line">u=http://www.infoserver.com/ae600</span><br><span class="line">e=ghost@mailserver.com</span><br><span class="line">c=IN IP4 0.0.0.0</span><br><span class="line">b=AS:128</span><br><span class="line">t=0 0</span><br><span class="line">a=range:npt=0-45.678</span><br><span class="line">m=video 1024 RTP/AVP 96</span><br><span class="line">b=AS:128</span><br><span class="line">a=rtpmap:96 H263-2000/90000</span><br><span class="line">a=fmtp:96 profile=3;level=10</span><br><span class="line">a=control:rtsp;//mediaserver.com/movie</span><br><span class="line">a=recvonly</span><br></pre></td></tr></table></figure>
+<p>就如我们以前所了解的，对于直播，我们在建立了直播源后，就会将生成的SDP文件broadcast.sdp放在服务器上，而用户使用rtsp://ip:port/broadcast.sdp就可以进行直播节目的播放，这里的sdp文件里的内容就是上面所提到的这些。它将我们在建立直播源时所设置的音、视频编码，及相应的码率记录下来存在broadcast.sdp文件中，这样手机在进行进播时，得到了相关的SDP信息，然后根据这些信息与服务器建立连接。</p>
+<h5 id="4-3-数据传送"><a href="#4-3-数据传送" class="headerlink" title="4.3    数据传送"></a>4.3    数据传送</h5><p>控制及媒体数据的传送是通过TCP/IP和UPD/IP上完成的，下图是一个协议栈的简单描述。媒体数据被打包成RTP包进行传送。</p>
+<p><img src="/2020/04/03/RTSP-RTSP%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/8AC15CE7FD3745B4A439365B8546E026" alt="6"></p>
+<h5 id="4-4-消息流程"><a href="#4-4-消息流程" class="headerlink" title="4.4    消息流程"></a>4.4    消息流程</h5><p>下面让我们来看一个具体的消息交互过程。我们可以通过ETHEREAL或是TCPDUMP这些抓包工具来获得这些信息。</p>
+<p><strong>c-&gt;s【向服务器请求SDP信息】</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">【DESCRIBE】	DESCRIBE rtsp://211.94.164.227/3.3gp RTSP/1.0</span><br><span class="line">【交互标识】	CSeq: 1</span><br><span class="line">【请求内容】	Accept: application/sdp</span><br><span class="line">【用户标识】	User-Agent:01056SS68001117616022101802836055;</span><br><span class="line">14;41;4578;327;13824;0;1;0x0202;0x00000B;0x028010</span><br></pre></td></tr></table></figure>
+
+<p><strong>s-&gt;c 【服务端返回SDP信息】</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">【成功响应】		RTSP/1.0 200 OK</span><br><span class="line">【服务器版本号】		Server: HMS Mobile V100R001B08D023</span><br><span class="line">【交互标识】		CSeq: 1</span><br><span class="line">【SDP长度】		Content-Length: 625</span><br><span class="line">【包含内容类型】		Content-Type: application/sdp</span><br><span class="line">【包含内容信息】		Content-Base: rtsp://211.94.164.227/3.3gp/</span><br></pre></td></tr></table></figure>
+
+<p><strong>【以下为SDP内容】</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">【SDP版本号】		v=0</span><br><span class="line">【服务器信息】		o=StreamingServer 3276474929 1067418948000 IN </span><br><span class="line">IP4 10.70.139.108</span><br><span class="line">【文件名】		s=3.3gp</span><br><span class="line">【URL】			u=rtsp://211.94.164.227/3.3gp</span><br><span class="line">【e-mail】			e=admin@</span><br><span class="line">【IPv4】			c=IN IP4 0.0.0.0</span><br><span class="line">				t=0 0</span><br><span class="line">【控制属性】		a=control:rtsp://211.94.164.227/3.3gp</span><br><span class="line">【视频信息】		m=video 0 RTP/AVP 96【媒体类型】</span><br><span class="line">【视频带宽】		b=AS:16</span><br><span class="line">【视频格式】		a=rtpmap:96 MP4V-ES【格式】/90000【采样率】</span><br><span class="line">【视频格式】		a=fmtp:96 profile-level-id=8; </span><br><span class="line">config=000001B008000001B50EA020202F000001000000012000C788BA9850584121463F</span><br><span class="line">				a=mpeg4-esid:201</span><br><span class="line">【厂家信息】		a=x-envivio-verid:00011118</span><br><span class="line">【视频轨道】		a=control:trackID=65737</span><br><span class="line"></span><br><span class="line">【音频信息】		m=audio 0 RTP/AVP 97【媒体类型】</span><br><span class="line">【音频带宽】		b=AS:19</span><br><span class="line">【音频格式】		a=rtpmap:97 MP4A-LATM【格式】/11025【采样率】/1</span><br><span class="line">				a=fmtp:97 profile-level-id=15; object=2; </span><br><span class="line">cpresent=0; config=40002A103FC0</span><br><span class="line">				a=mpeg4-esid:101</span><br><span class="line">【厂家信息】		a=x-envivio-verid:00011118</span><br><span class="line">【音频轨道】		a=control:trackID=65637</span><br></pre></td></tr></table></figure>
+<p><strong>c-&gt;s 【向服务器发起建立视频连接的呼叫】</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">【SETUP信令】		SETUP rtsp://211.94.164.227/3.3gp/trackID=65737 RTSP/1.0</span><br><span class="line">				CSeq: 2</span><br><span class="line">【传输信息】		Transport: RTP/AVP;unicast【单播 区别组播】;</span><br><span class="line">client_port=5004-5005【客户端端口号】</span><br></pre></td></tr></table></figure>
+
+<p><strong>s-&gt;c【服务器返回视频连接建立成功信息】</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">RTSP/1.0 200 OK</span><br><span class="line">Server: HMS Mobile V100R001B08D023</span><br><span class="line">CSeq: 2</span><br><span class="line">【会话标识】	Session: 4</span><br><span class="line">【传输信息】	Transport: RTP/AVP;unicast;client_port=5004-5005;</span><br><span class="line">source=211.94.164.227;【服务器IP】</span><br><span class="line">server_port=8090-8091【服务器端口号】;</span><br><span class="line">ssrc=3e06【同步源描述符】</span><br></pre></td></tr></table></figure>
+
+<p><strong>c-&gt;s【向服务器发起建立音频连接的呼叫】</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SETUP rtsp://211.94.164.227/3.3gp/trackID=65637 RTSP/1.0</span><br><span class="line">CSeq: 3</span><br><span class="line">Transport: RTP/AVP;unicast;client_port=5006-5007</span><br><span class="line">Session: 4</span><br></pre></td></tr></table></figure>
+
+<p><strong>s-&gt;c【服务器返回音频连接建立成功信息】</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">RTSP/1.0 200 OK	</span><br><span class="line">Server: HMS Mobile V100R001B08D023</span><br><span class="line">CSeq: 3</span><br><span class="line">Session: 4</span><br><span class="line">Transport: RTP/AVP;unicast;client_port=5006-5007;</span><br><span class="line">source=211.94.164.227;server_port=8092-8093;ssrc=3e06</span><br></pre></td></tr></table></figure>
+
+<p><strong>c-&gt;s【向服务器发出播放请求】</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">PLAY rtsp://211.94.164.227/3.3gp RTSP/1.0</span><br><span class="line">CSeq: 4</span><br><span class="line">Session: 4</span><br><span class="line">【播放位置】	Range: npt=now- 【从当前位置开始播放】</span><br></pre></td></tr></table></figure>
+
+<p><strong>s-&gt;c【服务器返回发出播放成功响应请求】</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">RTSP/1.0 200 OK</span><br><span class="line">Server: HMS Mobile V100R001B08D023</span><br><span class="line">CSeq: 4</span><br><span class="line">Session: 4</span><br><span class="line">【RTP信息】	RTP-Info: url=trackID=65737;【轨道信息】seq=1;【RTP包序列号】</span><br><span class="line">				rtptime=0【RTP包时间戳】,url=trackID=65637;seq=1;rtptime=0</span><br><span class="line">【播放范围】	Range: npt=0.000000-60.193000</span><br></pre></td></tr></table></figure>
+
+<p><strong>s-&gt;c【服务器发送视音频数据给终端】</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">【RTP包 略】	xxxx</span><br></pre></td></tr></table></figure>
+
+<p><strong>c-&gt;s【向服务器发送终止请求】</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">【TEARDOWN信令】TEARDOWN rtsp://211.94.164.227/3.3gp RTSP/1.0</span><br><span class="line">CSeq: 5</span><br><span class="line">Session: 4</span><br></pre></td></tr></table></figure>
+
+<p><strong>s-&gt;c【服务器返回终止成功信息】</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">RTSP/1.0 200 OK</span><br><span class="line">Server: HMS Mobile V100R001B08D023</span><br><span class="line">CSeq: 5</span><br><span class="line">Session: 4</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>RTSP</category>
+      </categories>
+      <tags>
+        <tag>RTSP</tag>
+        <tag>C/S</tag>
+        <tag>URL</tag>
+        <tag>DESCRIBE</tag>
+        <tag>SETUP</tag>
+        <tag>PLAY</tag>
+        <tag>PAUSE</tag>
+        <tag>TEARDOWN</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>海思-VENC模块学习</title>
     <url>/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<h4 id="一、VENC是什么？"><a href="#一、VENC是什么？" class="headerlink" title="一、VENC是什么？"></a>一、VENC是什么？</h4><p>VENC 模块，即视频编码模块。本模块支持多路实时编码，且每路编码彼此独立，++编码协议和编码 profile 可以不同++ 。本模块支持视频编码同时，调度 Region 模块对编码图像内容进行叠加和遮挡。<br><img src="/2020/04/02/%E6%B5%B7%E6%80%9D-VENC%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/1.jpg" alt="1"></p>
@@ -2360,33 +2563,6 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
       </tags>
   </entry>
   <entry>
-    <title>cURL-03-cURL的几种语言支持</title>
-    <url>/2019/11/03/cURL-03-cURL%E7%9A%84%E5%87%A0%E7%A7%8D%E8%AF%AD%E8%A8%80%E6%94%AF%E6%8C%81/</url>
-    <content><![CDATA[<h5 id="一、基于-C-的-HTTP-客户端"><a href="#一、基于-C-的-HTTP-客户端" class="headerlink" title="一、基于 C 的 HTTP 客户端"></a>一、基于 C 的 HTTP 客户端</h5><p>C API 在 libcurl 功能上提供了两个 API。easy 接口是一个简单的同步 API（意味着当您使用请求调用 libcurl 时，将能够满足您的请求，直到完成或发生错误）。多接口可以进一步控制 libcurl，您的应用程序可以执行多个同步传输，并控制 libcurl 何时何地移动数据。</p>
-<p>该示例使用 easy 接口。该 API 还能控制数据移动过程（使用回调），但正如其名称所示，使用起来非常简单。下面请看HTTP 的 C 语言示例,使用 libcurl easy 接口的 C HTTP 客户端。</p>
-<a id="more"></a>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt; </span><br><span class="line">#include &lt;string.h&gt; </span><br><span class="line">#include &lt;curl/curl.h&gt; </span><br><span class="line"> </span><br><span class="line">#define MAX_BUF     65536 </span><br><span class="line"> </span><br><span class="line">char wr_buf[MAX_BUF+1]; </span><br><span class="line">int  wr_index; </span><br><span class="line"> </span><br><span class="line">/* </span><br><span class="line">* Write data callback function (called within the context of </span><br><span class="line">* curl_easy_perform. </span><br><span class="line">*/ </span><br><span class="line">size_t write_data( void *buffer, size_t size, size_t nmemb, void *userp ) </span><br><span class="line">&#123; </span><br><span class="line"> int segsize = size * nmemb; </span><br><span class="line"> </span><br><span class="line"> /* Check to see if this data exceeds the size of our buffer. If so, </span><br><span class="line">  * set the user-defined context value and return 0 to indicate a </span><br><span class="line">  * problem to curl. </span><br><span class="line">  */ </span><br><span class="line"> if ( wr_index + segsize &gt; MAX_BUF ) &#123; </span><br><span class="line">   *(int *)userp = 1; </span><br><span class="line">   return 0; </span><br><span class="line"> &#125; </span><br><span class="line"> </span><br><span class="line"> /* Copy the data from the curl buffer into our buffer */ </span><br><span class="line"> memcpy( (void *)&amp;wr_buf[wr_index], buffer, (size_t)segsize ); </span><br><span class="line"> </span><br><span class="line"> /* Update the write index */ </span><br><span class="line"> wr_index += segsize; </span><br><span class="line"> </span><br><span class="line"> /* Null terminate the buffer */ </span><br><span class="line"> wr_buf[wr_index] = 0; </span><br><span class="line"> </span><br><span class="line"> /* Return the number of bytes received, indicating to curl that all is okay */ </span><br><span class="line"> return segsize; </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">/* </span><br><span class="line">* Simple curl application to read the index.html file from a Web site. </span><br><span class="line">*/ </span><br><span class="line">int main( void ) </span><br><span class="line">&#123; </span><br><span class="line"> CURL *curl; </span><br><span class="line"> CURLcode ret; </span><br><span class="line"> int  wr_error; </span><br><span class="line"> </span><br><span class="line"> wr_error = 0; </span><br><span class="line"> wr_index = 0; </span><br><span class="line"> </span><br><span class="line"> /* First step, init curl */ </span><br><span class="line"> curl = curl_easy_init(); </span><br><span class="line"> if (!curl) &#123; </span><br><span class="line">   printf(&quot;couldn&apos;t init curl\n&quot;); </span><br><span class="line">   return 0; </span><br><span class="line"> &#125; </span><br><span class="line"> </span><br><span class="line"> /* Tell curl the URL of the file we&apos;re going to retrieve */ </span><br><span class="line"> curl_easy_setopt( curl, CURLOPT_URL, &quot;www.exampledomain.com&quot; ); </span><br><span class="line"> </span><br><span class="line"> /* Tell curl that we&apos;ll receive data to the function write_data, and </span><br><span class="line">  * also provide it with a context pointer for our error return. </span><br><span class="line">  */ </span><br><span class="line"> curl_easy_setopt( curl, CURLOPT_WRITEDATA, (void *)&amp;wr_error ); </span><br><span class="line"> curl_easy_setopt( curl, CURLOPT_WRITEFUNCTION, write_data ); </span><br><span class="line"> </span><br><span class="line"> /* Allow curl to perform the action */ </span><br><span class="line"> ret = curl_easy_perform( curl ); </span><br><span class="line"> </span><br><span class="line"> printf( &quot;ret = %d (write_error = %d)\n&quot;, ret, wr_error ); </span><br><span class="line"> </span><br><span class="line"> /* Emit the page if curl indicates that no errors occurred */ </span><br><span class="line"> if ( ret == 0 ) printf( &quot;%s\n&quot;, wr_buf ); </span><br><span class="line"> </span><br><span class="line"> curl_easy_cleanup( curl ); </span><br><span class="line"> </span><br><span class="line"> return 0; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最上方是必需的 include文件，包括 cURL 根文件。接下来，定义了两个用于传输的变量。第一个变量是 wr_buf，表示将在其中写入传入数据的缓冲区。wr_index表示缓冲区的当前写入索引。</p>
-<p>转到 main函数，该函数使用 easy API 进行设置。所有 cURL 调用都通过维护特定请求状态的句柄进行操作。这称为 CURL指针引用。本例还创建一个特殊的返回码，称为 CURLcode。在使用任何 libcurl 函数之前，您需要调用 curl_easy_init获取 CURL句柄。接下来，注意 curl_easy_setopt调用的数量。它们为特定的操作配置句柄。对于这些调用，您提供句柄、命令和选项。首先，本例使用 CURLOPT_URL指定要获取的 URL。然后，它使用 CURL_WRITEDATA提供一个上下文变量（在本例中，它是内部的 write 错误变量）。最后，它使用 CURLOPT_WRITEFUNCTION指定数据可用时应该调用的函数。在启动 API 之后，API 将使用它读取的数据多次调用该函数。</p>
-<p>要开始传输，调用 curl_easy_perform。它的工作是根据之前的配置执行传输。调用该函数时，在完成传输或发生错误之前该函数不会返回。main的最后一步是提交返回状态，提交页面读取，最后使用 curl_easy_cleanup清除（当使用句柄执行完操作后）。</p>
-<p>现在看看 write_data函数。该函数是针对特定操作收到数据时调用的回调。注意，当您从网站读取数据时，将写入该数据（write_data）。将向回调提供一个缓冲区（包含可用数据）、成员数量和大小（缓冲中可用数据总量）、上下文指针。第一个任务是确保缓冲区（wr_buf）的空间足以写入数据。如果不够，它将设置上下文指针并返回 0，表示出现问题。否则，它将 cURL 缓冲区的数据复制到您的缓冲区，并增加索引，指向要写入的下一个位置。本例还终止字符串，稍后可以对其使用 printf。最后，它返回 libcurl 操作的字节数量。这将告诉 libcurl 数据被提取，它也可以丢弃该数据。这就是从网站将文件读取到内存的相对简单的方法。</p>
-<h5 id="二、基于-Python-的-HTTP-客户端"><a href="#二、基于-Python-的-HTTP-客户端" class="headerlink" title="二、基于 Python 的 HTTP 客户端"></a>二、基于 Python 的 HTTP 客户端</h5><p>Python 是一种非常有用的面向对象的脚本语言，在原型化和构建生产软件方面非常突出。示例假设您较熟悉 Python，但使用不多，因此不要期望过高。</p>
-<p>这个简单的 Python HTTP 客户端使用 pycurl，如下：</p>
-<p>使用 libcurl 的 pycurl接口的 Python HTTP 客户端</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import sys </span><br><span class="line">import pycurl </span><br><span class="line"> </span><br><span class="line">wr_buf = &apos;&apos;</span><br><span class="line"> </span><br><span class="line">def write_data( buf ): </span><br><span class="line">    global wr_buf </span><br><span class="line">    wr_buf += buf </span><br><span class="line"> </span><br><span class="line">def main(): </span><br><span class="line">    c = pycurl.Curl() </span><br><span class="line">    c.setopt( pycurl.URL, &apos;http://www.exampledomain.com&apos; ) </span><br><span class="line">    c.setopt( pycurl.WRITEFUNCTION, write_data ) </span><br><span class="line"> </span><br><span class="line">    c.perform() </span><br><span class="line"> </span><br><span class="line">    c.close() </span><br><span class="line"> </span><br><span class="line">main() </span><br><span class="line">sys.stdout.write(wr_buf)</span><br></pre></td></tr></table></figure>
-
-<p>这比 C 语言版本简单的多。它首先导入必需的模块（用于标准系统的 sys和 pycurl模块）。接下来，它定义 write 缓冲区（wr_buf）。像 C 程序中一样，声明一个 write_data函数。注意，该函数只有一个参数：从 HTTP 服务器中读取的数据缓冲区。我将该缓冲区连接到全局 write 缓冲区。main函数首先创建一个 Curl句柄，然后使用 setopt方法为传输定义 URL和 WRITEFUNCTION。它调用 perform方法启动传输并关闭句柄。最后，它调用 main函数，并将 write 缓冲区提交到 stdout。注意，在这种情况下，不需要错误上下文指针，因为使用了 Python 字符串连接，这就是说您不会使用大小固定的字符串。</p>
-]]></content>
-      <categories>
-        <category>cURL</category>
-      </categories>
-      <tags>
-        <tag>cURL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>cURL-02_在命令行中使用cURL</title>
     <url>/2019/11/03/cURL-02-%E5%9C%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E4%BD%BF%E7%94%A8cURL/</url>
     <content><![CDATA[<h4 id="一、获取和安装-cURL-libcurl"><a href="#一、获取和安装-cURL-libcurl" class="headerlink" title="一、获取和安装 cURL/libcurl"></a>一、获取和安装 cURL/libcurl</h4><p>获取和安装 libcurl 非常简单，取决于您所运行的 Linux 发行版。如果运行的是 Ubuntu，您可以使用 apt-get轻松安装这些包。以下行演示了如何为 libcurl 安装 libcurl 和 Python 绑定：</p>
@@ -2455,6 +2631,33 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
 
 
 <h5 id="13-cURL还有很多命令行操作，这里就不作陈诉了。"><a href="#13-cURL还有很多命令行操作，这里就不作陈诉了。" class="headerlink" title="13. cURL还有很多命令行操作，这里就不作陈诉了。"></a>13. cURL还有很多命令行操作，这里就不作陈诉了。</h5>]]></content>
+      <categories>
+        <category>cURL</category>
+      </categories>
+      <tags>
+        <tag>cURL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cURL-03-cURL的几种语言支持</title>
+    <url>/2019/11/03/cURL-03-cURL%E7%9A%84%E5%87%A0%E7%A7%8D%E8%AF%AD%E8%A8%80%E6%94%AF%E6%8C%81/</url>
+    <content><![CDATA[<h5 id="一、基于-C-的-HTTP-客户端"><a href="#一、基于-C-的-HTTP-客户端" class="headerlink" title="一、基于 C 的 HTTP 客户端"></a>一、基于 C 的 HTTP 客户端</h5><p>C API 在 libcurl 功能上提供了两个 API。easy 接口是一个简单的同步 API（意味着当您使用请求调用 libcurl 时，将能够满足您的请求，直到完成或发生错误）。多接口可以进一步控制 libcurl，您的应用程序可以执行多个同步传输，并控制 libcurl 何时何地移动数据。</p>
+<p>该示例使用 easy 接口。该 API 还能控制数据移动过程（使用回调），但正如其名称所示，使用起来非常简单。下面请看HTTP 的 C 语言示例,使用 libcurl easy 接口的 C HTTP 客户端。</p>
+<a id="more"></a>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt; </span><br><span class="line">#include &lt;string.h&gt; </span><br><span class="line">#include &lt;curl/curl.h&gt; </span><br><span class="line"> </span><br><span class="line">#define MAX_BUF     65536 </span><br><span class="line"> </span><br><span class="line">char wr_buf[MAX_BUF+1]; </span><br><span class="line">int  wr_index; </span><br><span class="line"> </span><br><span class="line">/* </span><br><span class="line">* Write data callback function (called within the context of </span><br><span class="line">* curl_easy_perform. </span><br><span class="line">*/ </span><br><span class="line">size_t write_data( void *buffer, size_t size, size_t nmemb, void *userp ) </span><br><span class="line">&#123; </span><br><span class="line"> int segsize = size * nmemb; </span><br><span class="line"> </span><br><span class="line"> /* Check to see if this data exceeds the size of our buffer. If so, </span><br><span class="line">  * set the user-defined context value and return 0 to indicate a </span><br><span class="line">  * problem to curl. </span><br><span class="line">  */ </span><br><span class="line"> if ( wr_index + segsize &gt; MAX_BUF ) &#123; </span><br><span class="line">   *(int *)userp = 1; </span><br><span class="line">   return 0; </span><br><span class="line"> &#125; </span><br><span class="line"> </span><br><span class="line"> /* Copy the data from the curl buffer into our buffer */ </span><br><span class="line"> memcpy( (void *)&amp;wr_buf[wr_index], buffer, (size_t)segsize ); </span><br><span class="line"> </span><br><span class="line"> /* Update the write index */ </span><br><span class="line"> wr_index += segsize; </span><br><span class="line"> </span><br><span class="line"> /* Null terminate the buffer */ </span><br><span class="line"> wr_buf[wr_index] = 0; </span><br><span class="line"> </span><br><span class="line"> /* Return the number of bytes received, indicating to curl that all is okay */ </span><br><span class="line"> return segsize; </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">/* </span><br><span class="line">* Simple curl application to read the index.html file from a Web site. </span><br><span class="line">*/ </span><br><span class="line">int main( void ) </span><br><span class="line">&#123; </span><br><span class="line"> CURL *curl; </span><br><span class="line"> CURLcode ret; </span><br><span class="line"> int  wr_error; </span><br><span class="line"> </span><br><span class="line"> wr_error = 0; </span><br><span class="line"> wr_index = 0; </span><br><span class="line"> </span><br><span class="line"> /* First step, init curl */ </span><br><span class="line"> curl = curl_easy_init(); </span><br><span class="line"> if (!curl) &#123; </span><br><span class="line">   printf(&quot;couldn&apos;t init curl\n&quot;); </span><br><span class="line">   return 0; </span><br><span class="line"> &#125; </span><br><span class="line"> </span><br><span class="line"> /* Tell curl the URL of the file we&apos;re going to retrieve */ </span><br><span class="line"> curl_easy_setopt( curl, CURLOPT_URL, &quot;www.exampledomain.com&quot; ); </span><br><span class="line"> </span><br><span class="line"> /* Tell curl that we&apos;ll receive data to the function write_data, and </span><br><span class="line">  * also provide it with a context pointer for our error return. </span><br><span class="line">  */ </span><br><span class="line"> curl_easy_setopt( curl, CURLOPT_WRITEDATA, (void *)&amp;wr_error ); </span><br><span class="line"> curl_easy_setopt( curl, CURLOPT_WRITEFUNCTION, write_data ); </span><br><span class="line"> </span><br><span class="line"> /* Allow curl to perform the action */ </span><br><span class="line"> ret = curl_easy_perform( curl ); </span><br><span class="line"> </span><br><span class="line"> printf( &quot;ret = %d (write_error = %d)\n&quot;, ret, wr_error ); </span><br><span class="line"> </span><br><span class="line"> /* Emit the page if curl indicates that no errors occurred */ </span><br><span class="line"> if ( ret == 0 ) printf( &quot;%s\n&quot;, wr_buf ); </span><br><span class="line"> </span><br><span class="line"> curl_easy_cleanup( curl ); </span><br><span class="line"> </span><br><span class="line"> return 0; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最上方是必需的 include文件，包括 cURL 根文件。接下来，定义了两个用于传输的变量。第一个变量是 wr_buf，表示将在其中写入传入数据的缓冲区。wr_index表示缓冲区的当前写入索引。</p>
+<p>转到 main函数，该函数使用 easy API 进行设置。所有 cURL 调用都通过维护特定请求状态的句柄进行操作。这称为 CURL指针引用。本例还创建一个特殊的返回码，称为 CURLcode。在使用任何 libcurl 函数之前，您需要调用 curl_easy_init获取 CURL句柄。接下来，注意 curl_easy_setopt调用的数量。它们为特定的操作配置句柄。对于这些调用，您提供句柄、命令和选项。首先，本例使用 CURLOPT_URL指定要获取的 URL。然后，它使用 CURL_WRITEDATA提供一个上下文变量（在本例中，它是内部的 write 错误变量）。最后，它使用 CURLOPT_WRITEFUNCTION指定数据可用时应该调用的函数。在启动 API 之后，API 将使用它读取的数据多次调用该函数。</p>
+<p>要开始传输，调用 curl_easy_perform。它的工作是根据之前的配置执行传输。调用该函数时，在完成传输或发生错误之前该函数不会返回。main的最后一步是提交返回状态，提交页面读取，最后使用 curl_easy_cleanup清除（当使用句柄执行完操作后）。</p>
+<p>现在看看 write_data函数。该函数是针对特定操作收到数据时调用的回调。注意，当您从网站读取数据时，将写入该数据（write_data）。将向回调提供一个缓冲区（包含可用数据）、成员数量和大小（缓冲中可用数据总量）、上下文指针。第一个任务是确保缓冲区（wr_buf）的空间足以写入数据。如果不够，它将设置上下文指针并返回 0，表示出现问题。否则，它将 cURL 缓冲区的数据复制到您的缓冲区，并增加索引，指向要写入的下一个位置。本例还终止字符串，稍后可以对其使用 printf。最后，它返回 libcurl 操作的字节数量。这将告诉 libcurl 数据被提取，它也可以丢弃该数据。这就是从网站将文件读取到内存的相对简单的方法。</p>
+<h5 id="二、基于-Python-的-HTTP-客户端"><a href="#二、基于-Python-的-HTTP-客户端" class="headerlink" title="二、基于 Python 的 HTTP 客户端"></a>二、基于 Python 的 HTTP 客户端</h5><p>Python 是一种非常有用的面向对象的脚本语言，在原型化和构建生产软件方面非常突出。示例假设您较熟悉 Python，但使用不多，因此不要期望过高。</p>
+<p>这个简单的 Python HTTP 客户端使用 pycurl，如下：</p>
+<p>使用 libcurl 的 pycurl接口的 Python HTTP 客户端</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import sys </span><br><span class="line">import pycurl </span><br><span class="line"> </span><br><span class="line">wr_buf = &apos;&apos;</span><br><span class="line"> </span><br><span class="line">def write_data( buf ): </span><br><span class="line">    global wr_buf </span><br><span class="line">    wr_buf += buf </span><br><span class="line"> </span><br><span class="line">def main(): </span><br><span class="line">    c = pycurl.Curl() </span><br><span class="line">    c.setopt( pycurl.URL, &apos;http://www.exampledomain.com&apos; ) </span><br><span class="line">    c.setopt( pycurl.WRITEFUNCTION, write_data ) </span><br><span class="line"> </span><br><span class="line">    c.perform() </span><br><span class="line"> </span><br><span class="line">    c.close() </span><br><span class="line"> </span><br><span class="line">main() </span><br><span class="line">sys.stdout.write(wr_buf)</span><br></pre></td></tr></table></figure>
+
+<p>这比 C 语言版本简单的多。它首先导入必需的模块（用于标准系统的 sys和 pycurl模块）。接下来，它定义 write 缓冲区（wr_buf）。像 C 程序中一样，声明一个 write_data函数。注意，该函数只有一个参数：从 HTTP 服务器中读取的数据缓冲区。我将该缓冲区连接到全局 write 缓冲区。main函数首先创建一个 Curl句柄，然后使用 setopt方法为传输定义 URL和 WRITEFUNCTION。它调用 perform方法启动传输并关闭句柄。最后，它调用 main函数，并将 write 缓冲区提交到 stdout。注意，在这种情况下，不需要错误上下文指针，因为使用了 Python 字符串连接，这就是说您不会使用大小固定的字符串。</p>
+]]></content>
       <categories>
         <category>cURL</category>
       </categories>
