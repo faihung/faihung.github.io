@@ -1,6 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>RTSP-SDP协议介绍</title>
+    <url>/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<h4 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h4><p>SDP 传递着媒体流信息，接收者可以解析传入的 sdp 数据，从而知道发送者的基本信<br>息。SDP 基本上在 internet 上工作。定义了会话描述的统一格式，但并不定义多播地址的分配和 SDP 消息的传输方式，也不支持媒体编码方案的协商，这些功能均由下层传送协议完成。典型的会话传送协议包括:SAP(Session Announcement Protocol 会话公告协议),SIP(Session Initiation Protocol，会话初始协议),RTSP,HTTP,和使用<br>MIME 的 E-Mail。</p>
+<a id="more"></a>
+
+<p>SDP 包括以下一些方面：</p>
+<ul>
+<li>会话的名称和目的</li>
+<li>会话存活时间</li>
+<li>包含在会话中的媒体信息，包括:<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">媒体类型(例:video,audio)</span><br><span class="line">传输协议(例:RTP/UDP/IP,H.320)</span><br><span class="line">媒体格式(例:H.261video, MPEG video)</span><br><span class="line">多播或远端（单播）地址和端口</span><br></pre></td></tr></table></figure></li>
+<li>为接收媒体而需的信息(addresses, ports, formats and so on)</li>
+<li>使用的带宽信息</li>
+<li>可信赖的接洽信息（Contact information）</li>
+</ul>
+<h4 id="二、SDP-规格"><a href="#二、SDP-规格" class="headerlink" title="二、SDP 规格"></a>二、SDP 规格</h4><p>SDP 会话描述由多行<type>=<value>组成。其中<type>是一个字符。<value>是<br>一个字符串，其格式视<type>而定。整个协议区分大小写。“=”两侧不允许有空格。</type></value></type></value></type></p>
+<p>SDP 会话描述由一个会话级描述（session_level description）和多个媒体级描述（media_level description）组成。会话级（session_level）的作用域是整个会话。其位置是从’v=’行开始到第一个媒体描述为止。媒体级（media_level）描述是对单个的媒体流进行描述（例如传送单个音频或者视频的 vlc sdp 文件只有短短的几句话，<br>从 m=开始，这其实就是个媒体机描述），其位置是从’m=’行开始到下一个媒体描述为止。<br>总之，除非媒体部分重载，会话级的值是各个媒体的缺省默认值（就是说媒体级描述其实也<br>是一个会话级描述，只不过没写出来的会话级描述参数都用的缺省值）。</p>
+<p>SDP 的结构如下：</p>
+<p><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/1.png" alt="1"><br><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/2.png" alt="2"><br>上面的有些行是必需有的，有些行是可选的。可选的行有*号标记。必需的是<br>v,o,s,t,m（这是对于会话级描述和媒体及描述总体而言的，对于媒体级描述而言只有 m= 是必须的）。注意所有的描述项必须按照上面的顺序给出。</p>
+<h4 id="三、各个字段的描述"><a href="#三、各个字段的描述" class="headerlink" title="三、各个字段的描述"></a>三、各个字段的描述</h4><h5 id="1-SDP-文件实例"><a href="#1-SDP-文件实例" class="headerlink" title="1. SDP 文件实例"></a>1. SDP 文件实例</h5><p><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/3.png" alt="3"></p>
+<h5 id="2-version-必选"><a href="#2-version-必选" class="headerlink" title="2. version(必选)"></a>2. version(必选)</h5><p>v=0;SDP 的版本号，不包括次版本号。</p>
+<h5 id="3-origion-必选"><a href="#3-origion-必选" class="headerlink" title="3. origion(必选)"></a>3. origion(必选)</h5><p><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/4.png" alt="4"><br><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/5.png" alt="5"></p>
+<h5 id="4-Session-Name"><a href="#4-Session-Name" class="headerlink" title="4. Session Name"></a>4. Session Name</h5><p>s=<sessionname>;会话名，在整个会话中有且只有一个”s=”。</sessionname></p>
+<h5 id="5-Connection-Data-必选"><a href="#5-Connection-Data-必选" class="headerlink" title="5. Connection Data(必选)"></a>5. Connection Data(必选)</h5><p><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/6.png" alt="6"></p>
+<h5 id="6-Bandwidth-可选"><a href="#6-Bandwidth-可选" class="headerlink" title="6. Bandwidth(可选)"></a>6. Bandwidth(可选)</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">b=&lt;modifier&gt;:&lt;bandwidth-value&gt;;描述了建议的带宽，单位 kbps，可选。</span><br><span class="line">&lt;modifier&gt;：包括两种 CT 和 AS。</span><br><span class="line">CT：ConferenceTotal，总带宽。</span><br><span class="line">AS：Application-SpecificMaximum，单个媒体带宽的最大值。</span><br></pre></td></tr></table></figure>
+<p>扩展机制：<modifier>以”X－”开始。建议 modifier 越短越好。例:b=X-YZ:128</modifier></p>
+<h5 id="7-Times-必选-RepeatTimesand-Time-Zones"><a href="#7-Times-必选-RepeatTimesand-Time-Zones" class="headerlink" title="7. Times(必选), RepeatTimesand Time Zones"></a>7. Times(必选), RepeatTimesand Time Zones</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">t=&lt;start time&gt; &lt;stop time&gt;;描述了会话的开始时间和结束时间。</span><br><span class="line">&lt;start time&gt; 和&lt;stop time&gt; 为 NTP 时间，单位是秒。假如&lt;stop time&gt;为零表示</span><br><span class="line">过了&lt;start time&gt;时间后会话一直持续。当&lt;start time&gt; 和&lt;stoptime&gt;均为零时表</span><br><span class="line">示持久会话。</span><br></pre></td></tr></table></figure>
+<p>建议 start time 和 stoptime 不要设为0。因为不知道此会话的开始和结束时间，<br>增加了调度（scheduling）的难度。</p>
+<h5 id="8-Media-Announcements-必选"><a href="#8-Media-Announcements-必选" class="headerlink" title="8. Media Announcements (必选)"></a>8. Media Announcements (必选)</h5><p><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/7.png" alt="7"><br><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/8.png" alt="8"></p>
+<h5 id="9-rtpmap（可选）"><a href="#9-rtpmap（可选）" class="headerlink" title="9. rtpmap（可选）"></a>9. rtpmap（可选）</h5><p><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/9.png" alt="9"><br>对于音频流，&lt;编码参数&gt;说明了音频的通道数。通道数默认缺省值为1。对于视频流，现阶段没有&lt;编码参数&gt;。<br><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/10.png" alt="10"><br>在 rtpmap 中，实验性的编码方案也可以用。其格式名前一定为”X－”例：一种新的实验性的被称为 GSMLPC 的音频流，使用的动态负载类型为 99。<br><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/11.png" alt="11"></p>
+<h5 id="10-SuggestedAttributes（可选）"><a href="#10-SuggestedAttributes（可选）" class="headerlink" title="10. SuggestedAttributes（可选）"></a>10. SuggestedAttributes（可选）</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a=&lt;TYPE&gt;或 a=&lt;TYPE&gt;:&lt;VALUES&gt;</span><br><span class="line">a=framerate:&lt;帧速率(fps)&gt;</span><br><span class="line">例子：音频：a=framerate:50</span><br><span class="line"></span><br><span class="line">按照 8K、8Bit 来算，(1/8000)*1000*1Byte*20ms=12.5B a=lang:&lt;语言标记&gt;//会话描述的缺省语言或媒体描述的语言</span><br></pre></td></tr></table></figure>
+<p>注:如果 SDP 语法分析器不能识别某一类型(Type),则整个描述丢失。如果”a=”的某属性值不理解,则予以丢失此属性。会话级的描述就是媒体级描述的缺省值（就是说媒体级描述其实也是一个会话级描述，只不过没写出来的会话级描述参数都用的缺省值）。</p>
+<h4 id="四、举例"><a href="#四、举例" class="headerlink" title="四、举例"></a>四、举例</h4><h5 id="1-媒体级会话-VLC-播放-264-视频的-sdp-文件"><a href="#1-媒体级会话-VLC-播放-264-视频的-sdp-文件" class="headerlink" title="1. 媒体级会话 VLC 播放 264 视频的 sdp 文件"></a>1. 媒体级会话 VLC 播放 264 视频的 sdp 文件</h5><p><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/12.png" alt="12"></p>
+<h5 id="2-媒体级会话-VLC-播放-g711-音频的-sdp-文件"><a href="#2-媒体级会话-VLC-播放-g711-音频的-sdp-文件" class="headerlink" title="2. 媒体级会话 VLC 播放 g711 音频的 sdp 文件"></a>2. 媒体级会话 VLC 播放 g711 音频的 sdp 文件</h5><p><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/13.png" alt="13"><br>如果是同时播放音频和视频流只要把这两个媒体级会话合在一个 sdp 文件中就好了</p>
+<h5 id="3-点播-mp4-文件，MS-H-返回给终端的-sdp-信息"><a href="#3-点播-mp4-文件，MS-H-返回给终端的-sdp-信息" class="headerlink" title="3. 点播 mp4 文件，MS_H 返回给终端的 sdp 信息"></a>3. 点播 mp4 文件，MS_H 返回给终端的 sdp 信息</h5><p><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/14.png" alt="14"></p>
+<h5 id="4-直播"><a href="#4-直播" class="headerlink" title="4. 直播"></a>4. 直播</h5><p>编码器生成的 sdp 文件<br><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/15.png" alt="15"><br><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/16.png" alt="16"><br><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/17.png" alt="17"><br><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/18.png" alt="18"></p>
+]]></content>
+      <categories>
+        <category>RTSP</category>
+      </categories>
+      <tags>
+        <tag>SDP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>RTSP-RTSP简单介绍</title>
     <url>/2020/04/03/RTSP-RTSP%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/</url>
     <content><![CDATA[<h4 id="一、概要"><a href="#一、概要" class="headerlink" title="一、概要"></a>一、概要</h4><p>RTSP（Real Time Streaming Protocol）实时流协议：一种流媒体控制协议，可对流媒体进行暂停、快进、快倒等操作。</p>
@@ -196,6 +240,7 @@
         <tag>RTSP</tag>
         <tag>C/S</tag>
         <tag>URL</tag>
+        <tag>SDP</tag>
         <tag>DESCRIBE</tag>
         <tag>SETUP</tag>
         <tag>PLAY</tag>
@@ -872,9 +917,9 @@ xian-3.000.00001  到xian-3.000.00001不升级</code></pre><p>5.所以从上面�
       </categories>
       <tags>
         <tag>指针</tag>
+        <tag>局部变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
-        <tag>局部变量</tag>
         <tag>数组取值</tag>
       </tags>
   </entry>
@@ -1915,9 +1960,9 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
       </categories>
       <tags>
         <tag>指针</tag>
-        <tag>全局变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
+        <tag>全局变量</tag>
       </tags>
   </entry>
   <entry>
@@ -2347,9 +2392,9 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sprintf</tag>
         <tag>strcat</tag>
         <tag>字符串拼接</tag>
+        <tag>sprintf</tag>
       </tags>
   </entry>
   <entry>
@@ -2391,8 +2436,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sprintf</tag>
         <tag>sscanf</tag>
+        <tag>sprintf</tag>
         <tag>整数转字符串</tag>
         <tag>字符串转整数</tag>
       </tags>
@@ -2457,10 +2502,10 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
+        <tag>sscanf</tag>
+        <tag>sprintf</tag>
         <tag>16进制转10进制</tag>
         <tag>10进制转16进制</tag>
-        <tag>sprintf</tag>
-        <tag>sscanf</tag>
       </tags>
   </entry>
   <entry>
@@ -2787,8 +2832,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>工具</category>
       </categories>
       <tags>
-        <tag>ubuntu</tag>
         <tag>VMware</tag>
+        <tag>ubuntu</tag>
       </tags>
   </entry>
   <entry>

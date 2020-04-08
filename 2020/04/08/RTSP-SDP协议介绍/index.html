@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="SDP," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Faihung's blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="一、概述SDP 传递着媒体流信息，接收者可以解析传入的 sdp 数据，从而知道发送者的基本信息。SDP 基本上在 internet 上工作。定义了会话描述的统一格式，但并不定义多播地址的分配和 SDP 消息的传输方式，也不支持媒体编码方案的协商，这些功能均由下层传送协议完成。典型的会话传送协议包括:SAP(Session Announcement Protocol 会话公告协议),SIP(Sess">
+<meta name="keywords" content="SDP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RTSP-SDP协议介绍">
+<meta property="og:url" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D&#x2F;index.html">
+<meta property="og:site_name" content="Faihung&#39;s blog">
+<meta property="og:description" content="一、概述SDP 传递着媒体流信息，接收者可以解析传入的 sdp 数据，从而知道发送者的基本信息。SDP 基本上在 internet 上工作。定义了会话描述的统一格式，但并不定义多播地址的分配和 SDP 消息的传输方式，也不支持媒体编码方案的协商，这些功能均由下层传送协议完成。典型的会话传送协议包括:SAP(Session Announcement Protocol 会话公告协议),SIP(Sess">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D&#x2F;2.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D&#x2F;3.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D&#x2F;4.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D&#x2F;5.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D&#x2F;6.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D&#x2F;7.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D&#x2F;8.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D&#x2F;9.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D&#x2F;10.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D&#x2F;11.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D&#x2F;12.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D&#x2F;13.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D&#x2F;14.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D&#x2F;15.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D&#x2F;16.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D&#x2F;17.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D&#x2F;18.png">
+<meta property="og:updated_time" content="2020-04-08T06:18:04.671Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D&#x2F;1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.faihung.net/2020/04/08/RTSP-SDP协议介绍/"/>
+
+
+
+
+
+  <title>RTSP-SDP协议介绍 | Faihung's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Faihung's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">作者：faihung</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" target="_blank" rel="noopener" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.faihung.net/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="faihung">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Faihung's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">RTSP-SDP协议介绍</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-08T14:13:18+08:00">
+                2020-04-08
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-04-08T14:18:04+08:00">
+                2020-04-08
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/RTSP/" itemprop="url" rel="index">
+                    <span itemprop="name">RTSP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"> 阅读次数:</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h4><p>SDP 传递着媒体流信息，接收者可以解析传入的 sdp 数据，从而知道发送者的基本信<br>息。SDP 基本上在 internet 上工作。定义了会话描述的统一格式，但并不定义多播地址的分配和 SDP 消息的传输方式，也不支持媒体编码方案的协商，这些功能均由下层传送协议完成。典型的会话传送协议包括:SAP(Session Announcement Protocol 会话公告协议),SIP(Session Initiation Protocol，会话初始协议),RTSP,HTTP,和使用<br>MIME 的 E-Mail。</p>
+<a id="more"></a>
+
+<p>SDP 包括以下一些方面：</p>
+<ul>
+<li>会话的名称和目的</li>
+<li>会话存活时间</li>
+<li>包含在会话中的媒体信息，包括:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">媒体类型(例:video,audio)</span><br><span class="line">传输协议(例:RTP/UDP/IP,H.320)</span><br><span class="line">媒体格式(例:H.261video, MPEG video)</span><br><span class="line">多播或远端（单播）地址和端口</span><br></pre></td></tr></table></figure></li>
+<li>为接收媒体而需的信息(addresses, ports, formats and so on)</li>
+<li>使用的带宽信息</li>
+<li>可信赖的接洽信息（Contact information）</li>
+</ul>
+<h4 id="二、SDP-规格"><a href="#二、SDP-规格" class="headerlink" title="二、SDP 规格"></a>二、SDP 规格</h4><p>SDP 会话描述由多行<type>=<value>组成。其中<type>是一个字符。<value>是<br>一个字符串，其格式视<type>而定。整个协议区分大小写。“=”两侧不允许有空格。</type></value></type></value></type></p>
+<p>SDP 会话描述由一个会话级描述（session_level description）和多个媒体级描述（media_level description）组成。会话级（session_level）的作用域是整个会话。其位置是从’v=’行开始到第一个媒体描述为止。媒体级（media_level）描述是对单个的媒体流进行描述（例如传送单个音频或者视频的 vlc sdp 文件只有短短的几句话，<br>从 m=开始，这其实就是个媒体机描述），其位置是从’m=’行开始到下一个媒体描述为止。<br>总之，除非媒体部分重载，会话级的值是各个媒体的缺省默认值（就是说媒体级描述其实也<br>是一个会话级描述，只不过没写出来的会话级描述参数都用的缺省值）。</p>
+<p>SDP 的结构如下：</p>
+<p><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/1.png" alt="1"><br><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/2.png" alt="2"><br>上面的有些行是必需有的，有些行是可选的。可选的行有*号标记。必需的是<br>v,o,s,t,m（这是对于会话级描述和媒体及描述总体而言的，对于媒体级描述而言只有 m= 是必须的）。注意所有的描述项必须按照上面的顺序给出。</p>
+<h4 id="三、各个字段的描述"><a href="#三、各个字段的描述" class="headerlink" title="三、各个字段的描述"></a>三、各个字段的描述</h4><h5 id="1-SDP-文件实例"><a href="#1-SDP-文件实例" class="headerlink" title="1. SDP 文件实例"></a>1. SDP 文件实例</h5><p><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/3.png" alt="3"></p>
+<h5 id="2-version-必选"><a href="#2-version-必选" class="headerlink" title="2. version(必选)"></a>2. version(必选)</h5><p>v=0;SDP 的版本号，不包括次版本号。</p>
+<h5 id="3-origion-必选"><a href="#3-origion-必选" class="headerlink" title="3. origion(必选)"></a>3. origion(必选)</h5><p><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/4.png" alt="4"><br><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/5.png" alt="5"></p>
+<h5 id="4-Session-Name"><a href="#4-Session-Name" class="headerlink" title="4. Session Name"></a>4. Session Name</h5><p>s=<sessionname>;会话名，在整个会话中有且只有一个”s=”。</sessionname></p>
+<h5 id="5-Connection-Data-必选"><a href="#5-Connection-Data-必选" class="headerlink" title="5. Connection Data(必选)"></a>5. Connection Data(必选)</h5><p><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/6.png" alt="6"></p>
+<h5 id="6-Bandwidth-可选"><a href="#6-Bandwidth-可选" class="headerlink" title="6. Bandwidth(可选)"></a>6. Bandwidth(可选)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">b=&lt;modifier&gt;:&lt;bandwidth-value&gt;;描述了建议的带宽，单位 kbps，可选。</span><br><span class="line">&lt;modifier&gt;：包括两种 CT 和 AS。</span><br><span class="line">CT：ConferenceTotal，总带宽。</span><br><span class="line">AS：Application-SpecificMaximum，单个媒体带宽的最大值。</span><br></pre></td></tr></table></figure>
+<p>扩展机制：<modifier>以”X－”开始。建议 modifier 越短越好。例:b=X-YZ:128</modifier></p>
+<h5 id="7-Times-必选-RepeatTimesand-Time-Zones"><a href="#7-Times-必选-RepeatTimesand-Time-Zones" class="headerlink" title="7. Times(必选), RepeatTimesand Time Zones"></a>7. Times(必选), RepeatTimesand Time Zones</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t=&lt;start time&gt; &lt;stop time&gt;;描述了会话的开始时间和结束时间。</span><br><span class="line">&lt;start time&gt; 和&lt;stop time&gt; 为 NTP 时间，单位是秒。假如&lt;stop time&gt;为零表示</span><br><span class="line">过了&lt;start time&gt;时间后会话一直持续。当&lt;start time&gt; 和&lt;stoptime&gt;均为零时表</span><br><span class="line">示持久会话。</span><br></pre></td></tr></table></figure>
+<p>建议 start time 和 stoptime 不要设为0。因为不知道此会话的开始和结束时间，<br>增加了调度（scheduling）的难度。</p>
+<h5 id="8-Media-Announcements-必选"><a href="#8-Media-Announcements-必选" class="headerlink" title="8. Media Announcements (必选)"></a>8. Media Announcements (必选)</h5><p><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/7.png" alt="7"><br><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/8.png" alt="8"></p>
+<h5 id="9-rtpmap（可选）"><a href="#9-rtpmap（可选）" class="headerlink" title="9. rtpmap（可选）"></a>9. rtpmap（可选）</h5><p><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/9.png" alt="9"><br>对于音频流，&lt;编码参数&gt;说明了音频的通道数。通道数默认缺省值为1。对于视频流，现阶段没有&lt;编码参数&gt;。<br><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/10.png" alt="10"><br>在 rtpmap 中，实验性的编码方案也可以用。其格式名前一定为”X－”例：一种新的实验性的被称为 GSMLPC 的音频流，使用的动态负载类型为 99。<br><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/11.png" alt="11"></p>
+<h5 id="10-SuggestedAttributes（可选）"><a href="#10-SuggestedAttributes（可选）" class="headerlink" title="10. SuggestedAttributes（可选）"></a>10. SuggestedAttributes（可选）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a=&lt;TYPE&gt;或 a=&lt;TYPE&gt;:&lt;VALUES&gt;</span><br><span class="line">a=framerate:&lt;帧速率(fps)&gt;</span><br><span class="line">例子：音频：a=framerate:50</span><br><span class="line"></span><br><span class="line">按照 8K、8Bit 来算，(1/8000)*1000*1Byte*20ms=12.5B a=lang:&lt;语言标记&gt;//会话描述的缺省语言或媒体描述的语言</span><br></pre></td></tr></table></figure>
+<p>注:如果 SDP 语法分析器不能识别某一类型(Type),则整个描述丢失。如果”a=”的某属性值不理解,则予以丢失此属性。会话级的描述就是媒体级描述的缺省值（就是说媒体级描述其实也是一个会话级描述，只不过没写出来的会话级描述参数都用的缺省值）。</p>
+<h4 id="四、举例"><a href="#四、举例" class="headerlink" title="四、举例"></a>四、举例</h4><h5 id="1-媒体级会话-VLC-播放-264-视频的-sdp-文件"><a href="#1-媒体级会话-VLC-播放-264-视频的-sdp-文件" class="headerlink" title="1. 媒体级会话 VLC 播放 264 视频的 sdp 文件"></a>1. 媒体级会话 VLC 播放 264 视频的 sdp 文件</h5><p><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/12.png" alt="12"></p>
+<h5 id="2-媒体级会话-VLC-播放-g711-音频的-sdp-文件"><a href="#2-媒体级会话-VLC-播放-g711-音频的-sdp-文件" class="headerlink" title="2. 媒体级会话 VLC 播放 g711 音频的 sdp 文件"></a>2. 媒体级会话 VLC 播放 g711 音频的 sdp 文件</h5><p><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/13.png" alt="13"><br>如果是同时播放音频和视频流只要把这两个媒体级会话合在一个 sdp 文件中就好了</p>
+<h5 id="3-点播-mp4-文件，MS-H-返回给终端的-sdp-信息"><a href="#3-点播-mp4-文件，MS-H-返回给终端的-sdp-信息" class="headerlink" title="3. 点播 mp4 文件，MS_H 返回给终端的 sdp 信息"></a>3. 点播 mp4 文件，MS_H 返回给终端的 sdp 信息</h5><p><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/14.png" alt="14"></p>
+<h5 id="4-直播"><a href="#4-直播" class="headerlink" title="4. 直播"></a>4. 直播</h5><p>编码器生成的 sdp 文件<br><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/15.png" alt="15"><br><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/16.png" alt="16"><br><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/17.png" alt="17"><br><img src="/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/18.png" alt="18"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SDP/" rel="tag"># SDP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/03/RTSP-RTSP%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/" rel="next" title="RTSP-RTSP简单介绍">
+                <i class="fa fa-chevron-left"></i> RTSP-RTSP简单介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="faihung" />
+            
+              <p class="site-author-name" itemprop="name">faihung</p>
+              <p class="site-description motion-element" itemprop="description">系统、归纳、总结</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">96</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/faihung" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/faihung" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://bbs.ebaina.com/forum.php" title="Ebaina" target="_blank">Ebaina</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.amobbs.com/index.php" title="amoBBS" target="_blank">amoBBS</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="ttps://blog.csdn.net/leixiaohua1020" title="leixiaohua" target="_blank">leixiaohua</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、概述"><span class="nav-text">一、概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、SDP-规格"><span class="nav-text">二、SDP 规格</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、各个字段的描述"><span class="nav-text">三、各个字段的描述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-SDP-文件实例"><span class="nav-text">1. SDP 文件实例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-version-必选"><span class="nav-text">2. version(必选)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-origion-必选"><span class="nav-text">3. origion(必选)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-Session-Name"><span class="nav-text">4. Session Name</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-Connection-Data-必选"><span class="nav-text">5. Connection Data(必选)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-Bandwidth-可选"><span class="nav-text">6. Bandwidth(可选)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-Times-必选-RepeatTimesand-Time-Zones"><span class="nav-text">7. Times(必选), RepeatTimesand Time Zones</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-Media-Announcements-必选"><span class="nav-text">8. Media Announcements (必选)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-rtpmap（可选）"><span class="nav-text">9. rtpmap（可选）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10-SuggestedAttributes（可选）"><span class="nav-text">10. SuggestedAttributes（可选）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、举例"><span class="nav-text">四、举例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-媒体级会话-VLC-播放-264-视频的-sdp-文件"><span class="nav-text">1. 媒体级会话 VLC 播放 264 视频的 sdp 文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-媒体级会话-VLC-播放-g711-音频的-sdp-文件"><span class="nav-text">2. 媒体级会话 VLC 播放 g711 音频的 sdp 文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-点播-mp4-文件，MS-H-返回给终端的-sdp-信息"><span class="nav-text">3. 点播 mp4 文件，MS_H 返回给终端的 sdp 信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-直播"><span class="nav-text">4. 直播</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">faihung</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"> 访客人数:</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"> 总访问量:</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
