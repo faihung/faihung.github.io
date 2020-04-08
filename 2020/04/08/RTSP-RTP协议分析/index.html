@@ -93,7 +93,7 @@
 <meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-RTP%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90&#x2F;2.jpg">
 <meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-RTP%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90&#x2F;3.jpg">
 <meta property="og:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-RTP%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90&#x2F;4.jpg">
-<meta property="og:updated_time" content="2020-04-08T08:40:58.655Z">
+<meta property="og:updated_time" content="2020-04-08T08:50:24.261Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;www.faihung.net&#x2F;2020&#x2F;04&#x2F;08&#x2F;RTSP-RTP%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90&#x2F;1.jpg">
 
@@ -347,7 +347,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-04-08T16:40:58+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-04-08T16:50:24+08:00">
                 2020-04-08
               </time>
             
@@ -409,6 +409,8 @@
 
       
         <h4 id="一、RTP概述"><a href="#一、RTP概述" class="headerlink" title="一、RTP概述"></a>一、RTP概述</h4><h5 id="1-1-RTP是什么"><a href="#1-1-RTP是什么" class="headerlink" title="1.1 RTP是什么"></a>1.1 RTP是什么</h5><p>RTP全名是Real-time Transport Protocol（实时传输协议）。它是IETF提出的一个标准，对应的RFC文档为RFC3550（RFC1889为其过期版本）。RFC3550不仅定义了RTP，而且定义了配套的相关协议RTCP（Real-time Transport Control Protocol，即实时传输控制协议）。RTP用来为IP网上的语音、图像、传真等多种需要实时传输的多媒体数据提供端到端的实时传输服务。RTP为Internet上端到端的实时传输提供时间信息和流同步，但并不保证服务质量，服务质量由RTCP来提供。</p>
+<a id="more"></a>
+
 <h5 id="1-2-RTP的应用环境"><a href="#1-2-RTP的应用环境" class="headerlink" title="1.2 RTP的应用环境"></a>1.2 RTP的应用环境</h5><p>RTP用于在单播或多播网络中传送实时数据。它们典型的应用场合有如下几个。</p>
 <p>简单的多播音频会议。语音通信通过一个多播地址和一对端口来实现。一个用于音频数据（RTP），另一个用于控制包（RTCP）。</p>
 <p>音频和视频会议。如果在一次会议中同时使用了音频和视频会议，这两种媒体将分别在不同的RTP会话中传送，每一个会话使用不同的传输地址（IP地址＋端口）。如果一个用户同时使用了两个会话，则每个会话对应的RTCP包都使用规范化名字CNAME（Canonical Name）。与会者可以根据RTCP包中的CNAME来获取相关联的音频和视频，然后根据RTCP包中的计时信息(Network time protocol)来实现音频和视频的同步。</p>
