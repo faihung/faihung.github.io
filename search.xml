@@ -1,6 +1,253 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>RTSP-RTSP协议详解</title>
+    <url>/2020/04/08/RTSP-RTSP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<h4 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h4><h5 id="1-1-RTSP简介"><a href="#1-1-RTSP简介" class="headerlink" title="1.1 RTSP简介"></a>1.1 RTSP简介</h5><p>RTSP(Real Time Streaming Protocol), 实时流传输协议, 是TCP/IP协议体系中的一个应用层协议, 由哥伦比亚大学, 网景和RealNetworks公司提交的IETF RFC标准. 该协议定义了一对多应用程序如何有效地通过IP网络传送多媒体数据. RTSP在体系结构上位于RTP和RTCP之上, 它使用TCP或RTP完成数据传输.</p>
+<a id="more"></a>
+
+<p><img src="/2020/04/08/RTSP-RTSP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/1.jpg" alt="1"></p>
+<p><strong>流媒体服务协议栈</strong></p>
+<p>RTSP提供了一个可扩展框架, 使实时数据, 如音频与视频的受控点播成为可能。 数据源包括现场数据与存储在剪辑中数据。该协议目的在于控制多个数据发送连接, 为选择发送通道, 如UDP, 组播UDP与TCP, 提供途径, 并为选择基于RTP上发送机制提供方法。</p>
+<p>它的语法和运作跟HTTP 1.1类似, 但并不特别强调时间同步,所以比较能容忍网络延迟。</p>
+<p>HTTP与RTSP相比, * HTTP传送HTML. HTTP请求由客户机发出, 服务器作出响应 * RTSP传送的是多媒体数据。使用RTSP时, 客户机和服务器都可以发出请求, 即RTSP可以是双向的。</p>
+<p>RTSP是用来控制声音或影像的多媒体串流协议, 并允许同时多个串流需求控制, 传输时所用的网络通讯协议并不在其定义的范围内, 服务器端可以自行选择使用TCP或UDP来传送串流内容。</p>
+<p>而前面提到的允许同时多个串流需求控制(Multicast), 除了可以降低服务器端的网络用量, 更进而支持多方视讯会议(Video Conference)。 因为与HTTP1.1的运作方式相似, 所以代理服务器〈Proxy〉的快取功能〈Cache〉也同样适用于RTSP, 并因RTSP具有重新导向功能, 可视实际负载情况来转换提供服务的服务器, 以避免过大的负载集中于同一服务器而造成延迟。</p>
+<p>该协议用于C/S模型, 是一个基于文本的协议, 用于在客户端和服务器端建立和协商实时流会话。</p>
+<p>实时流协议(RTSP)建立并控制一个或几个时间同步的连续流媒体。 尽管连续媒体流与控制流交换是可能的, 通常它本身并不发送连续流。换言之, RTSP充当多媒体服务器的网络远程控制。RTSP连接没有绑定到传输层连接, 如TCP。 在RTSP连接期间, RTSP用户可打开或关闭多个对服务器的可传输连接以发出RTSP请求。此外, 可使用无连接传输协议, 如UDP。 RTSP流控制的流可能用到RTP, 但RTSP操作并不依赖用于携带连续媒体的传输机制。</p>
+<p><strong>协议支持的操作如下</strong></p>
+<ol>
+<li>从媒体服务器上检索媒体: 用户可通过HTTP或其它方法提交一个演示描述。 如演示是组播, 演示式就包含用于连续媒体的的组播地址和端口。 如演示仅通过单播发送给用户, 用户为了安全应提供目的地址。</li>
+<li>媒体服务器邀请进入会议: 媒体服务器可被邀请参加正进行的会议, 或回放媒体, 或记录其中一部分, 或全部。这种模式在分布式教育应用上很有用, 会议中几方可轮流按远程控制按钮。</li>
+<li>将媒体加到现成讲座中: 如服务器告诉用户可获得附加媒体内容, 对现场讲座显得尤其有用。如HTTP/1.1中类似, RTSP请求可由代理, 通道与缓存处理。</li>
+</ol>
+<h5 id="1-2-协议特点"><a href="#1-2-协议特点" class="headerlink" title="1.2 协议特点"></a>1.2 协议特点</h5><ul>
+<li>可扩展性: 新方法和参数很容易加入RTSP.</li>
+<li>易解析: RTSP可由标准HTTP或MIME解析器解析.</li>
+<li>安全: RTSP使用网页安全机制.</li>
+<li>独立于传输: RTSP可使用不可靠数据报协议(EDP), 可靠数据报协议(RDP); 如要实现应用级可靠, 可使用可靠流协议.</li>
+<li>多服务器支持: 每个流可放在不同服务器上, 用户端自动与不同服务器建立几个并发控制连接, 媒体同步在传输层执行.</li>
+<li>记录设备控制: 协议可控制记录和回放设备.</li>
+<li>流控与会议开始分离: 仅要求会议初始化协议提供, 或可用来创建惟一会议标识号. 特殊情况下, 可用SIP或H.323来邀请服务器入会.</li>
+<li>适合专业应用: 通过SMPTE时标, RTSP支持帧级精度, 允许远程数字编辑.</li>
+<li>演示描述中立: 协议没强加特殊演示或元文件, 可传送所用格式类型; 然而, 演示描述至少必须包括一个RTSP URL.</li>
+<li>代理与防火墙友好: 协议可由应用和传输层防火墙处理。 防火墙需要理解SETUP方法, 为UDP媒体流打开一个“缺口”。</li>
+<li>HTTP友好: 此处, RTSP明智地采用HTTP观念, 使现在结构都可重用。 结构包括Internet内容选择平台(PICS)。 由于在大多数情况下控制连续媒体需要服务器状态, RTSP不仅仅向HTFP添加方法。</li>
+<li>适当的服务器控制: 如用户启动一个流, 必须也可以停止一个流。</li>
+<li>传输协调: 实际处理连续媒体流前, 用户可协调传输方法。</li>
+<li>性能协调: 如基本特征无效, 必须有一些清理机制让用户决定哪种方法没生效， 这允许用户提出适合的用户界面。</li>
+</ul>
+<h4 id="二、协议细节"><a href="#二、协议细节" class="headerlink" title="二、协议细节"></a>二、协议细节</h4><h5 id="2-1-典型的rtsp交互过程"><a href="#2-1-典型的rtsp交互过程" class="headerlink" title="2.1 典型的rtsp交互过程"></a>2.1 典型的rtsp交互过程</h5><blockquote>
+<p>C表示rtsp客户端, S表示rtsp服务端</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. C-&gt;S:OPTION request //询问S有哪些方法可用 </span><br><span class="line">1. S-&gt;C:OPTION response //S回应信息中包括提供的所有可用方法</span><br><span class="line">2. C-&gt;S:DESCRIBE request //要求得到S提供的媒体初始化描述信息 </span><br><span class="line">2. S-&gt;C:DESCRIBE response //S回应媒体初始化描述信息, 主要是sdp </span><br><span class="line">3. C-&gt;S:SETUP request //设置会话的属性, 以及传输模式, 提醒S建立会话 </span><br><span class="line">3. S-&gt;C:SETUP response //S建立会话, 返回会话标识符, 以及会话相关信息 </span><br><span class="line">4. C-&gt;S:PLAY request //C请求播放 </span><br><span class="line">4. S-&gt;C:PLAY response //S回应该请求的信息 S-&gt;C:发送流媒体数据 </span><br><span class="line">5. C-&gt;S:TEARDOWN request //C请求关闭会话 </span><br><span class="line">5. S-&gt;C:TEARDOWN response //S回应该请求</span><br></pre></td></tr></table></figure>
+<p>上述的过程是标准的, 友好的rtsp流程, 但实际的需求中并不一定按部就班来. 其中第3和4步是必需的！</p>
+<p>第一步, 只要服务器客户端约定好, 有哪些方法可用, 则option请求可以不要.</p>
+<p>第二步, 如果我们有其他途径得到媒体初始化描述信息(比如http请求等等), 则我们也不需要通过rtsp中的describe请求来完成.</p>
+<p>第五步, 可以根据系统需求的设计来决定是否需要.</p>
+<h5 id="2-2-RTSP消息格式"><a href="#2-2-RTSP消息格式" class="headerlink" title="2.2 RTSP消息格式"></a>2.2 RTSP消息格式</h5><p>RTSP的消息有两大类: 请求消息(request), 回应消息(response</p>
+<p>++请求消息++</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">方法 URI RTSP版本 CR LF 消息头 CR LF CR LF 消息体 CR LF</span><br></pre></td></tr></table></figure>
+<p>其中方法包括OPTION回应中所有的命令,URI是接受方的地址,例如:rtsp://192.168.20.136. RTSP版本一般都是 RTSP/1.0. 每行后面的CR LF表示回车换行, 需要接受端有相应的解析, 最后一个消息头需要有两个CR LF(即空行)</p>
+<p>++回应消息++</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">RTSP版本 状态码 解释 CR LF 消息头 CR LF CR LF 消息体 CR LF</span><br></pre></td></tr></table></figure>
+<p>其中RTSP版本一般都是RTSP/1.0, 状态码是一个数值, 200表示成功, 解释是与状态码对应的文本解释.</p>
+<h5 id="2-3-方法定义"><a href="#2-3-方法定义" class="headerlink" title="2.3 方法定义"></a>2.3 方法定义</h5><p>方法记号表示资源上执行的方法, 它区分大小写. 新方法可在将来定义, 但不能以$开头. 已定义方法如下表所示:(注: P—-演示, S—-流, C—-用户端, S—-服务器端)</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>方向</th>
+<th>对象</th>
+<th>要求</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DESCRIBE</td>
+<td>C-&gt;S</td>
+<td>P,S</td>
+<td>推荐</td>
+<td>检查演示或媒体对象的描述,也允许使用接收头指定用户理解的描述格式. DESCRIBE的答复-响应组成媒体RTSP初始阶段</td>
+</tr>
+<tr>
+<td>ANNOUNCE</td>
+<td>C-&gt;S S-&gt;C</td>
+<td>P,S</td>
+<td>可选</td>
+<td>当从用户发往服务器时, ANNOUNCE将请求URL识别的演示或媒体对象描述发送给服务器; 反之, ANNOUNCE实时更新连接描述. 如新媒体流加入演示, 整个演示描述再次发送, 而不仅仅是附加组件, 使组件能被删除</td>
+</tr>
+<tr>
+<td>GET_PARAMETER</td>
+<td>C-&gt;S S-&gt;C</td>
+<td>P,S</td>
+<td>可选</td>
+<td><code>GET_PARAMETER</code>请求检查RUL指定的演示与媒体的参数值. 没有实体体时,<code>GET_PARAMETER</code>也许能用来测试用户与服务器的连通情况</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>C-&gt;S S-&gt;C</td>
+<td>P,S</td>
+<td>要求</td>
+<td>可在任意时刻发出OPTIONS请求, 如用户打算尝试非标准请求, 并不影响服务器状态</td>
+</tr>
+<tr>
+<td>PAUSE</td>
+<td>C-&gt;S</td>
+<td>P,S</td>
+<td>推荐</td>
+<td>PAUSE请求引起流发送临时中断. 如请求URL命名一个流, 仅回放和记录被停止; 如请求URL命名一个演示或流组, 演示或组中所有当前活动的流发送都停止. 恢复回放或记录后, 必须维持同步. 在SETUP消息中连接头超时参数所指定时段期间被暂停后, 尽管服务器可能关闭连接并释放资源, 但服务器资源会被预订</td>
+</tr>
+<tr>
+<td>PLAY</td>
+<td>C-&gt;S</td>
+<td>P,S</td>
+<td>要求</td>
+<td>PLAY告诉服务器以SETUP指定的机制开始发送数据; 直到一些SETUP请求被成功响应, 客户端才可发布PLAY请求. PLAY请求将正常播放时间设置在所指定范围的起始处, 发送流数据直到范围的结束处. PLAY请求可排成队列, 服务器将PLAY请求排成队列, 顺序执行</td>
+</tr>
+<tr>
+<td>RECORD</td>
+<td>C-&gt;S</td>
+<td>P,S</td>
+<td>可选</td>
+<td>该方法根据演示描述初始化媒体数据记录范围, 时标反映开始和结束时间; 如没有给出时间范围, 使用演示描述提供的开始和结束时间. 如连接已经启动, 立即开始记录, 服务器数据请求URL或其他URL决定是否存储记录的数据; 如服务器没有使用URL请求, 响应应为201(创建), 并包含描述请求状态和参考新资源的实体与位置头. 支持现场演示记录的媒体服务器必须支持时钟范围格式, smpte格式没有意义</td>
+</tr>
+<tr>
+<td>REDIRECT</td>
+<td>S-&gt;C</td>
+<td>P,S</td>
+<td>可选</td>
+<td>重定向请求通知客户端连接到另一服务器地址. 它包含强制头地址, 指示客户端发布URL请求; 也可能包括参数范围, 以指明重定向何时生效. 若客户端要继续发送或接收URL媒体, 客户端必须对当前连接发送TEARDOWN请求, 而对指定主执新连接发送SETUP请求</td>
+</tr>
+<tr>
+<td>SETUP</td>
+<td>C-&gt;S</td>
+<td>S</td>
+<td>要求</td>
+<td>对URL的SETUP请求指定用于流媒体的传输机制. 客户端对正播放的流发布一个SETUP请求, 以改变服务器允许的传输参数. 如不允许这样做, 响应错误为”455 Method Not Valid In This State”. 为了透过防火墙, 客户端必须指明传输参数, 即使对这些参数没有影响</td>
+</tr>
+<tr>
+<td>SET_PARAMETER</td>
+<td>C-&gt;S S-&gt;C</td>
+<td>P,S</td>
+<td>可选</td>
+<td>这个方法请求设置演示或URL指定流的参数值. 请求仅应包含单个参数, 允许客户端决定某个特殊请求为何失败. 如请求包含多个参数, 所有参数可成功设置, 服务器必须只对该请求起作用. 服务器必须允许参数可重复设置成同一值, 但不让改变参数值. 注意: 媒体流传输参数必须用SETUP命令设置. 将设置传输参数限制为SETUP有利于防火墙. 将参数划分成规则排列形式, 结果有更多有意义的错误指示</td>
+</tr>
+<tr>
+<td>TEARDOWN</td>
+<td>C-&gt;S</td>
+<td>P,S</td>
+<td>要求</td>
+<td>TEARDOWN请求停止给定URL流发送, 释放相关资源. 如URL是此演示URL, 任何RTSP连接标识不再有效. 除非全部传输参数是连接描述定义的, SETUP请求必须在连接可再次播放前发布</td>
+</tr>
+</tbody></table>
+<p>某些防火墙设计与其他环境可能要求服务器插入RTSP方法和流数据. 由于插入将使客户端和服务器操作复杂, 并增加附加开销, 除非有必要, 应避免这样做. 插入二进制数据仅在RTSP通过TCP传输时才可使用.</p>
+<p>流数据(如RTP包)用一个ASCII字符’′封装, 后跟一个一字节通道标识, 其后是封装二进制数据的长度, 两字节整数.流数据紧跟其后, 没有CRLF, 但包括高层协议头.每个块包含一个高层协议数据单元.</p>
+<p>当传输选择为RTP, RTCP信息也被服务器通过TCP连接插入. 缺省情况下, RTCP包在比RTP通道高的第一个可用通道上发送. 客户端可能在另一通道显式请求RTCP包, 这可通过指定传输头插入参数中的两个通道来做到. 当两个或更多流交叉时, 为取得同步, 需要RTCP. 而且, 这为当网络设置需要通过TCP控制连接透过RTP/RTCP提供了一条方便的途径, 可能时, 在UDP上进行传输.</p>
+<h5 id="2-4-消息头定义"><a href="#2-4-消息头定义" class="headerlink" title="2.4 消息头定义"></a>2.4 消息头定义</h5><p>消息头的定义如下表. 表格说明:<br>Type |<br>—|<br>类型 “g” 表示请求和响应中的通用请求头;|<br>类型 “R” 表示请求头;|<br>类型 “r” 表示响应头;|<br>类型 “e” 表示实体头字段.|</p>
+<table>
+<thead>
+<tr>
+<th>Support</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>“req.” 表示必须由接收者以特殊的方法实现; 注意, 不是所有 “req.” 字段在该类型的每个请求中都会被发送. “req.” 只表示客户机(支持响应头)和服务器(支持请求头)必须执行该字段.</td>
+</tr>
+<tr>
+<td>“opt.” 表示是可选的.</td>
+</tr>
+</tbody></table>
+<p>最后一栏列出了关于头字段产生作用的方法; 其中 “entity” 针对于返回一个信息主体的所有方法. )</p>
+<p><img src="/2020/04/08/RTSP-RTSP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/2.jpg" alt="2"></p>
+<p><img src="/2020/04/08/RTSP-RTSP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/3.jpg" alt="3"></p>
+<p><strong>常用头解析</strong>:</p>
+<p><img src="/2020/04/08/RTSP-RTSP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/4.jpg" alt="4"></p>
+<p><img src="/2020/04/08/RTSP-RTSP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/5.jpg" alt="5"></p>
+<h5 id="2-5-状态码"><a href="#2-5-状态码" class="headerlink" title="2.5 状态码"></a>2.5 状态码</h5><p>标准RTSP 消息的状态码(在应答消息的第一行表示)</p>
+<p><img src="/2020/04/08/RTSP-RTSP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/6.jpg" alt="6"></p>
+<p><img src="/2020/04/08/RTSP-RTSP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/7.jpg" alt="7"></p>
+<p><img src="/2020/04/08/RTSP-RTSP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/8.jpg" alt="8"></p>
+<h4 id="三、rtsp中常用方法举例"><a href="#三、rtsp中常用方法举例" class="headerlink" title="三、rtsp中常用方法举例"></a>三、rtsp中常用方法举例</h4><p>本节针对上面所述的典型交互过程进行说明</p>
+<h5 id="3-1-OPTION"><a href="#3-1-OPTION" class="headerlink" title="3.1 OPTION"></a>3.1 OPTION</h5><p>目的是得到服务器提供的可用方法:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">OPTIONS rtsp://192.168.20.136:5000/xxx666 RTSP/1.0 CSeq: 1 //每个消息都有序号来标记, 第一个包通常是option请求消息 User-Agent: VLC media player (LIVE555 Streaming Media v2005.11.10)</span><br></pre></td></tr></table></figure>
+<p>服务器的回应信息包括提供的一些方法,例如:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">RTSP/1.0 200 OK Server: UServer 0.9.7_rc1 Cseq: 1 //每个回应消息的cseq数值和请求消息的cseq相对应 </span><br><span class="line">Public: OPTIONS, DESCRIBE, SETUP, TEARDOWN, PLAY, PAUSE, SCALE,GET_PARAMETER //服务器提供的可用的方法</span><br></pre></td></tr></table></figure>
+<h5 id="3-2-DESCRIBE"><a href="#3-2-DESCRIBE" class="headerlink" title="3.2 DESCRIBE"></a>3.2 DESCRIBE</h5><p>C向S发起DESCRIBE请求,为了得到会话描述信息(SDP):</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DESCRIBE rtsp://192.168.20.136:5000/xxx666 RTSP/1.0 </span><br><span class="line">CSeq: 2 </span><br><span class="line">token: </span><br><span class="line">Accept: application/sdp </span><br><span class="line">User-Agent: VLC media player (LIVE555 Streaming Media v2005.11.10)</span><br></pre></td></tr></table></figure>
+<p>服务器回应一些对此会话的描述信息(sdp):</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">RTSP/1.0 200 OK Server: UServer 0.9.7_rc1 </span><br><span class="line">Cseq: 2 </span><br><span class="line">x-prev-url: rtsp://192.168.20.136:5000 </span><br><span class="line">x-next-url: rtsp://192.168.20.136:5000 </span><br><span class="line">x-Accept-Retransmit: our-retransmit </span><br><span class="line">x-Accept-Dynamic-Rate: 1 </span><br><span class="line">Cache-Control: must-revalidate </span><br><span class="line">Last-Modified: Fri, 10 Nov 2006 12:34:38 GMT Date: Fri, 10 Nov 2006 12:34:38 </span><br><span class="line">GMT Expires: Fri, 10 Nov 2006 12:34:38 GMT </span><br><span class="line">Content-Base: rtsp://192.168.20.136:5000/xxx666/ Content-Length: 344 Content-Type: application/sdp v=0 //以下都是sdp信息 o=OnewaveUServerNG 1451516402 1025358037 IN IP4 192.168.20.136 s=/xxx666 u=http:/// e=admin@ c=IN IP4 0.0.0.0 t=0 0 a=isma-compliance:1,1.0,1 a=range:npt=0- m=video 0 RTP/AVP 96 //m表示媒体描述, 下面是对会话中视频通道的媒体描述 a=rtpmap:96 MP4V-ES/90000 a=fmtp:96 profile-level-id=245;config=000001B0F5000001B509000001000000012000C888B0E0E0FA62D089028307 a=control:trackID=0 //trackID＝0表示视频流用的是通道0</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-3-SETUP"><a href="#3-3-SETUP" class="headerlink" title="3.3 SETUP"></a>3.3 SETUP</h5><p>客户端提醒服务器建立会话,并确定传输模式:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SETUP rtsp://192.168.20.136:5000/xxx666/trackID=0 RTSP/1.0 </span><br><span class="line">CSeq: 3 </span><br><span class="line">Transport: RTP/AVP/TCP;unicast;interleaved=0-1 </span><br><span class="line">User-Agent: VLC media player (LIVE555 Streaming Media v2005.11.10) //uri中 带有trackID＝0, 表示对该通道进行设置. Transport参数设置了传输模式, 包的结构. 接下来的数据包头部第二个字节位置就是 interleaved, 它的值是每个通道都不同的, trackID＝0的interleaved值有两个0或1, 0表示rtp包, 1表示rtcp包, 接 受端根据interleaved的值来区别是哪种数据包.</span><br></pre></td></tr></table></figure>
+<p>服务器回应信息:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">RTSP/1.0 200 OK Server: UServer 0.9.7_rc1 </span><br><span class="line">Cseq: 3 </span><br><span class="line">Session: 6310936469860791894 //服务器回应的会话标识符 </span><br><span class="line">Cache-Control: no-cache </span><br><span class="line">Transport: RTP/AVP/TCP;unicast;interleaved=0-1;ssrc=6B8B4567</span><br></pre></td></tr></table></figure>
+<h5 id="3-4-PLAY"><a href="#3-4-PLAY" class="headerlink" title="3.4 PLAY"></a>3.4 PLAY</h5><p>客户端发送播放请求:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">PLAY rtsp://192.168.20.136:5000/xxx666 RTSP/1.0 </span><br><span class="line">CSeq: 4 </span><br><span class="line">Session: 6310936469860791894 </span><br><span class="line">Range: npt=0.000- //设置播放时间的范围 </span><br><span class="line">User-Agent: VLC media player (LIVE555 Streaming Media v2005.11.10)</span><br></pre></td></tr></table></figure>
+<p>服务器回应信息:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">RTSP/1.0 200 OK Server: UServer 0.9.7_rc1 </span><br><span class="line">Cseq: 4 </span><br><span class="line">Session: 6310936469860791894 </span><br><span class="line">Range: npt=0.000000- </span><br><span class="line">RTP-Info: url=trackID=0;seq=17040;rtptime=1467265309 //seq和rtptime都是rtp包中的信息</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-5-TEARDOWN"><a href="#3-5-TEARDOWN" class="headerlink" title="3.5 TEARDOWN"></a>3.5 TEARDOWN</h5><p>客户端发起关闭请求:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">TEARDOWN rtsp://192.168.20.136:5000/xxx666 RTSP/1.0 </span><br><span class="line">CSeq: 5 </span><br><span class="line">Session: 6310936469860791894 </span><br><span class="line">User-Agent: VLC media player (LIVE555 Streaming Media v2005.11.10)</span><br></pre></td></tr></table></figure>
+<p>服务器回应:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">RTSP/1.0 200 OK Server: UServer 0.9.7_rc1 </span><br><span class="line">Cseq: 5 </span><br><span class="line">Session: 6310936469860791894 </span><br><span class="line">Connection: Close</span><br></pre></td></tr></table></figure>
+<p>以上方法都是交互过程中最为常用的, 其它还有一些重要的方法如</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">get/set_parameter,pause,redirect等等</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="四、SDP协议概述"><a href="#四、SDP协议概述" class="headerlink" title="四、SDP协议概述"></a>四、SDP协议概述</h4><h5 id="4-1-简介"><a href="#4-1-简介" class="headerlink" title="4.1 简介"></a>4.1 简介</h5><p>SDP 完全是一种会话描述格式, 它不属于传输协议.<br>它使用不同的适当的传输协议，包括会话通知协议（SAP）、会话初始协议（SIP）、 实时流协议（RTSP）、MIME扩展协议的电子邮件以及超文本传输协议（HTTP）。<br>SDP协议是也是基于文本的协议，这样就能保证协议的可扩展性比较强, 这样就使其具有广泛的应用范围。SDP 不支持会话内容或媒体编码的协商, 所以在流媒体中只用来描述媒体信息。媒体协商这一块要用RTSP来实现．</p>
+<h5 id="4-2-SDP协议格式"><a href="#4-2-SDP协议格式" class="headerlink" title="4.2 SDP协议格式"></a>4.2 SDP协议格式</h5><p>SDP描述由许多文本行组成，文本行的格式为&lt;类型&gt;=&lt;值&gt;，&lt;类型&gt;是一个字母，&lt;值&gt;是结构化的文本串，其格式依&lt;类型&gt;而定。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">＜type＞=&lt;value&gt;[CRLF]</span><br></pre></td></tr></table></figure>
+<p><strong>sdp的格式</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">v=&lt;version&gt; </span><br><span class="line">o=&lt;username&gt; &lt;session id&gt; &lt;version&gt; &lt;network type&gt; &lt;address type&gt; &lt;address&gt; </span><br><span class="line">s=&lt;session name&gt; </span><br><span class="line">i=&lt;session description&gt; </span><br><span class="line">u=&lt;URI&gt; </span><br><span class="line">e=&lt;email address&gt; </span><br><span class="line">p=&lt;phone number&gt; </span><br><span class="line">c=&lt;network type&gt; &lt;address type&gt; &lt;connection address&gt; b=&lt;modifier&gt;:&lt;bandwidth-value&gt; </span><br><span class="line">t=&lt;start time&gt; &lt;stop time&gt; </span><br><span class="line">r=&lt;repeat interval&gt; &lt;active duration&gt; &lt;list of offsets from start-time&gt; z=&lt;adjustment time&gt; &lt;offset&gt; &lt;adjustment time&gt; &lt;offset&gt; .... </span><br><span class="line">k=&lt;method&gt; </span><br><span class="line">k=&lt;method&gt;:&lt;encryption key&gt; </span><br><span class="line">a=&lt;attribute&gt; </span><br><span class="line">a=&lt;attribute&gt;:&lt;value&gt; </span><br><span class="line">m=&lt;media&gt; &lt;port&gt; &lt;transport&gt; &lt;fmt list&gt; </span><br><span class="line">v = (协议版本) </span><br><span class="line">o = (所有者/创建者和会话标识符) </span><br><span class="line">s = (会话名称) </span><br><span class="line">i = * (会话信息) </span><br><span class="line">u = * (URI 描述) </span><br><span class="line">e = * (Email 地址) </span><br><span class="line">p = * (电话号码) </span><br><span class="line">c = * (连接信息) </span><br><span class="line">b = * (带宽信息) </span><br><span class="line">z = * (时间区域调整) </span><br><span class="line">k = * (加密密钥) </span><br><span class="line">a = * (0 个或多个会话属性行) </span><br><span class="line">时间描述: </span><br><span class="line">t = (会话活动时间) </span><br><span class="line">r = * (0或多次重复次数) </span><br><span class="line">媒体描述: </span><br><span class="line">m = (媒体名称和传输地址) </span><br><span class="line">i = * (媒体标题) </span><br><span class="line">c = * (连接信息 — 如果包含在会话层则该字段可选) </span><br><span class="line">b = * (带宽信息) </span><br><span class="line">k = * (加密密钥) </span><br><span class="line">a = * (0 个或多个媒体属性行)</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-3-SDP协议举例说明"><a href="#4-3-SDP协议举例说明" class="headerlink" title="4.3 SDP协议举例说明"></a>4.3 SDP协议举例说明</h5><p>SDP（Session Description Protocol）是一个用来描述多媒体会话的应用层控制协议，它是一个基于文本的协议，用于会话建立过程中的媒体类型和编码方案的协商等。<br><strong>消息正文格式</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">v=0 //该行指示协议的版本</span><br><span class="line">o=mhandley 2890844526 2890842807 IN IP4 126.16.64.4 //o行中包含与会话所有者有关的参数</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一个参数表明会话发起者的名称，该参数可不填写，如填写和SIP消息中，from消息头的内容一致。</li>
+<li>第二个参数为主叫方的会话标识符。</li>
+<li>第三个参数为主叫方会话的版本，会话数据有改变时，版本号递增。</li>
+<li>第四个参数定义了网络类型，IN表示Internet网络类型，目前仅定义该网络类型。</li>
+<li>第五个参数为地址类型，目前支持IPV4和IPV6两种地址类型。</li>
+<li>第六个参数为地址：表明会话发起者的IP地址，该地址为信令面的IP地址，信令PDP激活时为手机分配。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">s=SDP Seminar //表明本次会话的标题，或会话的名称</span><br><span class="line">i=A Seminar on the session description protocol //会话的描述</span><br><span class="line">u=http://www.cs.ucl.ac.uk/staff/M.Handley/sdp.03.ps //会话的URI，通过该地址可以查阅到会话的更多内容</span><br><span class="line">e=mjh@isi.edu (Mark Handley) //会话责任人的EMIAL地址</span><br><span class="line">c=IN IP4 224.2.17.12/127 //C行包含为多媒体会话而建立的连接的信息，其中指出了真正的媒体流使用的IP地址</span><br></pre></td></tr></table></figure></li>
+<li>第一个参数为网络类型，目前仅定义INTERNET网络类型。用“IN”表示。</li>
+<li>第二个参数为地址类型，目前支持两种地址类型：IPV4和IPV6。</li>
+<li>第三个参数为地址，该地址为多媒体流使用的IP地址。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">t=2873397496 2873404696 //表示会话的开始时间和结束时间</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一个参数表明会话的开始时间，数字表明从1900年1月1日00：00以来所经过的秒数。</li>
+<li>第二个参数表明会话的结束时间，数字表明从1900年1月1日00：00以来所经过的秒数。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">m=audio 3458 RTP/AVP 0 96 97 // m行又称媒体行，描述了发送方所支持的媒体类型等信息</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一个参数为媒体名称：表明支持音频类型。</li>
+<li>第二个参数为端口号，表明UE在本地端口为3458上发送音频流。</li>
+<li>第三个参数为传输协议，一般为RTP/AVP协议。</li>
+<li>第四~七参数为所支持的四种净荷类型编号</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a=rtpmap:0 PCMU //a行为媒体的属性行，以属性的名称：属性值的方式表示。</span><br><span class="line">a=rtpmap:96 G726-32/8000</span><br><span class="line">a=rtpmap:97 AMR-WB</span><br><span class="line">格式为：a=rtpmap:&lt;净荷类型&gt;&lt;编码名称&gt; * 净荷类型0固定分配给了PCMU， * 净荷类型96对应的编码方案为G.726,为动态分配的。 * 净荷类型97对应的编码方式为自适应多速率宽带编码（AMR-WB），为动态分配的。</span><br><span class="line">m=video 3400 RTP/AVP 98 99 //m行又称媒体行，描述了发送方所支持的媒体类型等信息</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一个参数为媒体名称：表明支持视频类型。</li>
+<li>第二个参数为端口号，表明UE在本地端口为3400上发送视频流。</li>
+<li>第三个参数为传输协议，一般为RTP/AVP协议。</li>
+<li>四、五参数给出了两种净荷类型编号</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a=rtpmap:98 MPV</span><br><span class="line">a=rtpmap:99 H.261</span><br></pre></td></tr></table></figure>
+<p>格式为：a=rtpmap:&lt;净荷类型&gt;&lt;编码名称&gt; * 净荷类型98对应的编码方案为MPV,为动态分配的。 * 净荷类型97对应的编码方式为H.261，为动态分配的。</p>
+<p>还可参考：<a href="https://www.faihung.net/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/">RTSP-SDP协议介绍</a></p>
+]]></content>
+      <categories>
+        <category>RTSP</category>
+      </categories>
+      <tags>
+        <tag>RTSP</tag>
+        <tag>消息格式</tag>
+        <tag>状态码</tag>
+        <tag>SDP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>RTSP-SDP协议介绍</title>
     <url>/2020/04/08/RTSP-SDP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/</url>
     <content><![CDATA[<h4 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h4><p>SDP 传递着媒体流信息，接收者可以解析传入的 sdp 数据，从而知道发送者的基本信<br>息。SDP 基本上在 internet 上工作。定义了会话描述的统一格式，但并不定义多播地址的分配和 SDP 消息的传输方式，也不支持媒体编码方案的协商，这些功能均由下层传送协议完成。典型的会话传送协议包括:SAP(Session Announcement Protocol 会话公告协议),SIP(Session Initiation Protocol，会话初始协议),RTSP,HTTP,和使用<br>MIME 的 E-Mail。</p>
@@ -238,9 +485,9 @@
       </categories>
       <tags>
         <tag>RTSP</tag>
+        <tag>SDP</tag>
         <tag>C/S</tag>
         <tag>URL</tag>
-        <tag>SDP</tag>
         <tag>DESCRIBE</tag>
         <tag>SETUP</tag>
         <tag>PLAY</tag>
@@ -917,9 +1164,9 @@ xian-3.000.00001  到xian-3.000.00001不升级</code></pre><p>5.所以从上面�
       </categories>
       <tags>
         <tag>指针</tag>
-        <tag>局部变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
+        <tag>局部变量</tag>
         <tag>数组取值</tag>
       </tags>
   </entry>
@@ -1960,9 +2207,9 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
       </categories>
       <tags>
         <tag>指针</tag>
+        <tag>全局变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
-        <tag>全局变量</tag>
       </tags>
   </entry>
   <entry>
@@ -2392,9 +2639,9 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
+        <tag>sprintf</tag>
         <tag>strcat</tag>
         <tag>字符串拼接</tag>
-        <tag>sprintf</tag>
       </tags>
   </entry>
   <entry>
@@ -2436,8 +2683,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sscanf</tag>
         <tag>sprintf</tag>
+        <tag>sscanf</tag>
         <tag>整数转字符串</tag>
         <tag>字符串转整数</tag>
       </tags>
@@ -2502,10 +2749,10 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sscanf</tag>
-        <tag>sprintf</tag>
         <tag>16进制转10进制</tag>
         <tag>10进制转16进制</tag>
+        <tag>sprintf</tag>
+        <tag>sscanf</tag>
       </tags>
   </entry>
   <entry>
@@ -2832,8 +3079,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>工具</category>
       </categories>
       <tags>
-        <tag>VMware</tag>
         <tag>ubuntu</tag>
+        <tag>VMware</tag>
       </tags>
   </entry>
   <entry>
