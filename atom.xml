@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.faihung.net/"/>
-  <updated>2020-04-08T08:50:24.261Z</updated>
+  <updated>2020-04-08T10:05:06.305Z</updated>
   <id>http://www.faihung.net/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RTSP-RTCP协议介绍</title>
+    <link href="http://www.faihung.net/2020/04/08/RTSP-RTCP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/"/>
+    <id>http://www.faihung.net/2020/04/08/RTSP-RTCP协议介绍/</id>
+    <published>2020-04-08T10:01:56.000Z</published>
+    <updated>2020-04-08T10:05:06.305Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="RTCP概要"><a href="#RTCP概要" class="headerlink" title="RTCP概要"></a>RTCP概要</h4><p>实时传输控制协议(Real-time Control Protocol，RTCP)与RTP共同定义在1996年提出的RFC 1889中，是和 RTP一起工作的控制协议。RTCP单独运行在低层协议上，由低层协议提供数据与控制包的复用。在RTP会话期间，每个会话参与者周期性地向所有其他参与者发送RTCP控制信息包，如下图所示。对于RTP会话或者广播，通常使用单个多目标广播地址，属于这个会话的所有RTP和RTCP信息包都使用这个多目标广播地址，通过使用不同的端口号可把RTP信息包和RTCP信息包区分开来。</p><p><img src="/2020/04/08/RTSP-RTCP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/1.jpg" alt="1"></p><a id="more"></a><h4 id="RTCP功能"><a href="#RTCP功能" class="headerlink" title="RTCP功能"></a>RTCP功能</h4><h5 id="1、为应用程序提供会话质量或者广播性能质量的信息"><a href="#1、为应用程序提供会话质量或者广播性能质量的信息" class="headerlink" title="1、为应用程序提供会话质量或者广播性能质量的信息"></a>1、为应用程序提供会话质量或者广播性能质量的信息</h5><p>RTCP的主要功能是为应用程序提供会话质量或者广播性能质量的信息。每个RTCP信息包不封装声音数据或者电视数据，而是封装发送端和/或者接收端的统计报表。这些信息包括发送的信息包数目、丢失的信息包数目和信息包的抖动等情况，这些反馈信息反映了当前的网络状况，对发送端、接收端或者网络管理员都非常有用。RTCP规格没有指定应用程序应该使用这些反馈信息做什么，这完全取决于应用程序开发人员。例如，发送端可以根据反馈信息来调整传输速率，接收端可以根据反馈信息判断问题是本地的、区域性的还是全球性的，网络管理员也可以使用RTCP信息包中的信息来评估网络用于多目标广播的性能。</p><h5 id="2、确定-RTP用户源"><a href="#2、确定-RTP用户源" class="headerlink" title="2、确定 RTP用户源"></a>2、确定 RTP用户源</h5><p>RTCP为每个RTP用户提供了一个全局唯一的称为规范名称 (Canonical Name)的标志符 CNAME，接收者使用它来追踪一个RTP进程的参加者。当发现冲突或程序重新启动时，RTP中的同步源标识符SSRC可能发生改变，接收者可利用CNAME来跟踪参加者。同时，接收者也需要利用CNAME在相关RTP连接中的几个数据流之间建立联系。当RTP需要进行音视频同步的时候，接受者就需要使用CNAME来使得同一发送者的音视频数据相关联。</p><h5 id="3、控制-RTCP传输间隔"><a href="#3、控制-RTCP传输间隔" class="headerlink" title="3、控制 RTCP传输间隔"></a>3、控制 RTCP传输间隔</h5><p>由于每个对话成员定期发送RTCP信息包，随着参加者不断增加，RTCP信息包频繁发送将占用过多的网络资源，为了防止拥塞，必须限制RTCP信息包的流量，控制信息所占带宽一般不超过可用带宽的5%，因此就需要调整RTCP包的发送速率。由于任意两个RTP终端之间都互发RTCP包，因此终端的总数很容易估计出来，应用程序根据参加者总数就可以调整 RTCP包的发送速率。</p><h5 id="4、传输最小进程控制信息"><a href="#4、传输最小进程控制信息" class="headerlink" title="4、传输最小进程控制信息　"></a>4、传输最小进程控制信息　</h5><p>这项功能对于参加者可以任意进入和离开的松散会话进程十分有用，参加者可以自由进入或离开，没有成员控制或参数协调。</p><h4 id="RTCP信息包"><a href="#RTCP信息包" class="headerlink" title="RTCP信息包"></a>RTCP信息包</h4><p>类似于RTP信息包，每个RTCP信息包以固定部分开始，紧接着的是可变长结构单元，最后以一个32位边界结束。</p><p>根据所携带的控制信息不同RTCP信息包可分为RR（接收者报告包）、SR（源报告包）、SEDS（源描述包）、BYE（离开申明）和APP（特殊应用包）五类5类：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SR：源报告包，用于发送和接收活动源的统计信息；</span><br><span class="line">RR：接收者报告包，用于接收非活动站的统计信息；</span><br><span class="line">SDES：源描述包，用于报告和站点相关的信息，包括CNAME；</span><br><span class="line">BYE：断开RTCP包，是站点离开系统的报告，表示结束；</span><br><span class="line">APP：应用特定函数。</span><br></pre></td></tr></table></figure><p>不同类型的RTCP信息包可堆叠，不需要插入任何分隔符就可以将多个RTCP包连接起来形成一个RTCP组合包，然后由低层协议用单一包发送出去。由于需要低层协议提供整体长度来决定组合包的结尾，在组合包中没有单个RTCP包的显式计数。</p><p>组合包中每个RTCP包可独立处理，而不需要按照包组合的先后顺序处理。在组合包中有以下几条强制约束：</p><ol><li><p>只要带宽允许，在SR包或RR包中的接收统计应该经常发送，因此每个周期发送的组合RTCP 包中应包含报告包。</p></li><li><p>每个组合包中都应该包含SDES CNAME，因为新接收者需要通过接收CNAME来识别源，并与媒体联系进行同步。</p></li><li><p>组合包前面是包类型数量，其增长应该受到限制。</p></li></ol><p>所有RTCP包至少必须以两个包组合形式发送，推荐格式如下：</p><p>加密前缀（Encryption prefix）</p><blockquote><p>仅当组合包被加密，才加上一个32位随机数用于每个组合包发送。</p></blockquote><p>SR或RR</p><blockquote><p>组合包中第一个RTCP包必须是一个报告包，以帮助分组头的确认。即使没有数据发送，也没有接收到数据，也要发送一个空RR，那怕组合包中RTCP包为BYE。</p></blockquote><p>附加RR</p><blockquote><p>如报告统计源数目超过31，在初始报告包后应该有附加RR 包。</p></blockquote><p>SDES</p><blockquote><p>包含CNAME 项的SDES包必须包含在每个组合RTCP包中。SDES包可能包括其他源描述项，这要根据特别的应用需要，并同时考虑带宽限制。</p></blockquote><p>BYE或APP</p><blockquote><p>除了BYE应作为最后一个包发送，其它RTCP包类型可以任意顺序排列，包类型出现可不止一次。</p></blockquote><p>混合器从多个源组合单个RTCP包，如组合包整体长度超过网络路径最大传输单元，可分成多个较短组合包用低层协议以单个包形式发送。注意，每个组合包必须以SR或RR包开始。附加RTCP包类型可在Internet Assigned Numbers Authority (IANA)处注册，以获得合法的类型号。</p><h4 id="RTCP传输间隔"><a href="#RTCP传输间隔" class="headerlink" title="RTCP传输间隔"></a>RTCP传输间隔</h4><p>由于RTP设计成允许应用自动扩展，可从几个人的小规模系统扩展成上千人的大规模系统。而每个会话参与者周期性地向所有其他参与者发送RTCP控制信息包，如每个参与者以固定速率发送接收报告，控制流量将随参与者数量线性增长。由于网络资源有限，相应的数据包就要减少，直接影响用户关心的数据传输。为了限制控制信息的流量，RTCP控制信息包速率必须按比例下降。</p><p>一旦确认加入到RTP会话中，即使后来被标记成非活动站，地址的状态仍会被保留，地址应继续计入共享RTCP带宽地址的总数中，时间要保证能扫描典型网络分区，建议为30分钟。注意，这仍大于RTCP报告间隔最大值的五倍。</p><h4 id="SR源报告包和RR接收者报告包"><a href="#SR源报告包和RR接收者报告包" class="headerlink" title="SR源报告包和RR接收者报告包"></a>SR源报告包和RR接收者报告包</h4><p>SR源报告包和RR接收者报告包用于提供接收质量反馈，除包类型代码外，SR与RR间唯一的差别是源报告包含有一个20字节发送者信息段。</p><p>RR针对每个信源都提供信息包丢失数、已收信息包最大序列号、到达时间抖动、接收最后一个SR的时间、接收最后一个SR的延迟等信息。</p><p>SR不仅提供接收质量反馈信息（与RR相同），而且提供SSRC标识符、NTP时间戳、RTP时间戳、发送包数以及发送字节数等。</p><p>根据接收者是否为发送者来决定使用SR还是RR包，活动源在发出最后一个数据包之后或前一个数据包与下一个数据包间隔期间发送SR；否则，就发送RR；SR和RR包都可没有接收报告块也可以包括多个接收报告块，其发布报告表示的源不一定是在CSRC列表上的起作用的源，每个接收报告块提供从特殊源接收数据的统计。</p><p>最大可有31个接收报告块嵌入在SR 或 RR包中，丢失包累计数差别给出间隔期间丢包的数量，而系列号的差别给出间隔期间希望发送的包数量，两者之比等于经过间隔期间包丢失百分比。</p><p>从发送者信息，第三方监控器可计算载荷平均数据速率与没收到数据间隔的平均包速率，两者比值给出平均载荷大小。</p><p>如假设包丢失与包大小无关，那么特殊接收者收到的包数量给出此接收者收到的表观流量。</p><h4 id="SDES源描述包"><a href="#SDES源描述包" class="headerlink" title="SDES源描述包"></a>SDES源描述包</h4><p>SDES源描述包提供了直观的文本信息来描述会话的参加者，包括CNAME、NAME、EMAIL、PHONE、LOC等源描述项，这些为接收方获取发送方的有关信息提供了方便。SDES 包由包头与数据块组成，数据块可以没有，也可有多个。包头由版本（V）、填充（P）、长度指示、包类型（PT）和源计数（SC）组成。PT占8位，用于识别RTCP的SDES包，SC占5位，指示包含在SDES包中的SSRC/CSRC块数量，零值有效，但没有意义。数据块由源描述项组成，源描述项的内容如下：</p><p>CNAME: 规范终端标识SDES项</p><blockquote><p>类似SSRC标识，RTCP为RTP连接中每一个参加者赋予唯一一个CNAME标识。在发生冲突或重启程序时，由于随机分配的SSRC标识可能发生变化，CNAME项可以提供从SSRC标识到仍为常量的源标识的绑定。<br>为方便第三方监控，CNAME应适合程序或人员定位源。</p></blockquote><p>NAME：用户名称SDES项</p><blockquote><p>这是用于描述源的真正的名称，如”John Doe, Bit Recycler, Megacorp”，可以是用户想要的任意形式。由于采用文本信息来描述，对诸如会议应用，可以对参加者直接列表显示，NAME项是除CNAME项以外发送最频繁的项目。NAME值在一次RTP会话期间应该保持为常数，但它不该成为连接的所有参加者中唯一依赖。</p></blockquote><p>EMAIL：电子邮件地址SDES项</p><blockquote><p>邮件地址格式由RFC822规定，如”<a href="mailto:John.Doe@megacorp.com" target="_blank" rel="noopener">John.Doe@megacorp.com</a>“。一次RTP会话期间，EMAIL项的内容希望保持不变。</p></blockquote><p>PHONE：电话号码SDES项</p><blockquote><p>电话号码应带有加号，代替国际接入代码，如”+1 908 555 1212”即为美国电话号码。</p></blockquote><p>LOC：用户地理位置SDES项</p><blockquote><p>根据应用，此项具有不同程度的细节。对会议应用，字符串如”Murray Hill, New Jersey”就足够了。然而，对活动标记系统，字符串如”Room 2A244, AT&amp;T BL MH”也许就适用。细节留给实施或用户，但格式和内容可用设置指示。在一次RTP会话期间，除移动主机外，LOC值期望保持不变。</p></blockquote><p>TOOL：应用或工具名称SDES项</p><blockquote><p>TOOL项包含一个字符串，表示产生流的应用的名称与版本，如”videotool 1.2”。这部分信息对调试很有用，类似于邮件或邮件系统版本SMTP头。TOOL值在一次RTP会话期间保持不变。</p></blockquote><p>NOTE: 通知/状态SDES项</p><blockquote><p>NOTE 项旨在描述源当前状态的过渡信息，如”on the phone, can’t talk”，或在讲座期间用于传送谈话的题目，它的语法可在设置中显式定义。NOTE项一般只用于携带例外信息，而不应包含在全部参加者中，因为这将降低接收报告和CNAME发送的速度，损害协议的性能。一般NOTE 项不作为用户设置文件的项目，也不会自动产生。</p></blockquote><blockquote><p>由于NOTE项对显示很重要，当会话的参加者处于活动状态时，其它非CNAME项（如NAME）传输速率将会降低，结果使NOTE项占用RTCP部分带宽。若过渡信息不活跃，NOTE项继续以同样的速度重复发送几次，并以一个串长为零的字符串通知接收者。</p></blockquote><p>PRIV: 专用扩展SDES项</p><blockquote><p>PRIV项用于定义实验或应用特定的SDES扩展，它由长字符串对组成的前缀，后跟填充该项其他部分和携带所需信息的字符串值组成。前缀长度段为8位。前缀字符串是定义PRIV项人员选择的名称，唯一对应应用接收到的其它PRIV项。应用实现者可选择使用应用名称，如有必要，外加附加子类型标识。另外，推荐其它人根据其代表的实体选择名称，然后，在实体内部协调名称的使用。</p></blockquote><blockquote><p>注意，前缀应尽可能的短。SDES 的PRIV项前缀没在IANA处注册。如证实某些形式的PRIV项具有通用性， IANA应给它分配一个正式的SDES项类型，这样就不再需要前缀，从而简化应用，并提高传输的效率。</p></blockquote><h4 id="BYE断开RTCP包"><a href="#BYE断开RTCP包" class="headerlink" title="BYE断开RTCP包"></a>BYE断开RTCP包</h4><p>如混合器接收到一个BYE包，混合器转发BYE包，而不改变SSRC/CSRC 标识。如混合器关闭，在关闭之前它应该发出一个BYE包，列出混合器处理的所有源，而不只是自己的SSRC标识。作为可选项，BYE包可包括一个8位八进制计数，后跟文本信息，表示离开原因，如：”camera malfunction”或”RTP loop detected”。字符串的编码与在SDES 项中所描述的相同。如字符串信息至BYE包下32位边界结束处，字符串就不以空结尾；否则，BYE包以空八进制填充。</p><h4 id="APP特殊应用包"><a href="#APP特殊应用包" class="headerlink" title="APP特殊应用包"></a>APP特殊应用包</h4><p>APP包用于开发新应用和新特征的实验，不要求注册包类型值。带有不可识别名称的APP包应被忽略掉。测试后，如确定应用广泛，推荐重新定义每个APP包，而不用向IANA注册子类型和名称段。</p><h4 id="RTP-RTCP的不足之处"><a href="#RTP-RTCP的不足之处" class="headerlink" title="RTP/ RTCP的不足之处"></a>RTP/ RTCP的不足之处</h4><p>RTP与RTCP相结合虽然保证了实时数据的传输，但也有自己的缺点。最显著的是当有许多用户一起加入会话进程的时候，由于每个参与者都周期发送RTCP信息包，导致RTCP包泛滥 (flooding)。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;RTCP概要&quot;&gt;&lt;a href=&quot;#RTCP概要&quot; class=&quot;headerlink&quot; title=&quot;RTCP概要&quot;&gt;&lt;/a&gt;RTCP概要&lt;/h4&gt;&lt;p&gt;实时传输控制协议(Real-time Control Protocol，RTCP)与RTP共同定义在1996年提出的RFC 1889中，是和 RTP一起工作的控制协议。RTCP单独运行在低层协议上，由低层协议提供数据与控制包的复用。在RTP会话期间，每个会话参与者周期性地向所有其他参与者发送RTCP控制信息包，如下图所示。对于RTP会话或者广播，通常使用单个多目标广播地址，属于这个会话的所有RTP和RTCP信息包都使用这个多目标广播地址，通过使用不同的端口号可把RTP信息包和RTCP信息包区分开来。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/2020/04/08/RTSP-RTCP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/1.jpg&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="RTSP" scheme="http://www.faihung.net/categories/RTSP/"/>
+    
+    
+      <category term="RTCP" scheme="http://www.faihung.net/tags/RTCP/"/>
+    
+  </entry>
   
   <entry>
     <title>RTSP-RTP协议分析</title>
@@ -561,37 +585,6 @@
       <category term="UTF-8" scheme="http://www.faihung.net/tags/UTF-8/"/>
     
       <category term="ANSI" scheme="http://www.faihung.net/tags/ANSI/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>工程设计-html boa cgi上传文件</title>
-    <link href="http://www.faihung.net/2019/12/15/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-html-boa-cgi%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6/"/>
-    <id>http://www.faihung.net/2019/12/15/工程设计-html-boa-cgi上传文件/</id>
-    <published>2019-12-14T16:20:25.000Z</published>
-    <updated>2019-12-14T16:21:48.864Z</updated>
-    
-    <content type="html"><![CDATA[<p>暂略</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;暂略&lt;/p&gt;
-
-      
-    
-    </summary>
-    
-    
-      <category term="工程设计" scheme="http://www.faihung.net/categories/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1/"/>
-    
-    
-      <category term="html" scheme="http://www.faihung.net/tags/html/"/>
-    
-      <category term="boa" scheme="http://www.faihung.net/tags/boa/"/>
-    
-      <category term="cgi" scheme="http://www.faihung.net/tags/cgi/"/>
     
   </entry>
   
