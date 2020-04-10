@@ -864,8 +864,8 @@
         <category>工程设计</category>
       </categories>
       <tags>
-        <tag>通信设计</tag>
         <tag>流程图</tag>
+        <tag>通信设计</tag>
       </tags>
   </entry>
   <entry>
@@ -1376,10 +1376,10 @@ xian-3.000.00001  到xian-3.000.00001不升级</code></pre><p>5.所以从上面�
         <category>C</category>
       </categories>
       <tags>
-        <tag>指针</tag>
+        <tag>局部变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
-        <tag>局部变量</tag>
+        <tag>指针</tag>
         <tag>数组取值</tag>
       </tags>
   </entry>
@@ -1762,9 +1762,9 @@ stemp 4 make install</code></pre><p>2.4 使用 curl –version 检查是否更�
         <category>工具</category>
       </categories>
       <tags>
-        <tag>Windows</tag>
         <tag>VMware</tag>
         <tag>网络配置</tag>
+        <tag>Windows</tag>
       </tags>
   </entry>
   <entry>
@@ -2419,10 +2419,10 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
         <category>C</category>
       </categories>
       <tags>
-        <tag>指针</tag>
-        <tag>全局变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
+        <tag>指针</tag>
+        <tag>全局变量</tag>
       </tags>
   </entry>
   <entry>
@@ -2473,8 +2473,8 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
         <tag>字节对齐</tag>
         <tag>大小端</tag>
         <tag>pragma pack()</tag>
-        <tag>通信设计</tag>
         <tag>流程图</tag>
+        <tag>通信设计</tag>
         <tag>数据结构构造</tag>
         <tag>解耦合</tag>
       </tags>
@@ -2896,8 +2896,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sprintf</tag>
         <tag>sscanf</tag>
+        <tag>sprintf</tag>
         <tag>整数转字符串</tag>
         <tag>字符串转整数</tag>
       </tags>
@@ -2962,10 +2962,10 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
+        <tag>sscanf</tag>
         <tag>16进制转10进制</tag>
         <tag>10进制转16进制</tag>
         <tag>sprintf</tag>
-        <tag>sscanf</tag>
       </tags>
   </entry>
   <entry>
@@ -3381,8 +3381,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>工具</category>
       </categories>
       <tags>
-        <tag>nfs</tag>
         <tag>ubuntu</tag>
+        <tag>nfs</tag>
       </tags>
   </entry>
   <entry>
