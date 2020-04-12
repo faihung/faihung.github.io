@@ -1379,9 +1379,9 @@ xian-3.000.00001  到xian-3.000.00001不升级</code></pre><p>5.所以从上面�
       </categories>
       <tags>
         <tag>指针</tag>
+        <tag>局部变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
-        <tag>局部变量</tag>
         <tag>数组取值</tag>
       </tags>
   </entry>
@@ -2422,9 +2422,9 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
       </categories>
       <tags>
         <tag>指针</tag>
-        <tag>全局变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
+        <tag>全局变量</tag>
       </tags>
   </entry>
   <entry>
