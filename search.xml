@@ -455,9 +455,9 @@
       </categories>
       <tags>
         <tag>RTSP</tag>
-        <tag>SDP</tag>
         <tag>消息格式</tag>
         <tag>状态码</tag>
+        <tag>SDP</tag>
       </tags>
   </entry>
   <entry>
@@ -698,9 +698,9 @@
       </categories>
       <tags>
         <tag>RTSP</tag>
+        <tag>SDP</tag>
         <tag>C/S</tag>
         <tag>URL</tag>
-        <tag>SDP</tag>
         <tag>DESCRIBE</tag>
         <tag>SETUP</tag>
         <tag>PLAY</tag>
