@@ -455,9 +455,9 @@
       </categories>
       <tags>
         <tag>RTSP</tag>
+        <tag>SDP</tag>
         <tag>消息格式</tag>
         <tag>状态码</tag>
-        <tag>SDP</tag>
       </tags>
   </entry>
   <entry>
@@ -698,9 +698,9 @@
       </categories>
       <tags>
         <tag>RTSP</tag>
-        <tag>SDP</tag>
         <tag>C/S</tag>
         <tag>URL</tag>
+        <tag>SDP</tag>
         <tag>DESCRIBE</tag>
         <tag>SETUP</tag>
         <tag>PLAY</tag>
@@ -779,93 +779,6 @@
         <tag>码率</tag>
         <tag>跳帧</tag>
         <tag>数据帧类型</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>工程设计-库函数方式实现文件的解压缩</title>
-    <url>/2020/02/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E5%BA%93%E5%87%BD%E6%95%B0%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E7%9A%84%E8%A7%A3%E5%8E%8B%E7%BC%A9/</url>
-    <content><![CDATA[<h4 id="一、-为什么要用函数方式来解压缩文件"><a href="#一、-为什么要用函数方式来解压缩文件" class="headerlink" title="一、    为什么要用函数方式来解压缩文件"></a>一、    为什么要用函数方式来解压缩文件</h4><p>之前关于算法模型的下载更新之后的一系列操作，如删除之前的文件、改变现有文件权限等操作用的是shell命令方式执行的。这种方式是在现有程序进程的基础上重新开启一个新的进程来执行shell命令。而用到的系统命令函数system、popen函数等会返回出各种程序状态，这些状态是不可控的，所以我们需要用到相应的库函数来实现它们的功能，目前都已经实现和验证它们的功能。</p>
-<p>现在关于海思应用程序和第3方库的下载更新是以文件压缩包的方式下载的，下载之后同样是用的shell命令方式来解压的。所以我们同样需要用到相应的库函数来实现文件的解压缩功能。</p>
-<a id="more"></a>
-
-<h4 id="二、-选用哪种库来解压缩文件"><a href="#二、-选用哪种库来解压缩文件" class="headerlink" title="二、    选用哪种库来解压缩文件"></a>二、    选用哪种库来解压缩文件</h4><p>对如何在linux系统中以函数的方式实现文件的解压缩，网上提到可以使用compress和uncompress函数，而这两个函数就在zlib的函数库中。</p>
-<p>zlib是一个专用的数据格式压缩库，支持很多格式的压缩，网上有很多资料可供查找，所以我们也选用的是zlib库。</p>
-<h4 id="三、-zlib库的操作记录"><a href="#三、-zlib库的操作记录" class="headerlink" title="三、    zlib库的操作记录"></a>三、    zlib库的操作记录</h4><h5 id="3-1如何下载zlib库"><a href="#3-1如何下载zlib库" class="headerlink" title="3.1如何下载zlib库"></a>3.1如何下载zlib库</h5><p>在zlib库的<a href="http://www.zlib.net/" target="_blank" rel="noopener">官方网站</a>中，可以下载最新版本的zlib库。<br><img src="/2020/02/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E5%BA%93%E5%87%BD%E6%95%B0%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E7%9A%84%E8%A7%A3%E5%8E%8B%E7%BC%A9/8F8C04D507A04219A549B829FF0D893B" alt="1"><br>然后将下载好的库zlib-1.2.11.tar.gz拷贝到linux系统中去。</p>
-<h5 id="3-2交叉编译-zlib-库"><a href="#3-2交叉编译-zlib-库" class="headerlink" title="3.2交叉编译 zlib 库"></a>3.2交叉编译 zlib 库</h5><p>zlib库最终是要在嵌入式linux系统中运行的，所以需要交叉编译。</p>
-<h6 id="3-2-1编译安装的步骤"><a href="#3-2-1编译安装的步骤" class="headerlink" title="3.2.1编译安装的步骤"></a>3.2.1编译安装的步骤</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">步骤1：$ tar zxvf zlib-1.2.11.tar.gz</span><br><span class="line"></span><br><span class="line">步骤2：$ cd zlib-1.2.11/</span><br><span class="line"></span><br><span class="line">步骤3：$ export CC=arm-himix200-linux-gcc    </span><br><span class="line">它的configure不支持用CC变量来指定交叉工具链</span><br><span class="line"></span><br><span class="line">步骤4：$ ./configure --prefix=$PWD/_install  </span><br><span class="line">最后生成的库、头文件和man文件都在当前目录的_install目录下</span><br><span class="line"></span><br><span class="line">步骤5：$ make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-<p>注意：</p>
-<ol>
-<li>在make install这一步，由于要把zlib安装到/usr/local/lib路径下，所以有些linux系统需要root 权限。安装成功后，可以在/home/yhh/zlib-1.2.11/_install/lib下找到 libz.a。</li>
-<li>libz.a是一个静态库，为了使用zlib的接口，我们必须在连接我们的程序时，libz.a链接进来。只需在 链接命令后加-lz /usr/llocal/lib/libz.a即可。</li>
-</ol>
-<h6 id="3-2-1编译安装中遇到的问题"><a href="#3-2-1编译安装中遇到的问题" class="headerlink" title="3.2.1编译安装中遇到的问题"></a>3.2.1编译安装中遇到的问题</h6><ol>
-<li>关于zlib安装时出现的错和执行make的时候出现：ln: 无法创建符号链接” …… “: 不支持的操作。<br>解决办法：将Windows下的共享目录中的源码移动到linux虚拟机里再执行make命令。</li>
-</ol>
-<ol start="2">
-<li>执行命令：~/zlib-1.2.11/examples$ arm-himix200-linux-gcc 1.c -o test_zip出现<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/tmp/ccUEzkKU.o: In function `main&apos;:</span><br><span class="line">1.c:(.text+0xcc): undefined reference to `compressBound&apos;</span><br><span class="line">1.c:(.text+0xfc): undefined reference to `compress&apos;</span><br><span class="line">1.c:(.text+0x130): undefined reference to `uncompress&apos;</span><br><span class="line">collect2: error: ld returned 1 exit status</span><br></pre></td></tr></table></figure>
-这是因为编译zlib应用测试程序时没有链接到相应的库文件<br>解决办法：arm-himix200-linux-gcc 1.c -o test_zip -lz</li>
-</ol>
-<ol start="3">
-<li>执行命令：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">~/zlib-1.2.11/examples$ arm-himix200-linux-gcc 1.c -o test_zip -lz出现</span><br><span class="line">/opt/hisi-linux/x86-arm/arm-himix200-linux/host_bin/../lib/gcc/arm-linux-gnueabi/6.3.0/../../../../arm-linux-gnueabi/bin/ld: cannot find -lz</span><br><span class="line">collect2: error: ld returned 1 exit status</span><br></pre></td></tr></table></figure>
-在2的基础上出现这个错误<br>解决办法：arm-himix200-linux-gcc 1.c -o test_zip -lz -L/home/yhh/zlib-1.2.11/_install/lib/</li>
-</ol>
-<h5 id="3-3-zlib的使用验证"><a href="#3-3-zlib的使用验证" class="headerlink" title="3.3 zlib的使用验证"></a>3.3 zlib的使用验证</h5><h6 id="3-3-1使用zlib库中的什么文件进行验证"><a href="#3-3-1使用zlib库中的什么文件进行验证" class="headerlink" title="3.3.1使用zlib库中的什么文件进行验证"></a>3.3.1使用zlib库中的什么文件进行验证</h6><p>zlib 在 examples 路径下提供了许多使用zlib的例子，如zpipe.c 基于单个文件的解压缩。这里我们用到的是多个文件的解压缩。可以使用：zlib-1.2.11\contrib\minizip\ miniunz.c中的一些接口函数。</p>
-<h6 id="3-3-2直接修改编译miniunz-c文件，然后交叉编译，证明此步骤的可行性"><a href="#3-3-2直接修改编译miniunz-c文件，然后交叉编译，证明此步骤的可行性" class="headerlink" title="3.3.2直接修改编译miniunz.c文件，然后交叉编译，证明此步骤的可行性"></a>3.3.2直接修改编译miniunz.c文件，然后交叉编译，证明此步骤的可行性</h6><p>下面是一个修改过的，直接交叉编译过的miniunz程序，在嵌入式linux系统中执行后：<br><img src="/2020/02/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E5%BA%93%E5%87%BD%E6%95%B0%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E7%9A%84%E8%A7%A3%E5%8E%8B%E7%BC%A9/6CCBAC005F894D188FD16917B3604247" alt="2"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">~ # ./miniunz </span><br><span class="line">MiniUnz 1.01b, demo of zLib + Unz package written by Gilles Vollant</span><br><span class="line">more info at http://www.winimage.com/zLibDll/unzip.html</span><br><span class="line">hisi_app.zip opened</span><br><span class="line"> extracting: av_streamer</span><br><span class="line"> extracting: input_stream.so</span><br><span class="line"> extracting: output_app.so</span><br></pre></td></tr></table></figure>
-<p>可以看到zlib库中的miniunz.c文件的一些函数是可以对嵌入式系统中的*.zip文件进行解压缩的。</p>
-<h6 id="3-3-3接下来"><a href="#3-3-3接下来" class="headerlink" title="3.3.3接下来"></a>3.3.3接下来</h6><p>满足3.3.2要求之后，就可以将miniunz.c函数的main函数做成一个接口函数，plug-in_framework工程会调用这个接口，然后可以解压hisi_app.zip文件了。这是整个工作最关键的一步。</p>
-<h5 id="3-4-zlib库移植到plug-in-framework中去，需要修改的地方"><a href="#3-4-zlib库移植到plug-in-framework中去，需要修改的地方" class="headerlink" title="3.4 zlib库移植到plug-in_framework中去，需要修改的地方"></a>3.4 zlib库移植到plug-in_framework中去，需要修改的地方</h5><h6 id="3-4-1-plug-in-framework-1-0-9-ai-av-streamer需要修改的地方"><a href="#3-4-1-plug-in-framework-1-0-9-ai-av-streamer需要修改的地方" class="headerlink" title="3.4.1 plug-in_framework_1.0.9_ai/av-streamer需要修改的地方"></a>3.4.1 plug-in_framework_1.0.9_ai/av-streamer需要修改的地方</h6><p>1.CMakeLists.txt添加如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">include_directories(&quot;../lib/app_zip/include&quot;) </span><br><span class="line">link_directories(&quot;../lib/app_zip/lib&quot;) </span><br><span class="line">target_link_libraries(av_streamer pthread dl m stdc++ libdhclient.so libsys_commom.so libsys_base.so  libdevsdk.so libsys_media.so librtsp.so librtmp_push.so libsys_serial.so libsys_mp4_storage.so libsys_httppro.so libnnie_ai.so libapp_para.so libapp_zip.so)</span><br></pre></td></tr></table></figure>
-<p>2.plugins/output_app/CMakeLists.txt添加如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">include_directories(&quot;../../../lib/app_zip/include&quot;)</span><br></pre></td></tr></table></figure>
-
-<h6 id="3-4-2-plug-in-framework-1-0-9-ai-lib需要修改的地方"><a href="#3-4-2-plug-in-framework-1-0-9-ai-lib需要修改的地方" class="headerlink" title="3.4.2 plug-in_framework_1.0.9_ai/lib需要修改的地方"></a>3.4.2 plug-in_framework_1.0.9_ai/lib需要修改的地方</h6><ol>
-<li>建立一个app_zip文件夹，其中app_zip包含4个字文件夹include、lib、src、test</li>
-<li>include文件夹中建立libapp_zip.h文件， app_zip模块中的一些申明函数，主要是给之后的output_app.c文件进行调用。</li>
-<li>lib文件夹是编译的动态库目录。</li>
-<li>src文件夹是源码库目录，包括zlib-1.2.11库和Makefile</li>
-<li>test文件是一些测试文件，包括test.c和Makefile</li>
-<li>在这里，已经编译生成了一个动态库和静态库，感觉Makefile中没有目标文件链接成功，现在会仔细检查一块。</li>
-</ol>
-<h4 id="四、一直出现的错误："><a href="#四、一直出现的错误：" class="headerlink" title="四、一直出现的错误："></a>四、一直出现的错误：</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">av_streamer: symbol lookup error: /usr/lib/output_app.so: undefined symbol: do_zip</span><br><span class="line">av_streamer: symbol lookup error: /usr/lib/output_app.so: undefined symbol: do_zip</span><br><span class="line">av_streamer: symbol lookup error: /usr/lib/output_app.so: undefined symbol: unzOpen64</span><br><span class="line">av_streamer: symbol lookup error: /usr/lib/output_app.so: undefined symbol: inflateInit2_</span><br></pre></td></tr></table></figure>
-<p>这种错误，不管怎么移植代码都是这个错误。</p>
-<p>删除libapp_zip.so之后，运行output_app.so，发现还是报上述错误，说明是根本就没有找这个库。</p>
-<p>运行./test_zip示例程序出现：./test_zip: error while loading shared libraries: libz.so.1: cannot open shared object file: No such file or directory这种现象是正常的。</p>
-<p>==所以关键还是的比较做测试用的Makefile与我们工程用的Makefile的区别==</p>
-]]></content>
-      <categories>
-        <category>工程设计</category>
-      </categories>
-      <tags>
-        <tag>zlib</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>工程设计-COM口16进制通信之数据通信超时与异常处理</title>
-    <url>/2020/02/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E4%B9%8B%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E8%B6%85%E6%97%B6%E4%B8%8E%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</url>
-    <content><![CDATA[<p>本文主要是补充 <a href="https://www.faihung.net/2019/11/23/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E8%AE%BE%E8%AE%A1/">工程设计-COM口16进制通信设计</a></p>
-<a id="more"></a>
-
-<h5 id="一、最初版"><a href="#一、最初版" class="headerlink" title="一、最初版"></a>一、最初版</h5><h6 id="1-流程图"><a href="#1-流程图" class="headerlink" title="1.流程图"></a>1.流程图</h6><p><img src="/2020/02/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E4%B9%8B%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E8%B6%85%E6%97%B6%E4%B8%8E%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/1.png" alt="1"><br><img src="/2020/02/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E4%B9%8B%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E8%B6%85%E6%97%B6%E4%B8%8E%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/2.png" alt="2"></p>
-<h6 id="2-异常处理"><a href="#2-异常处理" class="headerlink" title="2.异常处理"></a>2.异常处理</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bool exception_handling_extract(UINT8 *fraBuf, UINT8 buflen, UINT8 **prealBUF, UINT8 *preallen)</span><br><span class="line">&#123;</span><br><span class="line">	UINT8 len = 0;</span><br><span class="line">	UINT8 *pcur,*p;</span><br><span class="line">	UINT8 reclen = 0;</span><br><span class="line"></span><br><span class="line">	p = fraBuf;</span><br><span class="line">    while(buflen--)</span><br><span class="line">    &#123;</span><br><span class="line">        if(*p == 0x64)</span><br><span class="line">        &#123;</span><br><span class="line">            pcur = p;</span><br><span class="line">            reclen = (*(p+3)&lt;&lt;8)|(*(p+4));</span><br><span class="line">            //进行相应的校验和计算</span><br><span class="line">            if((*(p+4+reclen+1)) == Com_checksum((ComFrameData*)pcur,5+reclen) &amp;&amp; (*(p+4+reclen+1+1)==0x64))//校验和相等且0x64为最后一位</span><br><span class="line">            &#123;</span><br><span class="line">#if 1</span><br><span class="line">                printf(&quot;This real frame&apos;s checksum is ok\n&quot;);</span><br><span class="line">#endif</span><br><span class="line">				//开始提取这个有效的数据帧</span><br><span class="line">				*preallen = reclen+7;</span><br><span class="line">				*prealBUF = pcur;					</span><br><span class="line">                return true;                </span><br><span class="line">                </span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                printf(&quot;This real frame&apos;s checksum isn&apos;t ok\n&quot;);</span><br><span class="line">            &#125;           </span><br><span class="line">        &#125;</span><br><span class="line">        p++;	</span><br><span class="line">    &#125;   </span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h6 id="3-超时处理"><a href="#3-超时处理" class="headerlink" title="3.超时处理"></a>3.超时处理</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bool comm_waitAckHex(struct seriainfo seriaattrs_ttyAMA1, hisi2mcu_real_data_t hisi2mcu_realcmd, rerealdata_t rerealdata, mult_repeat_t mult_repeat)</span><br><span class="line">&#123;</span><br><span class="line">    int i,j,k,l,m,n;</span><br><span class="line">    UINT8 Rec_Buf[180];</span><br><span class="line">    UINT8 *pprealBuf;</span><br><span class="line">    UINT8 reallen;</span><br><span class="line"></span><br><span class="line">    memset(Rec_Buf, 0, sizeof(Rec_Buf));</span><br><span class="line">    serial_flush(&amp;seriaattrs_ttyAMA1,SERIAL_IOFLUSH);</span><br><span class="line">    for(i=0;i&lt;mult_repeat.w_times;i++)//多次重发</span><br><span class="line">    &#123;    </span><br><span class="line">        if(0 != serial_write_data(seriaattrs_ttyAMA1.serial_fd, hisi2mcu_realcmd.SendFrameBuf, hisi2mcu_realcmd.buf_hex_len))</span><br><span class="line">        &#123;</span><br><span class="line">            printf(&quot;Send MCU&apos;s data is error!\n&quot;);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">			for(m=1;m&lt;=mult_repeat.r_times;m++)//最多读20次</span><br><span class="line">			&#123;</span><br><span class="line">				usleep(mult_repeat.delay_us*1000);///?????????????????</span><br><span class="line">				if(0 != serial_read_data(seriaattrs_ttyAMA1.serial_fd, Rec_Buf, sizeof(Rec_Buf)))</span><br><span class="line">				&#123;</span><br><span class="line">					printf(&quot;Receive MCU&apos;s data is error!\n&quot;);</span><br><span class="line">				&#125;else&#123;</span><br><span class="line">					if(Rec_Buf[0] == 0x64)//Rec_Buf[0] != 0x00</span><br><span class="line">					&#123;</span><br><span class="line">						break;//收到数据</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;			</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">        if(Rec_Buf[0] == 0x64)//Rec_Buf[0] != 0x00</span><br><span class="line">        &#123;</span><br><span class="line">            break;//收到数据</span><br><span class="line">        &#125;       </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        if(exception_handling_extract(Rec_Buf, rerealdata.rebuflen, &amp;pprealBuf, &amp;reallen))</span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            memcpy(rerealdata.prealBuf, pprealBuf, reallen);</span><br><span class="line">            return true;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            printf(&quot;Debug1.5---exception handling extract is faled,KEY-&gt;0x%X,key-&gt;0x%X\n&quot;,hisi2mcu_realcmd.SendFrameBuf[2],hisi2mcu_realcmd.SendFrameBuf[5]);</span><br><span class="line">        &#125;       </span><br><span class="line">    </span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="二、改进版"><a href="#二、改进版" class="headerlink" title="二、改进版"></a>二、改进版</h5><h6 id="1-流程图-1"><a href="#1-流程图-1" class="headerlink" title="1. 流程图"></a>1. 流程图</h6><p><img src="/2020/02/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E4%B9%8B%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E8%B6%85%E6%97%B6%E4%B8%8E%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/3.png" alt="3"></p>
-<h6 id="2-代码"><a href="#2-代码" class="headerlink" title="2. 代码"></a>2. 代码</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">UINT8 Com_checksum(ComFrameData *pData, int len)</span><br><span class="line">&#123;</span><br><span class="line">    int i,sum=0;</span><br><span class="line">    UINT8 ccsum=0;  </span><br><span class="line">	UINT8 *pdata;</span><br><span class="line">	pdata = (UINT8 *)pData;</span><br><span class="line">	</span><br><span class="line">    for(i=0;i&lt;len;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        #if 0</span><br><span class="line">        printf(&quot;%X\n&quot;,*pdata);</span><br><span class="line">        #endif</span><br><span class="line">        sum += *(pdata++); </span><br><span class="line">    &#125;</span><br><span class="line">    ccsum = ~(sum&amp;0xFF);  </span><br><span class="line">	</span><br><span class="line">#if 0</span><br><span class="line">    printf(&quot;sum:0x%X\n&quot;,sum);</span><br><span class="line">    printf(&quot;ccsum:0x%X\n&quot;,ccsum);</span><br><span class="line">#endif</span><br><span class="line">    return ccsum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">bool hisi2mcu_serial_uni_func(struct seriainfo seriaattrs_ttyAMA1,</span><br><span class="line">								const char *hexCmd,</span><br><span class="line">								unsigned int hexCmd_size,</span><br><span class="line">								const char *hexCheck,</span><br><span class="line">								char *hexRecbuf,</span><br><span class="line">								unsigned int hexRecbuf_size,</span><br><span class="line">								unsigned int retryNum,</span><br><span class="line">								unsigned int delay_ms)</span><br><span class="line">&#123;</span><br><span class="line">	unsigned int loop = 0;</span><br><span class="line">	UINT8 i,reclen = 0;</span><br><span class="line">	UINT8 *preal,</span><br><span class="line">	UINT8 recbuf[3];</span><br><span class="line">	</span><br><span class="line">	serial_flush(&amp;seriaattrs_ttyAMA1,SERIAL_IOFLUSH);</span><br><span class="line">	while(loop &lt; retryNum)</span><br><span class="line">	&#123;</span><br><span class="line">		loop++;</span><br><span class="line">		if(0 != serial_write_data(seriaattrs_ttyAMA1.serial_fd, (unsigned char *)hexCmd, hexCmd_size))</span><br><span class="line">        &#123;</span><br><span class="line">            printf(&quot;send MCU&apos;s data is error!\n&quot;);</span><br><span class="line">			continue;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">			usleep(delay_ms*1000);</span><br><span class="line">			memset(hexRecbuf, 0x00, hexRecbuf_size);</span><br><span class="line">			if(0 != serial_read_data(seriaattrs_ttyAMA1.serial_fd, hexRecbuf, hexRecbuf_size))</span><br><span class="line">			&#123;</span><br><span class="line">				printf(&quot;receive MCU&apos;s data is error!\n&quot;);</span><br><span class="line">				continue;</span><br><span class="line">			&#125;else&#123;</span><br><span class="line">				while(*(hexRecbuf++) == 0x64)</span><br><span class="line">				&#123;</span><br><span class="line">					preal = hexRecbuf-1;</span><br><span class="line">					&#123;</span><br><span class="line">						reclen = (*(preal+3)&lt;&lt;8)|(*(preal+4));</span><br><span class="line">						//进行相应的校验和计算,校验和相等且0x64为最后一位</span><br><span class="line">						if(!((*(preal+4+reclen+1)==Com_checksum(preal,5+reclen)) &amp;&amp; (*(preal+4+reclen+1+1)==0x64)))</span><br><span class="line">						&#123;</span><br><span class="line">							printf(&quot;checksum does not meet requirements or end bit isn&apos;t 0x64!\n&quot;);</span><br><span class="line">							continue;</span><br><span class="line">						&#125;else&#123;</span><br><span class="line">							memcpy(recbuf, preal, 3);	</span><br><span class="line">							if((recbuf[0] != hexCheck++)&amp;&amp;(recbuf[1] != hexCheck++)&amp;&amp;(recbuf[i2] != hexCheck)) //比较帧头、上下行、关键字</span><br><span class="line">							&#123;</span><br><span class="line">								memset(hexRecbuf, 0x00, hexRecbuf_size);</span><br><span class="line">								return bool_false;</span><br><span class="line">							&#125;</span><br><span class="line">							return bool_true;		</span><br><span class="line">						&#125;</span><br><span class="line">						</span><br><span class="line">					&#125;</span><br><span class="line">					</span><br><span class="line">				&#125;</span><br><span class="line">				continue;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	memset(hexRecbuf, 0x00, hexRecbuf_size);</span><br><span class="line">	return bool_false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>工程设计</category>
-      </categories>
-      <tags>
-        <tag>通信设计</tag>
-        <tag>流程图</tag>
       </tags>
   </entry>
   <entry>
@@ -1182,43 +1095,6 @@
       </tags>
   </entry>
   <entry>
-    <title>工程设计-软件升级之设备端版本号管理(3)</title>
-    <url>/2019/12/29/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E4%B9%8B%E8%AE%BE%E5%A4%87%E7%AB%AF%E7%89%88%E6%9C%AC%E5%8F%B7%E7%AE%A1%E7%90%86-3/</url>
-    <content><![CDATA[<blockquote>
-<p>关于版本号管控需要满足以空间分支为主导,用时间变更作定位,方便bug查找修改。</p>
-</blockquote>
-<p>1.需要满足设备的向上兼容,通过版本号的变更迭代可以实现。形如：3.000.0001</p>
-<p>2.需要满足事物存在的3要素：</p>
-<ul>
-<li><p>时间(就是设备发货时间,也是设备的初始版本号,例如3.000.0001到3.000.0002的变更，就是一个时间变迁的过程)</p>
-</li>
-<li><p>地点(就是设备发货地点,同时对应代码库的分支)</p>
-</li>
-<li><p>设备(设备是必须存在的)</p>
-</li>
-</ul>
-<a id="more"></a>
-
-<p>每往一个地方发送设备,设备端代码通过git库建立一个分支,之后这个分支代码就主要是这个地方设备运行代码,方便以后bug查找,但不会对这个分支代码进行修改。<br>初始版本,以发往四川的为例：sichuan-3.000.0001</p>
-<p>3.我们的程序不断的在master分支上进行更新迭代。</p>
-<p>4.关于升级,会出现两种情况。(其它各种情况都离不开这两种情况)</p>
-<p>4.1 一种情况就是某一个地方的设备出现了bug被人发现了,这个时候必须要对这个地方的设备进行升级,此时修改master分支测试验证通过<br>将master分支代码克隆到这个地方分支上去,代码的版本号变更由sichuan-3.000.0001到sichuan-3.000.0002的变更。</p>
-<p>4.2 此时master分支,对4.1中bug进行修复并验证通过,同时我们也解决了一个其它的代码bug或者实现了一个功能,代码测试验证通过之后,感觉可以升级了,<br>这就是第二种情况升级(第二种升级又是系列情况升级)。<br>但并不是所有的设备都能升级,所以将master分支代码克隆到能够升级的地方分支上去。(时刻谨记地点分支代码不是用来修改的,是用来定位查找bug的)<br>形如：</p>
-<pre><code>sichuan-3.000.0002到sichuan-3.001.0000的升级
-tieling-3.000.0001到tieling-3.001.0000的升级
-xian-3.000.00001  到xian-3.000.00001不升级</code></pre><p>5.所以从上面可以看出：sichuan-3.000.00000,从右往左起,<br>第1段是bug&amp;功能的升级<br>第2段是代码进行系列的升级<br>第3段前半部分是地方名称,后半部分是产品换代升级</p>
-<p>6.代码的升级虽然是在服务器端升级的,但其实还是由设备端提供代码进行升级的。<br>所以每发一批设备,设备端都要给服务器端一个版本号：地点+一串号码,用来放入软件升级代码中去。</p>
-<p>每次发出去之前,肯定要经过相应的一系列测试,这些测试必然包括版本升级测试。<br>(关于软件升级版本号必然是以if else if的方式不端的扩张的,因为它是未知的。)</p>
-<p>7.软件升级代码以后要集中到运行程序中去,这样软件升级代码自身也会不断的迭代更新。</p>
-<blockquote>
-<p>注：此只为自己的一些不成熟的想法，真正版本号管理需要领导们自己决定。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>工程设计</category>
-      </categories>
-  </entry>
-  <entry>
     <title>系统函数&库函数-Linux中的popen函数和system函数(转)</title>
     <url>/2019/12/22/%E7%B3%BB%E7%BB%9F%E5%87%BD%E6%95%B0-%E5%BA%93%E5%87%BD%E6%95%B0-Linux%E4%B8%AD%E7%9A%84popen%E5%87%BD%E6%95%B0%E5%92%8Csystem%E5%87%BD%E6%95%B0-%E8%BD%AC/</url>
     <content><![CDATA[<blockquote>
@@ -1301,39 +1177,6 @@ xian-3.000.00001  到xian-3.000.00001不升级</code></pre><p>5.所以从上面�
       </tags>
   </entry>
   <entry>
-    <title>工程设计-软件升级之设备端版本号管理(2)</title>
-    <url>/2019/12/22/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E4%B9%8B%E8%AE%BE%E5%A4%87%E7%AB%AF%E7%89%88%E6%9C%AC%E5%8F%B7%E7%AE%A1%E7%90%86-2/</url>
-    <content><![CDATA[<blockquote>
-<p>关于版本号管理，之前升级都是在嵌入式设备中移植一个微型服务器，然后通过web端进行升级。现在是设备作为客户端向http发送版本号，http发送下载指令，设备端再想ftp服务器请求下载文件。所以思维方式要转换一下。<br>并且预期忘版本号的管理符合git库版本管理规则。</p>
-</blockquote>
-<a id="more"></a>
-
-<h5 id="一、应用场景"><a href="#一、应用场景" class="headerlink" title="一、应用场景"></a>一、应用场景</h5><p>服务器只有一个，而设备却有很多种，且分布在全国各地，各个地方情况不一样。<br>有的地方因为设备或者其它原因，软件不需要更新。<br>有的设备因为硬件与软件兼容性问题，只能升级特定的版本。<br>所以远程升级必须需要满足下面两种情况。</p>
-<h5 id="二、远程升级满足下面两种情况"><a href="#二、远程升级满足下面两种情况" class="headerlink" title="二、远程升级满足下面两种情况"></a>二、远程升级满足下面两种情况</h5><h6 id="2-1-后台服务器的手动升级-暴力升级"><a href="#2-1-后台服务器的手动升级-暴力升级" class="headerlink" title="2.1 后台服务器的手动升级(暴力升级)"></a>2.1 后台服务器的手动升级(暴力升级)</h6><h6 id="2-2-设备端的自动升级"><a href="#2-2-设备端的自动升级" class="headerlink" title="2.2 设备端的自动升级"></a>2.2 设备端的自动升级</h6><p>参考：<img src="/2019/12/22/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E4%B9%8B%E8%AE%BE%E5%A4%87%E7%AB%AF%E7%89%88%E6%9C%AC%E5%8F%B7%E7%AE%A1%E7%90%86-2/1.png" alt="1"></p>
-<h5 id="三、关于版本号管控"><a href="#三、关于版本号管控" class="headerlink" title="三、关于版本号管控"></a>三、关于版本号管控</h5><p>版本号管控或称三段式管控，形如：3.000.00000，3.100.10000,以10进制字符串的方式体现出来。（关于版本号的管控也可以按照设备发送的地方进行管控。按照时间来进行版本号回退管理，按照空间(发货地点)来进行分支进退管理。）</p>
-<p>注意：16进制数据和字符串型数据容易混淆</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">HISI_APP:3.01.0001 </span><br><span class="line">16进制方式：(0x03 0x2e 0x00 0x01 0x2e 0x00 0x00 0x00 0x01) </span><br><span class="line">字符串方式：(0x33 0x2e 0x30 0x31 0x2e 0x30 0x30 0x30 0x31)</span><br></pre></td></tr></table></figure>
-
-
-
-<h6 id="3-1-第3段—-00001，子功能升级-amp-BUG的修改（软件对应子功能添加-amp-BUG的修改的升级）"><a href="#3-1-第3段—-00001，子功能升级-amp-BUG的修改（软件对应子功能添加-amp-BUG的修改的升级）" class="headerlink" title="3.1 第3段—-00001，子功能升级&amp;BUG的修改（软件对应子功能添加&amp;BUG的修改的升级）"></a>3.1 第3段—-00001，子功能升级&amp;BUG的修改（软件对应子功能添加&amp;BUG的修改的升级）</h6><p>从文本文件中读取的’.’后面的第一位，为1表示该不可以升级，为0表示该段程序可以升级。</p>
-<p>之后的4位，表示版本号的范围：0000-9999。</p>
-<p>关于兼容性：修改bug有9999种版本完全够用，可能还没有达到这么多，就进入了系列升级。</p>
-<h6 id="3-2-第2段—-001，产品系列的升级（软件对应硬件方面的升级）"><a href="#3-2-第2段—-001，产品系列的升级（软件对应硬件方面的升级）" class="headerlink" title="3.2 第2段—-001，产品系列的升级（软件对应硬件方面的升级）"></a>3.2 第2段—-001，产品系列的升级（软件对应硬件方面的升级）</h6><p>从文本文件中读取的’.’后面的第一位，为1表示该不可以升级，为0表示该段程序可以升级。</p>
-<p>之后的2位，表示版本号的范围：00-99</p>
-<p>关于兼容性：修改bug有99种版本完全够用，可能还没有达到这么多，就进入了换代升级</p>
-<h6 id="3-3-第1段—-3，产品的换代升级（软件对应产品发布方面的升级）"><a href="#3-3-第1段—-3，产品的换代升级（软件对应产品发布方面的升级）" class="headerlink" title="3.3 第1段—-3，产品的换代升级（软件对应产品发布方面的升级）"></a>3.3 第1段—-3，产品的换代升级（软件对应产品发布方面的升级）</h6>]]></content>
-      <categories>
-        <category>工程设计</category>
-      </categories>
-      <tags>
-        <tag>FTP</tag>
-        <tag>流程图</tag>
-        <tag>http</tag>
-        <tag>版本号</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>C语言-函数返回局部变量的几种方式</title>
     <url>/2019/12/15/C%E8%AF%AD%E8%A8%80-%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
     <content><![CDATA[<p>一般的来说，函数是可以返回局部变量的。</p>
@@ -1379,9 +1222,9 @@ xian-3.000.00001  到xian-3.000.00001不升级</code></pre><p>5.所以从上面�
       </categories>
       <tags>
         <tag>指针</tag>
+        <tag>局部变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
-        <tag>局部变量</tag>
         <tag>数组取值</tag>
       </tags>
   </entry>
@@ -1404,42 +1247,6 @@ xian-3.000.00001  到xian-3.000.00001不升级</code></pre><p>5.所以从上面�
         <tag>notepadd</tag>
         <tag>UTF-8</tag>
         <tag>ANSI</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>工程设计-html boa cgi上传文件</title>
-    <url>/2019/12/15/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-html-boa-cgi%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6/</url>
-    <content><![CDATA[<p>暂略</p>
-]]></content>
-      <categories>
-        <category>工程设计</category>
-      </categories>
-      <tags>
-        <tag>html</tag>
-        <tag>boa</tag>
-        <tag>cgi</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>工程设计-软件升级之设备端FTP文件上传与下载(1)</title>
-    <url>/2019/12/14/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E4%B9%8B%E8%AE%BE%E5%A4%87%E7%AB%AFFTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD-1/</url>
-    <content><![CDATA[<h4 id="主要目的"><a href="#主要目的" class="headerlink" title="主要目的"></a>主要目的</h4><h5 id="下载文件"><a href="#下载文件" class="headerlink" title="下载文件"></a>下载文件</h5><h6 id="应用程序"><a href="#应用程序" class="headerlink" title="应用程序"></a>应用程序</h6><p>av_streamer input_streamer output_app</p>
-<a id="more"></a>
-
-<h6 id="系统库"><a href="#系统库" class="headerlink" title="系统库"></a>系统库</h6><p>libapp_para.so<br>libntptime.so<br>libsys_commom.so<br>libsys_serial.so<br>libdevsdk.so<br>librtmp_push.so<br>libsys_httppro.so<br>libdhclient.so<br>librtsp.so<br>libsys_media.so<br>libnnie_ai.so<br>libsys_base.so<br>libsys_mp4_storage.so</p>
-<h6 id="MCU程序"><a href="#MCU程序" class="headerlink" title="MCU程序"></a>MCU程序</h6><p>和上面类似（略）</p>
-<h5 id="上传日志"><a href="#上传日志" class="headerlink" title="上传日志"></a>上传日志</h5><p>程序运行记录（略）</p>
-<h4 id="第一阶段-正常环境下"><a href="#第一阶段-正常环境下" class="headerlink" title="第一阶段-正常环境下"></a>第一阶段-正常环境下</h4><p>还是直接看图比较直观。<br><img src="/2019/12/14/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E4%B9%8B%E8%AE%BE%E5%A4%87%E7%AB%AFFTP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD-1/1.png" alt="1"></p>
-<h4 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h4><p><a href="https://github.com/faihung/cURL" target="_blank" rel="noopener">参考代码</a></p>
-]]></content>
-      <categories>
-        <category>工程设计</category>
-      </categories>
-      <tags>
-        <tag>cURL</tag>
-        <tag>FTP</tag>
-        <tag>流程图</tag>
-        <tag>http</tag>
       </tags>
   </entry>
   <entry>
@@ -1764,9 +1571,9 @@ stemp 4 make install</code></pre><p>2.4 使用 curl –version 检查是否更�
         <category>工具</category>
       </categories>
       <tags>
-        <tag>Windows</tag>
         <tag>VMware</tag>
         <tag>网络配置</tag>
+        <tag>Windows</tag>
       </tags>
   </entry>
   <entry>
@@ -2199,182 +2006,6 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
       </tags>
   </entry>
   <entry>
-    <title>工程设计-CAN转以太网</title>
-    <url>/2019/11/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-CAN%E8%BD%AC%E4%BB%A5%E5%A4%AA%E7%BD%91/</url>
-    <content><![CDATA[<p>暂略</p>
-]]></content>
-      <categories>
-        <category>工程设计</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>工程设计-Hdmi转以太网</title>
-    <url>/2019/11/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-Hdmi%E8%BD%AC%E4%BB%A5%E5%A4%AA%E7%BD%91/</url>
-    <content><![CDATA[<h3 id="一、开发环境"><a href="#一、开发环境" class="headerlink" title="一、开发环境"></a>一、开发环境</h3><h4 id="1-1-概述"><a href="#1-1-概述" class="headerlink" title="1.1 概述"></a>1.1 概述</h4><p>嵌入式系统通常是一个资源受限的系统，因此直接在嵌入式系统的硬件平台上编写软件比较困难，有时候甚至是不可能的。</p>
-<p>目前的解决方法是采用宿主机、目标机的开发模式。在宿主机上编写程序，通过交叉编译器生成目标板上可以执行的二进制代码。然后通过文件系统，将二进制代码放在特定目录下，在目标板上运行。</p>
-<p>宿主机：VMWARE \ ubuntu（服务器：192.168.1.101）</p>
-<p>环境：交叉开发工具包，nfs</p>
-<p>目标机：linux hi3516</p>
-<a id="more"></a>
-
-<h4 id="1-2-安装过程"><a href="#1-2-安装过程" class="headerlink" title="1.2 安装过程"></a>1.2 安装过程</h4><p>参考相关SDK，nfs文件系统挂载：挂载点改变修改/etc/exports文件，具体方法自行谷歌。</p>
-<h4 id="1-3-应用场景"><a href="#1-3-应用场景" class="headerlink" title="1.3 应用场景"></a>1.3 应用场景</h4><p>这里主要描述是以前工作中用到视频信号通过HDMI口输入、经过海思平台编解码处理之后、再通过以太网口输出数据的过程。</p>
-<h3 id="二、开发流程"><a href="#二、开发流程" class="headerlink" title="二、开发流程"></a>二、开发流程</h3><p><img src="/2019/11/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-Hdmi%E8%BD%AC%E4%BB%A5%E5%A4%AA%E7%BD%91/1.jpg" alt="1"></p>
-<h4 id="2-1-芯片功能介绍"><a href="#2-1-芯片功能介绍" class="headerlink" title="2.1 芯片功能介绍"></a>2.1 芯片功能介绍</h4><p>Hi3516A各个模组之间相互依赖，逻辑组合从而实现不同的功能,见下图。即，如何编码、保存（文件/封包）。‘封包’也就是RTP包。<del>见2.1 传输层的子层RTP/RTCP。</del></p>
-<p><img src="/2019/11/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-Hdmi%E8%BD%AC%E4%BB%A5%E5%A4%AA%E7%BD%91/2.jpg" alt="2"></p>
-<h4 id="2-2-首先要有这样一个意识，即对开发板进行的配置，是以我们的需求为基础的。我们所做的工作在系统层次图的应用层部分"><a href="#2-2-首先要有这样一个意识，即对开发板进行的配置，是以我们的需求为基础的。我们所做的工作在系统层次图的应用层部分" class="headerlink" title="2.2 首先要有这样一个意识，即对开发板进行的配置，是以我们的需求为基础的。我们所做的工作在系统层次图的应用层部分"></a>2.2 首先要有这样一个意识，即对开发板进行的配置，是以我们的需求为基础的。我们所做的工作在系统层次图的应用层部分</h4><p>所需的函数统一由MPP（媒体处理平台）提供接口。MPP封装实现了基本功能函数，屏蔽掉了对底层的操作。 sample_venc.c为完成视频采集编码一系列操作的代码。观察其代码风格如下：</p>
-<ul>
-<li>函数返回值作为状态码，用以判断函数是否执行成功。</li>
-<li>函数需要传出的值通过全局变量或地址传出。</li>
-</ul>
-<p>下面先以函数先后顺序（也即视频采集编码处理流程）对各步骤做以说明。</p>
-<h4 id="2-3-配置视频缓存池"><a href="#2-3-配置视频缓存池" class="headerlink" title="2.3 配置视频缓存池"></a>2.3 配置视频缓存池</h4><p>视频缓存池结构图:</p>
-<p><img src="/2019/11/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-Hdmi%E8%BD%AC%E4%BB%A5%E5%A4%AA%E7%BD%91/3.jpg" alt="3"></p>
-<ul>
-<li><p>视频缓存池作用，视频缓存池主要向媒体业务提供大块物理内存管理功能，负责内存的分配和回收，充分发挥内存缓存池的作用，让物理内存资源在各个媒体处理模块中合理使用。</p>
-</li>
-<li><p>由于视频输入通道不提供创建和销毁公共视频缓存池功能，因此，在系统初始化之前，必须为视频输入通道配置公共视频缓存池。根据业务的不同，公共缓存池的数量、缓存块的大小和数量会有所不同。</p>
-</li>
-<li><p>enPayLoad，决定编码格式。</p>
-</li>
-<li><p>enSize，决定图像分辨率。（利用不同的编码通道，可以对同一rowdata编码出不同的分辨率。）</p>
-</li>
-<li><p>缓存块的大小根据 图像制式（PAL/NTSC）、图像分辨率、像素格式、图像跨距（字节对齐）共同决定。函数SAMPLE_COMM_SYS_CalcPicVbBlkSize计算缓存块大小。</p>
-</li>
-</ul>
-<h4 id="2-4-初始化MPP系统"><a href="#2-4-初始化MPP系统" class="headerlink" title="2.4 初始化MPP系统"></a>2.4 初始化MPP系统</h4><p>由于 MPP系统的正常运行依赖于缓存池，因此必须先调用 HI_MPI_VB_Init 初始化缓存池，再初始化 MPP系统。如果多次初始化，仍会返回成功，但实际上系统不会对 MPP的运行状态有任何影响。函数SAMPLE_COMM_SYS_Init完成MPP系统初始化</p>
-<h4 id="2-5-启动VI设备"><a href="#2-5-启动VI设备" class="headerlink" title="2.5 启动VI设备"></a>2.5 启动VI设备</h4><blockquote>
-<p>Tips： isp run must at this step – after vi dev enable, before vi chn enable<br>（函数皆由MPP提供接口）​</p>
-</blockquote>
-<h5 id="2-5-1-sensor初始化"><a href="#2-5-1-sensor初始化" class="headerlink" title="2.5.1 sensor初始化"></a>2.5.1 sensor初始化</h5><h5 id="2-5-2-启动VI设备"><a href="#2-5-2-启动VI设备" class="headerlink" title="2.5.2 启动VI设备"></a>2.5.2 启动VI设备</h5><h5 id="2-5-3-启动ISP"><a href="#2-5-3-启动ISP" class="headerlink" title="2.5.3 启动ISP"></a>2.5.3 启动ISP</h5><h5 id="2-5-4-使能VI通道"><a href="#2-5-4-使能VI通道" class="headerlink" title="2.5.4 使能VI通道"></a>2.5.4 使能VI通道</h5><h5 id="VI模块图"><a href="#VI模块图" class="headerlink" title="VI模块图"></a>VI模块图</h5><p><img src="/2019/11/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-Hdmi%E8%BD%AC%E4%BB%A5%E5%A4%AA%E7%BD%91/4.jpg" alt="4"></p>
-<ol>
-<li><p>根据产品的类型来启动VI设备，包括MIPI的配置，配置和启动VI的Capture的通道等。</p>
-</li>
-<li><p>MIPI的配置，主要是通过如果有就打开没有就创建一个可读写的文件，并返回一个文件描述符fd，再加上一个CMD命令–HI_MIPI_SET_DEV_ATTR，包括与其CMD命令相关的pstcomboDevAttr，/* input mode: MIPI/LVDS/SUBLVDS/HISPI/DC */来对设备的一些特性进行控制，就是通过ioctl函数来控制设备I/O口。最后要记得关掉被打开的文件。</p>
-</li>
-<li><p>开启VI通道，按照步骤来，配置和开启ViCap设备，设置VI通道的属性，然后启用VI通道。这里大都有海思提供的MPP的一些接口。</p>
-</li>
-</ol>
-<h4 id="2-6-启动视频处理模块"><a href="#2-6-启动视频处理模块" class="headerlink" title="2.6 启动视频处理模块"></a>2.6 启动视频处理模块</h4><p>每一个通道对应一系列的硬件和软件功能模块 ，通道可以进行“串联”，以完成一系列处理。通道的“串联”在开发文档中成为通道绑定。在整个处理流程中，要先后经过如下的通道绑定：VI—-VPSS                 VPSS—-VENC（这个是后者绑定前者）</p>
-<h5 id="2-6-1-启动VPSS-和-VPSS-Group的启动"><a href="#2-6-1-启动VPSS-和-VPSS-Group的启动" class="headerlink" title="2.6.1 启动VPSS 和 VPSS Group的启动"></a>2.6.1 启动VPSS 和 VPSS Group的启动</h5><p>主要根据制式和分辨率获得图像宽和高的具体数据。再由此确定通道属性，进行配置。然后使能VPSS通道。对VPSS GROUP的创建、获取/设置高级属性、最后启用VPSS GROUP,并成功返回一个状态值。</p>
-<h5 id="2-6-2-VPSS绑定VI"><a href="#2-6-2-VPSS绑定VI" class="headerlink" title="2.6.2 VPSS绑定VI"></a>2.6.2 VPSS绑定VI</h5><p>函数由MPP提供，直接调用。</p>
-<h5 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h5><p><img src="/2019/11/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-Hdmi%E8%BD%AC%E4%BB%A5%E5%A4%AA%E7%BD%91/5.jpg" alt="5"><br><img src="/2019/11/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-Hdmi%E8%BD%AC%E4%BB%A5%E5%A4%AA%E7%BD%91/6.jpg" alt="6"><br><img src="/2019/11/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-Hdmi%E8%BD%AC%E4%BB%A5%E5%A4%AA%E7%BD%91/7.jpg" alt="7"><br><img src="/2019/11/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-Hdmi%E8%BD%AC%E4%BB%A5%E5%A4%AA%E7%BD%91/8.jpg" alt="8"></p>
-<h4 id="2-7-启动视频流编码"><a href="#2-7-启动视频流编码" class="headerlink" title="2.7 启动视频流编码"></a>2.7 启动视频流编码</h4><h5 id="首先创建编码组，再创建编码通道。然后将编码通道注册到通道组。"><a href="#首先创建编码组，再创建编码通道。然后将编码通道注册到通道组。" class="headerlink" title="首先创建编码组，再创建编码通道。然后将编码通道注册到通道组。"></a>首先创建编码组，再创建编码通道。然后将编码通道注册到通道组。</h5><p>编码通道组是指芯片启动一次，能够同时处理的编码通道的集合。通道组模块接收外部原始图像数据，而不关心图像数据是来自哪个外部模块。我的理解是主通道为物理通道，所有绑定与同一物理通道的扩展通道，其数据源是一样的。关于他们的具体关系，参见开发参考文档的“6 视频编码模块—— 6.2.2 编码通道与通道组”。</p>
-<h5 id="接着开启编码通道接收输入图像。"><a href="#接着开启编码通道接收输入图像。" class="headerlink" title="接着开启编码通道接收输入图像。"></a>接着开启编码通道接收输入图像。</h5><h5 id="结构图-1"><a href="#结构图-1" class="headerlink" title="结构图"></a>结构图</h5><p><img src="/2019/11/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-Hdmi%E8%BD%AC%E4%BB%A5%E5%A4%AA%E7%BD%91/9.jpg" alt="9"><br><img src="/2019/11/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-Hdmi%E8%BD%AC%E4%BB%A5%E5%A4%AA%E7%BD%91/10.jpg" alt="10"><br><img src="/2019/11/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-Hdmi%E8%BD%AC%E4%BB%A5%E5%A4%AA%E7%BD%91/11.jpg" alt="11"><br><img src="/2019/11/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-Hdmi%E8%BD%AC%E4%BB%A5%E5%A4%AA%E7%BD%91/12.jpg" alt="12"></p>
-<h4 id="2-8-获取编码码流"><a href="#2-8-获取编码码流" class="headerlink" title="2.8 获取编码码流"></a>2.8 获取编码码流</h4><h5 id="1-在这里新开了一个线程专门用于接收码流，pthread-create"><a href="#1-在这里新开了一个线程专门用于接收码流，pthread-create" class="headerlink" title="1. 在这里新开了一个线程专门用于接收码流，pthread_create"></a>1. 在这里新开了一个线程专门用于接收码流，pthread_create</h5><h5 id="2-具体思路为，把编码通道映射为一个文件句柄（函数HI-MPI-VENC-GetFd完成此操作）。接着的所有操作都是对文件句柄进行的。这完全类似于端口通信中将端口打开视作文件句柄，然后进行读写操作。"><a href="#2-具体思路为，把编码通道映射为一个文件句柄（函数HI-MPI-VENC-GetFd完成此操作）。接着的所有操作都是对文件句柄进行的。这完全类似于端口通信中将端口打开视作文件句柄，然后进行读写操作。" class="headerlink" title="2. 具体思路为，把编码通道映射为一个文件句柄（函数HI_MPI_VENC_GetFd完成此操作）。接着的所有操作都是对文件句柄进行的。这完全类似于端口通信中将端口打开视作文件句柄，然后进行读写操作。"></a>2. 具体思路为，把编码通道映射为一个文件句柄（函数HI_MPI_VENC_GetFd完成此操作）。接着的所有操作都是对文件句柄进行的。这完全类似于端口通信中将端口打开视作文件句柄，然后进行读写操作。</h5><h5 id="3-执行步骤如下"><a href="#3-执行步骤如下" class="headerlink" title="3. 执行步骤如下"></a>3. 执行步骤如下</h5><h6 id="1-获取通道的文件句柄。"><a href="#1-获取通道的文件句柄。" class="headerlink" title="1. 获取通道的文件句柄。"></a>1. 获取通道的文件句柄。</h6><h6 id="2-从各通道获取码流。"><a href="#2-从各通道获取码流。" class="headerlink" title="2.  从各通道获取码流。"></a>2.  从各通道获取码流。</h6><blockquote>
-<p>这里一共有3&lt;0\1\2&gt;个通道，分别产生分辨率为1080p,VGA,QVGA的h264编码码流，我们的工程中只需要编码通道0的1080p码流。</p>
-</blockquote>
-<ul>
-<li>2.1 查询编码码流的一帧中有多少的包。</li>
-<li>2.2 根据包的数目分配内存。</li>
-<li>2.3 获取一帧数据。</li>
-<li>2.4 根据编码类型存数据。</li>
-<li>2.5 释放流。（不及时释放，当视频缓冲池满时即停止编码）</li>
-<li>2.6 释放分配的内存。</li>
-<li>2.7 关闭文件句柄。</li>
-<li>2.8 循环执行以上7步。</li>
-</ul>
-<h5 id="4-协议处理部分"><a href="#4-协议处理部分" class="headerlink" title="4. 协议处理部分"></a>4. 协议处理部分</h5><p><img src="/2019/11/24/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-Hdmi%E8%BD%AC%E4%BB%A5%E5%A4%AA%E7%BD%91/13.jpg" alt="13"></p>
-<h5 id="传输层的子层-RTP-RTCP"><a href="#传输层的子层-RTP-RTCP" class="headerlink" title="传输层的子层 RTP/RTCP"></a>传输层的子层 RTP/RTCP</h5><p>RTP/RTCP实时传输协议和实时传输控制协议。RTP协议从上层接收流媒体信息码流，如：H.264，封装成RTP包。RTCP从上层接收接收控制消息，封装成RTCP包。‘上层’，RTSP。见用层协议 RTSP。</p>
-<h5 id="应用层协议-RTSP"><a href="#应用层协议-RTSP" class="headerlink" title="应用层协议 RTSP"></a>应用层协议 RTSP</h5><h5 id="多媒体播放控制协议，以C-S模式工作，即以客户端和服务端的方式进行交互。"><a href="#多媒体播放控制协议，以C-S模式工作，即以客户端和服务端的方式进行交互。" class="headerlink" title="多媒体播放控制协议，以C/S模式工作，即以客户端和服务端的方式进行交互。"></a>多媒体播放控制协议，以C/S模式工作，即以客户端和服务端的方式进行交互。</h5><ol>
-<li>服务端，就是暂时移植的部分，见3.live555库的移植。</li>
-<li>客户端，暂时是VLC播放器。</li>
-<li>典型的rtsp交互过程(C表示rtsp客户端, S表示rtsp服务端)<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">step1：</span><br><span class="line">C-&gt;S:OPTION request  //询问 S 有哪些方法可用</span><br><span class="line">S-&gt;C:OPTION response //S 回应信息中包括提供的所有可用方法</span><br><span class="line"></span><br><span class="line">step2：    </span><br><span class="line">C-&gt;S:DESCRIBE request  //要求得到 S 提供的媒体初始化描述信息</span><br><span class="line">S-&gt;C:DESCRIBE response //S 回应媒体初始化描述信息, 主要是 sdp</span><br><span class="line"></span><br><span class="line">step3：    </span><br><span class="line">C-&gt;S:SETUP request  //设置会话的属性, 以及传输模式, 提醒 S 建立会话</span><br><span class="line">S-&gt;C:SETUP response //S 建立会话, 返回会话标识符, 以及会话相关信息</span><br><span class="line"></span><br><span class="line">step4：     </span><br><span class="line">C-&gt;S:PLAY request  //C 请求播放</span><br><span class="line">S-&gt;C:PLAY response //S 回应该请求的信息</span><br><span class="line">  </span><br><span class="line">step5：     </span><br><span class="line">S-&gt;C:发送流媒体数据</span><br><span class="line"></span><br><span class="line">step6：     </span><br><span class="line">C-&gt;S:TEARDOWN request  //C 请求关闭会话</span><br><span class="line">S-&gt;C:TEARDOWN response //S 回应该请求</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ol>
-<h5 id="服务器的搭建流程："><a href="#服务器的搭建流程：" class="headerlink" title="服务器的搭建流程："></a>服务器的搭建流程：</h5><h6 id="1-首先malloc一块内存，作为环形缓冲区的内存空间，初始化缓冲区得buffer大小、帧类型等；"><a href="#1-首先malloc一块内存，作为环形缓冲区的内存空间，初始化缓冲区得buffer大小、帧类型等；" class="headerlink" title="1. 首先malloc一块内存，作为环形缓冲区的内存空间，初始化缓冲区得buffer大小、帧类型等；"></a>1. 首先malloc一块内存，作为环形缓冲区的内存空间，初始化缓冲区得buffer大小、帧类型等；</h6><h6 id="2-设置服务器信息的全局变量、如访问端口号，获取主机名、域名等；"><a href="#2-设置服务器信息的全局变量、如访问端口号，获取主机名、域名等；" class="headerlink" title="2. 设置服务器信息的全局变量、如访问端口号，获取主机名、域名等；"></a>2. 设置服务器信息的全局变量、如访问端口号，获取主机名、域名等；</h6><h6 id="3-调用信号处理函数（一种处理机制），来设置我们的处理方式，是停止调度，还是继续执行下面EventLoop…；"><a href="#3-调用信号处理函数（一种处理机制），来设置我们的处理方式，是停止调度，还是继续执行下面EventLoop…；" class="headerlink" title="3. 调用信号处理函数（一种处理机制），来设置我们的处理方式，是停止调度，还是继续执行下面EventLoop…；"></a>3. 调用信号处理函数（一种处理机制），来设置我们的处理方式，是停止调度，还是继续执行下面EventLoop…；</h6><h6 id="4-获取socket描述符；"><a href="#4-获取socket描述符；" class="headerlink" title="4. 获取socket描述符；"></a>4. 获取socket描述符；</h6><ul>
-<li>4.1 通过socket创建一个套接字，并返回一个文件描述符</li>
-<li>4.2 通过setsockopt设置与某个套接字关联的选项</li>
-<li>4.3 通过bind来绑定socket</li>
-<li>4.4 在绑定和监听之间，通过ioctl来设置socket为非阻塞方式</li>
-<li>4.5 通过listen 监听</li>
-<li>4.6 返回socket的描述符</li>
-</ul>
-<h6 id="5-判断调度初始化是否出错；"><a href="#5-判断调度初始化是否出错；" class="headerlink" title="5.判断调度初始化是否出错；"></a>5.判断调度初始化是否出错；</h6><p><strong>5.1 对调度的一些标识、开始帧、关键帧、播放动作等进行初始化</strong></p>
-<p><strong>5.2 创建处理主线程</strong></p>
-<p>5.2.1 暂停某个进程，直到规定的时间内恢复</p>
-<p>5.2.2 开始从环形缓冲区获取元素数据，包括帧大小，类型</p>
-<p>5.2.3 判断要连接的客户端标识是否合法</p>
-<blockquote>
-<p>具体包括：是否有暂停动作、 开始计算时间戳、RTP回话是否传输、是否有播放动作等。</p>
-</blockquote>
-<p><strong>5.3 一直执行上述步骤，直到信号处理函数设定停止调度为止</strong></p>
-<h6 id="6-多个RTP端口初始化赋值"><a href="#6-多个RTP端口初始化赋值" class="headerlink" title="6.多个RTP端口初始化赋值"></a>6.多个RTP端口初始化赋值</h6><h6 id="7-创建一个线程，这里要承接上面的-1-芯片功能部分"><a href="#7-创建一个线程，这里要承接上面的-1-芯片功能部分" class="headerlink" title="7.创建一个线程，这里要承接上面的 1.芯片功能部分"></a>7.创建一个线程，这里要承接上面的 1.芯片功能部分</h6><h6 id="8-由信号处理函数来设定一个退出的全局变量"><a href="#8-由信号处理函数来设定一个退出的全局变量" class="headerlink" title="8.由信号处理函数来设定一个退出的全局变量"></a>8.由信号处理函数来设定一个退出的全局变量</h6><p><strong>8.1 接收连接，创建一个新的socket，通过accept来返回一个描述符</strong></p>
-<p><strong>8.2 处理新创建的连接</strong></p>
-<p><strong>8.3 对已有的连接进行调度</strong></p>
-<blockquote>
-<p>要调度的一个静态的结构体变量，包括：socket文件描述符，端口号、sockaddr、接收缓冲区、大小发送缓冲区、大小、会话链表等，以及整个链表且只要链表不为空的情况下</p>
-</blockquote>
-<ul>
-<li>8.3.1 rtsp服务端配置是否出错<blockquote>
-<p>读写I/O描述集变量的初始化</p>
-</blockquote>
-</li>
-</ul>
-<blockquote>
-<p>调用select等待对应描述符变化</p>
-</blockquote>
-<blockquote>
-<p>将可读进的RTSP包读到缓冲区中并判断是否溢出</p>
-</blockquote>
-<blockquote>
-<p>在RTSP数据中添加客户端地址信息</p>
-</blockquote>
-<blockquote>
-<p>对缓冲区的数据进行rtsp处理，判读是否有错误请求，如果没有错误则进入状态机，开始处理接收的请求，找到会话位置，打开会话列表，根据状态迁移规则，从当前状态开始迁移，即是否播放、暂停等。如果有错误，则丢弃处理之后的消息。</p>
-</blockquote>
-<blockquote>
-<p> 是否有数据发送，如果有将数据发送出去，并清空缓冲区。</p>
-</blockquote>
-<ul>
-<li>当8.3.1 没有出错时，继续下一个节点的操作</li>
-</ul>
-<ul>
-<li>当8.3.2 出错时,又是另一番处理</li>
-</ul>
-<h6 id="9-对回型缓冲区进行释放"><a href="#9-对回型缓冲区进行释放" class="headerlink" title="9.对回型缓冲区进行释放"></a>9.对回型缓冲区进行释放</h6><h3 id="三、附录"><a href="#三、附录" class="headerlink" title="三、附录"></a>三、附录</h3><h4 id="3-1-名词解释"><a href="#3-1-名词解释" class="headerlink" title="3.1 名词解释"></a>3.1 名词解释</h4><ul>
-<li>视频输入（VI）</li>
-<li>视频处理（VPSS）</li>
-<li>视频编码（VENC）</li>
-<li>视频解码（VDEC）</li>
-<li>视频输出(VO)</li>
-<li>视频侦测分析(VDA)</li>
-<li>音频输入(AI)</li>
-<li>音频输出(AO)</li>
-<li>音频编码（AENC）</li>
-<li>音频解码（ADEC）</li>
-<li>编码通道组子模块（GROUP）</li>
-<li>区域管理（REGION）</li>
-<li>视频编码层（VCL, VideoCoding Layer）</li>
-<li>网络提取层（NAL, NetworkAbstraction Layer）</li>
-<li>SDK          Software Developer’s Kit        软件开发工具包</li>
-<li>MPP          Media Processing Platform        媒体处理平台</li>
-<li>AI            Auto Iris Control                 自动光圈控制</li>
-<li>VEDU         Video Encode Unit               视频编码单元</li>
-<li>IVE           Intelligent Video Engineering      智能加速引擎</li>
-<li>PTS           Presentation Time Stamp         时间戳</li>
-<li>DDRC         Double-Data Rate Controller       DDR 控制器</li>
-<li>MMZ         Media Memory Zone             媒体内存区域</li>
-<li>ROI           Region Of Interest               感兴趣区域</li>
-</ul>
-<h4 id="3-2-其他要点"><a href="#3-2-其他要点" class="headerlink" title="3.2 其他要点"></a>3.2 其他要点</h4><ol>
-<li><p>当输入图像大小与编码通道宽高完全匹配时，才能启动编码通道进行编码。</p>
-</li>
-<li><p>未尽事宜，参阅开发完档。</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>工程设计</category>
-      </categories>
-      <tags>
-        <tag>海思</tag>
-        <tag>rtsp</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>C语言-ip地址合法性判断</title>
     <url>/2019/11/23/C%E8%AF%AD%E8%A8%80-ip%E5%9C%B0%E5%9D%80%E5%90%88%E6%B3%95%E6%80%A7%E5%88%A4%E6%96%AD/</url>
     <content><![CDATA[<h5 id="一、应用场景"><a href="#一、应用场景" class="headerlink" title="一、应用场景"></a>一、应用场景</h5><p>工作中我们有时候处理一些IP地址和端口号。这些东西需要保存到配置文件中，所以在保存之前，必须要进行合法性判断。</p>
@@ -2422,63 +2053,9 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
       </categories>
       <tags>
         <tag>指针</tag>
-        <tag>全局变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>工程设计-COM口16进制通信设计</title>
-    <url>/2019/11/23/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E8%AE%BE%E8%AE%A1/</url>
-    <content><![CDATA[<h4 id="一、16进制数据格式通过串口调试工具验证"><a href="#一、16进制数据格式通过串口调试工具验证" class="headerlink" title="一、16进制数据格式通过串口调试工具验证"></a>一、16进制数据格式通过串口调试工具验证</h4><p>拿到MCU板子，根据《mcu com软件接口设计方案_v002.xlsx》进行串口调试验证，见下表。</p>
-<a id="more"></a>
-
-<p><img src="/2019/11/23/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E8%AE%BE%E8%AE%A1/1.jpg" alt="1"><br>具体操作是用一个串口监视MCU的运行打印信息，用另一个串口作为16进制指令调试发送。稍微验证符合要求，即可进行下一步。</p>
-<h4 id="二、数据格式耦合-解耦合"><a href="#二、数据格式耦合-解耦合" class="headerlink" title="二、数据格式耦合/解耦合"></a>二、数据格式耦合/解耦合</h4><p>数据的传输最终是按照大小端、高低位一个bit个bit的buffer数组方式进行传输。所以我们发送/接收都需要对数据进行封装与解析。</p>
-<h5 id="2-1-数据结构类型"><a href="#2-1-数据结构类型" class="headerlink" title="2.1    数据结构类型"></a>2.1    数据结构类型</h5><p>根据上图构造一个可拓展的数据结构类型</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#ifndef _HEX_H_</span><br><span class="line">#define _HEX_H_</span><br><span class="line"></span><br><span class="line">typedef unsigned char UINT8;</span><br><span class="line">typedef unsigned short int UINT16;</span><br><span class="line">typedef unsigned int UINT32;</span><br><span class="line"></span><br><span class="line">#define COMMFRA_SEND_HEAD               0x64</span><br><span class="line">#define COMMFRA_SEND_UP_DOWN            0x01</span><br><span class="line">#define COMMFRA_SEND_TAIL               0x64</span><br><span class="line"></span><br><span class="line">#pragma   pack(1)</span><br><span class="line">typedef enum&#123;//关键字</span><br><span class="line">    RESET,</span><br><span class="line">	SOFT_HARD_VER,</span><br><span class="line">	HEART,</span><br><span class="line">	SET_MCU_TIME,</span><br><span class="line">	GET_MCU_TIME,</span><br><span class="line">	SWITCH_SIM,</span><br><span class="line">	GET_SIM,</span><br><span class="line">	GET_GPS,</span><br><span class="line">	LOW_POWER,</span><br><span class="line">	POWER_STATE,</span><br><span class="line">	POWER_OFF,</span><br><span class="line">	FIRMWARE_UPDATE,</span><br><span class="line">	</span><br><span class="line">	SET_SAMPLING_RATE = 0x10,</span><br><span class="line">	GET_SAMPLING_RATE,</span><br><span class="line">	START_SENSOR,</span><br><span class="line">	STOP_SENSOR,</span><br><span class="line">	CHECK_SENSOR,</span><br><span class="line">	SENSOR_BUFFER_FULL,</span><br><span class="line">	GET_SENSOR,</span><br><span class="line">	UPLOAD_SENSOR,</span><br><span class="line">	</span><br><span class="line">	START_BUZZER = 0x20</span><br><span class="line">&#125;keyword;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">typedef enum&#123;</span><br><span class="line">	KEY1 = 0x55,</span><br><span class="line">	KEY2 = 0xAA,</span><br><span class="line">	KEY3 = 0x01,</span><br><span class="line">	KEY4 = 0x02,</span><br><span class="line">&#125;key;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">联合体里面的单元数组，在定义的时候会按照最大的长度进行分配内存，所以接收到校验和,帧尾有时候会跑到item数据域中去，</span><br><span class="line">后面的结构体的校验和、帧尾会匹配不到。</span><br><span class="line">解决这种问题：</span><br><span class="line">1. 定义发送/接收item数据域的内容时,用指针变量，用的时候malloc堆内存，用的时候再free。但有的时候会遗忘。</span><br><span class="line">2. union中的成员，同一时刻只会用一种，将所有的item数据域的内容长度按照最长的分配。帧尾和校验和在在item数据域中去找。</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">typedef union&#123;</span><br><span class="line"></span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">		&#125;ComFrameDataReset_Request;//item-reset 			</span><br><span class="line">	&#125;ComFrameDataReset;</span><br><span class="line"></span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">		&#125;ComFrameDataVer_Request;  //获取软硬件板本，</span><br><span class="line">	</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 data[2];</span><br><span class="line">		&#125;ComFrameDataVer_Response;  //得到软硬件板本，</span><br><span class="line">	&#125;ComFrameDataVer;//item-Version</span><br><span class="line"></span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[2];</span><br><span class="line">		&#125;ComFrameDataHeart_Request;  </span><br><span class="line">		</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[2];</span><br><span class="line">		&#125;ComFrameDataHeart_Response;</span><br><span class="line">	&#125;ComFrameDataHeart;//item-Heart</span><br><span class="line"></span><br><span class="line">#if 1</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[7];</span><br><span class="line">		&#125;ComFrameDataSetMCUTime_Request;  </span><br><span class="line"> </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[7];</span><br><span class="line">		&#125;ComFrameDataSetMCUTime_Response;  	</span><br><span class="line">	&#125;ComFrameDataSetMCUTime;//item-SetMCUTime	</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">		&#125;ComFrameDataGetMCUTime_Request;  </span><br><span class="line">	</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[7];</span><br><span class="line">		&#125;ComFrameDataGetMCUTime_Response; </span><br><span class="line">	&#125;ComFrameDataGetMCUTime; //item-GetMCUTime</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataSwitchSIM_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[2];</span><br><span class="line">		&#125;ComFrameDataSwitchSIM_Response;</span><br><span class="line">	&#125;ComFrameDataSwitchSIM;//切换SIM卡</span><br><span class="line">		</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">		&#125;ComFrameDataGetSIM_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataGetSIM_Response;</span><br><span class="line">	&#125;ComFrameDataGetSIM;//获取目前使用的SIM卡</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">		&#125;ComFrameDataStartGPS_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">		&#125;ComFrameDataStartGPS_Response;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataGPS_Response;//响应成功or失败</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">		&#125;ComFrameDataGPSGet_Request;//读取GPS坐标，那么下面是不是还有一个响应</span><br><span class="line">		</span><br><span class="line">	&#125;ComFrameDataGPS;//GPS坐标</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">		&#125;ComFrameData4GInLowPower_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameData4GInLowPower_Response; </span><br><span class="line">	&#125;ComFrameData4GInLowPower;//进入低功耗</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">		&#125;ComFrameData4GExitLowPower_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameData4GExitLowPower_Response; </span><br><span class="line">	&#125;ComFrameData4GExitLowPower;//退出低功耗</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">		&#125;ComFrameDataPower_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[12];//这里数据大小的内容长度不能大于强制转换的数组的数据域内容，否则会错位</span><br><span class="line">		&#125;ComFrameDataPower_Response;//是主动获取还是定时上报</span><br><span class="line">	&#125;ComFrameDataPower;//电源情况</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">		&#125;ComFrameDataPowerOff_Request; </span><br><span class="line">	&#125;ComFrameDataPowerOff;</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataPowerOff_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataPowerOff_Response; </span><br><span class="line">	&#125;ComFrameDataFrimwareUpdate;//更新程序</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataSetSampleRate_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataSetSampleRate_Response;</span><br><span class="line">	&#125;ComFrameDataSetSampleRate;//设置采样率</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataGetSampleRate_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataGetSampleRate_Response;</span><br><span class="line">	&#125;ComFrameDataGetSampleRate;//读取采样率</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataStartSensor_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[2];</span><br><span class="line">		&#125;ComFrameDataStartSensor_Response;</span><br><span class="line">	&#125;ComFrameDataStartSensor;//启动传感器</span><br><span class="line"></span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataStopSensor_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[2];</span><br><span class="line">		&#125;ComFrameDataStopSensor_Response;</span><br><span class="line">	&#125;ComFrameDataStopSensor;//停止传感器</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataCheckSensor_Request; </span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[2];</span><br><span class="line">		&#125;ComFrameDataCheckSensor_Response;</span><br><span class="line">	&#125;ComFrameDataCheckSensor;//传感器自检</span><br><span class="line">		</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[3];</span><br><span class="line">		&#125;ComFrameDataSensorBuffFull_Response;		</span><br><span class="line">	&#125;ComFrameDataSensorBuffFull;//传感器buffer满</span><br><span class="line">	</span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[3];</span><br><span class="line">		&#125;ComFrameDataGetSensor_Request;	</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data;</span><br><span class="line">		&#125;ComFrameDataGetSensor_Response;				</span><br><span class="line">	&#125;ComFrameDataGetSensor;//获取传感器数据</span><br><span class="line"></span><br><span class="line">	union&#123;</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[2];</span><br><span class="line">		&#125;ComFrameDataStartBuzzer_Request;	</span><br><span class="line">		struct&#123;</span><br><span class="line">			UINT8 item_key;</span><br><span class="line">			UINT8 item_data[2];</span><br><span class="line">		&#125;ComFrameDataStartBuzzer_Response;		</span><br><span class="line">	&#125;ComFrameDataStartBuzzer;//启动蜂鸣器</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;ComFrameDataItem;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">typedef struct&#123;</span><br><span class="line">    UINT8   		frame_start;</span><br><span class="line">    UINT8   		frame_up_down;</span><br><span class="line">	</span><br><span class="line">    UINT8   		frame_key_word;</span><br><span class="line">    UINT16   		frame_datalength;//UINT8 (frame_datalength_high+frame_datalength_low)   		</span><br><span class="line">	</span><br><span class="line">    ComFrameDataItem   frame_item;</span><br><span class="line">	//将校验和帧尾从这里拿出去，放到每一个组包/解包函数中去。</span><br><span class="line">    //UINT8   		frame_CRC;</span><br><span class="line">    //UINT8   		frame_stop;</span><br><span class="line">&#125;ComFrameData;</span><br><span class="line"></span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
-
-<h5 id="2-2-强制转换和初始化"><a href="#2-2-强制转换和初始化" class="headerlink" title="2.2    强制转换和初始化"></a>2.2    强制转换和初始化</h5><p>数据传输之前，需要将buffer数组强制成转换成我们需要的数据结构类型，然后再进行赋值。<br>数据接收之后，需要将buffer数组强制转换成我们需要的数据结构类型，便于查看。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pdata = (UINT8 *)pData;//将结构体类型强制转换成unsigned char类型</span><br><span class="line">pBuf = (ComFrameData *)fraBuf;//将unsigned char类型强制转换成结构体类型</span><br></pre></td></tr></table></figure>
-
-<h5 id="2-3-注意字节对齐与大小端"><a href="#2-3-注意字节对齐与大小端" class="headerlink" title="2.3    注意字节对齐与大小端"></a>2.3    注意字节对齐与大小端</h5><p>整个数据结构中有char型、short型、char型数组，所以需要考虑到32位机字节对齐的问题。加上：</p>
-<pre><code>#pragma   pack(1)，强制连续存放，对齐边界为1。</code></pre><h4 id="三、数据格式的组包-解包"><a href="#三、数据格式的组包-解包" class="headerlink" title="三、数据格式的组包/解包"></a>三、数据格式的组包/解包</h4><p>数据传输时，需要对数据进行初始化、校验、打包。</p>
-<h5 id="3-1-校验和"><a href="#3-1-校验和" class="headerlink" title="3.1 校验和"></a>3.1 校验和</h5><p>在组包解包之前有校验和，这里从帧头开始到校验和之前开始累加，对最低byte取反即可。具体代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">UINT8 checksum(ComFrameData *pData, int len)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    int i,sum=0;</span><br><span class="line">    UINT8 ccsum=0;  </span><br><span class="line">	UINT8 *pdata;</span><br><span class="line">	pdata = (UINT8 *)pData;//将结构体类型强制转换成char类型</span><br><span class="line">	</span><br><span class="line">    for(i=0;i&lt;len;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        #if 1</span><br><span class="line">        printf(&quot;%X\n&quot;,*pdata);</span><br><span class="line">        #endif</span><br><span class="line">        sum += *(pdata++); </span><br><span class="line">    &#125;</span><br><span class="line">    ccsum = ~(sum&amp;0xFF);  </span><br><span class="line">	</span><br><span class="line">#if 1</span><br><span class="line">    printf(&quot;累加和:0x%X\n&quot;,sum);</span><br><span class="line">    printf(&quot;校验和:0x%X\n&quot;,ccsum);</span><br><span class="line">#endif</span><br><span class="line">    return ccsum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="3-2-将要Request的组包"><a href="#3-2-将要Request的组包" class="headerlink" title="3.2 将要Request的组包"></a>3.2 将要Request的组包</h5><p>举个例子，对上图Excel表中的reset命令进行组包，代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void commFraSend_ResetBulid_Request(UINT8 *fraBuf, UINT8 *plen)</span><br><span class="line">&#123;</span><br><span class="line">	ComFrameData *pBuf;</span><br><span class="line">	pBuf = (ComFrameData *)fraBuf;//将char类型强制转换成结构体类型</span><br><span class="line">	UINT8 frame_CRC,frame_stop;	</span><br><span class="line">	</span><br><span class="line">	pBuf-&gt;frame_start   		= COMMFRA_SEND_HEAD;	//64</span><br><span class="line">	pBuf-&gt;frame_up_down 		= COMMFRA_SEND_UP_DOWN; //1</span><br><span class="line">	pBuf-&gt;frame_key_word		= RESET;				//0 </span><br><span class="line">	</span><br><span class="line">	pBuf-&gt;frame_datalength		= 0x0001;				//高低位 大小端</span><br><span class="line">	pBuf-&gt;frame_item.ComFrameDataReset.ComFrameDataReset_Request.item_key	= KEY1;					//55</span><br><span class="line">	</span><br><span class="line">	frame_CRC 			= checksum(pBuf,6);</span><br><span class="line">	frame_stop    		= COMMFRA_SEND_TAIL;</span><br><span class="line">	printf(&quot;帧尾:0x%X\n&quot;,frame_stop);</span><br><span class="line">	*plen = sizeof(pBuf-&gt;frame_start)</span><br><span class="line">			+sizeof(pBuf-&gt;frame_up_down)</span><br><span class="line">			+sizeof(pBuf-&gt;frame_key_word)</span><br><span class="line">			+sizeof(pBuf-&gt;frame_datalength)</span><br><span class="line">			+sizeof(pBuf-&gt;frame_item.ComFrameDataReset.ComFrameDataReset_Request.item_key)</span><br><span class="line">			+sizeof(frame_CRC)</span><br><span class="line">			+sizeof(frame_stop);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="3-3-将要Response的解包"><a href="#3-3-将要Response的解包" class="headerlink" title="3.3 将要Response的解包"></a>3.3 将要Response的解包</h5><p>举个例子，对上图Excel表中的Response命令进行解包包，代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void commFraSend_SetMCUTimeAnalysis_Response(UINT8 *fraBuf)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	char i,item_len;</span><br><span class="line">	ComFrameData *pBuf;</span><br><span class="line">	pBuf = (ComFrameData *)fraBuf;//将char类型强制转换成结构体类型</span><br><span class="line">	UINT8 frame_CRC,frame_stop;</span><br><span class="line">	</span><br><span class="line">	printf(&quot;帧头:0x%X\n&quot;,pBuf-&gt;frame_start);</span><br><span class="line">	printf(&quot;上下行:0x%X\n&quot;,pBuf-&gt;frame_up_down);</span><br><span class="line">	printf(&quot;关键字:0x%X\n&quot;,pBuf-&gt;frame_key_word);</span><br><span class="line">	</span><br><span class="line">	item_len = (pBuf-&gt;frame_datalength&amp;0xFF)|(pBuf-&gt;frame_datalength&gt;&gt;8);</span><br><span class="line">	printf(&quot;数据长度:0x%X\n&quot;,item_len);</span><br><span class="line">	</span><br><span class="line">	printf(&quot;数据域-Key:0x%X\n&quot;,pBuf-&gt;frame_item.ComFrameDataSetMCUTime.ComFrameDataSetMCUTime_Response.item_key);</span><br><span class="line">	for(i=0;i&lt;item_len-1;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;数据域内容:0x%X\n&quot;,pBuf-&gt;frame_item.ComFrameDataSetMCUTime.ComFrameDataSetMCUTime_Response.item_data[i]);</span><br><span class="line">	&#125;	</span><br><span class="line">	</span><br><span class="line">	frame_CRC = pBuf-&gt;frame_item.ComFrameDataSetMCUTime.ComFrameDataSetMCUTime_Response.item_data[i];</span><br><span class="line">	frame_stop = pBuf-&gt;frame_item.ComFrameDataSetMCUTime.ComFrameDataSetMCUTime_Response.item_data[i+1];</span><br><span class="line">	</span><br><span class="line">	printf(&quot;校验:0x%X\n&quot;,frame_CRC);</span><br><span class="line">	printf(&quot;帧尾:0x%X\n&quot;,frame_stop);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="3-4-对接收数据进行的异常处理"><a href="#3-4-对接收数据进行的异常处理" class="headerlink" title="3.4 对接收数据进行的异常处理"></a>3.4 对接收数据进行的异常处理</h5><p>关于异常处理与提取,接收数据可能是20个byte,需要在这20个byte中提取有效的长度。</p>
-<ol>
-<li>这个有效长度必须满足收尾都是0x64</li>
-<li>这个有效长度最短长度不得少于8个byte</li>
-<li>这个有效长度的数据必须符合校验和的计算方式</li>
-<li>满足上面3条即可提取这个数据帧</li>
-<li>注意:在真正想要的数据帧之间是没有0x64的,这种情况先假设它不存在(后面会根据校验和的方式来处理)</li>
-</ol>
-<p>代码如下：（循环遍历+判断条件）</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">UINT8 ReceiveBuf[20] = &#123;</span><br><span class="line">0x00, 0x64, 0x00, 0x64, 0x01, 0x04, 0x00, 0x08, </span><br><span class="line">0x55, 0x07, 0xE2, 0x01, 0x06, 0x01, 0x1C, 0x18, </span><br><span class="line">0x14, 0x64, 0x30, 0x11&#125;;//模拟接收到的MCU响应的时间</span><br><span class="line"></span><br><span class="line">void exception_handling_extract(UINT8 *fraBuf, UINT8 buflen, UINT8 **prealBUF, UINT8 *preallen)</span><br><span class="line">&#123;</span><br><span class="line">	UINT8 len = 0;//n = 0,</span><br><span class="line">	UINT8 *pcur,*p;//*pBuf,</span><br><span class="line">	</span><br><span class="line">	printf(&quot;接收到的数据的长度是:%d\n&quot;,buflen);</span><br><span class="line">	p = fraBuf;</span><br><span class="line">	while(buflen--)</span><br><span class="line">	&#123;</span><br><span class="line">		if(*p == 0x64)</span><br><span class="line">		&#123;</span><br><span class="line">			pcur = p;</span><br><span class="line">			while(buflen--)</span><br><span class="line">			&#123;</span><br><span class="line">				p++;</span><br><span class="line">				if(*p == 0x64)</span><br><span class="line">				&#123;</span><br><span class="line">					len = p-pcur;</span><br><span class="line">					printf(&quot;两个0x64之间的数据长度:%d\n&quot;,len);</span><br><span class="line">					if(len&gt;=8)</span><br><span class="line">					&#123;</span><br><span class="line">						//进行相应的校验和计算</span><br><span class="line">						if(*(p-1) == checksum((ComFrameData*)pcur,len-1))</span><br><span class="line">						&#123;</span><br><span class="line">							printf(&quot;这个真实帧的校验和满足条件!\n&quot;);</span><br><span class="line">							//开始提取这个有效的数据帧</span><br><span class="line">							*preallen = len+1;</span><br><span class="line">							*prealBUF = pcur;</span><br><span class="line">							break;</span><br><span class="line">						&#125;else&#123;</span><br><span class="line">							printf(&quot;这个真实帧的校验和不满足条件!\n&quot;);</span><br><span class="line">						&#125;</span><br><span class="line">						</span><br><span class="line">					&#125;else&#123;</span><br><span class="line">						//说明真正想要的数据帧帧头不是前面的一个0x64,可能是这一个,或者是下一个。之后继续对p进行遍历</span><br><span class="line">						pcur = p;</span><br><span class="line">						len = 0;</span><br><span class="line">					&#125;	</span><br><span class="line">				&#125;</span><br><span class="line">				</span><br><span class="line">				printf(&quot;此时N2的长度是:%d\n&quot;,buflen);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		p++;	</span><br><span class="line">		printf(&quot;此时N1的长度是:%d\n&quot;,buflen);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="四、SEND-RECEIVE-数据"><a href="#四、SEND-RECEIVE-数据" class="headerlink" title="四、SEND/RECEIVE-数据"></a>四、SEND/RECEIVE-数据</h4><p>海思和MCU通信是通过串口通信，这里有现成的接口函数，驱动部分不需要做出太多的改动，现在主要考虑的应用逻辑部分。</p>
-<h5 id="4-1-数据长度必须要满足最小值"><a href="#4-1-数据长度必须要满足最小值" class="headerlink" title="4.1    数据长度必须要满足最小值"></a>4.1    数据长度必须要满足最小值</h5><h5 id="4-2-帧头、帧尾要符合要求，最好要有冗余检测"><a href="#4-2-帧头、帧尾要符合要求，最好要有冗余检测" class="headerlink" title="4.2    帧头、帧尾要符合要求，最好要有冗余检测"></a>4.2    帧头、帧尾要符合要求，最好要有冗余检测</h5><h5 id="4-3-校验对比"><a href="#4-3-校验对比" class="headerlink" title="4.3    校验对比"></a>4.3    校验对比</h5><p>前面在组包的时候已经有了，在接收数据的时候可以对刚接收到的数据进行校验对比。</p>
-<h5 id="4-4-发送数据之后是否有反馈"><a href="#4-4-发送数据之后是否有反馈" class="headerlink" title="4.4    发送数据之后是否有反馈"></a>4.4    发送数据之后是否有反馈</h5><p>根据下面(5 软件图&amp;流程图)可以看到有些是有反馈的有些是没有反馈的。</p>
-<h4 id="五、软件图-amp-流程图"><a href="#五、软件图-amp-流程图" class="headerlink" title="五、软件图&amp;流程图"></a>五、软件图&amp;流程图</h4><h5 id="5-1-Request-Response图"><a href="#5-1-Request-Response图" class="headerlink" title="5.1 Request Response图"></a>5.1 Request Response图</h5><p><img src="/2019/11/23/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E8%AE%BE%E8%AE%A1/2.jpg" alt="2"></p>
-<h5 id="5-1-流程图"><a href="#5-1-流程图" class="headerlink" title="5.1 流程图"></a>5.1 流程图</h5><p><img src="/2019/11/23/%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1-COM%E5%8F%A316%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1%E8%AE%BE%E8%AE%A1/3.jpg" alt="3"></p>
-<h4 id="六、完整版程序代码"><a href="#六、完整版程序代码" class="headerlink" title="六、完整版程序代码"></a>六、完整版程序代码</h4><p>配合《mcu com软件接口设计方案》,且测试验证通过，支持和MCU多次重发3次、支持多次重读20次，每次1ms,且可设置参数。<br><a href="https://github.com/faihung/test/tree/master/5-16%E8%BF%9B%E5%88%B6%E9%80%9A%E4%BF%A1" target="_blank" rel="noopener">参考代码</a></p>
-]]></content>
-      <categories>
-        <category>工程设计</category>
-      </categories>
-      <tags>
-        <tag>字节对齐</tag>
-        <tag>大小端</tag>
-        <tag>pragma pack()</tag>
-        <tag>通信设计</tag>
-        <tag>流程图</tag>
-        <tag>数据结构构造</tag>
-        <tag>解耦合</tag>
+        <tag>全局变量</tag>
       </tags>
   </entry>
   <entry>
@@ -2854,8 +2431,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sprintf</tag>
         <tag>strcat</tag>
+        <tag>sprintf</tag>
         <tag>字符串拼接</tag>
       </tags>
   </entry>
@@ -3294,8 +2871,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>工具</category>
       </categories>
       <tags>
-        <tag>VMware</tag>
         <tag>ubuntu</tag>
+        <tag>VMware</tag>
       </tags>
   </entry>
   <entry>
