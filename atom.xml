@@ -84,11 +84,11 @@
     
       <category term="RTSP" scheme="http://www.faihung.net/tags/RTSP/"/>
     
-      <category term="SDP" scheme="http://www.faihung.net/tags/SDP/"/>
-    
       <category term="消息格式" scheme="http://www.faihung.net/tags/%E6%B6%88%E6%81%AF%E6%A0%BC%E5%BC%8F/"/>
     
       <category term="状态码" scheme="http://www.faihung.net/tags/%E7%8A%B6%E6%80%81%E7%A0%81/"/>
+    
+      <category term="SDP" scheme="http://www.faihung.net/tags/SDP/"/>
     
   </entry>
   
@@ -138,11 +138,11 @@
     
       <category term="RTSP" scheme="http://www.faihung.net/tags/RTSP/"/>
     
+      <category term="SDP" scheme="http://www.faihung.net/tags/SDP/"/>
+    
       <category term="C/S" scheme="http://www.faihung.net/tags/C-S/"/>
     
       <category term="URL" scheme="http://www.faihung.net/tags/URL/"/>
-    
-      <category term="SDP" scheme="http://www.faihung.net/tags/SDP/"/>
     
       <category term="DESCRIBE" scheme="http://www.faihung.net/tags/DESCRIBE/"/>
     
@@ -434,11 +434,11 @@
     
       <category term="指针" scheme="http://www.faihung.net/tags/%E6%8C%87%E9%92%88/"/>
     
-      <category term="局部变量" scheme="http://www.faihung.net/tags/%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/"/>
-    
       <category term="生存周期" scheme="http://www.faihung.net/tags/%E7%94%9F%E5%AD%98%E5%91%A8%E6%9C%9F/"/>
     
       <category term="内存分配" scheme="http://www.faihung.net/tags/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/"/>
+    
+      <category term="局部变量" scheme="http://www.faihung.net/tags/%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/"/>
     
       <category term="数组取值" scheme="http://www.faihung.net/tags/%E6%95%B0%E7%BB%84%E5%8F%96%E5%80%BC/"/>
     

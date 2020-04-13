@@ -455,9 +455,9 @@
       </categories>
       <tags>
         <tag>RTSP</tag>
-        <tag>SDP</tag>
         <tag>消息格式</tag>
         <tag>状态码</tag>
+        <tag>SDP</tag>
       </tags>
   </entry>
   <entry>
@@ -698,9 +698,9 @@
       </categories>
       <tags>
         <tag>RTSP</tag>
+        <tag>SDP</tag>
         <tag>C/S</tag>
         <tag>URL</tag>
-        <tag>SDP</tag>
         <tag>DESCRIBE</tag>
         <tag>SETUP</tag>
         <tag>PLAY</tag>
@@ -1222,9 +1222,9 @@
       </categories>
       <tags>
         <tag>指针</tag>
-        <tag>局部变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
+        <tag>局部变量</tag>
         <tag>数组取值</tag>
       </tags>
   </entry>
@@ -1571,9 +1571,9 @@ stemp 4 make install</code></pre><p>2.4 使用 curl –version 检查是否更�
         <category>工具</category>
       </categories>
       <tags>
+        <tag>Windows</tag>
         <tag>VMware</tag>
         <tag>网络配置</tag>
-        <tag>Windows</tag>
       </tags>
   </entry>
   <entry>
@@ -2053,9 +2053,9 @@ Horizontal sync --&gt;用来标识什么时候开始新一行的图像扫描</co
       </categories>
       <tags>
         <tag>指针</tag>
+        <tag>全局变量</tag>
         <tag>生存周期</tag>
         <tag>内存分配</tag>
-        <tag>全局变量</tag>
       </tags>
   </entry>
   <entry>
@@ -2431,8 +2431,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>strcat</tag>
         <tag>sprintf</tag>
+        <tag>strcat</tag>
         <tag>字符串拼接</tag>
       </tags>
   </entry>
