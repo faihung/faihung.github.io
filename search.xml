@@ -1,6 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>移植编译-库函数方式实现文件的解压缩</title>
+    <url>/2020/04/13/%E7%A7%BB%E6%A4%8D%E7%BC%96%E8%AF%91-%E5%BA%93%E5%87%BD%E6%95%B0%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E7%9A%84%E8%A7%A3%E5%8E%8B%E7%BC%A9/</url>
+    <content><![CDATA[<h4 id="一、-为什么要用函数方式来解压缩文件"><a href="#一、-为什么要用函数方式来解压缩文件" class="headerlink" title="一、    为什么要用函数方式来解压缩文件"></a>一、    为什么要用函数方式来解压缩文件</h4><p>之前关于算法模型的下载更新之后的一系列操作，如删除之前的文件、改变现有文件权限等操作用的是shell命令方式执行的。这种方式是在现有程序进程的基础上重新开启一个新的进程来执行shell命令。而用到的系统命令函数system、popen函数等会返回出各种程序状态，这些状态是不可控的，所以我们需要用到相应的库函数来实现它们的功能，目前都已经实现和验证它们的功能。</p>
+<p>现在关于海思应用程序和第3方库的下载更新是以文件压缩包的方式下载的，下载之后同样是用的shell命令方式来解压的。所以我们同样需要用到相应的库函数来实现文件的解压缩功能。</p>
+<a id="more"></a>
+
+<h4 id="二、-选用哪种库来解压缩文件"><a href="#二、-选用哪种库来解压缩文件" class="headerlink" title="二、    选用哪种库来解压缩文件"></a>二、    选用哪种库来解压缩文件</h4><p>对如何在linux系统中以函数的方式实现文件的解压缩，网上提到可以使用compress和uncompress函数，而这两个函数就在zlib的函数库中。</p>
+<p>zlib是一个专用的数据格式压缩库，支持很多格式的压缩，网上有很多资料可供查找，所以我们也选用的是zlib库。</p>
+<h4 id="三、-zlib库的操作记录"><a href="#三、-zlib库的操作记录" class="headerlink" title="三、    zlib库的操作记录"></a>三、    zlib库的操作记录</h4><h5 id="3-1如何下载zlib库"><a href="#3-1如何下载zlib库" class="headerlink" title="3.1如何下载zlib库"></a>3.1如何下载zlib库</h5><p>在zlib库的<a href="http://www.zlib.net/" target="_blank" rel="noopener">官方网站</a>中，可以下载最新版本的zlib库。<br><img src="/2020/04/13/%E7%A7%BB%E6%A4%8D%E7%BC%96%E8%AF%91-%E5%BA%93%E5%87%BD%E6%95%B0%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E7%9A%84%E8%A7%A3%E5%8E%8B%E7%BC%A9/1.png" alt="1"><br>然后将下载好的库zlib-1.2.11.tar.gz拷贝到linux系统中去。</p>
+<h5 id="3-2交叉编译-zlib-库"><a href="#3-2交叉编译-zlib-库" class="headerlink" title="3.2交叉编译 zlib 库"></a>3.2交叉编译 zlib 库</h5><p>zlib库最终是要在嵌入式linux系统中运行的，所以需要交叉编译。</p>
+<h6 id="3-2-1编译安装的步骤"><a href="#3-2-1编译安装的步骤" class="headerlink" title="3.2.1编译安装的步骤"></a>3.2.1编译安装的步骤</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">步骤1：$ tar zxvf zlib-1.2.11.tar.gz</span><br><span class="line"></span><br><span class="line">步骤2：$ cd zlib-1.2.11/</span><br><span class="line"></span><br><span class="line">步骤3：$ export CC=arm-himix200-linux-gcc    </span><br><span class="line">它的configure不支持用CC变量来指定交叉工具链</span><br><span class="line"></span><br><span class="line">步骤4：$ ./configure --prefix=$PWD/_install  </span><br><span class="line">最后生成的库、头文件和man文件都在当前目录的_install目录下</span><br><span class="line"></span><br><span class="line">步骤5：$ make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<ol>
+<li>在make install这一步，由于要把zlib安装到/usr/local/lib路径下，所以有些linux系统需要root 权限。安装成功后，可以在/home/yhh/zlib-1.2.11/_install/lib下找到 libz.a。</li>
+<li>libz.a是一个静态库，为了使用zlib的接口，我们必须在连接我们的程序时，libz.a链接进来。只需在 链接命令后加-lz /usr/llocal/lib/libz.a即可。</li>
+</ol>
+<h6 id="3-2-1编译安装中遇到的问题"><a href="#3-2-1编译安装中遇到的问题" class="headerlink" title="3.2.1编译安装中遇到的问题"></a>3.2.1编译安装中遇到的问题</h6><ol>
+<li>关于zlib安装时出现的错和执行make的时候出现：ln: 无法创建符号链接” …… “: 不支持的操作。<br>解决办法：将Windows下的共享目录中的源码移动到linux虚拟机里再执行make命令。</li>
+</ol>
+<ol start="2">
+<li>执行命令：~/zlib-1.2.11/examples$ arm-himix200-linux-gcc 1.c -o test_zip出现<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/tmp/ccUEzkKU.o: In function `main&apos;:</span><br><span class="line">1.c:(.text+0xcc): undefined reference to `compressBound&apos;</span><br><span class="line">1.c:(.text+0xfc): undefined reference to `compress&apos;</span><br><span class="line">1.c:(.text+0x130): undefined reference to `uncompress&apos;</span><br><span class="line">collect2: error: ld returned 1 exit status</span><br></pre></td></tr></table></figure>
+这是因为编译zlib应用测试程序时没有链接到相应的库文件<br>解决办法：arm-himix200-linux-gcc 1.c -o test_zip -lz</li>
+</ol>
+<ol start="3">
+<li>执行命令：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">~/zlib-1.2.11/examples$ arm-himix200-linux-gcc 1.c -o test_zip -lz出现</span><br><span class="line">/opt/hisi-linux/x86-arm/arm-himix200-linux/host_bin/../lib/gcc/arm-linux-gnueabi/6.3.0/../../../../arm-linux-gnueabi/bin/ld: cannot find -lz</span><br><span class="line">collect2: error: ld returned 1 exit status</span><br></pre></td></tr></table></figure>
+在2的基础上出现这个错误<br>解决办法：arm-himix200-linux-gcc 1.c -o test_zip -lz -L/home/yhh/zlib-1.2.11/_install/lib/</li>
+</ol>
+<h5 id="3-3-zlib的使用验证"><a href="#3-3-zlib的使用验证" class="headerlink" title="3.3 zlib的使用验证"></a>3.3 zlib的使用验证</h5><h6 id="3-3-1使用zlib库中的什么文件进行验证"><a href="#3-3-1使用zlib库中的什么文件进行验证" class="headerlink" title="3.3.1使用zlib库中的什么文件进行验证"></a>3.3.1使用zlib库中的什么文件进行验证</h6><p>zlib 在 examples 路径下提供了许多使用zlib的例子，如zpipe.c 基于单个文件的解压缩。这里我们用到的是多个文件的解压缩。可以使用：zlib-1.2.11\contrib\minizip\ miniunz.c中的一些接口函数。</p>
+<h6 id="3-3-2直接修改编译miniunz-c文件，然后交叉编译，证明此步骤的可行性"><a href="#3-3-2直接修改编译miniunz-c文件，然后交叉编译，证明此步骤的可行性" class="headerlink" title="3.3.2直接修改编译miniunz.c文件，然后交叉编译，证明此步骤的可行性"></a>3.3.2直接修改编译miniunz.c文件，然后交叉编译，证明此步骤的可行性</h6><p>下面是一个修改过的，直接交叉编译过的miniunz程序，在嵌入式linux系统中执行后：<br><img src="/2020/04/13/%E7%A7%BB%E6%A4%8D%E7%BC%96%E8%AF%91-%E5%BA%93%E5%87%BD%E6%95%B0%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E7%9A%84%E8%A7%A3%E5%8E%8B%E7%BC%A9/2.png" alt="2"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">~ # ./miniunz </span><br><span class="line">MiniUnz 1.01b, demo of zLib + Unz package written by Gilles Vollant</span><br><span class="line">more info at http://www.winimage.com/zLibDll/unzip.html</span><br><span class="line">hisi_app.zip opened</span><br><span class="line"> extracting: av_streamer</span><br><span class="line"> extracting: input_stream.so</span><br><span class="line"> extracting: output_app.so</span><br></pre></td></tr></table></figure>
+<p>可以看到zlib库中的miniunz.c文件的一些函数是可以对嵌入式系统中的*.zip文件进行解压缩的。</p>
+<h6 id="3-3-3接下来"><a href="#3-3-3接下来" class="headerlink" title="3.3.3接下来"></a>3.3.3接下来</h6><p>满足3.3.2要求之后，就可以将miniunz.c函数的main函数做成一个接口函数，plug-in_framework工程会调用这个接口，然后可以解压hisi_app.zip文件了。这是整个工作最关键的一步。</p>
+<h5 id="3-4-zlib库移植到plug-in-framework中去，需要修改的地方"><a href="#3-4-zlib库移植到plug-in-framework中去，需要修改的地方" class="headerlink" title="3.4 zlib库移植到plug-in_framework中去，需要修改的地方"></a>3.4 zlib库移植到plug-in_framework中去，需要修改的地方</h5><h6 id="3-4-1-plug-in-framework-1-0-9-ai-av-streamer需要修改的地方"><a href="#3-4-1-plug-in-framework-1-0-9-ai-av-streamer需要修改的地方" class="headerlink" title="3.4.1 plug-in_framework_1.0.9_ai/av-streamer需要修改的地方"></a>3.4.1 plug-in_framework_1.0.9_ai/av-streamer需要修改的地方</h6><p>1.CMakeLists.txt添加如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">include_directories(&quot;../lib/app_zip/include&quot;) </span><br><span class="line">link_directories(&quot;../lib/app_zip/lib&quot;) </span><br><span class="line">target_link_libraries(av_streamer pthread dl m stdc++ libdhclient.so libsys_commom.so libsys_base.so  libdevsdk.so libsys_media.so librtsp.so librtmp_push.so libsys_serial.so libsys_mp4_storage.so libsys_httppro.so libnnie_ai.so libapp_para.so libapp_zip.so)</span><br></pre></td></tr></table></figure>
+<p>2.plugins/output_app/CMakeLists.txt添加如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">include_directories(&quot;../../../lib/app_zip/include&quot;)</span><br></pre></td></tr></table></figure>
+
+<h6 id="3-4-2-plug-in-framework-1-0-9-ai-lib需要修改的地方"><a href="#3-4-2-plug-in-framework-1-0-9-ai-lib需要修改的地方" class="headerlink" title="3.4.2 plug-in_framework_1.0.9_ai/lib需要修改的地方"></a>3.4.2 plug-in_framework_1.0.9_ai/lib需要修改的地方</h6><ol>
+<li>建立一个app_zip文件夹，其中app_zip包含4个字文件夹include、lib、src、test</li>
+<li>include文件夹中建立libapp_zip.h文件， app_zip模块中的一些申明函数，主要是给之后的output_app.c文件进行调用。</li>
+<li>lib文件夹是编译的动态库目录。</li>
+<li>src文件夹是源码库目录，包括zlib-1.2.11库和Makefile</li>
+<li>test文件是一些测试文件，包括test.c和Makefile</li>
+<li>在这里，已经编译生成了一个动态库和静态库，感觉Makefile中没有目标文件链接成功，现在会仔细检查一块。</li>
+</ol>
+<h4 id="四、一直出现的错误："><a href="#四、一直出现的错误：" class="headerlink" title="四、一直出现的错误："></a>四、一直出现的错误：</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">av_streamer: symbol lookup error: /usr/lib/output_app.so: undefined symbol: do_zip</span><br><span class="line">av_streamer: symbol lookup error: /usr/lib/output_app.so: undefined symbol: do_zip</span><br><span class="line">av_streamer: symbol lookup error: /usr/lib/output_app.so: undefined symbol: unzOpen64</span><br><span class="line">av_streamer: symbol lookup error: /usr/lib/output_app.so: undefined symbol: inflateInit2_</span><br></pre></td></tr></table></figure>
+<p>这种错误，不管怎么移植代码都是这个错误。</p>
+<p>删除libapp_zip.so之后，运行output_app.so，发现还是报上述错误，说明是根本就没有找这个库。</p>
+<p>运行./test_zip示例程序出现：./test_zip: error while loading shared libraries: libz.so.1: cannot open shared object file: No such file or directory这种现象是正常的。</p>
+<p>==所以关键还是的比较做测试用的Makefile与我们工程用的Makefile的区别==</p>
+]]></content>
+      <categories>
+        <category>移植编译</category>
+      </categories>
+      <tags>
+        <tag>zlib</tag>
+        <tag>Makefile</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>RTSP-RTCP协议介绍</title>
     <url>/2020/04/08/RTSP-RTCP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/</url>
     <content><![CDATA[<h4 id="RTCP概要"><a href="#RTCP概要" class="headerlink" title="RTCP概要"></a>RTCP概要</h4><p>实时传输控制协议(Real-time Control Protocol，RTCP)与RTP共同定义在1996年提出的RFC 1889中，是和 RTP一起工作的控制协议。RTCP单独运行在低层协议上，由低层协议提供数据与控制包的复用。在RTP会话期间，每个会话参与者周期性地向所有其他参与者发送RTCP控制信息包，如下图所示。对于RTP会话或者广播，通常使用单个多目标广播地址，属于这个会话的所有RTP和RTCP信息包都使用这个多目标广播地址，通过使用不同的端口号可把RTP信息包和RTCP信息包区分开来。</p>
