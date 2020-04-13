@@ -50,7 +50,7 @@
 <p>这种错误，不管怎么移植代码都是这个错误。</p>
 <p>删除libapp_zip.so之后，运行output_app.so，发现还是报上述错误，说明是根本就没有找这个库。</p>
 <p>运行./test_zip示例程序出现：./test_zip: error while loading shared libraries: libz.so.1: cannot open shared object file: No such file or directory这种现象是正常的。</p>
-<p>==所以关键还是的比较做测试用的Makefile与我们工程用的Makefile的区别==</p>
+<p>所以关键还是的比较做测试用的Makefile与我们工程用的Makefile的区别</p>
 ]]></content>
       <categories>
         <category>移植编译</category>
@@ -2491,8 +2491,8 @@ strSource：源字符串。</code></pre><p>strcat() 函数把 strSource 所指�
         <category>C</category>
       </categories>
       <tags>
-        <tag>sprintf</tag>
         <tag>strcat</tag>
+        <tag>sprintf</tag>
         <tag>字符串拼接</tag>
       </tags>
   </entry>
